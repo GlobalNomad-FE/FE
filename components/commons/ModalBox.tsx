@@ -3,7 +3,7 @@ import React from 'react';
 import TestModal from '../Modals/TestModal';
 
 interface ModalName {
-  [key: string]: React.ReactNode;
+  [key: string]: [React.ReactNode, string];
 }
 
 const ModalBox = () => {
@@ -12,7 +12,7 @@ const ModalBox = () => {
 
   //전역변수로 받은 모달의 이름을 오픈할 모달의 컴포넌트와 1:1 일치시킴
   const modalName: ModalName = {
-    openTestModal: <TestModal />,
+    openTestModal: [<TestModal />, '테스트'],
   };
 
   //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
@@ -28,11 +28,17 @@ const ModalBox = () => {
   return (
     //전체화면을 덮을 오버레이 div
     <div
-      className="fixed z-1 left-0 top-0 w-full h-full bg-black500 bg-opacity-40 flex items-center justify-center"
+      className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-40 flex items-center justify-center"
       onClick={handleClickModalOutside}
     >
       {/* 들어온 변수에 맞는 모달 컴포넌트를 띄움 */}
-      <div onClick={handleModalClick}>{modalName[openModal]}</div>
+      <div
+        onClick={handleModalClick}
+        className="p-6 bg-white rounded-lg shadow-lg"
+      >
+        <h1 className="text-black200 text-2xl font-bold">{modalName[openModal][1]}</h1>
+        {modalName[openModal][0]}
+      </div>
     </div>
   );
 };
