@@ -3,7 +3,7 @@ import React from 'react';
 const TestModal = () => {
   return (
     <div>
-      <p>adsadasd</p>
+      <div className="text-black200 my-5 w-[400px]">내용</div>
     </div>
   );
 };
