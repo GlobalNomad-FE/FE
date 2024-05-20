@@ -5,8 +5,12 @@ import modalStore from '@/libs/modalStore';
 
 export default function page() {
   const { openModal, setOpenModal } = modalStore();
-  const handleOpenModal = () => {
+  const handleOpenTestModal = () => {
     setOpenModal('openTestModal');
+  };
+
+  const handleOpenTest2Modal = () => {
+    setOpenModal('openTest2Modal');
   };
 
   return (
@@ -14,9 +18,15 @@ export default function page() {
       <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <button
           className="mb-3 text-5xl p-5 rounded-lg bg-violet200"
-          onClick={handleOpenModal}
+          onClick={handleOpenTestModal}
         >
-          모달버튼
+          테스트모달버튼
+        </button>
+        <button
+          className="mb-3 text-5xl p-5 rounded-lg bg-violet200"
+          onClick={handleOpenTest2Modal}
+        >
+          테스트2모달버튼
         </button>
       </div>
       {openModal && <ModalBox />}
