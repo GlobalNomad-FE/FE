@@ -1,6 +1,7 @@
 import modalStore from '@/libs/modalStore';
 import React from 'react';
 import TestModal from '../Modals/TestModal';
+import TestModal2 from '../Modals/TestModal2';
 
 interface ModalName {
   [key: string]: [React.ReactNode, string];
@@ -13,6 +14,7 @@ const ModalBox = () => {
   //전역변수로 받은 모달의 이름을 오픈할 모달의 컴포넌트와 1:1 일치시킴
   const modalName: ModalName = {
     openTestModal: [<TestModal />, '테스트'],
+    openTest2Modal: [<TestModal2 />, '테스트2'],
   };
 
   //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
