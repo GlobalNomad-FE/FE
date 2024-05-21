@@ -1,10 +1,10 @@
 'use client'; // app라우터에서는 맨위에 이거 써야 훅 쓸수 있는것 같습니다
 
 import ModalBox from '@/components/commons/ModalBox';
-import modalStore from '@/libs/modalStore';
+import useModalStore from '@/libs/modalStore';
 
 export default function page() {
-  const { openModal, setOpenModal } = modalStore();
+  const { openModal, setOpenModal } = useModalStore();
   const handleOpenTestModal = () => {
     setOpenModal('openTestModal');
   };

@@ -1,13 +1,13 @@
 import create from 'zustand';
 
-interface modalStore {
+type Store = {
   openModal: string;
   setOpenModal: (value: string) => void;
 }
 
-const modalStore = create<modalStore>((set) => ({
+const useModalStore = create<Store>((set) => ({
   openModal: "",
   setOpenModal: (value: string) => set({ openModal: value }),
 }));
 
-export default modalStore;
+export default useModalStore;
