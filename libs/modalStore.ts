@@ -5,7 +5,7 @@ type Store = {
   setOpenModal: (value: string) => void;
 };
 
-const useModalStore = create<Store>(set => ({
+const useModalStore = create<Store>((set) => ({
   openModal: '',
   setOpenModal: (value: string) => set({ openModal: value }),
 }));
