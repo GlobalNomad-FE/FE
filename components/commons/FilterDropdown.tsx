@@ -37,7 +37,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
 
   return (
     <div>
-      <button
+      <div
         className={`flex ${type === 'mainPage' ? 'w-[12.7rem]' : 'w-[16rem]'} 
         h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border border-solid border-green200 justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer tablet:w-[12rem] mobile:w-[9rem] mobile:h-[4.1rem] mobile:text-[1.4rem] mobile:py-[1rem]`}
         onClick={onDropDownOpen}
@@ -49,7 +49,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
           width={22}
           height={22}
         />
-      </button>
+      </div>
       {isOpen && (
         <ul
           className={`absolute z-2 ${
