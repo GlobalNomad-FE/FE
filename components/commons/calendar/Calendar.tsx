@@ -1,10 +1,11 @@
+'use client';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
-import React, { useEffect, useState } from 'react';
-import { setDefaultOptions } from 'date-fns';
+import React, { useState } from 'react';
 import { enUS, Locale } from 'date-fns/locale';
 import CalendarHeader from './CalendarHeader';
 import './Calendar.css';
+import useDateStore from '@/libs/calendarStore';
 
 const customLocale: Locale = {
   ...enUS,
@@ -18,44 +19,38 @@ const customLocale: Locale = {
   },
 };
 
+//TODO - 스케줄있는 날만 달력에 표시해줘야하나??? =>데이터처리 완료하고 차차 수정하기
 export default function Calendar() {
-  const [date, setDate] = useState(new Date());
+  const { date, setDate } = useDateStore();
   const [month, setMonth] = useState(new Date().getMonth());
-  const [clientLoaded, setClientLoaded] = useState(false);
 
-  const handleMonthChange = date => {
+  const handleMonthChange = (date: Date) => {
     setMonth(date.getMonth());
   };
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // 클라이언트 측에서만 실행
-      setClientLoaded(true);
-    }
-  }, []);
 
   return (
     <div>
-      {clientLoaded ? (
-        <DatePicker
-          selected={date}
-          onChange={date => setDate(date)}
-          inline
-          autoComplete="off"
-          locale={customLocale}
-          minDate={new Date()} //이전날짜 선택못함
-          onMonthChange={handleMonthChange}
-          dayClassName={d =>
-            d.getMonth() === month ? 'custom-day' : 'custom-day gray-day'
-          }
-          renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
-            <CalendarHeader
-              date={date}
-              decreaseMonth={decreaseMonth}
-              increaseMonth={increaseMonth}
-            />
-          )}
-        />
-      ) : null}
+      <DatePicker
+        selected={date}
+        onChange={(newDate: Date) => {
+          setDate(newDate); // Zustand 스토어의 date 값을 업데이트
+        }}
+        inline
+        autoComplete="off"
+        locale={customLocale}
+        minDate={new Date()} //이전날짜 선택못함
+        onMonthChange={handleMonthChange}
+        dayClassName={(d) =>
+          d.getMonth() === month ? 'custom-day' : 'custom-day gray-day'
+        }
+        renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
+          <CalendarHeader
+            date={date}
+            decreaseMonth={decreaseMonth}
+            increaseMonth={increaseMonth}
+          />
+        )}
+      />
     </div>
   );
 }

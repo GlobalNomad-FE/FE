@@ -49,9 +49,9 @@
 }
 
 .react-datepicker__day--selected:hover {
-  background-color: #ced8d5;
+  background: #0b3b2d;
   border-radius: 0.8rem;
-  opacity: 1;
+  color: white !important;
 }
 .react-datepicker__day--keyboard-selected {
   background-color: white;
