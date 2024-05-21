@@ -27,6 +27,11 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
     return setIsOpen(!isOpen);
   };
 
+  // filter 리스트 클릭 시 list 닫히는 이벤트
+  const onClickItemSelected = (index: number) => {
+    setIsOpen(false);
+  };
+
   // type prop 값에 따라 list에 들어갈 내용 배열이 달라짐
   const listItem = type === 'mainPage' ? mainPageFilter : bookingPageFilter;
 
@@ -54,6 +59,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
                   ? 'border-b border-solid border-gray200'
                   : ''
               } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100`}
+              onClick={() => onClickItemSelected(index)}
             >
               {item}
             </li>
