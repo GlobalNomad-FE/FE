@@ -17,24 +17,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
-    fontSize: {
-      h1: [
-        '28px',
-        { lineHeight: 'normal', letterSpacing: '0.56px', fontWeight: '700' },
-      ],
-      h2: [
-        '24px',
-        { lineHeight: '29px', letterSpacing: '0.48px', fontWeight: '700' },
-      ],
-      'h3-regular': ['20px', { lineHeight: 'normal', fontWeight: '400' }],
-      'h3-bold': ['20px', { lineHeight: 'normal', fontWeight: '700' }],
-      'h4-bold': ['18px', { lineHeight: 'normal', fontWeight: '700' }],
-      'body1-regular': ['16px', { lineHeight: '26px', fontWeight: '400' }],
-      'body1-bold': ['16px', { lineHeight: '20px', fontWeight: '700' }],
-      'body2-regular': ['14px', { lineHeight: '22px', fontWeight: '400' }],
-      'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
-      caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
-    },
+    
     boxShadow: {
       custom:
         '0px 0px 0px 1px #CDD0DC inset, 0px 2px 4px 0px rgba(5, 16, 55, 0.06)',
@@ -72,12 +55,31 @@ const config: Config = {
       green300: '#7ac555',
       violet200: '#5534da',
     },
-    screens: {
-      mobile: '375px',
-      tablet: '768px',
-      laptop: '1024px',
-      desktop: '1280px',
+
+    fontSize: {
+      h1: [
+        '28px',
+        { lineHeight: 'normal', letterSpacing: '0.56px', fontWeight: '700' },
+      ],
+      h2: [
+        '24px',
+        { lineHeight: '29px', letterSpacing: '0.48px', fontWeight: '700' },
+      ],
+      'h3-regular': ['20px', { lineHeight: 'normal', fontWeight: '400' }],
+      'h3-bold': ['20px', { lineHeight: 'normal', fontWeight: '700' }],
+      'h4-bold': ['18px', { lineHeight: 'normal', fontWeight: '700' }],
+      'body1-regular': ['16px', { lineHeight: '26px', fontWeight: '400' }],
+      'body1-bold': ['16px', { lineHeight: '20px', fontWeight: '700' }],
+      'body2-regular': ['14px', { lineHeight: '22px', fontWeight: '400' }],
+      'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
+      caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
     },
+    screens:{
+      'mobile':'375px',
+      'tablet':'768px',
+      'laptop': '1024px',
+      'desktop':'1280px'
+    }
   },
   plugins: [],
 };
