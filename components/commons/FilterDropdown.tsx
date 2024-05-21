@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 
 interface FilterDropdownType {
   type: string;
@@ -19,12 +20,22 @@ const bookingPageFilter = [
  * @param type main페이지는 'mainPage'로, 예약 내역 페이지는 'bookingPage'로 prop 넘겨주시면 됩니다.
  */
 const FilterDropdown = ({ type }: FilterDropdownType) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // dropdown 클릭 시 리스트 나왔다 사라졌다 이벤트
+  const onDropDownOpen = () => {
+    return setIsOpen(!isOpen);
+  };
+
   // type prop 값에 따라 list에 들어갈 내용 배열이 달라짐
   const listItem = type === 'mainPage' ? mainPageFilter : bookingPageFilter;
 
   return (
     <div>
-      <button className="flex w-[12.7rem] h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border border-solid border-green200 justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer">
+      <button
+        className="flex w-[12.7rem] h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border border-solid border-green200 justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer"
+        onClick={onDropDownOpen}
+      >
         <span>{type === 'mainPage' ? '가격' : '필터'}</span>
         <Image
           src="/icons/dropdown_arrow.svg"
@@ -33,20 +44,22 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
           height={22}
         />
       </button>
-      <ul className="absolute z-2 w-[12.7rem] mt-[0.8rem] border border-solid border-gray200 rounded-[0.6rem] bg-white cursor-pointer">
-        {listItem.map((item, index) => (
-          <li
-            key={index}
-            className={`flex h-[5.8rem] ${
-              index !== listItem.length - 1
-                ? 'border-b border-solid border-gray200'
-                : ''
-            } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100`}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+      {isOpen && (
+        <ul className="absolute z-2 w-[12.7rem] mt-[0.8rem] border border-solid border-gray200 rounded-[0.6rem] bg-white cursor-pointer">
+          {listItem.map((item, index) => (
+            <li
+              key={index}
+              className={`flex h-[5.8rem] ${
+                index !== listItem.length - 1
+                  ? 'border-b border-solid border-gray200'
+                  : ''
+              } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100`}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
