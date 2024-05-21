@@ -3,15 +3,23 @@ import { formatWage } from '@/utils/wageFormatter';
 import MinusIcon from '@/public/icons/minus-btn.svg';
 import PlusIcon from '@/public/icons/plus-btn.svg';
 import Calendar from '../calendar/Calendar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import data from './mock.json';
+import useDateStore from '@/libs/calendarStore';
+import formatDateToYYYYMMDD from '@/utils/dateFormatter';
 
-//TODO - price 데이터처리 수정(임시 price 가격 사용중)
+//TODO -'예약하기' 버튼을 클릭하면 “예약이 완료되었습니다.” 모달창 띄우기
 /**
  *
  * @returns
  */
 export default function FloatingBox() {
   const [count, setCount] = useState(1);
+  const [value, setValue] = useState<null | number>(null);
+
+  const { date } = useDateStore();
+  const { schedules, price } = data;
+  const formatDate = formatDateToYYYYMMDD(date);
 
   const handleCountPlus = () => {
     setCount(count + 1);
@@ -21,8 +29,10 @@ export default function FloatingBox() {
     if (count < 1) {
     }
   };
-  useEffect(() => {}, [count]);
-  const price = 1000;
+  const handleTimeSelect = (id: number) => {
+    setValue(id);
+  };
+  console.log('formatDate', formatDate);
   return (
     <div className="flex flex-col w-[38.4rem] bg-white border-solid rounded-2xl border-gray200 p-[2.4rem] shadow-[0px_4px_16px_rgba(17, 34, 17, 0.05)]">
       <div className="flex flex-row items-center gap-5">
@@ -37,10 +47,28 @@ export default function FloatingBox() {
       </div>
       <div className="mt-[1.6rem] mb-[1.6rem] flex flex-col gap-[1.4rem] ">
         <p className="text-h4-bold text-green400">예약 가능한 시간</p>
-        <div className="">
-          <button className="bg-white border rounded-lg border-nomad-black hover:bg-nomad-black hover:text-white text-body1-regular font-medium-w py-[1rem] px-[1.2rem] text-nomad-black">
-            12:00~15:00
-          </button>
+
+        <div>
+          {schedules.map((data) => {
+            const isSelected = value === data.id;
+            const isDate = formatDate === data.date;
+            console.log('data.date', data.date);
+            return (
+              isDate && (
+                <button
+                  className={` border rounded-lg border-nomad-black active:bg-nomad-black active:text-white text-body1-regular font-medium-w py-[1rem] px-[1.2rem] text-nomad-black mr-[1.2rem] mb-[1.2rem] ${
+                    isSelected
+                      ? 'bg-nomad-black text-white'
+                      : 'bg-white text-nomad-black '
+                  }`}
+                  key={data.id}
+                  onClick={() => handleTimeSelect(data.id)}
+                >
+                  {data.startTime}~{data.endTime}
+                </button>
+              )
+            );
+          })}
         </div>
       </div>
       <div className="flex flex-col gap-[0.8rem] border-t border-t-gray200 pt-[1.2rem]">
@@ -61,7 +89,13 @@ export default function FloatingBox() {
           </button>
         </div>
       </div>
-      <button className="px-[4rem] py-[1.4rem] bg-nomad-black text-white text-body1-bold my-[2.4rem] rounded ">
+      <button
+        className={`px-[4rem] py-[1.4rem] bg-nomad-black text-white text-body1-bold my-[2.4rem] rounded ${
+          !value ? 'opacity-50 cursor-not-allowed' : ''
+        } `}
+        type="submit"
+        disabled={!value}
+      >
         예약하기
       </button>
       <div className="border-t border-t-gray200 pt-[1.2rem] text-h3-bold flex justify-between">
