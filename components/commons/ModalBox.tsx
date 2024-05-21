@@ -1,4 +1,4 @@
-import modalStore from '@/libs/modalStore';
+import useModalStore from '@/libs/modalStore';
 import React from 'react';
 import TestModal from '../Modals/TestModal';
 import TestModal2 from '../Modals/TestModal2';
@@ -9,7 +9,7 @@ interface ModalName {
 
 const ModalBox = () => {
   //zustand로 전역상태관리 변수를 사용하기위해 정의함
-  const { openModal, setOpenModal } = modalStore();
+  const { openModal, setOpenModal } = useModalStore();
 
   //전역변수로 받은 모달의 이름을 오픈할 모달의 컴포넌트와 1:1 일치시킴
   const modalName: ModalName = {
