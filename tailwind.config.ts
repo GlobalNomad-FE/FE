@@ -17,7 +17,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
-    
+
     boxShadow: {
       custom:
         '0px 0px 0px 1px #CDD0DC inset, 0px 2px 4px 0px rgba(5, 16, 55, 0.06)',
@@ -74,12 +74,12 @@ const config: Config = {
       'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
       caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
     },
-    screens:{
-      'mobile':'375px',
-      'tablet':'768px',
-      'laptop': '1024px',
-      'desktop':'1280px'
-    }
+    screens: {
+      mobile: '375px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1280px',
+    },
   },
   plugins: [],
 };

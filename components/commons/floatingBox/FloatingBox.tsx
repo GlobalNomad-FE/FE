@@ -34,7 +34,10 @@ export default function FloatingBox() {
   };
   console.log('formatDate', formatDate);
   return (
-    <div className="flex flex-col w-[38.4rem] bg-white border-solid rounded-2xl border-gray200 p-[2.4rem] shadow-[0px_4px_16px_rgba(17, 34, 17, 0.05)]">
+    <div
+      className="flex flex-col w-[38.4rem] bg-white border rounded-2xl border-gray200 p-[2.4rem] "
+      style={{ boxShadow: '0px 4px 16px rgba(17, 34, 17, 0.05)' }}
+    >
       <div className="flex flex-row items-center gap-5">
         <p className="text-h1 text-black200">{formatWage(price)}</p>
         <p className="text-h3-regular text-gray600">/ 인</p>
