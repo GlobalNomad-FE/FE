@@ -46,6 +46,24 @@ const config: Config = {
         "green300": "#7ac555",
         "violet200": "#5534da",
     },
+    fontSize: {
+      h1: [
+        '28px',
+        { lineHeight: 'normal', letterSpacing: '0.56px', fontWeight: '700' },
+      ],
+      h2: [
+        '24px',
+        { lineHeight: '29px', letterSpacing: '0.48px', fontWeight: '700' },
+      ],
+      'h3-regular': ['20px', { lineHeight: 'normal', fontWeight: '400' }],
+      'h3-bold': ['20px', { lineHeight: 'normal', fontWeight: '700' }],
+      'h4-bold': ['18px', { lineHeight: 'normal', fontWeight: '700' }],
+      'body1-regular': ['16px', { lineHeight: '26px', fontWeight: '400' }],
+      'body1-bold': ['16px', { lineHeight: '20px', fontWeight: '700' }],
+      'body2-regular': ['14px', { lineHeight: '22px', fontWeight: '400' }],
+      'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
+      caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
+    },
     screens:{
       'mobile':'375px',
       'tablet':'768px',
