@@ -41,7 +41,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
               index !== listItem.length - 1
                 ? 'border-b border-solid border-gray200'
                 : ''
-            } justify-center items-center font-family text-[1.8rem] font-medium`}
+            } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100`}
           >
             {item}
           </li>
