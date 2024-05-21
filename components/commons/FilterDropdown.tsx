@@ -38,7 +38,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
   return (
     <div>
       <button
-        className="flex w-[12.7rem] h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border border-solid border-green200 justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer"
+        className="flex w-[12.7rem] h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[1.5rem] border border-solid border-green200 justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer tablet:w-[12rem] mobile:w-[9rem] mobile:h-[4.1rem] mobile:text-[1.4rem] mobile:py-[1rem]"
         onClick={onDropDownOpen}
       >
         <span>{type === 'mainPage' ? '가격' : '필터'}</span>
@@ -50,7 +50,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
         />
       </button>
       {isOpen && (
-        <ul className="absolute z-2 w-[12.7rem] mt-[0.8rem] border border-solid border-gray200 rounded-[0.6rem] bg-white cursor-pointer">
+        <ul className="absolute z-2 w-[12.7rem] mt-[0.8rem] border border-solid border-gray200 rounded-[0.6rem] bg-white cursor-pointer tablet:w-[12rem] mobile:w-[9rem]">
           {listItem.map((item, index) => (
             <li
               key={index}
@@ -58,7 +58,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
                 index !== listItem.length - 1
                   ? 'border-b border-solid border-gray200'
                   : ''
-              } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100`}
+              } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-[1.4rem]`}
               onClick={() => onClickItemSelected(index)}
             >
               {item}
