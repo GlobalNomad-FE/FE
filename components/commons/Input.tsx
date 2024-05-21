@@ -65,7 +65,7 @@ const Input = (props: Props) => {
             ? props.type
             : 'text'
         }
-        className={`w-[21.875rem] h-[3.625rem] px-5 py-4 bg-white rounded-md border border-${errorMessageColor} pt-8`}
+        className={`w-[21.875rem] h-[3.625rem] px-5 py-4 bg-white rounded-md border border-${errorMessageColor}`}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={placeholder}
