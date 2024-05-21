@@ -8,19 +8,7 @@ const usePagination = (totalPages) => {
       setCurrentPage(page);
     }
   };
-
-  const nextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  };
-
-  const previousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  };
-
+  
   const goToNextSet = () => {
     const nextPage = currentPage + 5;
     if (nextPage <= totalPages) {
@@ -42,8 +30,6 @@ const usePagination = (totalPages) => {
   return {
     currentPage,
     goToPage,
-    nextPage,
-    previousPage,
     goToNextSet,
     goToPreviousSet,
   };
