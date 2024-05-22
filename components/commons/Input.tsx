@@ -1,6 +1,7 @@
 'use client'; // Ensure this is the very fir
 import { useState, ChangeEvent } from 'react';
 import { z } from 'zod';
+import Image from 'next/image';
 
 interface Props {
   type: string; //email, password
@@ -71,10 +72,13 @@ const Input = (props: Props) => {
         placeholder={placeholder}
       />
       {props.type === 'password' && (
-        <img
+        <Image
+          alt="비밀번호 눈 아이콘"
           className="absolute pt-[4rem] right-3 cursor-pointer "
           src={`/icons/btn_visibility_${visibility ? 'off' : 'on'}.svg`}
           onClick={handleVisibility}
+          width={24}
+          height={24}
         />
       )}
       <div className={`text-${errorMessageColor} text-[1.2rem]`}>
