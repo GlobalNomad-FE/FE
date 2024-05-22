@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 interface Props {
   type: string; //email, password
-  password: string | null; //비밀번호 확인의 경우 기존 비밀번호가 담김
+  password?: string; //비밀번호 확인의 경우 기존 비밀번호가 담김
 }
 
 // 이메일 스키마 정의
