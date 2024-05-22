@@ -75,8 +75,10 @@ const config: Config = {
       caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
     },
     screens: {
-      mobile: { max: '767px' },
-      tablet: { min: '768px', max: '1023px' },
+      mobile: '375px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1280px',
     },
   },
   plugins: [],
