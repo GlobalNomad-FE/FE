@@ -1,35 +1,46 @@
 // import penIcon from '/icons/penIcon.svg';
-// import profileIcon from '/icons/account-check.svg';
 import Image from 'next/image';
 import { useState } from 'react';
+import AccountCheckIcon from '@/public/icons/account-check.svg';
+import TextboxCheckIcon from '@/public/icons/textbox-check.svg';
+import SettingCheckIcon from '@/public/icons/setting-check.svg';
+import CalendarCheckIcon from '@/public/icons/calendar-check.svg';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function SideNavigationMenu() {
-  const [selectedItem, setSelectedItem] = useState(null);
+  const pathname = usePathname();
+  const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     setSelectedItem(index);
   };
 
+  //TODO - 주소 정해지면 경로 바꿔야함
   const menuItems = [
     {
-      icon: '/icons/account-check.svg',
+      icon: AccountCheckIcon,
       alt: '내정보 아이콘',
       label: '내 정보',
+      path: '/',
     },
     {
-      icon: '/icons/textbox-check.svg',
+      icon: TextboxCheckIcon,
       alt: '예약내역 아이콘',
       label: '예약 내역',
+      path: '/testMenuBar',
     },
     {
-      icon: '/icons/setting-check.svg',
+      icon: SettingCheckIcon,
       alt: '체험관리 아이콘',
       label: '내 체험 관리',
+      path: '/aa',
     },
     {
-      icon: '/icons/calendar-check.svg',
+      icon: CalendarCheckIcon,
       alt: '예약현황 아이콘',
       label: '예약 현황',
+      path: '/bb',
     },
   ];
 
@@ -37,7 +48,7 @@ export default function SideNavigationMenu() {
     <div className="w-[38.5rem] tablet:w-[25rem] flex flex-col bg-white border border-gray200 rounded-xl p-[2.4rem] gap-[2.4rem] ">
       <div className="flex justify-center relative">
         <div
-          className="w-[16rem] h-[16rem] rounded-[16rem] bg-gray200 overflow-hidden relative "
+          className="w-[16rem] h-[16rem] rounded-[160px] bg-gray200 overflow-hidden relative "
           style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
         >
           <Image
@@ -56,21 +67,22 @@ export default function SideNavigationMenu() {
           />
         </div>
       </div>
-      <ul className="text-[#A1A1A1] text-body1-bold flex flex-col gap-[0.8rem]">
+      <ul className="text-body1-bold flex flex-col gap-[0.8rem]">
         {menuItems.map((item, index) => (
-          <li
-            key={index}
-            className={`flex gap-[0.4rem] items-center rounded-[1.2rem] h-[4.4rem] px-[1.6rem] py-[0.9rem] cursor-pointer
+          <Link href={item.path} key={index}>
+            <li
+              className={`flex gap-[0.4rem] items-center rounded-[12px] h-[4.4rem] px-[1.6rem] py-[0.9rem] cursor-pointer
           ${
-            selectedItem === index
+            selectedItem === index || item.path === pathname
               ? 'bg-green400 text-black200'
-              : 'hover:bg-green400 hover:text-black200'
+              : 'hover:bg-green400 hover:text-black200 text-[#A1A1A1]'
           }`}
-            onClick={() => handleClick(index)}
-          >
-            <Image src={item.icon} alt={item.alt} width={24} height={24} />
-            <p>{item.label}</p>
-          </li>
+              onClick={() => handleClick(index)}
+            >
+              <item.icon />
+              <p>{item.label}</p>
+            </li>
+          </Link>
         ))}
       </ul>
     </div>
