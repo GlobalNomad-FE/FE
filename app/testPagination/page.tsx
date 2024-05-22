@@ -1,12 +1,8 @@
 'use client'; // app라우터에서는 맨위에 이거 써야 훅 쓸수 있는것 같습니다
 
 import React, { useState } from 'react';
-import ModalBox from '@/components/commons/ModalBox';
 import Pagination from '@/components/commons/Pagination';
-import useModalStore from '@/libs/modalStore';
 import Image from 'next/image';
-import usePopupStore from '@/libs/popupStore';
-import PopupBox from '@/components/commons/PopupBox';
 
 //여기부터는 임시데이터 만드는 코드 (테스트를 위해 임시로 만든 데이터임)
 const imageUrls: string[] = [
@@ -31,11 +27,12 @@ interface Data {
   rating: number;
   reviewCount: number;
 }
+const size = 8;
 
 const dataArray: Data[] = [];
 const totalCount = 100;
 for (let i = 0; i < totalCount; i++) {
-  const page = Math.floor(i / 8) + 1;
+  const page = Math.floor(i / size) + 1;
 
   const newData: Data = {
     page: page,
@@ -52,24 +49,10 @@ for (let i = 0; i < totalCount; i++) {
 //여기까지
 
 export default function Page() {
-  const { openModal, setOpenModal } = useModalStore();
-  const { openPopup, setOpenPopup } = usePopupStore();
   const [currentPage, setCurrentPage] = useState(1);
 
   const handlePageChange = (currentPage: number) => {
     setCurrentPage(currentPage);
-  };
-
-  const handleOpenTestModal = () => {
-    setOpenModal('openTestModal');
-  };
-
-  const handleOpenTest2Modal = () => {
-    setOpenModal('openTest2Modal');
-  };
-
-  const handleOpenTestPopup = () => {
-    setOpenPopup('가입이 완료되었습니다!');
   };
 
   return (
@@ -97,11 +80,10 @@ export default function Page() {
       </div>
       <Pagination
         totalCount={totalCount}
-        size={8}
+        itemsInPage={size}
+        visiblePages={5}
         onPageChange={handlePageChange}
       />
-      {openModal && <ModalBox />}
-      {openPopup && <PopupBox />}
     </main>
   );
 }

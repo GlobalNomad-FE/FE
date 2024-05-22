@@ -51,32 +51,33 @@ const Pagination = ({
         {'<'}
       </button>
       {pageNumbers.map((pageNumber) => (
-        <div key={pageNumber}>
-          <button
-            onClick={() => goToPage(pageNumber)}
-            className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-              currentPage === pageNumber
-                ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem] my-[0.4rem]'
-                : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
-            }`}
-          >
-            {pageNumber}
-          </button>
-        </div>
-      ))}
-      <div>
         <button
-          onClick={goToNextSet}
-          className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-            Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)
-              ? 'border border-gray200 text-gray200'
-              : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
+          key={pageNumber}
+          onClick={() => goToPage(pageNumber)}
+          className={` rounded-[15px] ${
+            currentPage === pageNumber
+              ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem]'
+              : 'w-[5rem] h-[5rem] mx-[0.4rem] border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem]'
           }`}
-          disabled={Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)}
         >
-          {'>'}
+          {pageNumber}
         </button>
-      </div>
+      ))}
+      <button
+        onClick={goToNextSet}
+        className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
+          Math.ceil(currentPage / visiblePages) ===
+          Math.ceil(totalPages / visiblePages)
+            ? 'border border-gray200 text-gray200'
+            : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
+        }`}
+        disabled={
+          Math.ceil(currentPage / visiblePages) ===
+          Math.ceil(totalPages / visiblePages)
+        }
+      >
+        {'>'}
+      </button>
     </div>
   );
 };
