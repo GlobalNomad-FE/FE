@@ -41,10 +41,10 @@ const Input = ({ type, password = '' }: Props) => {
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 8 && type === 'password') {
-      setErrorMessage('8자 이상 입력해주세요');
+      return setErrorMessage('8자 이상 입력해주세요');
     }
     //TODO : 비밀번호 확인 시 비밀번호가 다른 경우, 오류 발생
-    if (type === 'password' && password !== e.target.value) {
+    if (password && password !== e.target.value) {
       setErrorMessage('비밀번호가 일치하지 않습니다.');
       setErrorMessageColor('red100');
     }
