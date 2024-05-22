@@ -29,10 +29,10 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
   }, [currentPage]);
 
   return (
-    <div className="flex items-center justify-center py-4 text-black200">
+    <div className="flex items-center justify-center py-4 text-black200 text-h4-bold ">
       <button
         onClick={goToPreviousSet}
-        className={`text-h4-bold w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
+        className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
           currentPage <= 5
             ? 'border border-gray200 text-gray200'
             : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
@@ -45,7 +45,7 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
         <div key={pageNumber}>
           <button
             onClick={() => goToPage(pageNumber)}
-            className={`text-h4-bold w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
+            className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
               currentPage === pageNumber
                 ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem] my-[0.4rem]'
                 : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
@@ -58,7 +58,7 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
       <div>
         <button
           onClick={goToNextSet}
-          className={`text-h4-bold w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
+          className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
             Math.ceil(currentPage / 5) === Math.ceil(totalPages / 5)
               ? 'border-gray200 text-gray200'
               : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'

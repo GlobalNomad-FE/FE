@@ -23,7 +23,7 @@ const PopupBox = () => {
     >
       <div
         onClick={handleStopBubbling}
-        className="w-[54rem] p-[2.8rem] bg-white rounded-[8px] pt-[10em] flex flex-col items-center justify-center"
+        className="w-[54rem] p-[2.8rem] bg-white rounded-[12px] pt-[10em] flex flex-col items-center justify-center"
       >
         <div className="text-black200 text-[1.8rem]">{openPopup}</div>
         {openPopup === '예약을 취소하시겠어요?' ? (

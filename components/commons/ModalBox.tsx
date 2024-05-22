@@ -37,7 +37,7 @@ const ModalBox = () => {
       {/* 들어온 변수에 맞는 모달 컴포넌트를 띄움 */}
       <div
         onClick={handleStopBubbling}
-        className="p-[3.5rem] bg-white rounded-[24px]"
+        className="p-[3.5rem] bg-white rounded-[12px]"
       >
         <div className="flex justify-between items-center">
           <h1 className="text-black200 text-h1">{modalName[openModal][1]}</h1>
