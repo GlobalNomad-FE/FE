@@ -8,11 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-pretendard)', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+    },
+
+    boxShadow: {
+      custom:
+        '0px 0px 0px 1px #CDD0DC inset, 0px 2px 4px 0px rgba(5, 16, 55, 0.06)',
     },
     colors: {
       black200: '#1b1b1b',
@@ -38,14 +46,16 @@ const config: Config = {
       blue200: '#2eb4ff',
       blue100: '#e5f3ff',
 
-      green50: '00AC07',
+      green50: '#00AC07',
       green100: '#F1EFFD',
-      green200: '0B3B2D',
+      green200: '#0B3B2D',
+      green400: '#112211',
 
       purple200: '#760dde',
       green300: '#7ac555',
       violet200: '#5534da',
     },
+
     fontSize: {
       h1: [
         '28px',
