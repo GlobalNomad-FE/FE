@@ -4,7 +4,7 @@ import { z } from 'zod';
 import Image from 'next/image';
 
 interface Props {
-  type: string; //email, password
+  type: 'email' | 'password'; //email, password
   password?: string; //비밀번호 확인의 경우 기존 비밀번호가 담김
 }
 
