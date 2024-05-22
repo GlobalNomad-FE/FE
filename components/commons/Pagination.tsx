@@ -34,7 +34,7 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
         onClick={goToPreviousSet}
         className={`text-h4-bold w-[5.5rem] h-[5.5rem] mx-[0.5rem] leading-tight border border-green200 rounded-[15px] ${
           currentPage <= 5
-            ? 'border-gray200 text-gray200'
+            ? 'border-gray100 text-gray200'
             : 'hover:bg-green200 hover:text-white'
         }`}
         disabled={currentPage <= 5}
@@ -60,7 +60,7 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
           onClick={goToNextSet}
           className={`text-h4-bold w-[5.5rem] h-[5.5rem] mx-[0.5rem] leading-tight border border-green200 rounded-[15px] ${
             Math.ceil(currentPage / 5) === Math.ceil(totalPages / 5)
-              ? 'border-gray200 text-gray200'
+              ? 'border-gray100 text-gray200'
               : 'hover:bg-green200 hover:text-white'
           }`}
           disabled={Math.ceil(currentPage / 5) === Math.ceil(totalPages / 5)}

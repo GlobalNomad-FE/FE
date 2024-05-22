@@ -81,7 +81,6 @@ export default function Page() {
           테스트2모달버튼
         </button>
       </div>
-      <Pagination totalCount={totalCount} size={8} onPageChange={handlePageChange} />
       <div className="grid grid-cols-4">
         {dataArray
           .filter((item) => item.page === currentPage) // 현재 페이지에 해당하는 데이터만 필터링
@@ -103,6 +102,7 @@ export default function Page() {
             </div>
           ))}
       </div>
+      <Pagination totalCount={totalCount} size={8} onPageChange={handlePageChange} />
       {openModal && <ModalBox />}
     </main>
   );
