@@ -1,3 +1,4 @@
+'use client'
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -39,7 +40,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
     <div>
       <div
         className={`flex ${type === 'mainPage' ? 'w-[12.7rem]' : 'w-[16rem]'} 
-        h-[5.3rem] px-[2rem] py-[1.6rem] rounded-3xl border border-solid border-green200 bg-white justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer tablet:w-[12rem] mobile:w-[9rem] mobile:h-[4.1rem] mobile:text-[1.4rem] mobile:py-[1rem]`}
+        h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[15px] border border-solid border-green200 bg-white justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer tablet:w-[12rem] mobile:w-[9rem] mobile:h-[4.1rem] mobile:text-[1.4rem] mobile:py-[1rem]`}
         onClick={onDropDownOpen}
       >
         <span>{type === 'mainPage' ? '가격' : '필터'}</span>
