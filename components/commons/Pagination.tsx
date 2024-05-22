@@ -1,8 +1,9 @@
 import usePagination from '@/hooks/usePagenation';
 import React, { useEffect } from 'react';
 
-// totalCount는 API에서 받아오는 값으로 데이터의 총 갯수이고
-// size는 API를 호출할 때 보내는 값으로 한 페이지에 보여줄 데이터의 갯수입니다.
+// totalCount는 데이터의 총 갯수이고
+// itemsInPage는 페이지당 보여지는 갯수이고
+// visiblePages는 페이지네이션 버튼 갯수이며 기본값은 5 입니다
 // onPageChange는 상위컴포넌트로 currentPage의 값을 보내주는 함수입니다.
 interface Props {
   totalCount: number;
