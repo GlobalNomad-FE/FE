@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 const usePagination = (totalPages) => {
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const goToPage = (page) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
-  
+
   const goToNextSet = () => {
     const nextPage = Math.ceil((currentPage) / 5) * 5 + 1;
     if (nextPage <= totalPages) {
