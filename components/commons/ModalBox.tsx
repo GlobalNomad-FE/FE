@@ -19,7 +19,7 @@ const ModalBox = () => {
   };
 
   //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleStopBubbling = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
@@ -36,7 +36,7 @@ const ModalBox = () => {
     >
       {/* 들어온 변수에 맞는 모달 컴포넌트를 띄움 */}
       <div
-        onClick={handleModalClick}
+        onClick={handleStopBubbling}
         className="p-[3.5rem] bg-white rounded-[24px]"
       >
         <div className="flex justify-between items-center">
