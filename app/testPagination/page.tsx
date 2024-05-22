@@ -5,6 +5,8 @@ import ModalBox from '@/components/commons/ModalBox';
 import Pagination from '@/components/commons/Pagination';
 import useModalStore from '@/libs/modalStore';
 import Image from 'next/image';
+import usePopupStore from '@/libs/popupStore';
+import PopupBox from '@/components/commons/PopupBox';
 
 //여기부터는 임시데이터 만드는 코드 (테스트를 위해 임시로 만든 데이터임)
 const imageUrls: string[] = [
@@ -51,10 +53,11 @@ for (let i = 0; i < totalCount; i++) {
 
 export default function Page() {
   const { openModal, setOpenModal } = useModalStore();
+  const { openPopup, setOpenPopup } = usePopupStore();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageChange = (currentPage:number) => {
-    setCurrentPage(currentPage); // B 컴포넌트에서 전달된 newX 값으로 x값 업데이트
+  const handlePageChange = (currentPage: number) => {
+    setCurrentPage(currentPage);
   };
 
   const handleOpenTestModal = () => {
@@ -65,25 +68,15 @@ export default function Page() {
     setOpenModal('openTest2Modal');
   };
 
+  const handleOpenTestPopup = () => {
+    setOpenPopup('가입이 완료되었습니다!');
+  };
+
   return (
-    <main className="items-center justify-between p-10 bg-white">
-      <div className="flex justify-center">
-        <button
-          className="text-h2 p-2 rounded-lg bg-violet200 mr-4"
-          onClick={handleOpenTestModal}
-        >
-          테스트모달버튼
-        </button>
-        <button
-          className="text-h2 p-2 rounded-lg bg-violet200"
-          onClick={handleOpenTest2Modal}
-        >
-          테스트2모달버튼
-        </button>
-      </div>
+    <main className="p-10 bg-white">
       <div className="grid grid-cols-4">
         {dataArray
-          .filter((item) => item.page === currentPage) // 현재 페이지에 해당하는 데이터만 필터링
+          .filter((item) => item.page === currentPage)
           .map((item) => (
             <div className="text-black200" key={item.id}>
               <div className="relative w-[283px] h-[283px] rounded-3xl overflow-hidden">
@@ -102,8 +95,13 @@ export default function Page() {
             </div>
           ))}
       </div>
-      <Pagination totalCount={totalCount} size={8} onPageChange={handlePageChange} />
+      <Pagination
+        totalCount={totalCount}
+        size={8}
+        onPageChange={handlePageChange}
+      />
       {openModal && <ModalBox />}
+      {openPopup && <PopupBox />}
     </main>
   );
 }
