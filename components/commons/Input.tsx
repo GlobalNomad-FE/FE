@@ -73,7 +73,7 @@ const Input = (props: Props) => {
       {props.type === 'password' && (
         <img
           className="absolute pt-[4rem] right-3 cursor-pointer "
-          src={`/icons/btn_visibility_${visibility ? 'on' : 'off'}.svg`}
+          src={`/icons/btn_visibility_${visibility ? 'off' : 'on'}.svg`}
           onClick={handleVisibility}
         />
       )}
