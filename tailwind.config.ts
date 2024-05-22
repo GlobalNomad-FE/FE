@@ -15,36 +15,37 @@ const config: Config = {
       },
     },
     colors: {
-        "black200": "#1b1b1b",
-        "black100": "#171717",
-        "nomad-black": "#112211",
+      black200: '#1b1b1b',
+      black100: '#171717',
+      'nomad-black': '#112211',
 
-        "white": "#ffffff",
+      white: '#ffffff',
 
-        "gray600": "#4b4b4b",
-        "gray500": "#79747e",
-        "gray400": "#a4a1aa",
-        "gray300": "#adaeb8",
-        "gray200": "#dddddd",
-        "gray100": "#eeeeee",
-        "gray50": "#fafafa",
+      gray600: '#4b4b4b',
+      gray500: '#79747e',
+      gray400: '#a4a1aa',
+      gray300: '#adaeb8',
+      gray200: '#dddddd',
+      gray100: '#eeeeee',
+      gray50: '#fafafa',
 
-        "red100": "#ff472e",
-        "red200": "#ffe4e0",
+      red100: '#ff472e',
+      red200: '#ffe4e0',
 
-        "yellow200": "#ffc23d",
+      yellow200: '#ffc23d',
 
-        "blue300": "#0085ff",
-        "blue200": "#2eb4ff",
-        "blue100": "#e5f3ff",
+      blue300: '#0085ff',
+      blue200: '#2eb4ff',
+      blue100: '#e5f3ff',
 
-        "green50": "00AC07",
-        "green100": "#F1EFFD",
-        "green200": "0B3B2D",
+      green50: '00AC07',
+      green100: '#F1EFFD',
+      green200: '#0B3B2D',
+      green400: '#CED8D5',
 
-        "purple200": "#760dde",
-        "green300": "#7ac555",
-        "violet200": "#5534da",
+      purple200: '#760dde',
+      green300: '#7ac555',
+      violet200: '#5534da',
     },
     fontSize: {
       h1: [
@@ -64,12 +65,12 @@ const config: Config = {
       'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
       caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
     },
-    screens:{
-      'mobile':'375px',
-      'tablet':'768px',
-      'laptop': '1024px',
-      'desktop':'1280px'
-    }
+    screens: {
+      mobile: '375px',
+      tablet: '768px',
+      laptop: '1024px',
+      desktop: '1280px',
+    },
   },
   plugins: [],
 };
