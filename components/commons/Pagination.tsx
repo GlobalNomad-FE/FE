@@ -1,8 +1,9 @@
 import usePagination from '@/hooks/usePagenation';
 import React, { useEffect } from 'react';
 
-// totalCount는 API에서 받아오는 값으로 데이터의 총 갯수이고
-// size는 API를 호출할 때 보내는 값으로 한 페이지에 보여줄 데이터의 갯수입니다.
+// totalCount는 데이터의 총 갯수이고
+// itemsInPage는 페이지당 보여지는 갯수이고
+// visiblePages는 페이지네이션 버튼 갯수이며 기본값은 5 입니다
 // onPageChange는 상위컴포넌트로 currentPage의 값을 보내주는 함수입니다.
 interface Props {
   totalCount: number;
@@ -51,32 +52,33 @@ const Pagination = ({
         {'<'}
       </button>
       {pageNumbers.map((pageNumber) => (
-        <div key={pageNumber}>
-          <button
-            onClick={() => goToPage(pageNumber)}
-            className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-              currentPage === pageNumber
-                ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem] my-[0.4rem]'
-                : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
-            }`}
-          >
-            {pageNumber}
-          </button>
-        </div>
-      ))}
-      <div>
         <button
-          onClick={goToNextSet}
-          className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-            Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)
-              ? 'border border-gray200 text-gray200'
-              : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
+          key={pageNumber}
+          onClick={() => goToPage(pageNumber)}
+          className={` rounded-[15px] ${
+            currentPage === pageNumber
+              ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem]'
+              : 'w-[5rem] h-[5rem] mx-[0.4rem] border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem]'
           }`}
-          disabled={Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)}
         >
-          {'>'}
+          {pageNumber}
         </button>
-      </div>
+      ))}
+      <button
+        onClick={goToNextSet}
+        className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
+          Math.ceil(currentPage / visiblePages) ===
+          Math.ceil(totalPages / visiblePages)
+            ? 'border border-gray200 text-gray200'
+            : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
+        }`}
+        disabled={
+          Math.ceil(currentPage / visiblePages) ===
+          Math.ceil(totalPages / visiblePages)
+        }
+      >
+        {'>'}
+      </button>
     </div>
   );
 };
