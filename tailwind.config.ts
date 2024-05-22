@@ -38,9 +38,9 @@ const config: Config = {
         "blue200": "#2eb4ff",
         "blue100": "#e5f3ff",
 
-        "green50": "00AC07",
+        "green50": "#00AC07",
         "green100": "#F1EFFD",
-        "green200": "0B3B2D",
+        "green200": "#0B3B2D",
 
         "purple200": "#760dde",
         "green300": "#7ac555",
