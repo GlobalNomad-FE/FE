@@ -1,4 +1,5 @@
 import useModalStore from '@/libs/modalStore';
+import Image from 'next/image';
 import React from 'react';
 import TestModal from '../Modals/TestModal';
 import TestModal2 from '../Modals/TestModal2';
@@ -23,22 +24,32 @@ const ModalBox = () => {
   };
 
   //모달 바깥쪽 클릭시 모달이 꺼지는 기능
-  const handleClickModalOutside = () => {
+  const handleClickModalClose = () => {
     setOpenModal('');
   };
 
   return (
     //전체화면을 덮을 오버레이 div
     <div
-      className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-40 flex items-center justify-center"
-      onClick={handleClickModalOutside}
+      className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+      onClick={handleClickModalClose}
     >
       {/* 들어온 변수에 맞는 모달 컴포넌트를 띄움 */}
       <div
         onClick={handleModalClick}
-        className="p-6 bg-white rounded-lg shadow-lg"
+        className="p-[3.5rem] bg-white rounded-[24px]"
       >
-        <h1 className="text-black200 text-2xl font-bold">{modalName[openModal][1]}</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-black200 text-h1">{modalName[openModal][1]}</h1>
+          <Image
+            src="/icons/btn-X-big.svg"
+            alt="닫기 버튼"
+            width={40}
+            height={40}
+            onClick={handleClickModalClose}
+            className="cursor-pointer"
+          />
+        </div>
         {modalName[openModal][0]}
       </div>
     </div>
