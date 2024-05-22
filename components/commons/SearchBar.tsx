@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const SearchBar = () => {
   return (
-    <div className="flex flex-col justify-between max-w-[120rem] w-[100%] h-[17.8rem] py-[3.2rem] px-[2.4rem] rounded-[1.6rem] bg-white tablet:h-[16.6rem] mobile:h-[12.9rem] mobile:py-[1.6rem]">
+    <div className="flex flex-col justify-between max-w-[120rem] w-[100%] h-[17.8rem] py-[3.2rem] px-[2.4rem] rounded-[1.6rem] bg-white shadow-search-bar-custom tablet:h-[16.6rem] mobile:h-[12.9rem] mobile:py-[1.6rem]">
       <p className="text-h3-bold mobile:text-body1-bold">
         무엇을 체험하고 싶으신가요?
       </p>

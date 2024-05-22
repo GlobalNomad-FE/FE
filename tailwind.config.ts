@@ -21,6 +21,7 @@ const config: Config = {
     boxShadow: {
       custom:
         '0px 0px 0px 1px #CDD0DC inset, 0px 2px 4px 0px rgba(5, 16, 55, 0.06)',
+      'search-bar-custom': '0px 4px 16px 0px rgba(17, 34, 17, 0.05)',
     },
     colors: {
       black200: '#1b1b1b',
