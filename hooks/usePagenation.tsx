@@ -1,16 +1,26 @@
 import { useState } from 'react';
 
-const usePagination = (totalPages) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  
-  const goToPage = (page) => {
+interface UsePaginationReturn {
+  currentPage: number;
+  goToPage: (page: number) => void;
+  goToNextSet: () => void;
+  goToPreviousSet: () => void;
+}
+
+const usePagination = (
+  totalPages: number,
+  visiblePages: number,
+): UsePaginationReturn => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const goToPage = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       setCurrentPage(page);
     }
   };
-  
+
   const goToNextSet = () => {
-    const nextPage = Math.ceil((currentPage) / 5) * 5 + 1;
+    const nextPage = Math.ceil(currentPage / visiblePages) * visiblePages + 1;
     if (nextPage <= totalPages) {
       setCurrentPage(nextPage);
     } else {
@@ -19,7 +29,8 @@ const usePagination = (totalPages) => {
   };
 
   const goToPreviousSet = () => {
-    const previousPage = Math.floor((currentPage - 1) / 5) * 5;
+    const previousPage =
+      Math.floor((currentPage - 1) / visiblePages) * visiblePages;
     if (previousPage >= 1) {
       setCurrentPage(previousPage);
     } else {
