@@ -6,17 +6,26 @@ import React, { useEffect } from 'react';
 // onPageChange는 상위컴포넌트로 currentPage의 값을 보내주는 함수입니다.
 interface Props {
   totalCount: number;
-  size: number;
+  itemsInPage: number;
+  visiblePages?: number;
   onPageChange: (value: number) => void;
 }
 
-const Pagination = ({ totalCount, size, onPageChange }: Props) => {
-  const totalPages = Math.ceil(totalCount / size);
-  const { currentPage, goToPage, goToNextSet, goToPreviousSet } =
-    usePagination(totalPages);
+const Pagination = ({
+  totalCount,
+  itemsInPage,
+  visiblePages = 5,
+  onPageChange,
+}: Props) => {
+  const totalPages = Math.ceil(totalCount / itemsInPage);
+  const { currentPage, goToPage, goToNextSet, goToPreviousSet } = usePagination(
+    totalPages,
+    visiblePages,
+  );
 
-  const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
-  const endPage = Math.min(startPage + 4, totalPages);
+  const startPage =
+    Math.floor((currentPage - 1) / visiblePages) * visiblePages + 1;
+  const endPage = Math.min(startPage + visiblePages - 1, totalPages);
 
   const pageNumbers = [];
   for (let i = startPage; i <= endPage; i++) {
@@ -33,11 +42,11 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
       <button
         onClick={goToPreviousSet}
         className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-          currentPage <= 5
+          currentPage <= visiblePages
             ? 'border border-gray200 text-gray200'
             : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
         }`}
-        disabled={currentPage <= 5}
+        disabled={currentPage <= visiblePages}
       >
         {'<'}
       </button>
@@ -59,11 +68,11 @@ const Pagination = ({ totalCount, size, onPageChange }: Props) => {
         <button
           onClick={goToNextSet}
           className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-            Math.ceil(currentPage / 5) === Math.ceil(totalPages / 5)
-              ? 'border-gray200 text-gray200'
+            Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)
+              ? 'border border-gray200 text-gray200'
               : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
           }`}
-          disabled={Math.ceil(currentPage / 5) === Math.ceil(totalPages / 5)}
+          disabled={Math.ceil(currentPage / visiblePages) === Math.ceil(totalPages / visiblePages)}
         >
           {'>'}
         </button>

@@ -102,7 +102,7 @@ export default function Page() {
             </div>
           ))}
       </div>
-      <Pagination totalCount={totalCount} size={8} onPageChange={handlePageChange} />
+      <Pagination totalCount={totalCount} itemsInPage={8} onPageChange={handlePageChange} />
       {openModal && <ModalBox />}
     </main>
   );
