@@ -59,11 +59,11 @@ export default function Gnb() {
   ];
 
   return (
-    <div>
+    <div className="fixed top-[0] w-full h-28 bg-[white] border border-gray200">
       <div>
         <Link href="/">
           <Image
-            src="/icons/logo_small.svg" // /public 제거
+            src="/icons/logo_small.svg"
             alt="로고"
             height={28}
             width={166}
@@ -76,19 +76,17 @@ export default function Gnb() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
+            //TODO 로그인 되면 알람이 뜰 수 있게
             <div>
               <button onClick={isNotificationOpenToggle}>
-                <Image
-                  src="/icons/notification.svg" // /public 제거
-                  alt="알림"
-                />
+                <Image src="/icons/notification.svg" alt="알림" />
               </button>
               {isNotificationOpen && '모달 자리'}
               <div>
                 <div />
                 <div>
                   <Avatar
-                    profileImageUrl={null} // profileImageUrl 변수 정의 필요
+                    profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
                     type="gnb"
                   />
                   <button onClick={isDropdownOpenToggle} ref={ref}>
