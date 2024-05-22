@@ -57,7 +57,7 @@ const Input = (props: Props) => {
   };
 
   return (
-    <label className="flex flex-col font-normal text-base gap-2 relative w-[21.875rem]">
+    <label className="flex flex-col font-normal text-base gap-[0.8rem] relative w-[35rem] text-[1.6rem] ">
       {labelName}
       <input
         type={
@@ -65,19 +65,21 @@ const Input = (props: Props) => {
             ? props.type
             : 'text'
         }
-        className={`w-[21.875rem] h-[3.625rem] px-5 py-4 bg-white rounded-md border border-${errorMessageColor}`}
+        className={`w-[35rem] h-[5.8rem] text-[1.6rem] px-5 py-4 bg-white rounded-md border border-${errorMessageColor}`}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={placeholder}
       />
       {props.type === 'password' && (
         <img
-          className="absolute pt-10 right-3 cursor-pointer "
+          className="absolute pt-[4rem] right-3 cursor-pointer "
           src={`/icons/btn_visibility_${visibility ? 'on' : 'off'}.svg`}
           onClick={handleVisibility}
         />
       )}
-      <div className={`text-${errorMessageColor} text-xs`}>{errorMessage}</div>
+      <div className={`text-${errorMessageColor} text-[1.2rem]`}>
+        {errorMessage}
+      </div>
     </label>
   );
 };
