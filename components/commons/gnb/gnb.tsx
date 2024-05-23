@@ -59,8 +59,8 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-[0] w-full h-28 bg-[white] border border-gray200">
-      <div>
+    <div className="fixed top-[0] w-full h-28 bg-[white] border-b border-gray200 flex justify-around ">
+      <div className=" max-w-[120rem] w-full mx-[auto] items-center flex justify-between px-[2.4rem] py-[1rem] ">
         <Link href="/">
           <Image
             src="/icons/logo_small.svg"
@@ -71,26 +71,31 @@ export default function Gnb() {
         </Link>
         <div>
           {!Auth ? (
-            <div>
+            <div className=" flex gap-[2.5rem] relative text-[1.4rem] h3-bold text-[black200] ">
               <Link href="/signin">로그인</Link>
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
             //TODO 로그인 되면 알람이 뜰 수 있게
-            <div>
+            <div className=" flex gap-[2.5rem] static">
               <button onClick={isNotificationOpenToggle}>
                 <Image src="/icons/notification.svg" alt="알림" />
               </button>
               {isNotificationOpen && '모달 자리'}
-              <div>
-                <div />
-                <div>
+              <div className=" flex relative gap-[2.5rem] ">
+                <div className=" h-[2.2rem] border-r-[1px_gray300]" />
+                <div className="flex w-[fit-content] gap-[1rem]">
                   <Avatar
                     profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
                     type="gnb"
                   />
-                  <button onClick={isDropdownOpenToggle} ref={ref}>
+                  <button
+                    onClick={isDropdownOpenToggle}
+                    ref={ref}
+                    className=" flex text-[1.4rem] body1-regular text-[nomad-black]"
+                  >
                     메뉴
+                    {/* user 데이터 받아오면서 수정 */}
                   </button>
                   {isDropdownOpen && (
                     <DropdownMenu type="gnb" dropdownMenuList={MyMenuList} />
