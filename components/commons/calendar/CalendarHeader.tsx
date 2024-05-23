@@ -1,4 +1,4 @@
-import './Calendar.css';
+import './Calender.css';
 import NextIcon from '@/public/icons/next.svg';
 import PrevIcon from '@/public/icons/prev.svg';
 

@@ -2,7 +2,7 @@
 import { formatWage } from '@/utils/wageFormatter';
 import MinusIcon from '@/public/icons/minus-btn.svg';
 import PlusIcon from '@/public/icons/plus-btn.svg';
-import Calendar from '../calendar/Calendar';
+import Calendar from '../calendar/Calender';
 import { useState } from 'react';
 import data from './mock.json';
 import useDateStore from '@/libs/calendarStore';
@@ -32,10 +32,10 @@ export default function FloatingBox() {
   const handleTimeSelect = (id: number) => {
     setValue(id);
   };
-  console.log('formatDate', formatDate);
+
   return (
     <div
-      className="flex flex-col w-[38.4rem] bg-white border rounded-2xl border-gray200 p-[2.4rem] "
+      className="flex flex-col w-[384px] bg-white border rounded-2xl border-gray200 p-[2.4rem] "
       style={{ boxShadow: '0px 4px 16px rgba(17, 34, 17, 0.05)' }}
     >
       <div className="flex flex-row items-center gap-5">

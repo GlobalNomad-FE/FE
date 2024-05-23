@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import React, { useState } from 'react';
 import { enUS, Locale } from 'date-fns/locale';
 import CalendarHeader from './CalendarHeader';
-import './Calendar.css';
+import './Calender.css';
 import useDateStore from '@/libs/calendarStore';
 
 const customLocale: Locale = {
