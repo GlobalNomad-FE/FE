@@ -15,9 +15,9 @@ interface CategoryType {
 const Category = ({ onClick, isSelected, children }: CategoryType) => {
   return (
     <div
-      className={`flex justify-center items-center w-[12.7rem] h-[5.3rem] border border-solid border-green200 rounded-[1.5rem] font-family text-[1.8rem] font-medium cursor-pointer ${
-        isSelected ? 'bg-nomad-black text-white' : ''
-      } tablet:w-[12rem] mobile:w-[8rem] mobile:h-[4.1rem] mobile:text-[1.4rem]`}
+      className={`flex justify-center items-center w-[7.9375em] h-[3.3125em] border border-solid border-green200 rounded-[15px] font-family text-lg font-medium cursor-pointer ${
+        isSelected ? 'bg-nomad-black text-white' : 'bg-white'
+      } tablet:w-[7.5em] mobile:w-[5em] mobile:h-[41px] mobile:text-[14px] mobile:font-normal`}
       onClick={onClick}
     >
       {children}
