@@ -2,30 +2,30 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-interface FilterDropdownType {
-  type: string;
-}
+type FilterDropdownType = 'mainPage' | 'bookingPage';
 
-const mainPageFilter = ['가격이 낮은 순', '가격이 높은 순'];
-const bookingPageFilter = [
-  '예약 신청',
-  '예약 취소',
-  '예약 승인',
-  '예약 거절',
-  '체험 완료',
-];
+const filter = {
+  mainPage: ['가격이 낮은 순', '가격이 높은 순'],
+  bookingPage: [
+    '예약 신청',
+    '예약 취소',
+    '예약 승인',
+    '예약 거절',
+    '체험 완료',
+  ],
+};
 
 /**
  *
  * @description Filter Dropdown 컴포넌트
  * @param type main페이지는 'mainPage'로, 예약 내역 페이지는 'bookingPage'로 prop 넘겨주시면 됩니다.
  */
-const FilterDropdown = ({ type }: FilterDropdownType) => {
+const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // dropdown 클릭 시 리스트 나왔다 사라졌다 이벤트
   const onDropDownOpen = () => {
-    return setIsOpen(!isOpen);
+    setIsOpen(!isOpen);
   };
 
   // filter 리스트 클릭 시 list 닫히는 이벤트
@@ -34,7 +34,7 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
   };
 
   // type prop 값에 따라 list에 들어갈 내용 배열이 달라짐
-  const listItem = type === 'mainPage' ? mainPageFilter : bookingPageFilter;
+  const listItem = filter[type];
 
   return (
     <div
