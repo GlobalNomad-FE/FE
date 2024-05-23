@@ -37,13 +37,18 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
   const listItem = type === 'mainPage' ? mainPageFilter : bookingPageFilter;
 
   return (
-    <div>
+    <div
+      className={`${type === 'bookingPage' && 'tablet:hidden mobile:hidden'}`}
+    >
       <div
-        className={`flex ${type === 'mainPage' ? 'w-[12.7rem]' : 'w-[16rem]'} 
-        h-[5.3rem] px-[2rem] py-[1.6rem] rounded-[15px] border border-solid border-green200 bg-white justify-between items-center font-family text-[1.8rem] font-medium cursor-pointer tablet:w-[12rem] mobile:w-[9rem] mobile:h-[4.1rem] mobile:text-[1.4rem] mobile:py-[1rem]`}
+        className={`${
+          type === 'mainPage' ? 'w-[7.9375rem] tablet:w-[7.5rem]' : 'w-40'
+        } flex h-[3.3125rem] px-5 py-4 rounded-[15px] border border-solid border-green200 bg-white justify-between items-center cursor-pointer tablet:w-[7.5rem] mobile:w-[5.625rem] mobile:h-[2.5625rem] mobile:py-2.5`}
         onClick={onDropDownOpen}
       >
-        <span>{type === 'mainPage' ? '가격' : '필터'}</span>
+        <span className="font-family text-[1.125rem] font-medium mobile:text-[0.875rem] ">
+          {type === 'mainPage' ? '가격' : '필터'}
+        </span>
         <Image
           src="/icons/filter-dropdown-arrow.svg"
           alt="드롭다운 화살표"
@@ -53,19 +58,18 @@ const FilterDropdown = ({ type }: FilterDropdownType) => {
       </div>
       {isOpen && (
         <ul
-          className={`absolute z-2 ${
-            type === 'mainPage' ? 'w-[12.7rem]' : 'w-[16rem]'
-          } 
-          mt-[0.8rem] border border-solid border-gray200 rounded-md bg-white cursor-pointer tablet:w-[12rem] mobile:w-[9rem]`}
+          className={`${
+            type === 'mainPage' ? 'w-[7.9375rem]' : 'w-[10rem]'
+          } absolute z-2 mt-2 border border-solid border-gray200 rounded-md bg-white cursor-pointer tablet:w-[7.5rem] mobile:w-[7.5rem]`}
         >
           {listItem.map((item, index) => (
             <li
               key={index}
-              className={`flex h-[5.8rem] ${
+              className={`${
                 index !== listItem.length - 1
                   ? 'border-b border-solid border-gray200'
                   : ''
-              } justify-center items-center font-family text-[1.8rem] font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-[1.4rem]`}
+              } flex h-[3.625rem] justify-center items-center font-family text-lg font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-sm`}
               onClick={() => onClickItemSelected(index)}
             >
               {item}
