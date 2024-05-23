@@ -10,6 +10,9 @@ interface SearchBarType {
 /**
  *
  * @description SearchBar 컴포넌트
+ * @param inputValue - 검색 input 입력 값
+ * @param setInputValue - 업데이트될 검색 input 입력 값 함수
+ * @param onSearch - 검색될 값(입력할 때마다 업데이트 되지 않고 검색어 모두 입력 후 검색될 수 있게하기 위함
  */
 const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
   const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
