@@ -23,9 +23,9 @@ const SearchBarTest = () => {
         setInputValue={setInputValue}
         onSearch={handleSearch}
       />
-      <div className="flex flex-wrap mt-20">
+      <div className="flex flex-wrap mt-[20px]">
         {filteredData.map((item) => (
-          <div key={item.id} className="m-20 p-10 bg-white">
+          <div key={item.id} className="m-[20px] p-[10px] bg-white">
             {item.title}
           </div>
         ))}
