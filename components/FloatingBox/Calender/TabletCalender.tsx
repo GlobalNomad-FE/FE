@@ -1,26 +1,38 @@
 import React, { useState } from 'react';
 import PopupCalender from './PopupCalender';
+import { useSelectTimeStore } from '@/libs/calendarStore';
+import { formatDate } from '@/utils/dateFormatter';
+import { se } from 'date-fns/locale/se';
 
 export default function TabletCalender() {
+  const { selectTime } = useSelectTimeStore();
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
+  const date = selectTime?.date;
 
   const hadleOpenCalender = () => {
     setIsCalenderOpen(true);
   };
+
+  const handleCloseCalender = () => {
+    setIsCalenderOpen(false);
+  };
+
   return (
     <>
-      <div onClick={hadleOpenCalender}>날짜 선택하기</div>
+      <div onClick={hadleOpenCalender}>
+        <p className="text-body1-medium text-nomad-black underline">
+          {date
+            ? `${formatDate(date)} ${selectTime?.startTime}~${
+                selectTime?.endTime
+              }`
+            : '날짜 선택하기'}
+        </p>
+      </div>
       {isCalenderOpen && (
         <div>
-          <PopupCalender />
+          <PopupCalender handleClose={handleCloseCalender} />
         </div>
       )}
     </>
   );
-}
-{
-  /* 
-TabletCalender 는 DatePicker컴포넌트에 들어감(창크기에 따라 선택되게 할꺼임)
-날짜 선택하기 누르면 팝업 캘린더 켜져야함
-*/
 }
