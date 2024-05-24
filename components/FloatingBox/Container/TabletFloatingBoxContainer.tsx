@@ -6,15 +6,13 @@ import ParticipantCount from '../ParticipantCount';
 import TotalPrice from '../TotalPrice';
 import ReservationButton from '../ReservationButton';
 import data from '../mock.json';
-import useDateStore from '@/libs/calendarStore';
-import formatDateToYYYYMMDD from '@/utils/dateFormatter';
-import TabletCalender from '../Calender/TabletCalender';
+import { useSelectTimeStore } from '@/libs/calendarStore';
 
 const TabletFloatingBoxContainer = () => {
   const [count, setCount] = useState(1);
-  const [value, setValue] = useState<null | number>(null);
-
+  const { selectTime } = useSelectTimeStore();
   const { price } = data;
+  const id = selectTime?.id;
 
   const handleCountPlus = () => {
     setCount(count + 1);
@@ -35,7 +33,11 @@ const TabletFloatingBoxContainer = () => {
         handleCountPlus={handleCountPlus}
         handleCountMinus={handleCountMinus}
       />
-      <ReservationButton value={value} handleReservation={handleReservation} />
+      <ReservationButton
+        value={!!id}
+        handleButtonClick={handleReservation}
+        text={'예약하기'}
+      />
       <TotalPrice total={price * count} />
     </FloatingBox>
   );
