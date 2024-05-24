@@ -1,11 +1,11 @@
 import useModalStore from '@/libs/modalStore';
 import Image from 'next/image';
-import React from 'react';
+import React, { ReactNode } from "react";
 import TestModal from '../Modals/TestModal';
 import TestModal2 from '../Modals/TestModal2';
 
 interface ModalName {
-  [key: string]: [React.ReactNode, string];
+  [key: string]: [ReactNode, string];
 }
 
 const ModalBox = () => {
@@ -19,7 +19,7 @@ const ModalBox = () => {
   };
 
   //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
-  const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleStopBubbling = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
@@ -36,8 +36,8 @@ const ModalBox = () => {
     >
       {/* 들어온 변수에 맞는 모달 컴포넌트를 띄움 */}
       <div
-        onClick={handleModalClick}
-        className="p-[3.5rem] bg-white rounded-[24px]"
+        onClick={handleStopBubbling}
+        className="p-[3.5rem] bg-white rounded-[12px]"
       >
         <div className="flex justify-between items-center">
           <h1 className="text-black200 text-h1">{modalName[openModal][1]}</h1>
