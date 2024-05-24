@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        {children}
         <div id="portal"></div>
+        {children}
       </body>
     </html>
   );
