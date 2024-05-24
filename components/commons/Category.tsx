@@ -8,7 +8,7 @@ interface CategoryType {
 /**
  *
  * @description 메인페이지에 쓰이는 카테고리 컴포넌트
- * @param {object} onClick 클릭이벤트
+ * @param {function} onClick 클릭이벤트
  * @param {boolean} isSelected index 선택 여부
  * @param {string} children 카테고리 이름
  */
