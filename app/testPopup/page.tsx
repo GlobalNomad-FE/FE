@@ -1,7 +1,7 @@
 'use client'; // app라우터에서는 맨위에 이거 써야 훅 쓸수 있는것 같습니다
 
+import BasePopup from '@/components/commons/BasePopup';
 import React, { useState } from 'react';
-import PopupBox from '@/components/commons/PopupBox';
 
 export default function Page() {
   const [openPopup, setOpenPopup] = useState(false);
@@ -38,7 +38,7 @@ export default function Page() {
       >
         예약취소
       </button>
-      {openPopup && <PopupBox text={popupText} numOfButtons={buttonNum} closePopup={closePopup}/>}
+      {openPopup && <BasePopup text={popupText} numOfButtons={buttonNum} closePopup={closePopup}/>}
     </main>
   );
 }

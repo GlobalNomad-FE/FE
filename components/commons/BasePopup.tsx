@@ -4,7 +4,7 @@ import React from 'react';
 /**
  * @param {string} text - 팝업에 띄울 메세지
  * @param {number} numOfButtons - 팝업에 있는 버튼 갯수, 미입력시 기본값 1
- * @param {() => void} closePopup - 팝업에 있는 버튼 갯수, 미입력시 기본값 1
+ * @param {() => void} closePopup - 팝업을 닫는 함수
  */
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
   closePopup: () => void;
 }
 
-const PopupBox = ({ text, numOfButtons = 1 , closePopup}: Props) => {
+const BasePopup = ({ text, numOfButtons = 1 , closePopup}: Props) => {
   //모달 끄기
   const handleClickPopupClose = () => {
     closePopup();
@@ -67,4 +67,4 @@ const PopupBox = ({ text, numOfButtons = 1 , closePopup}: Props) => {
   );
 };
 
-export default PopupBox;
+export default BasePopup;
