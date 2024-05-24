@@ -68,6 +68,7 @@ const config: Config = {
       ],
       'h3-regular': ['20px', { lineHeight: 'normal', fontWeight: '400' }],
       'h3-bold': ['20px', { lineHeight: 'normal', fontWeight: '700' }],
+      'h4-regular': ['18px', { lineHeight: 'normal', fontWeight: '400' }],
       'h4-bold': ['18px', { lineHeight: 'normal', fontWeight: '700' }],
       'body1-regular': ['16px', { lineHeight: '26px', fontWeight: '400' }],
       'body1-bold': ['16px', { lineHeight: '20px', fontWeight: '700' }],
