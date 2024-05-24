@@ -63,7 +63,7 @@ const Button = ({
           ? `solid 1px ${ColorValue[borderColor]}`
           : 'none',
         }}
-        className='text-white rounded-[8px] cursor-pointer flex items-center justify-center duration-500'
+        className='rounded-[8px] cursor-pointer flex items-center justify-center duration-500'
       >
         {text}
       </button>
