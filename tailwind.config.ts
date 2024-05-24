@@ -49,7 +49,7 @@ const config: Config = {
       green50: '#00AC07',
       green100: '#F1EFFD',
       green200: '#0B3B2D',
-      green400: '#112211',
+      green400: '#CED8D5',
 
       purple200: '#760dde',
       green300: '#7ac555',
