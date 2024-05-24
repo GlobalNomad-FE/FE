@@ -11,9 +11,9 @@ const ParticipantCount = ({
   handleCountPlus: () => void;
   handleCountMinus: () => void;
 }) => (
-  <div className="flex flex-col gap-[12px] border-t border-t-gray200 pt-[1.2rem]">
+  <div className="flex flex-col gap-[12px] border-t border-t-gray200 pt-[1.2rem] tablet:border-none">
     <p className="text-h3-bold text-green400">참여 인원 수</p>
-    <div className="border border-gray200 rounded-md flex shadow-custom bg-white overflow-hidden w-[150px]">
+    <div className="border border-gray200 rounded-md flex shadow-custom bg-white  justify-between w-[150px]">
       <button
         className="p-[1rem]"
         onClick={handleCountMinus}
@@ -24,7 +24,7 @@ const ParticipantCount = ({
       <div className="p-[8px] w-[52px] flex justify-center items-center text-body2-regular">
         {count}
       </div>
-      <button className="p-[10px]" onClick={handleCountPlus}>
+      <button className="p-[1rem]" onClick={handleCountPlus}>
         <PlusIcon />
       </button>
     </div>

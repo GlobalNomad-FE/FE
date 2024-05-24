@@ -2,10 +2,12 @@ import React from 'react';
 
 const ReservationButton = ({
   value,
-  handleReservation,
+  handleButtonClick,
+  text,
 }: {
-  value: number | null;
-  handleReservation: () => void;
+  value: boolean;
+  handleButtonClick: () => void;
+  text: string;
 }) => (
   <button
     className={`px-4 py-[1.4rem] bg-nomad-black w-full text-white text-body1-bold my-7 rounded ${
@@ -13,9 +15,9 @@ const ReservationButton = ({
     }`}
     type="submit"
     disabled={!value}
-    onClick={handleReservation}
+    onClick={handleButtonClick}
   >
-    예약하기
+    {text}
   </button>
 );
 
