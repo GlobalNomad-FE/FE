@@ -5,12 +5,14 @@ import { useState, useRef } from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface SelectDateProps {
-  selectDate: Date | null; // 선택된 날짜를 받을 props
   onSelectedDateChange: (date: Date | null) => void; // 선택된 날짜 변경 시 호출될 콜백 함수
 }
 
+/**
+ * 캘린더 선택이 가능한 inputBox입니다.
+ * @param onSelectedDateChange 날짜 선택 시 실행될 함수(date를 넘겨줍니다.)
+ */
 const DatePickerInput: React.FC<SelectDateProps> = ({
-  selectDate,
   onSelectedDateChange,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -29,7 +31,7 @@ const DatePickerInput: React.FC<SelectDateProps> = ({
         ref={datePickerRef}
         className="text-black200 border border-black100 rounded px-[16px] py-[8px] bg-white w-[379px] h-[56px] text-[16px]"
         dateFormat="YY/MM/dd"
-        selected={selectDate || selectedDate}
+        selected={selectedDate}
         onChange={(date) => {
           onSelectedDateChange(date);
           setSelectedDate(date);
