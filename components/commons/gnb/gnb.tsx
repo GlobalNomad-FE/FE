@@ -59,8 +59,8 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-[0] w-full h-28 bg-[white] border-b border-gray200 flex justify-around ">
-      <div className=" max-w-[120rem] w-full mx-[auto] items-center flex justify-between px-[2.4rem] py-[1rem] ">
+    <div className="fixed top-0 w-full h-28 bg-[white] border-b border-gray200 flex justify-around ">
+      <div className=" max-w-1920 w-full mx-auto items-center flex justify-between px-38.4 py-16 ">
         <Link href="/">
           <Image
             src="/icons/logo_small.svg"
