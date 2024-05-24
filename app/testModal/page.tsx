@@ -3,6 +3,7 @@
 import React from 'react';
 import ModalBox from '@/components/commons/ModalBox';
 import useModalStore from '@/libs/modalStore';
+import Button from '@/components/commons/Button';
 
 export default function Page() {
   const { openModal, setOpenModal } = useModalStore();
@@ -33,6 +34,11 @@ export default function Page() {
           </button>
         ))}
       </div>
+      <div className="flex items-center justify-center">
+      <Button text={"안녕"} width={350} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true} onClick={() => alert('경고')}/>
+      <Button text={"안녕"} width={68} height={18} fontSize={15} bgColor={"white"} textColor={"gray"} border={true} />
+      <Button text={"안녕"} width={144} height={48} fontSize={20} bgColor={"gray"} textColor={"green"}/>
+    </div>
       {openModal && <ModalBox />}
     </main>
   );
