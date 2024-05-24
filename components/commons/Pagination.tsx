@@ -1,10 +1,6 @@
 import usePagination from '@/hooks/usePagination';
 import React, { useEffect } from 'react';
 
-/** totalCount는 데이터의 총 갯수이고
- itemsInPage는 페이지당 보여지는 갯수이고
- visiblePages는 페이지네이션 버튼 갯수이며 기본값은 5 입니다
- onPageChange는 상위컴포넌트로 currentPage의 값을 보내주는 함수입니다. */
 /**
  * @param {number} totalCount - 총 데이터의 갯수.
  * @param {number} itemsInPage - 페이지당 보여지는 아이템의 갯수.

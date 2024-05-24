@@ -1,11 +1,11 @@
 import useModalStore from '@/libs/modalStore';
 import Image from 'next/image';
-import React from 'react';
+import React, { ReactNode } from "react";
 import TestModal from '../Modals/TestModal';
 import TestModal2 from '../Modals/TestModal2';
 
 interface ModalName {
-  [key: string]: [React.ReactNode, string];
+  [key: string]: [ReactNode, string];
 }
 
 const ModalBox = () => {

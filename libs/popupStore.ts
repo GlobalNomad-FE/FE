@@ -1,13 +1,13 @@
-import create from 'zustand';
+import create, { SetState } from 'zustand';
 
 type Store = {
-  openModalIfTextExists: string;
-  setOpenModalIfTextExists: (value: string) => void;
+  openPopup: boolean;
+  setOpenPopup: () => void;
 };
 
-const usePopupStore = create<Store>((set) => ({
-  openModalIfTextExists: '',
-  setOpenModalIfTextExists: (value: string) => set({ openModalIfTextExists: value }),
+const usePopupStore = create<Store>((set: SetState<Store>) => ({
+  openPopup: false,
+  setOpenPopup: () => set((state: Store) => ({ openPopup: !state.openPopup })),
 }));
 
 export default usePopupStore;
