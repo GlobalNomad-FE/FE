@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import Avatar from '@/components/avatar/avatar';
+import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 
 export default function Gnb() {
@@ -87,7 +87,6 @@ export default function Gnb() {
                 <div className="flex w-[fit-content] gap-[1rem]">
                   <Avatar
                     profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
-                    type="gnb"
                   />
                   <button
                     onClick={isDropdownOpenToggle}
@@ -98,7 +97,7 @@ export default function Gnb() {
                     {/* user 데이터 받아오면서 수정 */}
                   </button>
                   {isDropdownOpen && (
-                    <DropdownMenu type="gnb" dropdownMenuList={MyMenuList} />
+                    <DropdownMenu dropdownMenuList={MyMenuList} />
                   )}
                 </div>
               </div>

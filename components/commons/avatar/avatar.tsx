@@ -2,10 +2,9 @@ import Image from 'next/image';
 
 interface AvatarProps {
   profileImageUrl?: string | null;
-  type: string;
 }
 
-export default function Avatar({ profileImageUrl = null, type }: AvatarProps) {
+export default function Avatar({ profileImageUrl = null }: AvatarProps) {
   const imageUrl = profileImageUrl || 'images/Image_default_profile_image.png';
 
   return (
