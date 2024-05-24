@@ -8,9 +8,9 @@ interface CategoryType {
 /**
  *
  * @description 메인페이지에 쓰이는 카테고리 컴포넌트
- * @param onClick 클릭이벤트
- * @param isSelected index 선택 여부
- * @param children 카테고리 이름
+ * @param {object} onClick 클릭이벤트
+ * @param {boolean} isSelected index 선택 여부
+ * @param {string} children 카테고리 이름
  */
 const Category = ({ onClick, isSelected, children }: CategoryType) => {
   return (
