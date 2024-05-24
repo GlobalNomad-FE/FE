@@ -18,7 +18,7 @@ const filter = {
 /**
  *
  * @description Filter Dropdown 컴포넌트
- * @param type main페이지는 'mainPage'로, 예약 내역 페이지는 'bookingPage'로 prop 넘겨주시면 됩니다.
+ * @param {string} type main페이지는 'mainPage'로, 예약 내역 페이지는 'bookingPage'로 prop 넘겨주시면 됩니다.
  */
 const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
   const [isOpen, setIsOpen] = useState(false);
