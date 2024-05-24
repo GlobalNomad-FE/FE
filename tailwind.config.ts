@@ -71,6 +71,7 @@ const config: Config = {
       'h4-bold': ['18px', { lineHeight: 'normal', fontWeight: '700' }],
       'body1-regular': ['16px', { lineHeight: '26px', fontWeight: '400' }],
       'body1-bold': ['16px', { lineHeight: '20px', fontWeight: '700' }],
+      'body1-medium': ['16px', { lineHeight: '26px', fontWeight: '600' }],
       'body2-regular': ['14px', { lineHeight: '22px', fontWeight: '400' }],
       'body2-bold': ['14px', { lineHeight: 'normal', fontWeight: '700' }],
       caption: ['12px', { lineHeight: '16px', fontWeight: '400' }],
