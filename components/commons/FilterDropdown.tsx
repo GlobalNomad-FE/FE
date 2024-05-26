@@ -43,7 +43,7 @@ const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
       <div
         className={`${
           type === 'mainPage' ? 'w-[7.9375rem] tablet:w-[7.5rem]' : 'w-40'
-        } flex h-[3.3125rem] px-5 py-4 rounded-[15px] border border-solid border-green200 bg-white justify-between items-center cursor-pointer tablet:w-[7.5rem] mobile:w-[5.625rem] mobile:h-[2.5625rem] mobile:py-2.5`}
+        } flex h-[3.3125rem] px-5 py-4 rounded-[15px] border border-green200 bg-white justify-between items-center cursor-pointer tablet:w-[7.5rem] mobile:w-[5.625rem] mobile:h-[2.5625rem] mobile:py-2.5`}
         onClick={onDropDownOpen}
       >
         <span className="font-family text-[1.125rem] font-medium mobile:text-[0.875rem] ">
@@ -60,7 +60,7 @@ const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
         <ul
           className={`${
             type === 'mainPage' ? 'w-[7.9375rem]' : 'w-[10rem]'
-          } absolute z-2 mt-2 border border-solid border-gray200 rounded-md bg-white cursor-pointer tablet:w-[7.5rem] mobile:w-[7.5rem]`}
+          } absolute z-2 mt-2 border border-gray200 rounded-md bg-white cursor-pointer tablet:w-[7.5rem] mobile:w-[7.5rem]`}
         >
           {listItem.map((item, index) => (
             <li
