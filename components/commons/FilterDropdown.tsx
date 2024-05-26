@@ -19,8 +19,15 @@ const filter = {
  *
  * @description Filter Dropdown 컴포넌트
  * @param {string} type main페이지는 'mainPage'로, 예약 내역 페이지는 'bookingPage'로 prop 넘겨주시면 됩니다.
+ * @param {function} onSelect 선택된 index를 하위 컴포넌트에서 상위로 전달
  */
-const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
+const FilterDropdown = ({
+  type,
+  onSelect,
+}: {
+  type: FilterDropdownType;
+  onSelect: (index: number) => void;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // dropdown 클릭 시 리스트 나왔다 사라졌다 이벤트
@@ -28,9 +35,10 @@ const FilterDropdown = ({ type }: { type: FilterDropdownType }) => {
     setIsOpen(!isOpen);
   };
 
-  // filter 리스트 클릭 시 list 닫히는 이벤트
+  // filter 리스트 클릭 시 list 닫히는 이벤트, index 전달
   const onClickItemSelected = (index: number) => {
     setIsOpen(false);
+    onSelect(index);
   };
 
   // type prop 값에 따라 list에 들어갈 내용 배열이 달라짐
