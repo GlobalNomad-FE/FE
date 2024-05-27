@@ -39,12 +39,12 @@ const BasePopup = ({ text, numOfButtons = 1 , closePopup}: Props) => {
             <div
               className={'flex w-full mt-12 justify-center gap-4'}
             >
-              <Button text={"아니오"} width={120} height={48} fontSize={16} bgColor={"white"} textColor={"green"} border={true} borderColor={"green"} hover={true} onClick={handleClickPopupClose}/>
-              <Button text={"취소하기"} width={120} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true} />
+              <Button text={"아니오"} width={120} height={48} fontSize={16} btnColor={"white"} textColor={"green"} border={true} borderColor={"green"} hover={true} onClick={handleClickPopupClose}/>
+              <Button text={"취소하기"} width={120} height={48} fontSize={16} btnColor={"green"} textColor={"white"} hover={true} />
             </div>
           ) : (
             <div className={'flex w-full mt-12 justify-end'}>
-              <Button text={"확인"} width={120} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true}  onClick={handleClickPopupClose}/>
+              <Button text={"확인"} width={120} height={48} fontSize={16} btnColor={"green"} textColor={"white"} hover={true}  onClick={handleClickPopupClose}/>
             </div>
           )}
         </div>

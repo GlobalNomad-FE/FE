@@ -1,7 +1,6 @@
 import usePagination from '@/hooks/usePagination';
 import React, { useEffect } from 'react';
-
-
+import Button from '@/components/commons/Button';
 
 interface Props {
   totalCount: number;
@@ -13,7 +12,7 @@ interface Props {
 /**
  * @param {number} totalCount - 총 데이터의 갯수.
  * @param {number} itemsInPage - 페이지당 보여지는 아이템의 갯수.
- * @param {number} [visiblePages=5] - 보여질 페이지네이션 버튼의 갯수. 기본값은 5입니다.
+ * @param {number} [visiblePages] - 보여질 페이지네이션 버튼의 갯수. 기본값은 5입니다.
  * @param {function} onPageChange - 현재 페이지 값을 상위 컴포넌트로 보내는 콜백 함수.
  */
 const Pagination = ({
@@ -43,46 +42,88 @@ const Pagination = ({
   }, [currentPage]);
 
   return (
-    <div className="flex items-center justify-center py-4 text-black200 text-h4-bold ">
-      <button
-        onClick={goToPreviousSet}
-        className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-          currentPage <= visiblePages
-            ? 'border border-gray200 text-gray200'
-            : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
-        }`}
-        disabled={currentPage <= visiblePages}
-      >
-        {'<'}
-      </button>
-      {pageNumbers.map((pageNumber) => (
-        <button
-          key={pageNumber}
-          onClick={() => goToPage(pageNumber)}
-          className={` rounded-[15px] ${
-            currentPage === pageNumber
-              ? 'text-white bg-green200 text-h3-bold w-[4.4rem] h-[4.4rem] mx-[0.7rem]'
-              : 'w-[5rem] h-[5rem] mx-[0.4rem] border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem]'
-          }`}
-        >
-          {pageNumber}
-        </button>
-      ))}
-      <button
-        onClick={goToNextSet}
-        className={`w-[5rem] h-[5rem] mx-[0.4rem] rounded-[15px] ${
-          Math.ceil(currentPage / visiblePages) ===
+    <div className="flex items-center justify-center py-4 text-black200 text-h4-bold gap-2.5">
+      <Button
+        text={'<'}
+        width={55}
+        height={55}
+        fontSize={16}
+        btnColor={'white'}
+        textColor={currentPage > visiblePages ? 'green' : 'gray'}
+        border={true}
+        borderColor={currentPage > visiblePages ? 'green' : 'gray'}
+        hover={currentPage > visiblePages}
+        onClick={currentPage > visiblePages ? goToPreviousSet : undefined}
+        disabled={!(currentPage > visiblePages)}
+        rounded={15}
+      />
+      {pageNumbers.map((pageNumber) =>
+        currentPage === pageNumber ? (
+          <Button
+            text={pageNumber}
+            width={55}
+            height={55}
+            fontSize={16}
+            btnColor={'green'}
+            textColor={'white'}
+            hover={true}
+            onClick={() => goToPage(pageNumber)}
+            rounded={15}
+            clicked={true}
+          />
+        ) : (
+          <Button
+            text={pageNumber}
+            width={55}
+            height={55}
+            fontSize={16}
+            btnColor={'white'}
+            textColor={'green'}
+            border={true}
+            borderColor={'green'}
+            hover={true}
+            onClick={() => goToPage(pageNumber)}
+            rounded={15}
+          />
+        ),
+      )}
+      <Button
+        text={'>'}
+        width={55}
+        height={55}
+        fontSize={16}
+        btnColor={'white'}
+        textColor={
+          Math.ceil(currentPage / visiblePages) !==
           Math.ceil(totalPages / visiblePages)
-            ? 'border border-gray200 text-gray200'
-            : 'border border-green200 text-green200 hover:bg-green200 hover:text-white duration-500 hover:text-h3-bold hover:w-[4.4rem] hover:h-[4.4rem] hover:mx-[0.7rem] hover:my-[0.2rem]'
-        }`}
-        disabled={
-          Math.ceil(currentPage / visiblePages) ===
+            ? 'green'
+            : 'gray'
+        }
+        border={true}
+        borderColor={
+          Math.ceil(currentPage / visiblePages) !==
+          Math.ceil(totalPages / visiblePages)
+            ? 'green'
+            : 'gray'
+        }
+        hover={
+          Math.ceil(currentPage / visiblePages) !==
           Math.ceil(totalPages / visiblePages)
         }
-      >
-        {'>'}
-      </button>
+        onClick={
+          Math.ceil(currentPage / visiblePages) !==
+          Math.ceil(totalPages / visiblePages)
+            ? goToNextSet
+            : undefined
+        }
+        disabled={
+          !(
+            Math.ceil(currentPage / visiblePages) !==
+            Math.ceil(totalPages / visiblePages)
+          )
+        }
+        rounded={15}
+      />
     </div>
   );
 };

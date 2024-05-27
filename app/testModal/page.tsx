@@ -35,9 +35,9 @@ export default function Page() {
         ))}
       </div>
       <div className="flex items-center justify-center">
-      <Button text={"안녕"} width={350} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true} onClick={() => alert('경고')}/>
-      <Button text={"안녕"} width={68} height={18} fontSize={15} bgColor={"white"} textColor={"gray"} border={true} />
-      <Button text={"안녕"} width={144} height={48} fontSize={20} bgColor={"gray"} textColor={"green"}/>
+      <Button text={"안녕"} width={350} height={48} fontSize={16} btnColor={"green"} textColor={"white"} hover={true} onClick={() => alert('경고')}/>
+      <Button text={"안녕"} width={68} height={18} fontSize={15} btnColor={"white"} textColor={"gray"} border={true} />
+      <Button text={"안녕"} width={144} height={48} fontSize={20} btnColor={"gray"} textColor={"green"}/>
     </div>
       {openModal && <ModalBox />}
     </main>
