@@ -1,5 +1,6 @@
 import Portal from '@/utils/Portal';
 import React from 'react';
+import Button from '@/components/commons/Button';
 
 /**
  * @param {string} text - 팝업에 띄울 메세지
@@ -31,34 +32,19 @@ const BasePopup = ({ text, numOfButtons = 1 , closePopup}: Props) => {
       >
         <div
           onClick={handleStopBubbling}
-          className="w-[54rem] p-[2.8rem] bg-white rounded-[12px] pt-[10em] flex flex-col items-center justify-center"
+          className="w-[34rem] p-[2rem] bg-white rounded-lg pt-28 flex flex-col items-center justify-center"
         >
-          <div className="text-black200 text-[1.8rem]">{text}</div>
+          <div className="text-h4-regular">{text}</div>
           {numOfButtons === 2 ? (
             <div
-              className={'flex w-full mt-[4.5rem] justify-center gap-[1rem]'}
+              className={'flex w-full mt-12 justify-center gap-4'}
             >
-              <button
-                onClick={handleClickPopupClose}
-                className="text-[1.6rem] w-[12.8rem] h-[4.8rem] rounded-[8px] bg-white text-green200 cursor-pointer flex items-center justify-center border border-green200 duration-500 hover:text-[1.9rem] hover:w-[12.2rem] hover:h-[4.6rem] hover:mx-[0.3rem] hover:my-[0.1rem]"
-              >
-                아니오
-              </button>
-              <button
-                // Todo: onClick={취소하는함수}
-                className="text-[1.6rem] w-[12.8rem] h-[4.8rem] rounded-[8px] bg-green200 text-white cursor-pointer flex items-center justify-center duration-500 hover:text-[1.9rem] hover:w-[12.2rem] hover:h-[4.6rem] hover:mx-[0.3rem] hover:my-[0.1rem]"
-              >
-                취소하기
-              </button>
+              <Button text={"아니오"} width={120} height={48} fontSize={16} bgColor={"white"} textColor={"green"} border={true} borderColor={"green"} hover={true} onClick={handleClickPopupClose}/>
+              <Button text={"취소하기"} width={120} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true} />
             </div>
           ) : (
-            <div className={'flex w-full mt-[4.5rem] justify-end'}>
-              <button
-                onClick={handleClickPopupClose}
-                className="text-[1.6rem] w-[12.8rem] h-[4.8rem] rounded-[8px] bg-green200 text-white cursor-pointer flex items-center justify-center duration-500 hover:text-[1.9rem] hover:w-[12.2rem] hover:h-[4.6rem] hover:mx-[0.3rem] hover:my-[0.1rem]"
-              >
-                확인
-              </button>
+            <div className={'flex w-full mt-12 justify-end'}>
+              <Button text={"확인"} width={120} height={48} fontSize={16} bgColor={"green"} textColor={"white"} hover={true}  onClick={handleClickPopupClose}/>
             </div>
           )}
         </div>
