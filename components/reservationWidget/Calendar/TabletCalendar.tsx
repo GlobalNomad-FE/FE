@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import PopupCalender from './PopupCalender';
-import { useSelectTimeStore } from '@/libs/calendarStore';
+import PopupCalender from './PopupCalendar';
 import { formatDate } from '@/utils/dateFormatter';
-import { se } from 'date-fns/locale/se';
+import { useCalendar } from '../lib/Calendar.provider';
 
-export default function TabletCalender() {
-  const { selectTime } = useSelectTimeStore();
+export default function TabletCalendar() {
+  const { selectSchedule } = useCalendar();
+  const date = selectSchedule?.date;
   const [isCalenderOpen, setIsCalenderOpen] = useState(false);
-  const date = selectTime?.date;
 
   const hadleOpenCalender = () => {
     setIsCalenderOpen(true);
@@ -20,10 +19,10 @@ export default function TabletCalender() {
   return (
     <>
       <div onClick={hadleOpenCalender}>
-        <p className="text-body1-medium text-nomad-black underline">
+        <p className="text-body1-medium text-green200 underline">
           {date
-            ? `${formatDate(date)} ${selectTime?.startTime}~${
-                selectTime?.endTime
+            ? `${formatDate(date)} ${selectSchedule?.startTime}~${
+                selectSchedule?.endTime
               }`
             : '날짜 선택하기'}
         </p>

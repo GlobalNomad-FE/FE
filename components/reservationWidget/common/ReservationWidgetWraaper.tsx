@@ -1,6 +1,10 @@
 import React from 'react';
 
-const FloatingBox = ({ children }: { children: React.ReactNode }) => {
+const ReservationWidgetWraaper = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   return (
     <div
       className="relative flex flex-col w-96 bg-white border rounded-2xl border-gray200 p-6 tablet:w-[251px]"
@@ -11,4 +15,4 @@ const FloatingBox = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default FloatingBox;
+export default ReservationWidgetWraaper;

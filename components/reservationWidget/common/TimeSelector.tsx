@@ -1,22 +1,22 @@
 import React from 'react';
-import { useSelectTimeStore } from '@/libs/calendarStore';
+import { useCalendar } from '../lib/Calendar.provider';
 
-const TimeSelector = ({
-  schedules,
-  selectedDate,
-}: {
-  schedules: any[];
-  selectedDate: string;
-}) => {
-  const { selectTime, setSelectTime } = useSelectTimeStore();
+/**
+ *
+ * @param schedules: api 데이터로 받아오는 스케쥴 리스트 (프로바이더 schedule과 다른것)
+ */
+const TimeSelector = ({ schedules }: { schedules: any[] }) => {
+  const { onChangeSchedule, selectSchedule, formatedDate } = useCalendar();
 
   return (
-    <div className="mt-4  flex flex-col gap-3.5">
-      <p className="text-h4-bold text-green400">예약 가능한 시간</p>
+    <div className="mt-4  flex flex-col gap-3.5 mobile:mt-7">
+      <p className="text-h3-bold text-black200 mobile:text-h2">
+        예약 가능한 시간
+      </p>
       <div>
         {schedules.map((data) => {
-          const isSelected = selectTime?.id === data.id;
-          const isDate = selectedDate === data.date;
+          const isSelected = selectSchedule?.id === data.id;
+          const isDate = formatedDate === data.date;
           return (
             isDate && (
               <button
@@ -26,7 +26,7 @@ const TimeSelector = ({
                     : 'bg-white text-nomad-black'
                 }`}
                 key={data.id}
-                onClick={() => setSelectTime(data)}
+                onClick={() => onChangeSchedule(data)}
               >
                 {data.startTime}~{data.endTime}
               </button>
