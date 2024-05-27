@@ -1,3 +1,5 @@
+'use client';
+
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
