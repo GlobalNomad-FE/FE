@@ -23,7 +23,6 @@ const CancelReservation = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {' '}
       <Button
         width={150}
         height={50}
@@ -38,14 +37,13 @@ const CancelReservation = ({ children }: { children: React.ReactNode }) => {
       <Portal>
         {openPopup && (
           <div
-            className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+            className="fixed z-20 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
             onClick={handleClosePopup}
           >
             <div
               onClick={handleStopBubbling}
               className="w-[298px] p-[24px] bg-white rounded-[12px] flex flex-col items-center justify-center"
             >
-              {' '}
               <Image
                 src="/icons/cancel-reservation.svg"
                 alt="체크 버튼"

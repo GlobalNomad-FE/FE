@@ -1,6 +1,7 @@
 import Portal from '@/utils/Portal';
 import React from 'react';
 import Button from '@/components/commons/Button';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   isOpen: boolean;
@@ -8,11 +9,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const BasePopup = ({
-  isOpen,
-  closePopup,
-  children,
-}: Props) => {
+const BasePopup = ({ isOpen, closePopup, children }: Props) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
   //모달 끄기
   const handleClickPopupClose = () => {
     closePopup();
@@ -26,18 +24,24 @@ const BasePopup = ({
     <Portal>
       {isOpen && (
         <div
-          className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+          className="fixed z-20 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
           onClick={handleClickPopupClose}
         >
           <div
             onClick={handleStopBubbling}
-            className="w-[34rem] p-[2rem] bg-white rounded-lg pt-28 flex flex-col items-center justify-center"
+            className={`bg-white rounded-[8px] flex flex-col items-center ${
+              isMobile ? 'w-[327px] h-[220px]' : 'w-[540px] p-[28px]'
+            }`}
           >
-            <div className="text-h4-regular">{children}</div>
-            <div className={'flex w-full mt-12 justify-end'}>
+            <div className="text-h4-regular mt-[80px]">{children}</div>
+            <div
+              className={`flex w-full mt-[45px] ${
+                isMobile ? 'justify-center' : 'justify-end'
+              }`}
+            >
               <Button
-                width={120}
-                height={48}
+                width={isMobile ? 138 : 120}
+                height={isMobile ? 42 : 48}
                 fontSize={16}
                 btnColor={'green'}
                 textColor={'white'}

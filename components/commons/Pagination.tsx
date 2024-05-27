@@ -1,6 +1,7 @@
 import usePagination from '@/hooks/usePagination';
 import React, { useEffect } from 'react';
 import Button from '@/components/commons/Button';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   totalCount: number;
@@ -26,6 +27,7 @@ const Pagination = ({
     totalPages,
     visiblePages,
   );
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const startPage =
     Math.floor((currentPage - 1) / visiblePages) * visiblePages + 1;
@@ -44,9 +46,9 @@ const Pagination = ({
   return (
     <div className="flex items-center justify-center py-4 text-black200 text-h4-bold gap-2.5">
       <Button
-        width={55}
-        height={55}
-        fontSize={16}
+        width={isMobile ? 40 : 55}
+        height={isMobile ? 40 : 55}
+        fontSize={18}
         btnColor={'white'}
         textColor={currentPage > visiblePages ? 'green' : 'gray'}
         border={true}
@@ -61,9 +63,9 @@ const Pagination = ({
       {pageNumbers.map((pageNumber) =>
         currentPage === pageNumber ? (
           <Button
-            width={55}
-            height={55}
-            fontSize={16}
+            width={isMobile ? 40 : 55}
+            height={isMobile ? 40 : 55}
+            fontSize={18}
             btnColor={'green'}
             textColor={'white'}
             hover={true}
@@ -75,9 +77,9 @@ const Pagination = ({
           </Button>
         ) : (
           <Button
-            width={55}
-            height={55}
-            fontSize={16}
+            width={isMobile ? 40 : 55}
+            height={isMobile ? 40 : 55}
+            fontSize={18}
             btnColor={'white'}
             textColor={'green'}
             border={true}
@@ -91,9 +93,9 @@ const Pagination = ({
         ),
       )}
       <Button
-        width={55}
-        height={55}
-        fontSize={16}
+        width={isMobile ? 40 : 55}
+        height={isMobile ? 40 : 55}
+        fontSize={18}
         btnColor={'white'}
         textColor={
           Math.ceil(currentPage / visiblePages) !==
