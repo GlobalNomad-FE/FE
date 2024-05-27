@@ -2,19 +2,17 @@ import Portal from '@/utils/Portal';
 import React from 'react';
 import Button from '@/components/commons/Button';
 
-/**
- * @param {string} text - 팝업에 띄울 메세지
- * @param {number} numOfButtons - 팝업에 있는 버튼 갯수, 미입력시 기본값 1
- * @param {() => void} closePopup - 팝업을 닫는 함수
- */
-
 interface Props {
-  text: string;
-  numOfButtons?: number;
+  isOpen: boolean;
   closePopup: () => void;
+  children: React.ReactNode;
 }
 
-const BasePopup = ({ text, numOfButtons = 1 , closePopup}: Props) => {
+const BasePopup = ({
+  isOpen,
+  closePopup,
+  children,
+}: Props) => {
   //모달 끄기
   const handleClickPopupClose = () => {
     closePopup();
@@ -26,29 +24,32 @@ const BasePopup = ({ text, numOfButtons = 1 , closePopup}: Props) => {
 
   return (
     <Portal>
-      <div
-        className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
-        onClick={handleClickPopupClose}
-      >
+      {isOpen && (
         <div
-          onClick={handleStopBubbling}
-          className="w-[34rem] p-[2rem] bg-white rounded-lg pt-28 flex flex-col items-center justify-center"
+          className="fixed z-1 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+          onClick={handleClickPopupClose}
         >
-          <div className="text-h4-regular">{text}</div>
-          {numOfButtons === 2 ? (
-            <div
-              className={'flex w-full mt-12 justify-center gap-4'}
-            >
-              <Button text={"아니오"} width={120} height={48} fontSize={16} btnColor={"white"} textColor={"green"} border={true} borderColor={"green"} hover={true} onClick={handleClickPopupClose}/>
-              <Button text={"취소하기"} width={120} height={48} fontSize={16} btnColor={"green"} textColor={"white"} hover={true} />
-            </div>
-          ) : (
+          <div
+            onClick={handleStopBubbling}
+            className="w-[34rem] p-[2rem] bg-white rounded-lg pt-28 flex flex-col items-center justify-center"
+          >
+            <div className="text-h4-regular">{children}</div>
             <div className={'flex w-full mt-12 justify-end'}>
-              <Button text={"확인"} width={120} height={48} fontSize={16} btnColor={"green"} textColor={"white"} hover={true}  onClick={handleClickPopupClose}/>
+              <Button
+                width={120}
+                height={48}
+                fontSize={16}
+                btnColor={'green'}
+                textColor={'white'}
+                hover={true}
+                onClick={handleClickPopupClose}
+              >
+                확인
+              </Button>
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </Portal>
   );
 };
