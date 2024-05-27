@@ -1,12 +1,12 @@
-import './Calender.css';
+import './Calendar.css';
 import NextIcon from '@/public/icons/next.svg';
 import PrevIcon from '@/public/icons/prev.svg';
 
 /**
  * 캘린더 커스텀 헤더 컴포넌트 입니다.
  * @param {Object} props.date 캘린더 날짜 값
- * @param {function} props.decreaseMonth 이전 달로 넘어가는 함수
- * @param {function} props.increaseMonth 다음 달로 넘어가는 함수
+ * @param {Function} props.decreaseMonth 이전 달로 넘어가는 함수
+ * @param {Function} props.increaseMonth 다음 달로 넘어가는 함수
  */
 
 interface CalendarHeaderProps {
@@ -21,7 +21,7 @@ export default function CalendarHeader({
   increaseMonth,
 }: CalendarHeaderProps) {
   const year = date.getFullYear();
-  const month = date.getMonth() + 1;
+  const month = date.getMonth();
   const monthNames = [
     'January',
     'February',
