@@ -44,7 +44,6 @@ const Pagination = ({
   return (
     <div className="flex items-center justify-center py-4 text-black200 text-h4-bold gap-2.5">
       <Button
-        text={'<'}
         width={55}
         height={55}
         fontSize={16}
@@ -56,11 +55,12 @@ const Pagination = ({
         onClick={currentPage > visiblePages ? goToPreviousSet : undefined}
         disabled={!(currentPage > visiblePages)}
         rounded={15}
-      />
+      >
+        {'<'}
+      </Button>
       {pageNumbers.map((pageNumber) =>
         currentPage === pageNumber ? (
           <Button
-            text={pageNumber}
             width={55}
             height={55}
             fontSize={16}
@@ -70,10 +70,11 @@ const Pagination = ({
             onClick={() => goToPage(pageNumber)}
             rounded={15}
             clicked={true}
-          />
+          >
+            {pageNumber}
+          </Button>
         ) : (
           <Button
-            text={pageNumber}
             width={55}
             height={55}
             fontSize={16}
@@ -84,11 +85,12 @@ const Pagination = ({
             hover={true}
             onClick={() => goToPage(pageNumber)}
             rounded={15}
-          />
+          >
+            {pageNumber}
+          </Button>
         ),
       )}
       <Button
-        text={'>'}
         width={55}
         height={55}
         fontSize={16}
@@ -123,7 +125,9 @@ const Pagination = ({
           )
         }
         rounded={15}
-      />
+      >
+        {'>'}
+      </Button>
     </div>
   );
 };
