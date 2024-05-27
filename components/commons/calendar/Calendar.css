@@ -1,6 +1,6 @@
 .react-datepicker {
   padding: 10px;
-  width: 100%;
+  width: auto;
   font-family: 'Open Sans';
   font-size: 13px;
   font-style: normal;
@@ -10,7 +10,12 @@
   border: 1px solid #eee;
   color: #4b4b4b;
   font-weight: 600;
+
+  @media (max-width: 727px) {
+    margin-top: 20px;
+  }
 }
+
 .react-datepicker__day--today {
   font-weight: 900;
   background-color: #ced8d5;

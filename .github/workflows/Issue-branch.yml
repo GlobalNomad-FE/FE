@@ -1,0 +1,36 @@
+name: Create Issue Branch
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Create issue branch
+      run: |
+        ISSUE_NUMBER=${{ github.event.issue.number }}
+        ISSUE_TITLE=${{ github.event.issue.title }}
+        BRANCH_NAME="${ISSUE_NUMBER}-${ISSUE_TITLE}"
+        echo "Creating branch $BRANCH_NAME"
+        
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+        git fetch origin
+        git checkout -b $BRANCH_NAME origin/develop
+        git push origin $BRANCH_NAME
+
+    - name: Add comment to issue
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        body: |
+          Branch [${{ github.event.issue.title }}] has been created: 
+          ```
+          $BRANCH_NAME
+          ```
