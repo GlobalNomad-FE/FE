@@ -11,8 +11,8 @@ const ParticipantCount = ({
   handleCountPlus: () => void;
   handleCountMinus: () => void;
 }) => (
-  <div className="flex flex-col gap-[12px] border-t border-t-gray200 pt-[1.2rem] tablet:border-none">
-    <p className="text-h3-bold text-green400">참여 인원 수</p>
+  <div className="flex flex-col gap-[12px] border-t border-t-gray200 pt-[1.2rem] tablet:border-none mobile:border-none">
+    <p className="text-h3-bold text-nomad-black mobile:text-h2">참여 인원 수</p>
     <div className="border border-gray200 rounded-md flex shadow-custom bg-white  justify-between w-[150px]">
       <button
         className="p-[1rem]"
