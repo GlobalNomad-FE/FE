@@ -1,3 +1,4 @@
+'use client';
 interface CategoryType {
   onClick: () => void;
   isSelected: boolean;
