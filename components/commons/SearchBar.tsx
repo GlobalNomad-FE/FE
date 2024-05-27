@@ -34,7 +34,7 @@ const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
       <div className="flex gap-x-3">
         <form className="flex relative w-[100%] h-14 rounded bg-gray600">
           <input
-            className="w-[100%] h-14 pl-12 border border-solid border-gray500 rounded text-body1-regular mobile:text-body2-regular"
+            className="w-[100%] h-14 pl-12 border border-gray500 rounded text-body1-regular mobile:text-body2-regular"
             placeholder="내가 원하는 체험은"
             value={inputValue}
             onChange={onChangeInputValue}
@@ -49,7 +49,7 @@ const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
           />
         </form>
         <button
-          type="button"
+          type="submit"
           className="min-w-[8.5em] h-14 bg-nomad-black text-white text-body1-bold rounded mobile:min-w-24"
           onClick={onSearch}
         >
