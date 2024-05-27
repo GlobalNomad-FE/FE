@@ -1,3 +1,5 @@
+'use client';
+
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
@@ -59,7 +61,7 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-0 w-full h-[70px] bg-[white] border-b border-gray200 flex justify-around z-[999]">
+    <div className="fixed top-0 w-full h-[70px] bg-[white] border-b border-gray200 flex justify-around z-10">
       <div className=" max-w-[1920px] w-full mx-auto items-center flex justify-between px-[38.4px]  ">
         <Link href="/">
           <Image
