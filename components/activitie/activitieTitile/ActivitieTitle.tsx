@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import data from '@/components/FloatingBox/mock.json';
+import data from '@/components/reservationWidget/mock.json';
 
 /* TODO 데이터들어오는 값으로 바꿔야함 */
 
@@ -8,7 +8,7 @@ export default function ActivitieTitle() {
   const { subImageUrls: bioImage, bannerImageUrl } = data;
   return (
     <div>
-      <div className="mt-[150px] flex justify-between max-w-5xl items-center">
+      <div className="mt-[150px] flex justify-between max-w-[1200px] items-center">
         <div className=" flex flex-col">
           <div>{data.category}</div>
           <p className="text-title text-nomad-black mt-2.5 mb-4">타이틀</p>
