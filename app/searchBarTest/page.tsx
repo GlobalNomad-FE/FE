@@ -1,6 +1,6 @@
 'use client';
 import SearchBar from '@/components/commons/SearchBar';
-import data from '@/components/commons/mock.json';
+import data from './mock.json';
 import { useState } from 'react';
 
 const SearchBarTest = () => {
