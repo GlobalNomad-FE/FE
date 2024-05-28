@@ -10,10 +10,11 @@ export default function Map({ location }: { location: string }) {
     kakao.maps.load(() => {
       // 2. 지도 생성 및 설정
       const container = document.getElementById('map');
+
       const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        center: new kakao.maps.LatLng(37.502, 127.026581),
         level: 3,
-        draggable : false
+        draggable: false,
       };
       const map = new kakao.maps.Map(container as HTMLElement, options);
 
@@ -25,34 +26,42 @@ export default function Map({ location }: { location: string }) {
           // 5. 결과값으로 받은 위치를 마커로 표시
           const latitude: number = Number(result[0].y);
           const longitude: number = Number(result[0].x);
-
           let coords = new kakao.maps.LatLng(latitude, longitude);
+          //마커 이미지 변경
+          let imageSrc = '/icons/maker2.png'; // 마커이미지의 주소입니다
+          let imageSize = new kakao.maps.Size(25, 33); // 마커이미지의 크기입니다
+
+          let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
           // 결과값으로 받은 위치를 마커로 표시
           let marker = new kakao.maps.Marker({
             map: map,
             position: coords,
+            image: markerImage,
           });
-          kakao.maps.event.addListener(marker, 'click', function() {
-           window.open(`https://map.kakao.com/link/map/선택위치,${latitude},${longitude}`);
-        });
 
-          let infowindow = new kakao.maps.InfoWindow({
-            content: `<div style="width:300px;text-align:center;padding:6px 0;border-radius:16px">${location}</div>`,
+          // 마커 클릭시 카카오 지도로 이동
+          kakao.maps.event.addListener(marker, 'click', function () {
+            window.open(
+              `https://map.kakao.com/link/map/선택위치,${latitude},${longitude}`,
+            );
           });
-          infowindow.open(map, marker);
+
+          // 커스텀 오버레이(주소텍스트 나타내는거)
+          let overlay = new kakao.maps.CustomOverlay({
+            position: coords,
+            content: `<div style="right:-120px;bottom:38px;padding:10px;width:auto;text-align:center;border-radius:24px;border:2px solid #0475F4;position: absolute;background:white;"><p style="font-weight: 600;color:#171717;">${location}</p></div>`,
+          });
+          overlay.setMap(map);
 
           // 6. 지도의 중심을 결과값으로 받은 위치로 이동
           map.setCenter(coords);
         }
       });
-      
-      function setDraggable(draggable) {
-      // 마우스 드래그로 지도 이동 가능여부를 설정합니다
-      map.setDraggable(draggable);    
-}
-     
-    
+      // 마우스 드래그로 지도 이동 가능여부를 설정
+      function setDraggable(draggable: boolean) {
+        map.setDraggable(draggable);
+      }
     });
   }, [location]);
 
