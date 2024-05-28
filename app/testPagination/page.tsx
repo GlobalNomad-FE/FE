@@ -55,28 +55,28 @@ export default function Page() {
     setCurrentPage(currentPage);
   };
 
+  const filteredData = dataArray.filter((item) => item.page === currentPage);
+
   return (
     <main className="p-10 bg-white">
       <div className="grid grid-cols-4">
-        {dataArray
-          .filter((item) => item.page === currentPage)
-          .map((item) => (
-            <div className="text-black200" key={item.id}>
-              <div className="relative w-[283px] h-[283px] rounded-3xl overflow-hidden">
-                <Image
-                  src={`/images/${item.bannerImageUrl}.png`}
-                  alt={item.bannerImageUrl}
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-              <div>
-                {item.rating}, {item.reviewCount}
-              </div>
-              <div>{item.title}</div>
-              <div>{item.price}</div>
+        {filteredData.map((item) => (
+          <div className="text-black200" key={item.id}>
+            <div className="relative w-[283px] h-[283px] rounded-3xl overflow-hidden">
+              <Image
+                src={`/images/${item.bannerImageUrl}.png`}
+                alt={item.bannerImageUrl}
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
-          ))}
+            <div>
+              {item.rating}, {item.reviewCount}
+            </div>
+            <div>{item.title}</div>
+            <div>{item.price}</div>
+          </div>
+        ))}
       </div>
       <Pagination
         totalCount={totalCount}
