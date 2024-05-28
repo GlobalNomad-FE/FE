@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import 'react-kakao-maps-sdk';
 import Image from 'next/image';
+import { MapProps, _MapProps } from 'react-kakao-maps-sdk';
 
 export default function Map({ location }: { location: string }) {
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function Map({ location }: { location: string }) {
       const options = {
         center: new kakao.maps.LatLng(33.450701, 126.570667),
         level: 3,
+        draggable : false
       };
       const map = new kakao.maps.Map(container as HTMLElement, options);
 
@@ -31,9 +33,12 @@ export default function Map({ location }: { location: string }) {
             map: map,
             position: coords,
           });
+          kakao.maps.event.addListener(marker, 'click', function() {
+           window.open(`https://map.kakao.com/link/map/선택위치,${latitude},${longitude}`);
+        });
 
           let infowindow = new kakao.maps.InfoWindow({
-            content: `<div style="width:300px;text-align:center;padding:6px 0;">${location}</div>`,
+            content: `<div style="width:300px;text-align:center;padding:6px 0;border-radius:16px">${location}</div>`,
           });
           infowindow.open(map, marker);
 
@@ -41,6 +46,13 @@ export default function Map({ location }: { location: string }) {
           map.setCenter(coords);
         }
       });
+      
+      function setDraggable(draggable) {
+      // 마우스 드래그로 지도 이동 가능여부를 설정합니다
+      map.setDraggable(draggable);    
+}
+     
+    
     });
   }, [location]);
 
