@@ -1,3 +1,5 @@
+'use client';
+
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
@@ -59,8 +61,8 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-0 w-full h-28 bg-[white] border-b border-gray200 flex justify-around ">
-      <div className=" max-w-1920 w-full mx-auto items-center flex justify-between px-38.4 py-16 ">
+    <div className="fixed top-0 w-full h-[70px] bg-[white] border-b border-gray200 flex justify-around z-10">
+      <div className=" max-w-[1920px] w-full mx-auto items-center flex justify-between px-[38.4px]  ">
         <Link href="/">
           <Image
             src="/icons/logo_small.svg"
@@ -71,27 +73,27 @@ export default function Gnb() {
         </Link>
         <div>
           {!Auth ? (
-            <div className=" flex gap-40 relative text-22.4 h3-bold text-[black200] ">
+            <div className=" flex gap-[40px] relative text-sm font-medium text-black200 ">
               <Link href="/signin">로그인</Link>
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
             //TODO 로그인 되면 알람이 뜰 수 있게
-            <div className=" flex gap-40 static">
+            <div className=" flex gap-[40px] static">
               <button onClick={isNotificationOpenToggle}>
                 <Image src="/icons/notification.svg" alt="알림" />
               </button>
               {isNotificationOpen && '모달 자리'}
-              <div className=" flex relative gap-40 ">
-                <div className=" h-35.2 border-r-[1px_gray300]" />
-                <div className="flex w-[fit-content] gap-16">
+              <div className=" flex relative gap-10 ">
+                <div className=" h-[35.2px] border-r-[1px_gray300]" />
+                <div className="flex w-fit-content gap-[16px]">
                   <Avatar
                     profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
                   />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className=" flex text-22.4 body1-regular text-[nomad-black]"
+                    className=" flex text-[22.4px] body1-regular text-[nomad-black]"
                   >
                     메뉴
                     {/* user 데이터 받아오면서 수정 */}
