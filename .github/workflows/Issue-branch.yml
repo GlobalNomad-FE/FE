@@ -16,8 +16,10 @@ jobs:
       run: |
         ISSUE_NUMBER=${{ github.event.issue.number }}
         ISSUE_TITLE=${{ github.event.issue.title }}
-        BRANCH_NAME="${ISSUE_NUMBER}-${ISSUE_TITLE}"
-        echo "Creating branch $BRANCH_NAME"
+        SAFE_TITLE=$(echo "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | tr -c '[:alnum:]' '-' | tr ' ' '-')
+        BRANCH_NAME="${ISSUE_NUMBER}-${SAFE_TITLE}"
+
+        echo "::set-output name=branch_name::$BRANCH_NAME"
         
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
