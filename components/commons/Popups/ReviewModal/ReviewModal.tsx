@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 import Image from 'next/image';
 import ReviewContent from './ReviewContent';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 const ReviewModal = () => {
   const [openModal, setOpenModal] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -42,9 +44,17 @@ const ReviewModal = () => {
           >
             <div
               onClick={handleStopBubbling}
-              className="w-[480px] px-[24px] pt-[35px] pb-[46px] bg-white rounded-[24px] flex flex-col items-center justify-center"
+              className={`px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center ${
+                isMobile
+                  ? 'w-[375px] pb-[39px]'
+                  : 'w-[480px] pb-[46px] rounded-[24px]'
+              }`}
             >
-              <div className="flex w-full justify-between items-center mb-[41px]">
+              <div
+                className={`flex w-full justify-between items-center ${
+                  isMobile ? 'mb-[24px]' : 'mb-[41px]'
+                }`}
+              >
                 <h1 className="text-h1">후기 작성</h1>
                 <Image
                   src="/icons/btn-X-big.svg"
