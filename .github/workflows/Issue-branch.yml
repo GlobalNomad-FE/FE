@@ -27,8 +27,8 @@ jobs:
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
         git fetch origin
-        git checkout -b "$BRANCH_NAME" origin/develop
-        git push origin "$BRANCH_NAME"
+        git checkout -b "${BRANCH_NAME}" origin/develop
+        git push origin "${BRANCH_NAME}"
 
     - name: Add comment to issue
       uses: peter-evans/create-or-update-comment@v1
