@@ -41,7 +41,7 @@ const Pagination = ({
   //CurrenPage의 변화를 감지해서 그 값을 상위컴포넌트로 전달해줍니다
   useEffect(() => {
     onPageChange(currentPage);
-  }, [currentPage]);
+  }, [currentPage, onPageChange]);
 
   return (
     <div className="flex items-center justify-center py-4 text-black200 text-h4-bold gap-2.5">
@@ -63,6 +63,7 @@ const Pagination = ({
       {pageNumbers.map((pageNumber) =>
         currentPage === pageNumber ? (
           <Button
+            key={pageNumber}
             width={isMobile ? 40 : 55}
             height={isMobile ? 40 : 55}
             fontSize={18}
@@ -77,6 +78,7 @@ const Pagination = ({
           </Button>
         ) : (
           <Button
+            key={pageNumber}
             width={isMobile ? 40 : 55}
             height={isMobile ? 40 : 55}
             fontSize={18}
