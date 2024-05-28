@@ -1,15 +1,11 @@
-'use client';
-
 import BasePopup from '@/components/commons/Popups/BasePopup';
 import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 
-const ReservationCompleted = () => {
+const EmailExist = () => {
   const [openPopup, setOpenPopup] = useState(false);
-  const [popupText, setPopupText] = useState('');
 
   const handleOpenPopup = () => {
-    
     setOpenPopup(true);
   };
 
@@ -30,6 +26,7 @@ const ReservationCompleted = () => {
       >
         회원가입 하기
       </Button>
+      {/* 팝업 여기부터 아래 3줄처럼 사용하면 됨  */}
       <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
         이미 사용중인 이메일입니다.
       </BasePopup>
@@ -37,4 +34,4 @@ const ReservationCompleted = () => {
   );
 };
 
-export default ReservationCompleted;
+export default EmailExist;

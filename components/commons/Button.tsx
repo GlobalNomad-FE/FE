@@ -7,7 +7,7 @@ const ColorValue: { [key: string]: string } = {
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  width: number;
+  width: number | 'full';
   height: number;
   fontSize: number;
   textBold?: boolean;
@@ -62,7 +62,10 @@ const Button = ({
         onMouseEnter={handleMouseOver}
         onMouseLeave={handleMouseOut}
         style={{
-          width: pxToRem(hovered || clicked ? width * 0.8 : width),
+          width:
+            width === 'full'
+              ? '100%'
+              : pxToRem(hovered || clicked ? width * 0.8 : width),
           height: pxToRem(hovered || clicked ? height * 0.8 : height),
           fontSize: pxToRem(hovered || clicked ? fontSize * 1.2 : fontSize),
           fontWeight: textBold ? 700 : 400,

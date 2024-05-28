@@ -1,5 +1,3 @@
-'use client';
-
 import Portal from '@/utils/Portal';
 import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
@@ -34,6 +32,7 @@ const CancelReservation = ({ children }: { children: React.ReactNode }) => {
       >
         예약취소
       </Button>
+      {/* 팝업 여기부터 아래 끝까지 처럼 사용하면 됨  */}
       <Portal>
         {openPopup && (
           <div
