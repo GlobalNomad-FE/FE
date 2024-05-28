@@ -1,5 +1,5 @@
 import DatePicker from 'react-datepicker';
-import Image from 'next/Image';
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 
 import 'react-datepicker/dist/react-datepicker.css';
