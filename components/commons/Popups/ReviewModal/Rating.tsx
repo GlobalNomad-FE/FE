@@ -22,6 +22,7 @@ const Rating = () => {
     <div className="flex justify-center gap-[8px] p-[12px]">
       {rating.map(({ id, empty }) => (
         <Image
+          key={id}
           src={empty ? '/icons/empty-star.svg' : '/icons/star.svg'}
           alt={empty ? '빈 별' : '노란 별'}
           width={56}
