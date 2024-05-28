@@ -19,7 +19,7 @@ const MyReservations = () => {
   return (
     <div>
       <Gnb />
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] bg-gray50">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50">
         <div className="flex gap-6 w-[1200px] pt-[142px]">
           {!isMobile && <SideNavigationMenu />}
           <div className="flex flex-col flex-grow">
@@ -43,13 +43,12 @@ const MyReservations = () => {
                 </p>
               </div>
             ) : (
-              <div className="mt-[16px]">
+              <div className="flex flex-col gap-6 mt-[16px]">
                 {data.reservations.map((item) => (
                   <div
                     key={item.id}
-                    className="flex w-[792px] min-h-[204px] bg-white"
+                    className="flex max-w-[792px] h-[204px] bg-white"
                   >
-                    <div className="w-[204px] h-[100%] bg-gray200"></div>
                     <div>
                       <p>{item.activity.title}</p>
                       <p>{item.date}</p>
