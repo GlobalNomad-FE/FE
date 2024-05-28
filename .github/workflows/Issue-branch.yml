@@ -19,7 +19,7 @@ jobs:
         ISSUE_TITLE=${{ github.event.issue.title }}
 
         # Convert ISSUE_TITLE to a branch-friendly format
-        SAFE_TITLE=$(echo "$ISSUE_TITLE" | iconv -t ascii//TRANSLIT | tr -cd '[:alnum:] ' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
+        SAFE_TITLE=$(echo "$ISSUE_TITLE" | iconv -f utf-8 -t ascii//TRANSLIT | tr -cd '[:alnum:]-' | tr '[:space:]' '-')
         BRANCH_NAME="${ISSUE_NUMBER}-${SAFE_TITLE}"
 
         echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
@@ -27,8 +27,8 @@ jobs:
         git config --global user.name "${{ github.actor }}"
         git config --global user.email "${{ github.actor }}@users.noreply.github.com"
         git fetch origin
-        git checkout -b "${BRANCH_NAME}" origin/develop
-        git push origin "${BRANCH_NAME}"
+        git checkout -b "$BRANCH_NAME" origin/develop
+        git push origin "$BRANCH_NAME"
 
     - name: Add comment to issue
       uses: peter-evans/create-or-update-comment@v1
