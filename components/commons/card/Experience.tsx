@@ -89,14 +89,14 @@ const Experience = ({
           height={204}
         />
       </div>
-      <div className="w-[588px] tablet:w-[290px] mobile:w-[216px] bg-white p-6 tablet:p-3 mobile:p-3">
+      <div className="w-[588px] tablet:w-[290px] mobile:w-[216px] bg-white p-6 tablet:p-3 mobile:p-2">
         <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
           {textProps().text}
         </p>
-        <p className="text-xl tablet:text-[18px] mobile:text-[14px] font-bold">
+        <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold">
           {title}
         </p>
-        <p className="text-lg tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-0 mobile:mt-0">
+        <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-0 mobile:mt-0">
           {date} · {startTime} - {endTime} · {headCount}명
         </p>
         <div className="flex justify-between mt-4 tablet:mt-1 mobile:mt-1 items-end">
@@ -105,7 +105,7 @@ const Experience = ({
           )}`}</p>
           {status === 'pending' ? (
             <button
-              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-[40px] mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold"
+              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold"
               onClick={() => handleReservationCancellation()}
             >
               예약취소
@@ -113,7 +113,7 @@ const Experience = ({
           ) : (
             status === 'completed' && (
               <button
-                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-[40px] mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
+                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
                 onClick={() => handleWritingReviews()}
               >
                 후기작성
