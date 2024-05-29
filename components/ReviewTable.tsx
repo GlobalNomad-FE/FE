@@ -25,7 +25,7 @@ export default function ReviewTable({ data }: ReviewTableProps) {
         const { profileImageUrl, nickname } = user;
         return (
           <div
-            className="flex gap-4 border-b border-gray400 py-6 last:border-none"
+            className="flex gap-4 border-b border-gray400 py-6 last:border-none first:pt-0"
             key={list.id}
           >
             <div className="w-[45px] h-[45px] rounded-[45px] bg-gray200 overflow-hidden relative">
