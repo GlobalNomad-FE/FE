@@ -94,13 +94,13 @@ const Experience = ({
         <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
           {date} · {startTime} - {endTime} · {headCount}명
         </p>
-        <div className="flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
+        <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
           <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">{`₩${totalPrice.toLocaleString(
             'ko-KR',
           )}`}</p>
           {status === 'pending' ? (
             <button
-              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold"
+              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border border-black200 rounded-md font-bold"
               onClick={() => handleReservationCancellation()}
             >
               예약 취소
