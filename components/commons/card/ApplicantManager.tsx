@@ -59,7 +59,7 @@ const ApplicantManager = ({
           </>
         ) : reservationStatus === 'confirmed' ? (
           <p className="w-[82px] h-[38px] bg-[#FFF4E8] rounded-[26.5px] px-3 py-2 text-[#FF7C1D] text-sm font-bold cursor-default">
-            예약확정
+            예약승인
           </p>
         ) : (
           <p className="w-[82px] h-[38px] bg-[#FFE4E0] rounded-[26.5px] px-3 py-2 text-[#FF472E] text-sm font-bold cursor-default">
