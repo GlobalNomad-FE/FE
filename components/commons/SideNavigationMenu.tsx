@@ -45,10 +45,13 @@ export default function SideNavigationMenu() {
   ];
 
   return (
-    <div className="w-[38.5rem] tablet:w-[25rem] flex flex-col bg-white border border-gray200 rounded-xl p-[2.4rem] gap-[2.4rem] ">
+    <div
+      className="w-[385px] h-[432px] tablet:w-[250px] flex flex-col bg-white border border-gray200 rounded-xl p-[24px] gap-[24px] "
+      style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
+    >
       <div className="flex justify-center relative">
         <div
-          className="w-[16rem] h-[16rem] rounded-[160px] bg-gray200 overflow-hidden relative "
+          className="w-[160px] h-[160px] rounded-[160px] bg-gray200 overflow-hidden relative "
           style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
         >
           <Image
@@ -58,7 +61,7 @@ export default function SideNavigationMenu() {
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <div className="absolute tablet:right-[30px] right-[90px] bottom-0 z-99 cursor-pointer">
+        <div className="absolute tablet:right-[30px] right-[90px] bottom-0 z-2 cursor-pointer">
           <Image
             src="/icons/penIcon.svg"
             alt="수정아이콘"
@@ -67,11 +70,11 @@ export default function SideNavigationMenu() {
           />
         </div>
       </div>
-      <ul className="text-body1-bold flex flex-col gap-[0.8rem]">
+      <ul className="text-body1-bold flex flex-col gap-[8px]">
         {menuItems.map((item, index) => (
           <Link href={item.path} key={index}>
             <li
-              className={`flex gap-[0.4rem] items-center rounded-[12px] h-[4.4rem] px-[1.6rem] py-[0.9rem] cursor-pointer
+              className={`flex gap-[4px] items-center rounded-[12px] h-[44px] px-[16px] py-[9px] cursor-pointer
           ${
             selectedItem === index || item.path === pathname
               ? 'bg-green400 text-black200'
