@@ -12,9 +12,6 @@ interface BioImageType {
   imageUrl: string;
 }
 
-interface ButtonOnClick {
-  onClick: React.MouseEventHandler<any> | undefined;
-}
 export default function ActivitieTitle() {
   const { subImageUrls: bioImage, bannerImageUrl } = data;
 
@@ -81,7 +78,8 @@ export default function ActivitieTitle() {
     }
   };
 
-  const SampleNextArrow = ({ onClick }: ButtonOnClick) => {
+  const SampleNextArrow = (props: any) => {
+    const { onClick } = props;
     return (
       <div
         style={{
@@ -104,7 +102,8 @@ export default function ActivitieTitle() {
     );
   };
 
-  const SamplePrevArrow = ({ onClick }: ButtonOnClick) => {
+  const SamplePrevArrow = (props: any) => {
+    const { onClick } = props;
     return (
       <div
         style={{
