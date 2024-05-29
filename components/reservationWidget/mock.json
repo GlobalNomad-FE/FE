@@ -10,15 +10,19 @@
   "subImageUrls": [
     {
       "id": 1,
-      "imageUrl": "/images/스트릿댄스.png"
+      "imageUrl": "/images/석양.png"
     },
     {
       "id": 2,
-      "imageUrl": "/images/스트릿댄스.png"
+      "imageUrl": "/images/썰매견.png"
     },
     {
       "id": 3,
-      "imageUrl": "/images/스트릿댄스.png"
+      "imageUrl": "/images/자전거여행.png"
+    },
+    {
+      "id": 4,
+      "imageUrl": "/images/피오르체험.png"
     }
   ],
   "schedules": [
