@@ -48,7 +48,7 @@ const ApplicantManager = ({
               className="w-[82px] h-[38px] bg-black200 rounded-md px-3 py-2 text-white text-sm font-bold"
               onClick={() => handleReservationStatusChange('confirmed')}
             >
-              확정하기
+              승인하기
             </button>
             <button
               className="w-[82px] h-[38px] bg-white border rounded-md px-3 py-2 text-black text-sm font-bold"
