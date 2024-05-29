@@ -18,7 +18,7 @@ export default function ActivitiesDetailPage() {
         <div className="w-[790px] flex flex-col">
           <ActivitieBio description={description} />
           <Map location={data.address} />
-          <Review data={data} />
+          <Review />
         </div>
         <div className="">
           <CalendarProvider>
