@@ -61,8 +61,8 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-0 w-full h-[70px] bg-[white] border-b border-gray200 flex justify-around z-10">
-      <div className=" max-w-[1920px] w-full mx-auto items-center flex justify-between px-[38.4px]  ">
+    <div className="fixed top-0 w-full h-[70px] border-b border-gray200 flex z-10">
+      <div className="max-w-[1048px] w-full mx-auto flex items-center justify-between px-[24px]">
         <Link href="/">
           <Image
             src="/icons/logo_small.svg"
@@ -73,7 +73,7 @@ export default function Gnb() {
         </Link>
         <div>
           {!Auth ? (
-            <div className=" flex gap-[40px] relative text-sm font-medium text-black200 ">
+            <div className="flex gap-[25px] relative text-body2-regular font-medium text-black200">
               <Link href="/signin">로그인</Link>
               <Link href="/signup">회원가입</Link>
             </div>
@@ -81,7 +81,12 @@ export default function Gnb() {
             //TODO 로그인 되면 알람이 뜰 수 있게
             <div className=" flex gap-[40px] static">
               <button onClick={isNotificationOpenToggle}>
-                <Image src="/icons/notification.svg" alt="알림" />
+                <Image
+                  src="/icons/notification.svg"
+                  alt="알림"
+                  height={20}
+                  width={20}
+                />
               </button>
               {isNotificationOpen && '모달 자리'}
               <div className=" flex relative gap-10 ">
