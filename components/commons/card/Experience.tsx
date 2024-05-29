@@ -100,7 +100,7 @@ const Experience = ({
           )}`}</p>
           {status === 'pending' ? (
             <button
-              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border border-black200 rounded-md font-bold"
+              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold border-black200"
               onClick={() => handleReservationCancellation()}
             >
               예약 취소
@@ -108,7 +108,7 @@ const Experience = ({
           ) : (
             status === 'completed' && (
               <button
-                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
+                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
                 onClick={() => handleWritingReviews()}
               >
                 후기 작성
