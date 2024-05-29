@@ -45,25 +45,25 @@ const ApplicantManager = ({
         {reservationStatus === 'pending' ? (
           <>
             <button
-              className="w-[82px] h-[38px] bg-black200 rounded-md px-3 py-2 text-white text-sm font-bold"
+              className="w-[82px] h-[38px] bg-black200 rounded-md px-3 py-2 text-white text-[14px] font-bold"
               onClick={() => handleReservationStatusChange('confirmed')}
             >
               승인하기
             </button>
             <button
-              className="w-[82px] h-[38px] bg-white border rounded-md px-3 py-2 text-black text-sm font-bold"
+              className="w-[82px] h-[38px] bg-white border rounded-md px-3 py-2 text-black text-[14px] font-bold"
               onClick={() => handleReservationStatusChange('declined')}
             >
               거절하기
             </button>
           </>
         ) : reservationStatus === 'confirmed' ? (
-          <p className="w-[82px] h-[38px] bg-[#FFF4E8] rounded-[26.5px] px-3 py-2 text-[#FF7C1D] text-sm font-bold cursor-default">
-            예약승인
+          <p className="w-[82px] h-[38px] bg-[#FFF4E8] rounded-[26.5px] px-3 py-2 text-[#FF7C1D] text-[14px] font-bold cursor-default flex justify-center">
+            예약 승인
           </p>
         ) : (
-          <p className="w-[82px] h-[38px] bg-[#FFE4E0] rounded-[26.5px] px-3 py-2 text-[#FF472E] text-sm font-bold cursor-default">
-            예약거절
+          <p className="w-[82px] h-[38px] bg-[#FFE4E0] rounded-[26.5px] px-3 py-2 text-[#FF472E] text-[14px] font-bold cursor-default flex justify-center">
+            예약 거절
           </p>
         )}
       </div>
