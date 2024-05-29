@@ -80,22 +80,22 @@ const Experience = ({
   };
 
   return (
-    <div className="w-[792px] h-[204px] tablet:w-[429px] tablet:h-[156px] mobile:w-[344px] mobile:h-[128px] rounded-[24px] flex justify-between overflow-hidden">
+    <div className="w-[792px] h-[204px] tablet:w-[429px] tablet:h-[156px] mobile:w-[344px] mobile:h-[128px] rounded-[24px] flex justify-between overflow-hidden text-black200 text-[16px]">
       <div className="w-[204px] h-[204px] tablet:w-[156px] tablet:h-[156px] mobile:w-[128px] mobile:h-[128px] relative">
         <Image src={bannerImageUrl} alt="체험 이미지" fill objectFit="cover" />
       </div>
-      <div className="w-[588px] tablet:w-[290px] mobile:w-[216px] bg-white p-6 tablet:p-3 mobile:p-2">
+      <div className="w-[588px] tablet:w-[290px] mobile:w-[216px] bg-white p-6 tablet:p-[15px] mobile:p-[9px]">
         <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
           {textProps().text}
         </p>
-        <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold">
+        <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold mt-2 tablet:m-0 mobile:mt-[5px]">
           {title}
         </p>
-        <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-0 mobile:mt-0">
+        <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
           {date} · {startTime} - {endTime} · {headCount}명
         </p>
-        <div className="flex justify-between mt-4 tablet:mt-1 mobile:mt-1 items-end">
-          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-medium ">{`₩${totalPrice.toLocaleString(
+        <div className="flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
+          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">{`₩${totalPrice.toLocaleString(
             'ko-KR',
           )}`}</p>
           {status === 'pending' ? (
@@ -103,7 +103,7 @@ const Experience = ({
               className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-[32px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold"
               onClick={() => handleReservationCancellation()}
             >
-              예약취소
+              예약 취소
             </button>
           ) : (
             status === 'completed' && (
@@ -111,7 +111,7 @@ const Experience = ({
                 className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
                 onClick={() => handleWritingReviews()}
               >
-                후기작성
+                후기 작성
               </button>
             )
           )}
