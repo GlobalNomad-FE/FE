@@ -6,6 +6,14 @@ import FilterDropdown from '@/components/commons/FilterDropdown';
 import data from './mock.json';
 import Image from 'next/image';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import Experience from '@/components/commons/card/Experience';
+
+// pending   - 보류중 ( 예약 신청 ) 현재는 예약 완료
+// confirmed  - 승인됨 ( 예약 승인 )
+// declined  - 거부됨 ( 예약 거절 )
+// canceled  - 취소된 ( 예약 취소 )
+// completed - 완전한 ( 체험 완료 )
+const statusArr = ['pending', 'canceled', 'confirmed', 'declined', 'completed'];
 
 const MyReservations = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -15,6 +23,17 @@ const MyReservations = () => {
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
   };
+
+  const filteredReservations =
+    selectedIndex !== null
+      ? data.reservations
+          .filter((item) => item.status === statusArr[selectedIndex])
+          .sort(
+            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+          )
+      : data.reservations.sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
 
   return (
     <div>
@@ -44,17 +63,19 @@ const MyReservations = () => {
               </div>
             ) : (
               <div className="flex flex-col gap-6 mt-[16px]">
-                {data.reservations.map((item) => (
-                  <div
+                {filteredReservations.map((item) => (
+                  <Experience
                     key={item.id}
-                    className="flex max-w-[792px] h-[204px] bg-white"
-                  >
-                    <div>
-                      <p>{item.activity.title}</p>
-                      <p>{item.date}</p>
-                      <p>₩{item.totalPrice}</p>
-                    </div>
-                  </div>
+                    id={item.id}
+                    title={item.activity.title}
+                    date={item.date}
+                    startTime={item.startTime}
+                    endTime={item.endTime}
+                    headCount={item.headCount}
+                    totalPrice={item.totalPrice}
+                    experienceStatus={item.status}
+                    bannerImageUrl={item.activity.bannerImageUrl}
+                  />
                 ))}
               </div>
             )}
