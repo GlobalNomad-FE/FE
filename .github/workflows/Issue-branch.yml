@@ -9,28 +9,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Create issue branch
-      run: |
-        ISSUE_NUMBER=${{ github.event.issue.number }}
-        ISSUE_TITLE=${{ github.event.issue.title }}
-        BRANCH_NAME="${ISSUE_NUMBER}-${ISSUE_TITLE}"
-        echo "Creating branch $BRANCH_NAME"
-        
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-        git fetch origin
-        git checkout -b $BRANCH_NAME origin/develop
-        git push origin $BRANCH_NAME
+      - name: Create issue branch
+        id: create_branch
+        run: |
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+          ISSUE_TITLE="${{ github.event.issue.title }}"
 
-    - name: Add comment to issue
-      uses: peter-evans/create-or-update-comment@v1
-      with:
-        issue-number: ${{ github.event.issue.number }}
-        body: |
-          Branch [${{ github.event.issue.title }}] has been created: 
-          ```
-          $BRANCH_NAME
-          ```
+          # Remove only the brackets, keep the content inside brackets
+          SAFE_TITLE=$(echo "$ISSUE_TITLE" | sed 's/\[//g;s/\]//g' | tr ' ' '-')
+          BRANCH_NAME="${ISSUE_NUMBER}-${SAFE_TITLE}"
+
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git fetch origin
+          git checkout -b "$BRANCH_NAME" origin/develop
+          git push origin "$BRANCH_NAME"
+
+      - name: Add comment to issue
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Branch for [${{ github.event.issue.title }}] has been created: 
+            ```
+            ${{ env.BRANCH_NAME }}
+            ```
