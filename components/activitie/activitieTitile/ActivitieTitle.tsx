@@ -5,6 +5,7 @@ import data from '@/components/reservationWidget/mock.json';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
+import Menu from '../Menu';
 
 /* TODO 데이터들어오는 값으로 바꿔야함 (체험상세조회 api)*/
 interface BioImageType {
@@ -165,14 +166,7 @@ export default function ActivitieTitle() {
             </div>
           </div>
         </div>
-        <div>
-          <Image
-            src="/icons/meatball.svg"
-            width={40}
-            height={40}
-            alt="메뉴아이콘"
-          />
-        </div>
+        <Menu />
       </div>
       <div className="mt-[42px] flex h-[540px] tablet:h-[310px] rounded-2xl overflow-hidden gap-2 tablet:gap-1 mobile:h-[310px] mobile:rounded-none">
         <div className="w-1/2 h-full mobile:hidden">
