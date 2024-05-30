@@ -10,7 +10,7 @@ export const CardResource = () => {
         className="absolute z-0 scale-125 rounded-[20px] "
         fill
         src="/images/Banner.png"
-        alt="배너"
+        alt="카드 리소스의 그라데이션 바탕입니다."
       />
       <div className=" absolute z-[1] h-full w-full rounded-[20px] "></div>
       <div className="absolute bottom-[30px] z-[1] flex w-[384px] flex-col gap-[6px] px-[20px] py-[12px] text-[#ffffff] mobile:bottom-0 mobile:w-[166px] mobile:gap-[6px] mobile:py-[12px] mobile:px-[20px]">
