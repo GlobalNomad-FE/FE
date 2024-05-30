@@ -41,7 +41,7 @@ export default function Menu() {
       </button>
       {isKebabOpen && (
         <div
-          className="bg-white border border-gray200 rounded-md absolute right-0 w-40"
+          className="bg-white border border-gray200 rounded-md absolute right-0 w-40 z-[1]"
           ref={optionsRef}
         >
           <div className="px-[46px] py-[18px] cursor-pointer text-h4-regular text-gray600 hover:bg-green400 hover:text-green200">
