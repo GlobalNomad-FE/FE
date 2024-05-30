@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bottom-0 flex h-24 w-full min-w-[400px] items-center justify-between whitespace-nowrap border-none bg-nomad-black p-0 px-20 text-white mobile:px-0">
       <div className="flex w-full items-center justify-between justify-items-center pb-6 mobile:flex-col">
-        <div className="flex w-3/6 justify-between gap-4">
+        <div className="flex w-1/2 justify-between gap-4">
           <div className=" text-gray600 "> @codeit - 2024 </div>
           <div className="flex gap-5 whitespace-nowrap ">
             <div className=" text-gray600">Privacy Policy</div>
