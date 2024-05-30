@@ -7,7 +7,7 @@ type FilterDropdownType = 'mainPage' | 'bookingPage';
 const filter = {
   mainPage: ['가격이 낮은 순', '가격이 높은 순'],
   bookingPage: [
-    '예약 신청',
+    '예약 완료',
     '예약 취소',
     '예약 승인',
     '예약 거절',
