@@ -42,8 +42,8 @@ export const CardResource = () => {
 export const CardResourceCategory = () => {
   return (
     <div className="flex w-min  flex-col gap-[16px] text-[#ffffff]">
-      <div className="relative h-[107px] w-[282px]  overflow-hidden rounded-[20px] mobile:h-[90px] mobile:w-[168px] ">
-        <div className=" absolute z-[1] flex w-[282px] flex-col gap-[10px] text-black200 mobile:w-[168px] mobile:gap-[5px]">
+      <div className="relative h-[120px] w-[282px]  overflow-hidden rounded-[20px] mobile:h-[90px] mobile:w-[168px] ">
+        <div className=" absolute z-[1] flex w-[282px]  flex-col gap-[10px] text-black200 mobile:w-[168px] mobile:gap-[5px]">
           <div className="flex gap-[5px] text-[#ffffff]">
             <Image
               src="/icons/star-on.svg"
