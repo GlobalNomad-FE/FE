@@ -42,8 +42,8 @@ export const CardResource = () => {
 export const CardResourceCategory = () => {
   return (
     <div className="flex w-min  flex-col gap-[16px] text-[#ffffff]">
-      <div className="relative h-[168px] w-[168px]  overflow-hidden rounded-[20px] mobile:h-[221px] mobile:w-[221px] xl:h-[283px] xl:w-[283px]">
-        <div className=" absolute z-[1] flex w-[282px] flex-col gap-[10px] text-black200 mobile:w-[282px]">
+      <div className="relative h-[107px] w-[282px]  overflow-hidden rounded-[20px] mobile:h-[90px] mobile:w-[168px] ">
+        <div className=" absolute z-[1] flex w-[282px] flex-col gap-[10px] text-black200 mobile:w-[168px] mobile:gap-[5px]">
           <div className="flex gap-[5px] text-[#ffffff]">
             <Image
               src="/icons/star-on.svg"
@@ -55,12 +55,12 @@ export const CardResourceCategory = () => {
               3.9 <span className="text-[#a1a1a1]">(108)</span>
             </span>
           </div>
-          <div className=" text-[24px] font-[600] mobile:text-[24px] text-black200">
+          <div className=" text-[24px] font-[600] mobile:text-[18px] text-black200">
             피오르 체험
           </div>
-          <div className="flex gap-[5px] text-[28px] font-[700] mobile:text-[28px] text-black200">
+          <div className="flex gap-[5px] text-[28px] font-[700] mobile:text-[20px] text-black200">
             <span className="text-black200">₩ 42,800</span>
-            <span className="self-center text-[20px] font-[400] text-gray600 mobile:text-[20px]">
+            <span className="self-center text-[20px] font-[400] text-gray600 mobile:text-[16px]">
               / 인
             </span>
           </div>
