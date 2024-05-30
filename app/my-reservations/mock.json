@@ -1,0 +1,406 @@
+{
+  "cursorId": 1,
+  "reservations": [
+    {
+      "id": 1,
+      "teamId": "team_01",
+      "userId": 100,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner1.jpg",
+        "title": "서울 야경 사진 촬영 투어",
+        "id": 101
+      },
+      "scheduleId": 201,
+      "status": "pending",
+      "reviewSubmitted": false,
+      "totalPrice": 50000,
+      "headCount": 2,
+      "date": "2024-06-15",
+      "startTime": "20:00",
+      "endTime": "22:00",
+      "createdAt": "2024-05-27T19:03:53.803Z",
+      "updatedAt": "2024-05-27T19:04:53.803Z"
+    },
+    {
+      "id": 2,
+      "teamId": "team_02",
+      "userId": 101,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner2.jpg",
+        "title": "전통 차 시음 및 다도 체험",
+        "id": 102
+      },
+      "scheduleId": 202,
+      "status": "canceled",
+      "reviewSubmitted": true,
+      "totalPrice": 30000,
+      "headCount": 1,
+      "date": "2024-06-20",
+      "startTime": "15:00",
+      "endTime": "16:30",
+      "createdAt": "2024-05-27T19:05:53.803Z",
+      "updatedAt": "2024-05-27T19:06:53.803Z"
+    },
+    {
+      "id": 3,
+      "teamId": "team_03",
+      "userId": 102,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner3.jpg",
+        "title": "제주도 해변 말 타기 체험",
+        "id": 103
+      },
+      "scheduleId": 203,
+      "status": "completed",
+      "reviewSubmitted": false,
+      "totalPrice": 100000,
+      "headCount": 4,
+      "date": "2024-06-25",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "createdAt": "2024-05-27T19:07:53.803Z",
+      "updatedAt": "2024-05-27T19:08:53.803Z"
+    },
+    {
+      "id": 4,
+      "teamId": "team_04",
+      "userId": 103,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner4.jpg",
+        "title": "부산 국제 영화제 VIP 투어",
+        "id": 104
+      },
+      "scheduleId": 204,
+      "status": "pending",
+      "reviewSubmitted": false,
+      "totalPrice": 150000,
+      "headCount": 2,
+      "date": "2024-07-01",
+      "startTime": "18:00",
+      "endTime": "23:00",
+      "createdAt": "2024-05-27T19:09:53.803Z",
+      "updatedAt": "2024-05-27T19:10:53.803Z"
+    },
+    {
+      "id": 5,
+      "teamId": "team_05",
+      "userId": 104,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner5.jpg",
+        "title": "강릉 커피 거리 투어",
+        "id": 105
+      },
+      "scheduleId": 205,
+      "status": "rejected",
+      "reviewSubmitted": true,
+      "totalPrice": 40000,
+      "headCount": 1,
+      "date": "2024-07-05",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "createdAt": "2024-05-27T19:11:53.803Z",
+      "updatedAt": "2024-05-27T19:12:53.803Z"
+    },
+    {
+      "id": 6,
+      "teamId": "team_06",
+      "userId": 105,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner6.jpg",
+        "title": "남산 타워 야경 투어",
+        "id": 106
+      },
+      "scheduleId": 206,
+      "status": "pending",
+      "reviewSubmitted": false,
+      "totalPrice": 65000,
+      "headCount": 2,
+      "date": "2024-07-10",
+      "startTime": "19:30",
+      "endTime": "21:30",
+      "createdAt": "2024-05-27T20:00:00.000Z",
+      "updatedAt": "2024-05-27T20:01:00.000Z"
+    },
+    {
+      "id": 7,
+      "teamId": "team_07",
+      "userId": 106,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner7.jpg",
+        "title": "전주 한옥마을 문화 체험",
+        "id": 107
+      },
+      "scheduleId": 207,
+      "status": "completed",
+      "reviewSubmitted": true,
+      "totalPrice": 80000,
+      "headCount": 3,
+      "date": "2024-07-15",
+      "startTime": "09:00",
+      "endTime": "12:00",
+      "createdAt": "2024-05-27T20:02:00.000Z",
+      "updatedAt": "2024-05-27T20:03:00.000Z"
+    },
+    {
+      "id": 8,
+      "teamId": "team_08",
+      "userId": 107,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner8.jpg",
+        "title": "인천 차이나타운 맛집 탐방",
+        "id": 108
+      },
+      "scheduleId": 208,
+      "status": "approved",
+      "reviewSubmitted": false,
+      "totalPrice": 55000,
+      "headCount": 2,
+      "date": "2024-07-20",
+      "startTime": "11:00",
+      "endTime": "14:00",
+      "createdAt": "2024-05-27T20:04:00.000Z",
+      "updatedAt": "2024-05-27T20:05:00.000Z"
+    },
+    {
+      "id": 9,
+      "teamId": "team_09",
+      "userId": 108,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner9.jpg",
+        "title": "제주도 해안 도보 여행",
+        "id": 109
+      },
+      "scheduleId": 209,
+      "status": "pending",
+      "reviewSubmitted": true,
+      "totalPrice": 30000,
+      "headCount": 1,
+      "date": "2024-07-25",
+      "startTime": "07:00",
+      "endTime": "09:00",
+      "createdAt": "2024-05-27T20:06:00.000Z",
+      "updatedAt": "2024-05-27T20:07:00.000Z"
+    },
+    {
+      "id": 10,
+      "teamId": "team_10",
+      "userId": 109,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner10.jpg",
+        "title": "경주 역사 유적지 탐방",
+        "id": 110
+      },
+      "scheduleId": 210,
+      "status": "canceled",
+      "reviewSubmitted": false,
+      "totalPrice": 45000,
+      "headCount": 3,
+      "date": "2024-07-30",
+      "startTime": "10:00",
+      "endTime": "13:00",
+      "createdAt": "2024-05-27T20:08:00.000Z",
+      "updatedAt": "2024-05-27T20:09:00.000Z"
+    },
+    {
+      "id": 11,
+      "teamId": "team_11",
+      "userId": 110,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner11.jpg",
+        "title": "Busan Sea Life Aquarium Visit",
+        "id": 111
+      },
+      "scheduleId": 211,
+      "status": "pending",
+      "reviewSubmitted": false,
+      "totalPrice": 70000,
+      "headCount": 4,
+      "date": "2024-08-05",
+      "startTime": "12:00",
+      "endTime": "14:00",
+      "createdAt": "2024-05-28T20:00:00.000Z",
+      "updatedAt": "2024-05-28T20:01:00.000Z"
+    },
+    {
+      "id": 12,
+      "teamId": "team_12",
+      "userId": 111,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner12.jpg",
+        "title": "Daegu Modern History Tour",
+        "id": 112
+      },
+      "scheduleId": 212,
+      "status": "completed",
+      "reviewSubmitted": false,
+      "totalPrice": 55000,
+      "headCount": 2,
+      "date": "2024-08-10",
+      "startTime": "09:30",
+      "endTime": "11:30",
+      "createdAt": "2024-05-28T20:02:00.000Z",
+      "updatedAt": "2024-05-28T20:03:00.000Z"
+    },
+    {
+      "id": 13,
+      "teamId": "team_13",
+      "userId": 112,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner13.jpg",
+        "title": "Gangneung Coffee Festival",
+        "id": 113
+      },
+      "scheduleId": 213,
+      "status": "pending",
+      "reviewSubmitted": true,
+      "totalPrice": 30000,
+      "headCount": 1,
+      "date": "2024-08-15",
+      "startTime": "10:00",
+      "endTime": "12:00",
+      "createdAt": "2024-05-28T20:04:00.000Z",
+      "updatedAt": "2024-05-28T20:05:00.000Z"
+    },
+    {
+      "id": 14,
+      "teamId": "team_14",
+      "userId": 113,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner14.jpg",
+        "title": "Seoul Royal Palace Night Tour",
+        "id": 114
+      },
+      "scheduleId": 214,
+      "status": "rejected",
+      "reviewSubmitted": false,
+      "totalPrice": 40000,
+      "headCount": 2,
+      "date": "2024-08-20",
+      "startTime": "18:00",
+      "endTime": "20:00",
+      "createdAt": "2024-05-28T20:06:00.000Z",
+      "updatedAt": "2024-05-28T20:07:00.000Z"
+    },
+    {
+      "id": 15,
+      "teamId": "team_15",
+      "userId": 114,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner15.jpg",
+        "title": "Andong Hahoe Folk Village Traditional Experience",
+        "id": 115
+      },
+      "scheduleId": 215,
+      "status": "approved",
+      "reviewSubmitted": true,
+      "totalPrice": 85000,
+      "headCount": 3,
+      "date": "2024-08-25",
+      "startTime": "08:30",
+      "endTime": "11:30",
+      "createdAt": "2024-05-28T20:08:00.000Z",
+      "updatedAt": "2024-05-28T20:09:00.000Z"
+    },
+    {
+      "id": 16,
+      "teamId": "team_16",
+      "userId": 115,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner16.jpg",
+        "title": "Sokcho Beach Camping Experience",
+        "id": 116
+      },
+      "scheduleId": 216,
+      "status": "pending",
+      "reviewSubmitted": false,
+      "totalPrice": 120000,
+      "headCount": 4,
+      "date": "2024-09-01",
+      "startTime": "15:00",
+      "endTime": "11:00",
+      "createdAt": "2024-05-29T20:00:00.000Z",
+      "updatedAt": "2024-05-29T20:01:00.000Z"
+    },
+    {
+      "id": 17,
+      "teamId": "team_17",
+      "userId": 116,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner17.jpg",
+        "title": "Damyang Bamboo Forest Walk",
+        "id": 117
+      },
+      "scheduleId": 217,
+      "status": "completed",
+      "reviewSubmitted": true,
+      "totalPrice": 35000,
+      "headCount": 2,
+      "date": "2024-09-05",
+      "startTime": "10:00",
+      "endTime": "13:00",
+      "createdAt": "2024-05-29T20:02:00.000Z",
+      "updatedAt": "2024-05-29T20:03:00.000Z"
+    },
+    {
+      "id": 18,
+      "teamId": "team_18",
+      "userId": 117,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner18.jpg",
+        "title": "Gwangju Democracy Movement Memorial Tour",
+        "id": 118
+      },
+      "scheduleId": 218,
+      "status": "approved",
+      "reviewSubmitted": false,
+      "totalPrice": 20000,
+      "headCount": 1,
+      "date": "2024-09-10",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "createdAt": "2024-05-29T20:04:00.000Z",
+      "updatedAt": "2024-05-29T20:05:00.000Z"
+    },
+    {
+      "id": 19,
+      "teamId": "team_19",
+      "userId": 118,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner19.jpg",
+        "title": "Yeosu Night Sea Cruise",
+        "id": 119
+      },
+      "scheduleId": 219,
+      "status": "rejected",
+      "reviewSubmitted": false,
+      "totalPrice": 60000,
+      "headCount": 2,
+      "date": "2024-09-15",
+      "startTime": "19:00",
+      "endTime": "21:00",
+      "createdAt": "2024-05-29T20:06:00.000Z",
+      "updatedAt": "2024-05-29T20:07:00.000Z"
+    },
+    {
+      "id": 20,
+      "teamId": "team_20",
+      "userId": 119,
+      "activity": {
+        "bannerImageUrl": "https://example.com/banner20.jpg",
+        "title": "Suwon Hwaseong Fortress Night Tour",
+        "id": 120
+      },
+      "scheduleId": 220,
+      "status": "approved",
+      "reviewSubmitted": true,
+      "totalPrice": 50000,
+      "headCount": 3,
+      "date": "2024-09-20",
+      "startTime": "18:00",
+      "endTime": "20:00",
+      "createdAt": "2024-05-29T20:08:00.000Z",
+      "updatedAt": "2024-05-29T20:09:00.000Z"
+    }
+  ],
+  "totalCount": 20
+}
