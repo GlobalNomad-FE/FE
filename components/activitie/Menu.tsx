@@ -2,15 +2,15 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRef } from 'react';
-import CancelReservation from '../commons/Popups/CancelReservation';
 import { useRouter, usePathname } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
 
 export default function Menu() {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname(); //나중에 데이터 연동할때 쓸 것
   const ref = useRef<HTMLDivElement>(null);
 
   // 메뉴 열고 닫기
@@ -62,9 +62,18 @@ export default function Menu() {
           </div>
         </div>
       )}
-      {/* {isPopupOpen && (
-        <CancelReservation>정말 삭제하시겠습니까?</CancelReservation>
-      )} */}
+      {isPopupOpen && (
+        <BasePopupTwoBtns
+          buttonText={'삭제하기'}
+          isOpen={isPopupOpen}
+          closePopup={() => {
+            setIsPopupOpen(false);
+          }}
+          clickEvent={handleDeletePopupOpen} //TODO - 데이터 연동하고 삭제하기 이벤트함수 바꿔야함(임시)
+        >
+          정말 삭제 하시겠습니까?
+        </BasePopupTwoBtns>
+      )}
     </div>
   );
 }
