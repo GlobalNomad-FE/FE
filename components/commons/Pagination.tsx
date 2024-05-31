@@ -72,7 +72,6 @@ const Pagination = ({
             hover={true}
             onClick={() => goToPage(pageNumber)}
             rounded={15}
-            clicked={true}
           >
             {pageNumber}
           </Button>

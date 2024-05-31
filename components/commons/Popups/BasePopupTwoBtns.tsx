@@ -11,10 +11,10 @@ interface Props {
   children: React.ReactNode;
 }
 /**
- * @param {string} buttonText - 오른쪽 버튼에 들어갈 텍스트.
- * @param {boolean} isOpen - 모달이 열려있는 상태를 알려주는 값.
- * @param {function} closePopup - 모달을 닫는 함수.
- * @param {function} clickEvent - 오른쪽 버튼을 클릭시 일어날 함수.
+ * @param {String} buttonText - 오른쪽 버튼에 들어갈 텍스트.
+ * @param {Boolean} isOpen - 모달이 열려있는 상태를 알려주는 값.
+ * @param {Function} closePopup - 모달을 닫는 함수.
+ * @param {Function} clickEvent - 오른쪽 버튼을 클릭시 일어날 함수.
  */
 const BasePopupTwoBtns = ({
   buttonText,
@@ -67,9 +67,9 @@ const BasePopupTwoBtns = ({
                   fontSize={14}
                   textBold={true}
                   btnColor={'white'}
-                  textColor={'green'}
+                  textColor={'nomadBlack'}
                   border={true}
-                  borderColor={'green'}
+                  borderColor={'nomadBlack'}
                   hover={true}
                   onClick={handleClosePopup}
                 >
@@ -80,7 +80,7 @@ const BasePopupTwoBtns = ({
                   height={38}
                   fontSize={14}
                   textBold={true}
-                  btnColor={'green'}
+                  btnColor={'nomadBlack'}
                   textColor={'white'}
                   hover={true}
                   onClick={handleClickEvent}

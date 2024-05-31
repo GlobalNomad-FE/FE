@@ -27,7 +27,7 @@ const ReviewForm = () => {
           height={isMobile ? 48 : 56}
           fontSize={16}
           textBold={true}
-          btnColor={'green'}
+          btnColor={'nomadBlack'}
           textColor={'white'}
           rounded={4}
           hover={true}
