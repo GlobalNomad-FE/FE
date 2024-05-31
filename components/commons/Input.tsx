@@ -21,7 +21,8 @@ const Input = ({ type, password = '' }: Props) => {
   const [errorMessageColor, setErrorMessageColor] = useState('gray500');
 
   const labelName = type === 'email' ? '이메일' : '비밀번호';
-  const placeholder = type === 'email' ? '입력' : '비밀번호를 입력해주세요';
+  const placeholder =
+    type === 'email' ? '이메일을 입력해 주세요' : '비밀번호를 입력해주세요';
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
