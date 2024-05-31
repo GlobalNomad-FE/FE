@@ -2,17 +2,21 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import ReviewModal from '../Popups/ReviewModal/ReviewModal';
 
 interface Reservation {
   id: number;
   title: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-  headCount: number;
-  experienceStatus: string;
+  date?: string;
+  startTime?: string;
+  endTime?: string;
+  headCount?: number;
+  experienceStatus?: string;
   totalPrice: number;
   bannerImageUrl: string;
+  rating?: number;
+  reviewCount?: number;
+  type: 'activities' | 'reservations';
 }
 
 /**
@@ -38,8 +42,12 @@ const Experience = ({
   totalPrice,
   experienceStatus,
   bannerImageUrl,
+  type,
+  rating,
+  reviewCount,
 }: Reservation) => {
   const [status, setStatus] = useState(experienceStatus);
+  const [modlaOpen, setModalOpen] = useState(false);
 
   const textProps = () => {
     const textPropsObj = { color: '', text: '-' };
@@ -72,6 +80,7 @@ const Experience = ({
 
   const handleWritingReviews = () => {
     //TODO : 후기 작성 모달 연결
+    setModalOpen(true);
   };
 
   const handleReservationCancellation = () => {
@@ -84,36 +93,63 @@ const Experience = ({
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
         <Image src={bannerImageUrl} alt="체험 이미지" fill objectFit="cover" />
       </div>
-      <div className="w-[100%] p-6 tablet:p-[12px] mobile:p-[9px]">
-        <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
-          {textProps().text}
-        </p>
-        <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold mt-2 tablet:m-0 mobile:mt-[5px]">
-          {title}
-        </p>
-        <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
-          {date} · {startTime} - {endTime} · {headCount}명
-        </p>
+      <div className="flex flex-col justify-between w-[100%] p-6 tablet:p-[12px] mobile:p-[9px]">
+        <div>
+          {type === 'reservations' ? (
+            <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
+              {textProps().text}
+            </p>
+          ) : (
+            <div className="flex gap-[6px]">
+              <Image
+                src="/icons/Star.svg"
+                alt="케밥 아이콘"
+                width={19}
+                height={19}
+              />
+              <span>
+                {rating} ({reviewCount})
+              </span>
+            </div>
+          )}
+          <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold mt-2 tablet:m-0 mobile:mt-[5px]">
+            {title}
+          </p>
+          {type === 'reservations' && (
+            <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
+              {date} · {startTime} - {endTime} · {headCount}명
+            </p>
+          )}
+        </div>
         <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
           <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">{`₩${totalPrice.toLocaleString(
             'ko-KR',
           )}`}</p>
-          {status === 'pending' ? (
+          {status === 'pending' && (
             <button
               className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold border-black200"
               onClick={() => handleReservationCancellation()}
             >
               예약 취소
             </button>
-          ) : (
-            status === 'completed' && (
-              <button
-                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
-                onClick={() => handleWritingReviews()}
-              >
-                후기 작성
-              </button>
-            )
+          )}
+          {status === 'completed' && (
+            <button
+              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
+              onClick={handleWritingReviews}
+            >
+              후기 작성
+            </button>
+          )}
+          {modlaOpen && <ReviewModal />}
+          {type === 'activities' && (
+            <Image
+              src="/icons/meatball.svg"
+              width={40}
+              height={40}
+              alt="케밥 아이콘"
+              className="cursor-pointer"
+            />
           )}
         </div>
       </div>
