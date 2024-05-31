@@ -11,13 +11,15 @@ export default function Page() {
   return (
     <div className="text-black200 bg-gray50">
       <Gnb />
-      <div className="pt-[142px] w-full flex justify-center">
-        <div className="w-[389px]">
+      <div className="pt-[142px] tablet:pt-[94px] w-full flex justify-center">
+        <div className="mobile:invisible mobile:w-0">
           <SideNavigationMenu />
         </div>
-        <div className="pl-[24px] text-[32px] mb-[142px]">
-          <p className="w-[800px] font-bold">예약현황</p>
-          <div className="w-[800px] h-[48px] mt-[42px] px-4 py-3 border border-gray500 rounded-[4px] bg-white relative flex justify-between">
+        <div className="pl-[24px] tablet:[17px] text-[32px] mb-[142px] tablet:mb-[128px]">
+          <p className="w-[800px] tablet:w-[429px] mobile:w-[342px] font-bold">
+            예약현황
+          </p>
+          <div className="w-[800px] tablet:w-[429px] mobile:w-[342px] h-[48px] mt-[42px] px-4 py-3 border border-gray500 rounded-[4px] bg-white relative flex justify-between">
             <p className="bg-white w-[45px] px-1 text-[14px] bottom-10 absolute">
               체험명
             </p>
@@ -29,8 +31,8 @@ export default function Page() {
               height={24}
             />
           </div>
-          <div className="w-[800px] flex justify-center">
-            <div className="w-[342px] flex justify-between my-[30px]">
+          <div className="w-[800px] tablet:w-[429px] mobile:w-[342px] flex justify-center">
+            <div className="w-[342px] mobile:w-[342px] flex justify-between my-[30px] tablet:my-[24px]">
               <Image
                 src="./icons/prev.svg"
                 alt="이전 월 아이콘"
@@ -46,7 +48,7 @@ export default function Page() {
               />
             </div>
           </div>
-          <div className="w-[800px] h-[800px] border bg-white rounded-lg border-[#E8E8E8]"></div>
+          <div className="w-[800px] tablet:w-[429px] mobile:w-[342px] h-[813px] border bg-white rounded-lg border-[#E8E8E8]"></div>
         </div>
       </div>
       <Footer />
