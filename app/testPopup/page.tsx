@@ -12,11 +12,12 @@ export default function Page() {
       <ReservationCompleted />
       <ReviewModal
         title="함께배우면 즐거운 스트릿 댄스"
-        url="/images/스트릿댄스.png"
+        bannerImageUrl="/images/스트릿댄스.png"
         date="2023. 2. 14"
-        time="11:00 - 12:30"
-        count={10}
-        price={10000}
+        startTime="11:00"
+        endTime="12:30"
+        headCount={10}
+        totalPrice={10000}
         reservationId={12341234}
       />
     </main>

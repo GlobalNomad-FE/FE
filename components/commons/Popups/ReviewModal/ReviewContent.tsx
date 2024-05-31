@@ -5,29 +5,32 @@ import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   title: string;
-  url: string;
+  bannerImageUrl: string;
   date: string;
-  time: string;
-  count: number;
-  price: number;
+  startTime: string;
+  endTime: string;
+  headCount: number;
+  totalPrice: number;
   reservationId: number;
 }
 /**
  * @param {string} title - 체험 이름.
- * @param {string} url - 체험 사진 경로.
+ * @param {string} bannerImageUrl - 체험 사진 경로.
  * @param {string} date - 체험 날짜. ex) 2023. 2. 14 형식.
- * @param {string} time - 체험 시간. ex) 11:00 - 12:30 형식.
- * @param {number} count - 체험 인원.
- * @param {number} price - 체험 가격.
+ * @param {string} startTime 체험시작 시간
+ * @param {string} endTime 체험종료 시간
+ * @param {number} headCount - 체험 인원.
+ * @param {number} totalPrice - 체험 가격.
  * @param {number} reservationId - 리뷰할 체험 고유 번호.
  */
 const ReviewContent = ({
   title,
-  url,
+  bannerImageUrl,
   date,
-  time,
-  count,
-  price,
+  startTime,
+  endTime,
+  headCount,
+  totalPrice,
   reservationId,
 }: Props) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -45,7 +48,7 @@ const ReviewContent = ({
           }`}
         >
           <Image
-            src={url}
+            src={bannerImageUrl}
             alt={title}
             layout="fill"
             objectFit="cover"
@@ -60,13 +63,13 @@ const ReviewContent = ({
           <div className={isMobile ? 'text-body2-regular' : 'text-h4-regular'}>
             <span>{date}</span>
             <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
-            <span>{time}</span>
+            <span>{startTime} - {endTime}</span>
             <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
-            <span>{count} 명</span>
+            <span>{headCount} 명</span>
           </div>
           <div className="w-full border-t border-opacity-10 border-green200" />
           <span className={isMobile ? 'text-h3-bold' : 'text-[32px] font-bold'}>
-            ₩{Intl.NumberFormat().format(price)}
+            ₩{Intl.NumberFormat().format(totalPrice)}
           </span>
         </div>
       </div>
