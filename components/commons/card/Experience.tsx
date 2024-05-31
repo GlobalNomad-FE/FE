@@ -30,6 +30,9 @@ interface Reservation {
  * @param experienceStatus 체험 상태. pending(보류), confirmed(확정), declined(거절) canceled(취소), completed(완료)
  * @param totalPrice 금액
  * @param bannerImageUrl 체험 이미지
+ * @param rating 별점
+ * @param reviewCount 리뷰 수
+ * @param type 내 체험 관리 : 'activities' | 예약 내역 : 'reservations'
  */
 
 const Experience = ({
@@ -47,7 +50,7 @@ const Experience = ({
   reviewCount,
 }: Reservation) => {
   const [status, setStatus] = useState(experienceStatus);
-  const [modlaOpen, setModalOpen] = useState(false);
+  const [isKebobOpen, setIsKebobOpen] = useState(false);
 
   const textProps = () => {
     const textPropsObj = { color: '', text: '-' };
@@ -78,20 +81,30 @@ const Experience = ({
     return textPropsObj;
   };
 
-  const handleWritingReviews = () => {
-    //TODO : 후기 작성 모달 연결
-    setModalOpen(true);
-  };
+  // const handleWritingReviews = () => {
+  //   //TODO : 후기 작성 모달 연결
+  //   setModalOpen(true);
+  // };
 
   const handleReservationCancellation = () => {
     setStatus('canceled');
     //TODO : 예약 취소 진행 api연결 필요 /4-13/my-reservations/{reservationId}
   };
 
+  const handleKebobOpen = () => {
+    setIsKebobOpen(!isKebobOpen);
+  };
+
   return (
-    <div className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex overflow-hidden text-black200 text-[16px] bg-white">
+    <div className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white">
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
-        <Image src={bannerImageUrl} alt="체험 이미지" fill objectFit="cover" />
+        <Image
+          src={bannerImageUrl}
+          alt="체험 이미지"
+          fill
+          objectFit="cover"
+          className="rounded-l-[24px]"
+        />
       </div>
       <div className="flex flex-col justify-between w-[100%] p-6 tablet:p-[12px] mobile:p-[9px]">
         <div>
@@ -125,32 +138,46 @@ const Experience = ({
           <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">{`₩${totalPrice.toLocaleString(
             'ko-KR',
           )}`}</p>
-          {status === 'pending' && (
-            <button
-              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold border-black200"
-              onClick={() => handleReservationCancellation()}
-            >
-              예약 취소
-            </button>
-          )}
-          {status === 'completed' && (
-            <button
-              className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
-              onClick={handleWritingReviews}
-            >
-              후기 작성
-            </button>
-          )}
-          {modlaOpen && <ReviewModal />}
-          {type === 'activities' && (
-            <Image
-              src="/icons/meatball.svg"
-              width={40}
-              height={40}
-              alt="케밥 아이콘"
-              className="cursor-pointer"
-            />
-          )}
+          <div className="">
+            {status === 'pending' && (
+              <button
+                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold border-black200"
+                onClick={() => handleReservationCancellation()}
+              >
+                예약 취소
+              </button>
+            )}
+            {status === 'completed' && (
+              <button
+                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
+                onClick={() => handleReservationCancellation()}
+              >
+                후기 작성
+              </button>
+            )}
+            {type === 'activities' && (
+              <div className="relative">
+                <Image
+                  src="/icons/meatball.svg"
+                  width={40}
+                  height={40}
+                  alt="케밥 아이콘"
+                  className="cursor-pointer"
+                  onClick={handleKebobOpen}
+                />
+                {isKebobOpen && (
+                  <div className="absolute top-[48px] right-0 w-[180px] rounded-md bg-white shadow-search-bar-custom border z-10 cursor-pointer">
+                    <p className="flex flex-col justify-center items-center h-[58px] border-b text-[18px] font-medium hover:bg-gray100">
+                      수정하기
+                    </p>
+                    <p className="flex flex-col justify-center items-center h-[58px] border-b text-[18px] font-medium hover:bg-gray100">
+                      삭제하기
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
