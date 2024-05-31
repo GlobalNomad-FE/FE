@@ -43,7 +43,7 @@ const BasePopup = ({ isOpen, closePopup, children }: Props) => {
                 width={isMobile ? 138 : 120}
                 height={isMobile ? 42 : 48}
                 fontSize={16}
-                btnColor={'green'}
+                btnColor={'nomadBlack'}
                 textColor={'white'}
                 hover={true}
                 onClick={handleClickPopupClose}
