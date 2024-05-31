@@ -3,7 +3,36 @@ import Image from 'next/image';
 import ReviewForm from './ReviewForm';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-const ReviewContent = () => {
+interface Props {
+  title: string;
+  bannerImageUrl: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  headCount: number;
+  totalPrice: number;
+  reservationId: number;
+}
+/**
+ * @param {string} title - 체험 이름.
+ * @param {string} bannerImageUrl - 체험 사진 경로.
+ * @param {string} date - 체험 날짜. ex) 2023. 2. 14 형식.
+ * @param {string} startTime 체험시작 시간
+ * @param {string} endTime 체험종료 시간
+ * @param {number} headCount - 체험 인원.
+ * @param {number} totalPrice - 체험 가격.
+ * @param {number} reservationId - 리뷰할 체험 고유 번호.
+ */
+const ReviewContent = ({
+  title,
+  bannerImageUrl,
+  date,
+  startTime,
+  endTime,
+  headCount,
+  totalPrice,
+  reservationId,
+}: Props) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   return (
@@ -19,32 +48,32 @@ const ReviewContent = () => {
           }`}
         >
           <Image
-            src="/images/스트릿댄스.png"
-            alt="스트릿댄스"
+            src={bannerImageUrl}
+            alt={title}
             layout="fill"
             objectFit="cover"
           />
         </div>
         <div
-          className={`flex flex-col ${isMobile ? 'gap-[7px]' : 'gap-[13px]'}`}
+          className={`flex flex-col text-nomad-black ${isMobile ? 'gap-[7px]' : 'gap-[13px]'}`}
         >
           <h2 className={isMobile ? 'text-body1-bold' : 'text-h3-bold'}>
-            함께 배우면 즐거운 스트릿 댄스
+            {title}
           </h2>
           <div className={isMobile ? 'text-body2-regular' : 'text-h4-regular'}>
-            <span>2023. 2. 14</span>
+            <span>{date}</span>
             <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
-            <span>11:00 - 12:30</span>
+            <span>{startTime} - {endTime}</span>
             <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
-            <span>10명</span>
+            <span>{headCount} 명</span>
           </div>
           <div className="w-full border-t border-opacity-10 border-green200" />
           <span className={isMobile ? 'text-h3-bold' : 'text-[32px] font-bold'}>
-            ₩10,000
+            ₩{Intl.NumberFormat().format(totalPrice)}
           </span>
         </div>
       </div>
-      <ReviewForm />
+      <ReviewForm reservationId={reservationId} />
     </div>
   );
 };
