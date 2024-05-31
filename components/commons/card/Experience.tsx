@@ -80,11 +80,11 @@ const Experience = ({
   };
 
   return (
-    <div className="w-[792px] h-[204px] tablet:w-[429px] tablet:h-[156px] mobile:w-[344px] mobile:h-[128px] rounded-[24px] flex justify-between overflow-hidden text-black200 text-[16px]">
-      <div className="w-[204px] h-[204px] tablet:w-[156px] tablet:h-[156px] mobile:w-[128px] mobile:h-[128px] relative">
+    <div className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex overflow-hidden text-black200 text-[16px] bg-white">
+      <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
         <Image src={bannerImageUrl} alt="체험 이미지" fill objectFit="cover" />
       </div>
-      <div className="w-[588px] tablet:w-[290px] mobile:w-[216px] bg-white p-6 tablet:p-[15px] mobile:p-[9px]">
+      <div className="w-[100%] p-6 tablet:p-[12px] mobile:p-[9px]">
         <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
           {textProps().text}
         </p>
