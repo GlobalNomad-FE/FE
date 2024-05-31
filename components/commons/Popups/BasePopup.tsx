@@ -11,11 +11,11 @@ interface Props {
 
 const BasePopup = ({ isOpen, closePopup, children }: Props) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
-  //모달 끄기
+  //팝업 끄기
   const handleClickPopupClose = () => {
     closePopup();
   };
-  //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
+  //팝업 안쪽 클릭시 팝업이 꺼지는 현상을 없애기위해 버블링 막음
   const handleStopBubbling = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -33,7 +33,7 @@ const BasePopup = ({ isOpen, closePopup, children }: Props) => {
               isMobile ? 'w-[327px] h-[220px]' : 'w-[540px] p-[28px]'
             }`}
           >
-            <div className="text-h4-regular mt-[80px]">{children}</div>
+            <div className="text-black200 text-h4-regular mt-[80px]">{children}</div>
             <div
               className={`flex w-full mt-[45px] ${
                 isMobile ? 'justify-center' : 'justify-end'
@@ -43,7 +43,7 @@ const BasePopup = ({ isOpen, closePopup, children }: Props) => {
                 width={isMobile ? 138 : 120}
                 height={isMobile ? 42 : 48}
                 fontSize={16}
-                btnColor={'green'}
+                btnColor={'nomadBlack'}
                 textColor={'white'}
                 hover={true}
                 onClick={handleClickPopupClose}

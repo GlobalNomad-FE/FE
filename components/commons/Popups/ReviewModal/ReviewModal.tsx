@@ -5,7 +5,36 @@ import Image from 'next/image';
 import ReviewContent from './ReviewContent';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-const ReviewModal = () => {
+interface Props {
+  title: string;
+  bannerImageUrl: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  headCount: number;
+  totalPrice: number;
+  reservationId: number;
+}
+/**
+ * @param {string} title - 체험 이름.
+ * @param {string} bannerImageUrl - 체험 사진 경로.
+ * @param {string} date - 체험 날짜. ex) 2023. 2. 14 형식.
+ * @param {string} startTime 체험시작 시간
+ * @param {string} endTime 체험종료 시간
+ * @param {number} headCount - 체험 인원.
+ * @param {number} totalPrice - 체험 가격.
+ * @param {number} reservationId - 리뷰할 체험 고유 번호.
+ */
+const ReviewModal = ({
+  title,
+  bannerImageUrl,
+  date,
+  startTime,
+  endTime,
+  headCount,
+  totalPrice,
+  reservationId,
+}: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -25,17 +54,16 @@ const ReviewModal = () => {
   return (
     <>
       <Button
-        width={150}
-        height={50}
-        fontSize={15}
-        btnColor={'green'}
+        width={144}
+        height={40}
+        fontSize={16}
+        btnColor={'nomadBlack'}
         textColor={'white'}
         hover={true}
         onClick={handleOpenModal}
       >
-        후기작성
+        후기 작성
       </Button>
-      {/* 모달 여기부터 아래 끝까지 처럼 사용하면 됨  */}
       <Portal>
         {openModal && (
           <div
@@ -46,7 +74,7 @@ const ReviewModal = () => {
               onClick={handleStopBubbling}
               className={`px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center ${
                 isMobile
-                  ? 'w-[375px] pb-[39px]'
+                  ? 'w-full h-full'
                   : 'w-[480px] pb-[46px] rounded-[24px]'
               }`}
             >
@@ -55,7 +83,7 @@ const ReviewModal = () => {
                   isMobile ? 'mb-[24px]' : 'mb-[41px]'
                 }`}
               >
-                <h1 className="text-h1">후기 작성</h1>
+                <h1 className="text-h1 text-black200">후기 작성</h1>
                 <Image
                   src="/icons/btn-X-big.svg"
                   alt="닫기 버튼"
@@ -65,7 +93,16 @@ const ReviewModal = () => {
                   className="cursor-pointer"
                 />
               </div>
-              <ReviewContent />
+              <ReviewContent
+                title={title}
+                bannerImageUrl={bannerImageUrl}
+                date={date}
+                startTime={startTime}
+                endTime={endTime}
+                headCount={headCount}
+                totalPrice={totalPrice}
+                reservationId={reservationId}
+              />
             </div>
           </div>
         )}
