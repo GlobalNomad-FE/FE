@@ -33,7 +33,7 @@ const BasePopup = ({ isOpen, closePopup, children }: Props) => {
               isMobile ? 'w-[327px] h-[220px]' : 'w-[540px] p-[28px]'
             }`}
           >
-            <div className="text-h4-regular mt-[80px]">{children}</div>
+            <div className="text-black200 text-h4-regular mt-[80px]">{children}</div>
             <div
               className={`flex w-full mt-[45px] ${
                 isMobile ? 'justify-center' : 'justify-end'
