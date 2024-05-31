@@ -15,7 +15,7 @@ export default function Page() {
         <div className="mobile:invisible mobile:w-0">
           <SideNavigationMenu />
         </div>
-        <div className="pl-[24px] tablet:[17px] text-[32px] mb-[142px] tablet:mb-[128px]">
+        <div className="pl-[24px] mobile:pl-0 tablet:[17px] text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] tablet:w-[429px] mobile:w-[342px] font-bold">
             예약현황
           </p>
