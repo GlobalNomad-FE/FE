@@ -11,8 +11,8 @@ export default function Page() {
   return (
     <div className="text-black200 bg-gray50">
       <Gnb />
-      <div className="pt-[142px] flex ">
-        <div className="pl-[142px]">
+      <div className="pt-[142px] w-full flex justify-center">
+        <div className="w-[389px]">
           <SideNavigationMenu />
         </div>
         <div className="pl-[24px] text-[32px] mb-[142px]">
