@@ -74,9 +74,8 @@ const Button = ({
           marginLeft: width === 'full' ? 0 : pxToRem(hovered ? width * 0.1 : 0),
           borderRadius: `${rounded}px`,
           border: border ? `solid 1px ${ColorValue[borderColor]}` : 'none',
-          cursor: 'pointer',
         }}
-        className="cursor-pointer flex items-center justify-center duration-500"
+        className="flex items-center justify-center duration-500"
       >
         {children}
       </button>

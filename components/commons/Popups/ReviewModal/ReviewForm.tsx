@@ -63,7 +63,7 @@ const ReviewForm = ({ reservationId }: Props) => {
           height={isMobile ? 48 : 56}
           fontSize={16}
           textBold={true}
-          btnColor={rating && reviewText ? 'nomadBlack' : 'gray'}
+          btnColor={!rating || !reviewText ? 'gray' : 'nomadBlack'}
           textColor={'white'}
           rounded={4}
           hover={true}
