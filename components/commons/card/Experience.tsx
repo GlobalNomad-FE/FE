@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
+import Menu from '@/components/activitie/Menu';
 
 interface Reservation {
   id: number;
@@ -53,7 +54,6 @@ const Experience = ({
   reviewCount,
 }: Reservation) => {
   const [status, setStatus] = useState(experienceStatus);
-  const [isKebobOpen, setIsKebobOpen] = useState(false);
 
   const textProps = () => {
     const textPropsObj = { color: '', text: '-' };
@@ -87,10 +87,6 @@ const Experience = ({
   const handleReservationCancellation = () => {
     setStatus('canceled');
     //TODO : 예약 취소 진행 api연결 필요 /4-13/my-reservations/{reservationId}
-  };
-
-  const handleKebobOpen = () => {
-    setIsKebobOpen(!isKebobOpen);
   };
 
   return (
@@ -157,28 +153,7 @@ const Experience = ({
                 reservationId={activityId}
               />
             )}
-            {type === 'activities' && (
-              <div className="relative">
-                <Image
-                  src="/icons/meatball.svg"
-                  width={40}
-                  height={40}
-                  alt="케밥 아이콘"
-                  className="cursor-pointer"
-                  onClick={handleKebobOpen}
-                />
-                {isKebobOpen && (
-                  <div className="absolute top-[48px] right-0 w-[180px] rounded-md bg-white shadow-search-bar-custom border z-10 cursor-pointer">
-                    <p className="flex flex-col justify-center items-center h-[58px] border-b text-[18px] font-medium hover:bg-gray100">
-                      수정하기
-                    </p>
-                    <p className="flex flex-col justify-center items-center h-[58px] border-b text-[18px] font-medium hover:bg-gray100">
-                      삭제하기
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
+            {type === 'activities' && <Menu />}
           </div>
         </div>
       </div>
