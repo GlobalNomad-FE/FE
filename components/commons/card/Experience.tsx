@@ -14,6 +14,7 @@ interface Reservation {
   experienceStatus?: string;
   totalPrice: number;
   bannerImageUrl: string;
+  activityId?: number;
   rating?: number;
   reviewCount?: number;
   type: 'activities' | 'reservations';
@@ -30,6 +31,7 @@ interface Reservation {
  * @param experienceStatus 체험 상태. pending(보류), confirmed(확정), declined(거절) canceled(취소), completed(완료)
  * @param totalPrice 금액
  * @param bannerImageUrl 체험 이미지
+ * @param activityId 예약 ID
  * @param rating 별점
  * @param reviewCount 리뷰 수
  * @param type 내 체험 관리 : 'activities' | 예약 내역 : 'reservations'
@@ -38,13 +40,14 @@ interface Reservation {
 const Experience = ({
   id,
   title,
-  date,
-  startTime,
-  endTime,
-  headCount,
+  date = '',
+  startTime = '',
+  endTime = '',
+  headCount = 0,
   totalPrice,
   experienceStatus,
   bannerImageUrl,
+  activityId = 0,
   type,
   rating,
   reviewCount,
@@ -80,11 +83,6 @@ const Experience = ({
 
     return textPropsObj;
   };
-
-  // const handleWritingReviews = () => {
-  //   //TODO : 후기 작성 모달 연결
-  //   setModalOpen(true);
-  // };
 
   const handleReservationCancellation = () => {
     setStatus('canceled');
@@ -148,12 +146,16 @@ const Experience = ({
               </button>
             )}
             {status === 'completed' && (
-              <button
-                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold bg-black200 text-white"
-                onClick={() => handleReservationCancellation()}
-              >
-                후기 작성
-              </button>
+              <ReviewModal
+                title={title}
+                bannerImageUrl={bannerImageUrl}
+                date={date}
+                startTime={startTime}
+                endTime={endTime}
+                headCount={headCount}
+                totalPrice={totalPrice}
+                reservationId={activityId}
+              />
             )}
             {type === 'activities' && (
               <div className="relative">
