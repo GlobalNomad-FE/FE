@@ -7,7 +7,7 @@ import data from './mock.json';
 import Image from 'next/image';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Experience from '@/components/commons/card/Experience';
-import ReviewModal from '@/components/commons/Popups/ReviewModal/ReviewModal';
+import Footer from '@/components/commons/Footer';
 
 interface Activity {
   bannerImageUrl: string;
@@ -26,12 +26,12 @@ interface Reservation {
   endTime: string;
 }
 
-// pending   - 보류중 ( 예약 신청 ) 현재는 예약 완료
-// confirmed  - 승인됨 ( 예약 승인 )
+// pending   - 보류중 ( 예약 완료 )
+// confirmed - 승인됨 ( 예약 승인 )
 // declined  - 거부됨 ( 예약 거절 )
 // canceled  - 취소된 ( 예약 취소 )
 // completed - 완전한 ( 체험 완료 )
-const statusArr = ['pending', 'canceled', 'confirmed', 'declined', 'completed'];
+const statusArr = ['pending', 'confirmed', 'declined', 'canceled', 'completed'];
 
 const ITEMS_PER_PAGE = 5; // 페이지당 표시할 항목 수
 
@@ -83,9 +83,8 @@ const MyReservations = () => {
   return (
     <div>
       <Gnb />
-      <ReviewModal />
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50">
-        <div className="flex gap-6 w-[1200px] pt-[142px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
+        <div className="flex gap-6 w-[1200px]">
           {!isMobile && <SideNavigationMenu />}
           <div className="flex flex-col flex-grow">
             <div className="flex justify-between">
@@ -108,7 +107,7 @@ const MyReservations = () => {
                 </p>
               </div>
             ) : (
-              <div className="flex flex-col gap-6 mt-[16px] mb-[72px]">
+              <div className="flex flex-col gap-6 mt-[16px]">
                 {reservations.map((item) => (
                   <Experience
                     key={item.id}
@@ -121,6 +120,7 @@ const MyReservations = () => {
                     totalPrice={item.totalPrice}
                     experienceStatus={item.status}
                     bannerImageUrl={item.activity.bannerImageUrl}
+                    type="reservations"
                   />
                 ))}
               </div>
@@ -128,6 +128,7 @@ const MyReservations = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
