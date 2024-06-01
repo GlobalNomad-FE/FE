@@ -4,7 +4,7 @@ const ColorValue: { [key: string]: string } = {
   green: '#0B3B2D',
   gray: '#a4a1aa',
   white: 'white',
-  nomadBlack: '#112211'
+  nomadBlack: '#112211',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -74,7 +74,7 @@ const Button = ({
           marginLeft: width === 'full' ? 0 : pxToRem(hovered ? width * 0.1 : 0),
           borderRadius: `${rounded}px`,
           border: border ? `solid 1px ${ColorValue[borderColor]}` : 'none',
-          cursor: hovered ? 'pointer' : 'default',
+          cursor: 'pointer',
         }}
         className="cursor-pointer flex items-center justify-center duration-500"
       >
