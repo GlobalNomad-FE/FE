@@ -100,7 +100,7 @@ const Experience = ({
           className="rounded-l-[24px]"
         />
       </div>
-      <div className="flex flex-col justify-between w-[100%] p-6 tablet:p-[12px] mobile:p-[9px]">
+      <div className="flex flex-col justify-between w-full p-6 tablet:p-[12px] mobile:p-[9px]">
         <div>
           {type === 'reservations' ? (
             <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
