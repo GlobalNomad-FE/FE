@@ -36,7 +36,6 @@ const ReviewModal = ({
   reservationId,
 }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -55,45 +54,17 @@ const ReviewModal = ({
 
   return (
     <>
-      {isDesktop && (
-        <Button
-          width={144}
-          height={40}
-          fontSize={16}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
-      {isTablet && (
-        <Button
-          width={112}
-          height={40}
-          fontSize={16}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
-      {isMobile && (
-        <Button
-          width={80}
-          height={32}
-          fontSize={14}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
+      <Button
+        width={isMobile ? 80 : isTablet ? 112 : 140}
+        height={isMobile ? 32 : 40}
+        fontSize={isMobile ? 14 : 16}
+        btnColor={'nomadBlack'}
+        textColor={'white'}
+        hover={true}
+        onClick={handleOpenModal}
+      >
+        후기 작성
+      </Button>
       <Portal>
         {openModal && (
           <div
