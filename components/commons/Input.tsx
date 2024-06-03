@@ -58,7 +58,7 @@ const Input = ({ type, password = '' }: Props) => {
   };
 
   return (
-    <label className="flex flex-col font-normal text-base gap-[0.8rem] relative w-[35rem] text-[1.6rem] ">
+    <label className="flex flex-col font-normal text-base gap-[8px] relative w-[560px] text-[16px] ">
       {labelName}
       <input
         type={
@@ -66,7 +66,7 @@ const Input = ({ type, password = '' }: Props) => {
             ? type
             : 'text'
         }
-        className={`w-[35rem] h-[5.8rem] text-[1.6rem] px-5 py-4 bg-white rounded-md border border-${errorMessageColor}`}
+        className={`w-[560px] h-12 text-[16px] px-5 py-4 bg-white rounded-md border border-${errorMessageColor}`}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={placeholder}
@@ -74,14 +74,14 @@ const Input = ({ type, password = '' }: Props) => {
       {type === 'password' && (
         <Image
           alt="비밀번호 눈 아이콘"
-          className="absolute pt-[4rem] right-3 cursor-pointer "
+          className="absolute pt-[44px] right-3 cursor-pointer "
           src={`/icons/btn_visibility_${visibility ? 'off' : 'on'}.svg`}
           onClick={handleVisibility}
           width={24}
           height={24}
         />
       )}
-      <div className={`text-${errorMessageColor} text-[1.2rem]`}>
+      <div className={`text-${errorMessageColor} text-[16px]`}>
         {errorMessage}
       </div>
     </label>
