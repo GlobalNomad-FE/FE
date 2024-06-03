@@ -17,6 +17,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       fontSize: {
+        title: ['32px', { lineHeight: 'normal', fontWeight: '700' }],
         h1: [
           '28px',
           { lineHeight: 'normal', letterSpacing: '0.56px', fontWeight: '700' },
@@ -81,6 +82,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')], //스크롤바 숨김가능(scrollbar-hide)
 };
 export default config;
