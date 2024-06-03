@@ -48,15 +48,11 @@ const ReviewForm = ({ reservationId }: Props) => {
         ))}
       </div>
       <form
-        className={`flex flex-col w-full  ${
-          isMobile ? 'gap-[12px]' : 'gap-[24px]'
-        }`}
+        className="flex flex-col w-full mobile:gap-[12px] gap-[24px]"
         onSubmit={rating && reviewText ? handleSubmit : undefined}
       >
         <textarea
-          className={`text-black200 w-full px-[16px] py-[8px] border border-gray-500 rounded-[4px] text-body1-regular ${
-            isMobile ? 'h-[346px]' : 'h-[240px]'
-          }`}
+          className="text-black200 w-full px-[16px] py-[8px] border border-gray-500 rounded-[4px] text-body1-regular mobile:h-[346px] h-[240px]"
           placeholder="후기를 작성해주세요"
           value={reviewText}
           onChange={handleReviewChange}
@@ -67,7 +63,7 @@ const ReviewForm = ({ reservationId }: Props) => {
           height={isMobile ? 48 : 56}
           fontSize={16}
           textBold={true}
-          btnColor={rating && reviewText ? 'nomadBlack' : 'gray'}
+          btnColor={!rating || !reviewText ? 'gray' : 'nomadBlack'}
           textColor={'white'}
           rounded={4}
           hover={true}

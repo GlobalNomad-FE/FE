@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import ReviewForm from './ReviewForm';
-import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   title: string;
@@ -33,20 +32,10 @@ const ReviewContent = ({
   totalPrice,
   reservationId,
 }: Props) => {
-  const isMobile = useMediaQuery('(max-width: 767px)');
-
   return (
-    <div
-      className={`flex w-full flex-col ${
-        isMobile ? 'gap-[12px]' : 'gap-[24px]'
-      }`}
-    >
-      <div className="flex w-full justify-between">
-        <div
-          className={`relative rounded-[12px] overflow-hidden ${
-            isMobile ? 'w-[100px] h-[100px]' : 'w-[126px] h-[126px]'
-          }`}
-        >
+    <div className="flex w-full flex-col mobile:gap-[12px] gap-[24px]">
+      <div className="flex w-full justify-between items-center">
+        <div className="relative rounded-[12px] overflow-hidden mobile:w-[100px] mobile:h-[100px] w-[126px] h-[126px]">
           <Image
             src={bannerImageUrl}
             alt={title}
@@ -54,21 +43,19 @@ const ReviewContent = ({
             objectFit="cover"
           />
         </div>
-        <div
-          className={`flex flex-col text-nomad-black ${isMobile ? 'gap-[7px]' : 'gap-[13px]'}`}
-        >
-          <h2 className={isMobile ? 'text-body1-bold' : 'text-h3-bold'}>
-            {title}
-          </h2>
-          <div className={isMobile ? 'text-body2-regular' : 'text-h4-regular'}>
+        <div className="flex flex-col text-nomad-black mobile:gap-[7px] gap-[13px]">
+          <h2 className="mobile:text-body1-bold text-h3-bold">{title}</h2>
+          <div className="mobile:text-body2-regular text-h4-regular">
             <span>{date}</span>
-            <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
-            <span>{startTime} - {endTime}</span>
-            <span className={isMobile ? 'mx-[2px]' : 'mx-[10px]'}>·</span>
+            <span className="mobile:mx-[2px] mx-[10px]">·</span>
+            <span>
+              {startTime} - {endTime}
+            </span>
+            <span className="mobile:mx-[2px] mx-[10px]">·</span>
             <span>{headCount} 명</span>
           </div>
           <div className="w-full border-t border-opacity-10 border-green200" />
-          <span className={isMobile ? 'text-h3-bold' : 'text-[32px] font-bold'}>
+          <span className="mobile:text-h3-bold text-title">
             ₩{Intl.NumberFormat().format(totalPrice)}
           </span>
         </div>
