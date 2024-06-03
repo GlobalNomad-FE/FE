@@ -35,6 +35,10 @@ const statusArr = ['pending', 'confirmed', 'declined', 'canceled', 'completed'];
 
 const ITEMS_PER_PAGE = 5; // 페이지당 표시할 항목 수
 
+/**
+ *
+ * /{teamId}/my-reservations
+ */
 const MyReservations = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [page, setPage] = useState(1); // 현재 페이지 상태 추가
