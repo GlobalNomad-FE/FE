@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 import Image from 'next/image';
 import ReviewContent from './ReviewContent';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   title: string;
@@ -35,6 +36,9 @@ const ReviewModal = ({
   reservationId,
 }: Props) => {
   const [openModal, setOpenModal] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const handleOpenModal = () => {
     setOpenModal(true);
