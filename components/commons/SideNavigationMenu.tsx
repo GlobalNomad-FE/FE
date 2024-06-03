@@ -1,4 +1,4 @@
-// import penIcon from '/icons/penIcon.svg';
+'use client';
 import Image from 'next/image';
 import { useState } from 'react';
 import AccountCheckIcon from '@/public/icons/account-check.svg';
@@ -46,7 +46,7 @@ export default function SideNavigationMenu() {
 
   return (
     <div
-      className="w-[385px] h-[432px] tablet:w-[250px] flex flex-col bg-white border border-gray200 rounded-xl p-[24px] gap-[24px] "
+      className="w-[385px] h-[432px] tablet:w-[250px] flex flex-col bg-white border border-gray200 rounded-xl p-[24px] gap-[24px] mobile:hidden"
       style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
     >
       <div className="flex justify-center relative">
