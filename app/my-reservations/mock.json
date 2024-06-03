@@ -6,7 +6,7 @@
       "teamId": "team_01",
       "userId": 100,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner1.jpg",
+        "bannerImageUrl": "/images/Banner-cover.png",
         "title": "서울 야경 사진 촬영 투어",
         "id": 101
       },
@@ -26,7 +26,7 @@
       "teamId": "team_02",
       "userId": 101,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner2.jpg",
+        "bannerImageUrl": "/images/스트릿댄스.png",
         "title": "전통 차 시음 및 다도 체험",
         "id": 102
       },
@@ -46,7 +46,7 @@
       "teamId": "team_03",
       "userId": 102,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner3.jpg",
+        "bannerImageUrl": "/images/mangom.jpeg",
         "title": "제주도 해변 말 타기 체험",
         "id": 103
       },
@@ -66,7 +66,7 @@
       "teamId": "team_04",
       "userId": 103,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner4.jpg",
+        "bannerImageUrl": "/images/pakata마을.png",
         "title": "부산 국제 영화제 VIP 투어",
         "id": 104
       },
@@ -86,12 +86,12 @@
       "teamId": "team_05",
       "userId": 104,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner5.jpg",
+        "bannerImageUrl": "/images/VR게임.png",
         "title": "강릉 커피 거리 투어",
         "id": 105
       },
       "scheduleId": 205,
-      "status": "rejected",
+      "status": "declined",
       "reviewSubmitted": true,
       "totalPrice": 40000,
       "headCount": 1,
@@ -106,7 +106,7 @@
       "teamId": "team_06",
       "userId": 105,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner6.jpg",
+        "bannerImageUrl": "/images/갈대숲.png",
         "title": "남산 타워 야경 투어",
         "id": 106
       },
@@ -126,7 +126,7 @@
       "teamId": "team_07",
       "userId": 106,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner7.jpg",
+        "bannerImageUrl": "/images/석양.png",
         "title": "전주 한옥마을 문화 체험",
         "id": 107
       },
@@ -146,12 +146,12 @@
       "teamId": "team_08",
       "userId": 107,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner8.jpg",
+        "bannerImageUrl": "/images/숲.png",
         "title": "인천 차이나타운 맛집 탐방",
         "id": 108
       },
       "scheduleId": 208,
-      "status": "approved",
+      "status": "confirmed",
       "reviewSubmitted": false,
       "totalPrice": 55000,
       "headCount": 2,
@@ -166,7 +166,7 @@
       "teamId": "team_09",
       "userId": 108,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner9.jpg",
+        "bannerImageUrl": "/images/스트릿댄스.png",
         "title": "제주도 해안 도보 여행",
         "id": 109
       },
@@ -186,7 +186,7 @@
       "teamId": "team_10",
       "userId": 109,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner10.jpg",
+        "bannerImageUrl": "/images/썰매견.png",
         "title": "경주 역사 유적지 탐방",
         "id": 110
       },
@@ -206,7 +206,7 @@
       "teamId": "team_11",
       "userId": 110,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner11.jpg",
+        "bannerImageUrl": "/images/열기구-페스티벌.png",
         "title": "Busan Sea Life Aquarium Visit",
         "id": 111
       },
@@ -226,7 +226,7 @@
       "teamId": "team_12",
       "userId": 111,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner12.jpg",
+        "bannerImageUrl": "/images/열대어-구경.png",
         "title": "Daegu Modern History Tour",
         "id": 112
       },
@@ -246,7 +246,7 @@
       "teamId": "team_13",
       "userId": 112,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner13.jpg",
+        "bannerImageUrl": "/images/자전거여행.png",
         "title": "Gangneung Coffee Festival",
         "id": 113
       },
@@ -266,12 +266,12 @@
       "teamId": "team_14",
       "userId": 113,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner14.jpg",
+        "bannerImageUrl": "/images/징검다리.png",
         "title": "Seoul Royal Palace Night Tour",
         "id": 114
       },
       "scheduleId": 214,
-      "status": "rejected",
+      "status": "declined",
       "reviewSubmitted": false,
       "totalPrice": 40000,
       "headCount": 2,
@@ -286,12 +286,12 @@
       "teamId": "team_15",
       "userId": 114,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner15.jpg",
+        "bannerImageUrl": "/images/피오르체험.png",
         "title": "Andong Hahoe Folk Village Traditional Experience",
         "id": 115
       },
       "scheduleId": 215,
-      "status": "approved",
+      "status": "confirmed",
       "reviewSubmitted": true,
       "totalPrice": 85000,
       "headCount": 3,
@@ -306,7 +306,7 @@
       "teamId": "team_16",
       "userId": 115,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner16.jpg",
+        "bannerImageUrl": "/images/Banner-cover.png",
         "title": "Sokcho Beach Camping Experience",
         "id": 116
       },
@@ -326,7 +326,7 @@
       "teamId": "team_17",
       "userId": 116,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner17.jpg",
+        "bannerImageUrl": "/images/스트릿댄스.png",
         "title": "Damyang Bamboo Forest Walk",
         "id": 117
       },
@@ -346,12 +346,12 @@
       "teamId": "team_18",
       "userId": 117,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner18.jpg",
+        "bannerImageUrl": "/images/mangom.jpeg",
         "title": "Gwangju Democracy Movement Memorial Tour",
         "id": 118
       },
       "scheduleId": 218,
-      "status": "approved",
+      "status": "confirmed",
       "reviewSubmitted": false,
       "totalPrice": 20000,
       "headCount": 1,
@@ -366,12 +366,12 @@
       "teamId": "team_19",
       "userId": 118,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner19.jpg",
+        "bannerImageUrl": "/images/pakata마을.png",
         "title": "Yeosu Night Sea Cruise",
         "id": 119
       },
       "scheduleId": 219,
-      "status": "rejected",
+      "status": "declined",
       "reviewSubmitted": false,
       "totalPrice": 60000,
       "headCount": 2,
@@ -386,12 +386,12 @@
       "teamId": "team_20",
       "userId": 119,
       "activity": {
-        "bannerImageUrl": "https://example.com/banner20.jpg",
+        "bannerImageUrl": "/images/VR게임.png",
         "title": "Suwon Hwaseong Fortress Night Tour",
         "id": 120
       },
       "scheduleId": 220,
-      "status": "approved",
+      "status": "confirmed",
       "reviewSubmitted": true,
       "totalPrice": 50000,
       "headCount": 3,

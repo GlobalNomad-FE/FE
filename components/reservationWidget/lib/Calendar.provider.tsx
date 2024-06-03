@@ -1,3 +1,4 @@
+'use client';
 import { ReactNode, createContext, useState, useContext } from 'react';
 import { CalendarContextProps, Schedule } from './Calendar.types';
 import formatDateToYYYYMMDD from '@/utils/dateFormatter';
