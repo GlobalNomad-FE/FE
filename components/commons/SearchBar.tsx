@@ -1,29 +1,32 @@
 'use client';
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, KeyboardEvent, SetStateAction } from 'react';
+import { useState, ChangeEvent, KeyboardEvent } from 'react';
 
 interface SearchBarType {
-  inputValue: string;
-  setInputValue: Dispatch<SetStateAction<string>>;
-  onSearch: () => void;
+  onSearch: (searchTerm: string) => void;
 }
+
 /**
  *
  * @description SearchBar 컴포넌트
- * @param {string} inputValue - 검색 input 입력 값
- * @param {function} setInputValue - 업데이트될 검색 input 입력 값 함수
- * @param {function} onSearch - 검색될 값(입력할 때마다 업데이트 되지 않고 검색어 모두 입력 후 검색될 수 있게하기 위함
+ * @param {function} onSearch - 검색어를 상위 컴포넌트로 전달하는 함수
  */
-const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
-  const onChangeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
+const SearchBar = ({ onSearch }: SearchBarType) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      onSearch();
+      onSearch(inputValue);
     }
+  };
+
+  const handleSearch = () => {
+    onSearch(inputValue);
   };
 
   return (
@@ -37,7 +40,7 @@ const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
             className="w-[100%] h-14 pl-12 border border-gray500 rounded text-body1-regular mobile:text-body2-regular"
             placeholder="내가 원하는 체험은"
             value={inputValue}
-            onChange={onChangeInputValue}
+            onChange={handleInput}
             onKeyDown={handleKeyPress}
           />
           <Image
@@ -51,7 +54,7 @@ const SearchBar = ({ inputValue, setInputValue, onSearch }: SearchBarType) => {
         <button
           type="submit"
           className="min-w-[8.5em] h-14 bg-nomad-black text-white text-body1-bold rounded mobile:min-w-24"
-          onClick={onSearch}
+          onClick={handleSearch}
         >
           검색하기
         </button>
