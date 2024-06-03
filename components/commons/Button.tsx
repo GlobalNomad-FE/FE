@@ -1,10 +1,11 @@
+'use client';
 import React, { useState } from 'react';
 
 const ColorValue: { [key: string]: string } = {
   green: '#0B3B2D',
   gray: '#a4a1aa',
   white: 'white',
-  nomadBlack: '#112211'
+  nomadBlack: '#112211',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
