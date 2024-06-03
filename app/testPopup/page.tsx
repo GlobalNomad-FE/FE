@@ -7,7 +7,7 @@ import ReservationCompleted from '@/components/tests/ReservationCompleted';
 
 export default function Page() {
   return (
-    <main className="p-[5rem] text-white flex justify-center gap-20">
+    <main>
       <EmailExist />
       <ReservationCompleted />
       <ReviewModal
