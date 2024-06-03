@@ -51,17 +51,45 @@ const ReviewModal = ({
 
   return (
     <>
-      <Button
-        width={144}
-        height={40}
-        fontSize={16}
-        btnColor={'nomadBlack'}
-        textColor={'white'}
-        hover={true}
-        onClick={handleOpenModal}
-      >
-        후기 작성
-      </Button>
+      {isDesktop && (
+        <Button
+          width={144}
+          height={40}
+          fontSize={16}
+          btnColor={'nomadBlack'}
+          textColor={'white'}
+          hover={true}
+          onClick={handleOpenModal}
+        >
+          후기 작성
+        </Button>
+      )}
+      {isTablet && (
+        <Button
+          width={112}
+          height={40}
+          fontSize={16}
+          btnColor={'nomadBlack'}
+          textColor={'white'}
+          hover={true}
+          onClick={handleOpenModal}
+        >
+          후기 작성
+        </Button>
+      )}
+      {isMobile && (
+        <Button
+          width={80}
+          height={32}
+          fontSize={14}
+          btnColor={'nomadBlack'}
+          textColor={'white'}
+          hover={true}
+          onClick={handleOpenModal}
+        >
+          후기 작성
+        </Button>
+      )}
       <Portal>
         {openModal && (
           <div
