@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const SignIn = () => {
   return (
-    <div className="flex w-full flex-col items-center pt-24">
+    <div className="flex w-full flex-col items-center pt-40 ">
       <div>
         <Link href="/">
           <Image
