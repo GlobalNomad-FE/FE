@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 import Image from 'next/image';
 import ReviewContent from './ReviewContent';
-import useMediaQuery from '@/hooks/useMediaQuery';
 
 interface Props {
   title: string;
@@ -36,10 +35,6 @@ const ReviewModal = ({
   reservationId,
 }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
-  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -103,17 +98,9 @@ const ReviewModal = ({
           >
             <div
               onClick={handleStopBubbling}
-              className={`px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center ${
-                isMobile
-                  ? 'w-full h-full'
-                  : 'w-[480px] pb-[46px] rounded-[24px]'
-              }`}
+              className="px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center mobile:w-full mobile:h-full mobile:pb-0 w-[480px] pb-[46px] rounded-[24px] mobile:rounded-none"
             >
-              <div
-                className={`flex w-full justify-between items-center ${
-                  isMobile ? 'mb-[24px]' : 'mb-[41px]'
-                }`}
-              >
+              <div className="flex w-full justify-between items-center mobile:mb-[24px] mb-[41px]">
                 <h1 className="text-h1 text-black200">후기 작성</h1>
                 <Image
                   src="/icons/btn-X-big.svg"
