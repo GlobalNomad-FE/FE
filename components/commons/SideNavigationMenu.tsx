@@ -28,19 +28,19 @@ export default function SideNavigationMenu() {
       icon: TextboxCheckIcon,
       alt: '예약내역 아이콘',
       label: '예약 내역',
-      path: '/testMenuBar',
+      path: '/my-reservations',
     },
     {
       icon: SettingCheckIcon,
       alt: '체험관리 아이콘',
       label: '내 체험 관리',
-      path: '/aa',
+      path: '/activities',
     },
     {
       icon: CalendarCheckIcon,
       alt: '예약현황 아이콘',
       label: '예약 현황',
-      path: '/bb',
+      path: '/reservationHistory',
     },
   ];
 
