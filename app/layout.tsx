@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import ReactQueryProviders from '@/apis/ReactQueryProviders';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import React from 'react';
 
 const pretendard = localFont({
