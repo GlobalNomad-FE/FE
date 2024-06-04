@@ -4,8 +4,8 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer className="bottom-0 flex h-[160px] w-full min-w-[375px] items-center justify-between whitespace-nowrap border-none bg-nomad-black p-0 px-20 text-white mobile:px-0">
-      <div className="flex w-full items-center justify-between justify-items-center pb-[64px] pt-[32px] mobile:flex-col">
+    <footer className="bottom-0 flex h-40 w-full min-w-[375px] items-center justify-between whitespace-nowrap border-none bg-nomad-black p-0 px-20 text-white mobile:px-0">
+      <div className="flex w-full items-center justify-between justify-items-center pb-16 pt-8 mobile:flex-col">
         <div className="flex w-1/2 justify-between gap-4">
           <div className=" text-gray600 "> @codeit - 2024 </div>
           <div className="flex gap-5 whitespace-nowrap ">
