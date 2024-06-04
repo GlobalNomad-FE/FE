@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import ReactQueryProviders from '@/apis/ReactQueryProviders';
+import React from 'react';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -23,12 +25,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={pretendard.className}>
-        <div id="portal" />
-        <Script
-          strategy="beforeInteractive"
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
-        />
-        {children}
+        <ReactQueryProviders>
+          <div id="portal" />
+          <Script
+            strategy="beforeInteractive"
+            src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
+          />
+          {children}
+        </ReactQueryProviders>
       </body>
     </html>
   );
