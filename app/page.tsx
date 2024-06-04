@@ -1,9 +1,13 @@
+import Footer from "@/components/commons/Footer";
 import Gnb from "@/components/commons/gnb/gnb";
+import MainBody from "@/components/MainBody";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main>
       <Gnb />
+      <MainBody />
+      {/* <Footer /> */}
     </main>
   );
 }
