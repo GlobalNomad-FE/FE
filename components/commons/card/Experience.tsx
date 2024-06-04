@@ -35,6 +35,7 @@ interface Reservation {
  * @param activityId 예약 ID
  * @param rating 별점
  * @param reviewCount 리뷰 수
+ * @param price 체험 가격
  * @param type 내 체험 관리 : 'activities' | 예약 내역 : 'reservations'
  */
 
@@ -129,9 +130,11 @@ const Experience = ({
           )}
         </div>
         <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
-          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">{`₩${totalPrice.toLocaleString(
-            'ko-KR',
-          )}`}</p>
+          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">
+            {type === 'reservations'
+              ? `₩${totalPrice.toLocaleString('ko-KR')}`
+              : `₩${totalPrice.toLocaleString('ko-KR')} /인`}
+          </p>
           <div className="">
             {status === 'pending' && (
               <button

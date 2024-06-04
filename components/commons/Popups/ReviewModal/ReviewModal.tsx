@@ -36,8 +36,6 @@ const ReviewModal = ({
   reservationId,
 }: Props) => {
   const [openModal, setOpenModal] = useState(false);
-
-  const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
 
@@ -56,45 +54,17 @@ const ReviewModal = ({
 
   return (
     <>
-      {isDesktop && (
-        <Button
-          width={144}
-          height={40}
-          fontSize={16}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
-      {isTablet && (
-        <Button
-          width={112}
-          height={40}
-          fontSize={16}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
-      {isMobile && (
-        <Button
-          width={80}
-          height={32}
-          fontSize={14}
-          btnColor={'nomadBlack'}
-          textColor={'white'}
-          hover={true}
-          onClick={handleOpenModal}
-        >
-          후기 작성
-        </Button>
-      )}
+      <Button
+        width={isMobile ? 80 : isTablet ? 112 : 140}
+        height={isMobile ? 32 : 40}
+        fontSize={isMobile ? 14 : 16}
+        btnColor={'nomadBlack'}
+        textColor={'white'}
+        hover={true}
+        onClick={handleOpenModal}
+      >
+        후기 작성
+      </Button>
       <Portal>
         {openModal && (
           <div
@@ -103,17 +73,9 @@ const ReviewModal = ({
           >
             <div
               onClick={handleStopBubbling}
-              className={`px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center ${
-                isMobile
-                  ? 'w-full h-full'
-                  : 'w-[480px] pb-[46px] rounded-[24px]'
-              }`}
+              className="px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center mobile:w-full mobile:h-full mobile:pb-0 w-[480px] pb-[46px] rounded-[24px] mobile:rounded-none"
             >
-              <div
-                className={`flex w-full justify-between items-center ${
-                  isMobile ? 'mb-[24px]' : 'mb-[41px]'
-                }`}
-              >
+              <div className="flex w-full justify-between items-center mobile:mb-[24px] mb-[41px]">
                 <h1 className="text-h1 text-black200">후기 작성</h1>
                 <Image
                   src="/icons/btn-X-big.svg"
