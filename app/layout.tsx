@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import localFont from 'next/font/local';
 import Script from 'next/script';
+import ReactQueryProviders from '@/apis/ReactQueryProviders';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import React from 'react';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -20,16 +23,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
     <html lang="ko">
-      <body className={pretendard.className}>
-        <div id="portal" />
-        <Script
-          strategy="beforeInteractive"
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
-        />
-        {children}
-      </body>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryProviders>
+          <body className={pretendard.className}>
+            <div id="portal" />
+            <Script
+              strategy="beforeInteractive"
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
+            />
+            {children}
+          </body>
+        </ReactQueryProviders>
+      </QueryClientProvider>
     </html>
   );
 }
