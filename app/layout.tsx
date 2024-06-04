@@ -26,18 +26,18 @@ export default function RootLayout({
   const [queryClient] = React.useState(() => new QueryClient());
   return (
     <html lang="ko">
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryProviders>
-          <body className={pretendard.className}>
+      <body className={pretendard.className}>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryProviders>
             <div id="portal" />
             <Script
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
             />
             {children}
-          </body>
-        </ReactQueryProviders>
-      </QueryClientProvider>
+          </ReactQueryProviders>
+        </QueryClientProvider>
+      </body>
     </html>
   );
 }
