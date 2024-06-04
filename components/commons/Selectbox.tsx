@@ -13,7 +13,7 @@ interface Option {
 
 interface SelectBoxProps {
   options: Option[];
-  onSelect: (value: string) => void;
+  onSelect: (value: any) => void;
   width: string;
   placeholder: string;
 }
