@@ -1,7 +1,7 @@
 export const activitiesKey = {
   getActivities: (
     method: 'cursor' | 'offset',
-    methodValue: number, // cursorId 또는 page 값
+    methodValue: number | null, // cursorId 또는 page 값
     size: number,
     category?: string,
     keyword?: string,

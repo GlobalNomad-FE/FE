@@ -10,7 +10,7 @@ interface BaseRequest {
 
 interface InfinityScrollRequest extends BaseRequest {
   method: 'cursor';
-  cursorId: number;
+  cursorId: number | null;
   size: number;
 }
 
