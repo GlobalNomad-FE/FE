@@ -9,12 +9,12 @@ const MainBody = () => {
   const page = 1;
   const size = 8;
 
-  // const { data, isSuccess, isError, error } = useGetActivitiesAll({
-  //   page: page,
-  //   size: size,
-  // });
+  const { data } = useGetActivitiesAll({
+    page: page,
+    size: size,
+  });
 
-  // console.log(data);
+  console.log(data);
 
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
