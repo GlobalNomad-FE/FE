@@ -1,3 +1,10 @@
 export const activitiesKey = {
-  getActivities: (page?: number, size?: number) => ['activities', page, size],
+  getActivities: (
+    method: 'cursor' | 'offset',
+    methodValue: number, // cursorId 또는 page 값
+    size: number,
+    category?: string,
+    keyword?: string,
+    sort?: 'most_reviewed' | 'price_asc' | 'price_desc' | 'latest',
+  ) => ['activities', method, methodValue, size, category, keyword, sort],
 };

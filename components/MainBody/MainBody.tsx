@@ -10,6 +10,7 @@ const MainBody = () => {
   const size = 8;
 
   const { data } = useGetActivities({
+    method: 'offset',
     page: page,
     size: size,
   });
