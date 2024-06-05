@@ -2,9 +2,20 @@
 import React, { useState } from 'react';
 import SearchBar from './commons/SearchBar';
 import MonthBest from './MonthBest';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { getActivities } from '@/apis/api';
 
 const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [page, setPage] = useState(1);
+  const size = 8;
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['activities', page, size],
+    queryFn: () => getActivities(page, size)
+  });
+
+  console.log(data);
 
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
