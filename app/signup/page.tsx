@@ -31,7 +31,7 @@ const SignUp = () => {
         <Input
           type="passwordCheck"
           password={password}
-          placeholder="비밀번호 확인"
+          placeholder="비밀번호를 한번 더 입력해 주세요"
         />
         <button
           type="submit"
