@@ -1,15 +1,15 @@
 'use client';
 import React, { useState } from 'react';
-import SearchBar from './commons/SearchBar';
+import SearchBar from '@/components/commons/SearchBar';
 import MonthBest from './MonthBest';
-import useGetActivitiesAll from '@/apis/activities/GetActivitiesAll';
+import useGetActivities from '@/apis/activities/useGetActivities';
 
 const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const page = 1;
   const size = 8;
 
-  const { data } = useGetActivitiesAll({
+  const { data } = useGetActivities({
     page: page,
     size: size,
   });

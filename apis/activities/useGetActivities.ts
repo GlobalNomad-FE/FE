@@ -26,7 +26,7 @@ interface GetActivitiesResponse {
   }[];
 }
 
-async function getActivitiesAll({ page, size }: GetActivitiesRequest) {
+async function getActivities({ page, size }: GetActivitiesRequest) {
   const response = await instance.get<GetActivitiesResponse>('/activities', {
     params: {
       method: 'offset',
@@ -37,11 +37,11 @@ async function getActivitiesAll({ page, size }: GetActivitiesRequest) {
   return response.data;
 }
 
-const useGetActivitiesAll = ({ page, size }: GetActivitiesRequest) => {
+const useGetActivities = ({ page, size }: GetActivitiesRequest) => {
   return useSuspenseQuery({
-    queryKey: activitiesKey.GetActivitiesAll(page, size),
-    queryFn: () => getActivitiesAll({ page, size }),
+    queryKey: activitiesKey.getActivities(page, size),
+    queryFn: () => getActivities({ page, size }),
   });
 };
 
-export default useGetActivitiesAll;
+export default useGetActivities;
