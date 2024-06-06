@@ -27,11 +27,11 @@ interface Reservation {
 }
 
 // pending   - ( 예약 완료 )
+// canceled  - ( 예약 취소 )
 // confirmed - ( 예약 승인 )
 // declined  - ( 예약 거절 )
-// canceled  - ( 예약 취소 )
 // completed - ( 체험 완료 )
-const statusArr = ['pending', 'confirmed', 'declined', 'canceled', 'completed'];
+const statusArr = ['pending', 'canceled', 'confirmed', 'declined', 'completed'];
 
 const ITEMS_PER_PAGE = 5; // 페이지당 표시할 항목 수
 
