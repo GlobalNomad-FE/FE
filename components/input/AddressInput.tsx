@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import Script from 'next/script';
+import { KeyActivitiesData } from '@/app/activities/register/page';
 
 interface DaumPostcode {
   open: () => void;
@@ -12,15 +13,20 @@ declare namespace daum {
   }) => DaumPostcode;
 }
 
-export default function AddressInput() {
-  const addressInputRef = useRef(null);
+interface AddressInputProps {
+  handlevalue: (id: KeyActivitiesData, value: any) => void;
+}
+
+export default function AddressInput({ handlevalue }: AddressInputProps) {
+  const addressInputRef = useRef<any>(null);
 
   const handleOpenAddressSearch = () => {
     new daum.Postcode({
       oncomplete: function (data: any) {
         // 팝업에서 검색 결과를 선택했을 때의 로직
-        if (addressInputRef.current) {
+        if (addressInputRef?.current && data.address) {
           addressInputRef.current.value = data.address;
+          handlevalue('address', data.address);
         }
       },
     }).open();
