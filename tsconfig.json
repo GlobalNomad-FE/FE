@@ -22,6 +22,12 @@
       "@common/*": ["./components/reservationWidget/common/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "apis/axios.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "apis/axios.ts"
+  ],
   "exclude": ["node_modules"]
 }
