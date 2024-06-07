@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import useGetActivities from '@/apis/activities/useGetActivities';
 import Button from '@/components/commons/Button';
