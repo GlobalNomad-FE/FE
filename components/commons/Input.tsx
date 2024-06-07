@@ -4,8 +4,10 @@ import { z } from 'zod';
 import Image from 'next/image';
 
 interface Props {
-  type: 'email' | 'password'; //email, password
+  type: 'text' | 'password' | 'email' | 'number' | 'time';
   password?: string; //비밀번호 확인의 경우 기존 비밀번호가 담김
+  isError?: boolean;
+  errorMessage?: string;
 }
 
 // 이메일 스키마 정의

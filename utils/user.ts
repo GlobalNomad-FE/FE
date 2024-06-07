@@ -52,10 +52,10 @@ export const USER_INPUT_VALIDATION: USER_INPUT_VALIDATION_TYPE = {
     },
   },
   password: {
-    regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+    regex: /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/,
     errorMessage: {
       empty: '비밀번호를 입력해 주세요.',
-      invalid: '영문과 숫자, 특수문자를 조합하여 입력해 주세요.',
+      invalid: '영문과 숫자를 조합하여 입력해 주세요.',
       minLength: '8자 이상 입력해주세요',
       check: '이메일 또는 비밀번호를 확인해 주세요',
     },
