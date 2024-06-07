@@ -53,7 +53,7 @@ const SignUp = () => {
   });
 
   const signUpMutation = useMutation({
-    mutationFn: (data: FormValues) => auth.signUp(data),
+    mutationFn: (data: FormValues) => auth.signup(data),
     mutationKey: ['signUp'],
     onSuccess: () => {
       router.push('/signin');

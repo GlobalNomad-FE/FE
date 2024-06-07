@@ -2,12 +2,17 @@ import { FormValues, PostAuthLoginReq, PostAuthLoginRes } from './auth.type';
 import { instance } from '../instance';
 
 export const auth = {
-  signIn: async (userData: FormValues) => {
-    const response = await instance.post('/auth/signIn', userData);
+  signup: async (userData: FormValues) => {
+    const response = await instance.post('/users', userData);
     return response.data;
   },
-  signUp: async (userData: FormValues) => {
-    const response = await instance.post('/users', userData);
+  signin: async (userData: FormValues) => {
+    const response = await instance.post('/auth/login', userData);
+    return response.data;
+  },
+
+  getImageUrl: async (imageUrl: FormData) => {
+    const response = await instance.post('/users/me/image', imageUrl);
     return response.data;
   },
   tokensUpdate: async (refreshToken: string) => {
