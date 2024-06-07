@@ -42,10 +42,15 @@ interface GetActivitiesResponse {
 }
 
 async function getActivities(request: GetActivitiesRequest) {
-  const params = (request.method === 'cursor') ? 
-    { method: request.method, cursorId: request.cursorId, size: request.size } : 
-    { method: request.method, page: request.page, size: request.size };
-  
+  const params =
+    request.method === 'cursor'
+      ? {
+          method: request.method,
+          cursorId: request.cursorId,
+          size: request.size,
+        }
+      : { method: request.method, page: request.page, size: request.size };
+
   const response = await instance.get<GetActivitiesResponse>('/activities', {
     params: {
       ...params,
@@ -60,12 +65,10 @@ async function getActivities(request: GetActivitiesRequest) {
 const useGetActivities = (request: GetActivitiesRequest) => {
   return useSuspenseQuery({
     queryKey: activitiesKey.getActivities(
-      request.method, 
       request.method === 'cursor' ? request.cursorId : request.page,
-      request.size,
-      request.category, 
-      request.keyword, 
-      request.sort
+      request.category,
+      request.keyword,
+      request.sort,
     ),
     queryFn: () => getActivities(request),
   });

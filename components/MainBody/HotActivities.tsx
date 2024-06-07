@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import useGetActivities from '@/apis/activities/useGetActivities';
-import Button from '@/components/commons/Button';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import HotActivitiesPagination from './HotActivitiesPagination';
 
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [history, setHistory] = useState<number[]>([]);
+  const isSmallPCScreen = useMediaQuery('(max-width: 1248px)');
 
   const { data } = useGetActivities({
     method: 'cursor',
@@ -14,62 +16,34 @@ const HotActivities = () => {
     sort: 'most_reviewed',
   });
 
-  const handleGetPrevData = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleGetPrevData = () => {
     history.pop();
     setHistory(history);
     setCursorId(history[history.length - 1]);
   };
 
-  const handleGetNextData = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleGetNextData = () => {
     const nextId = data.activities[0].id;
     setHistory([...history, nextId]);
     setCursorId(nextId);
   };
 
   return (
-    <div className="relative flex flex-col text-black200 gap-[33px] underPc:w-full">
+    <div
+      className={`relative flex flex-col text-black200 gap-[33px] ${
+        isSmallPCScreen ? 'w-full' : ''
+      }`}
+    >
       <div className="flex justify-between px-[24px]">
         <h1 className="text-4xl font-bold">🔥 인기 체험</h1>
-        <div className="flex">
-          <Button
-            width={44}
-            height={44}
-            fontSize={18}
-            btnColor={'white'}
-            textColor={history.length > 0 ? 'nomadBlack' : 'gray'}
-            border={true}
-            borderColor={history.length > 0 ? 'nomadBlack' : 'gray'}
-            onClick={history.length > 0 ? handleGetPrevData : undefined}
-            disabled={history.length === 0}
-            rounded={15}
-          >
-            {'<'}
-          </Button>
-          <Button
-            width={44}
-            height={44}
-            fontSize={18}
-            btnColor={'white'}
-            textColor={
-              history.length + 3 < data.totalCount ? 'nomadBlack' : 'gray'
-            }
-            border={true}
-            borderColor={
-              history.length + 3 < data.totalCount ? 'nomadBlack' : 'gray'
-            }
-            onClick={
-              history.length + 3 < data.totalCount
-                ? handleGetNextData
-                : undefined
-            }
-            disabled={history.length + 3 > data.totalCount}
-            rounded={15}
-          >
-            {'>'}
-          </Button>
-        </div>
+        {isSmallPCScreen || (
+          <HotActivitiesPagination
+            totalCount={data.totalCount}
+            history={history}
+            clickPrev={handleGetPrevData}
+            clickNext={handleGetNextData}
+          />
+        )}
       </div>
       <div className="flex gap-[24px] px-[24px] overflow-x-scroll">
         {data.activities.map((item) => (
@@ -79,8 +53,8 @@ const HotActivities = () => {
           >
             <div className="absolute bg-custom-gradient w-[384px] h-[384px] z-10" />
             <Image
-              src={`/images/스트릿댄스.png`}
-              alt={item.bannerImageUrl}
+              src={item.bannerImageUrl}
+              alt={item.title}
               fill
               objectFit="cover"
             />
@@ -95,7 +69,10 @@ const HotActivities = () => {
                 {item.rating} ({item.reviewCount})
               </div>
               <div className="text-3xl font-bold w-[230px]">{item.title}</div>
-              <div className="text-h3-bold">{item.price}</div>
+              <div className="text-h3-bold">
+                ₩ {item.price.toLocaleString('ko-KR')}{' '}
+                <span className="text-gray400 text-body2-regular">/ 인</span>
+              </div>
             </div>
           </div>
         ))}

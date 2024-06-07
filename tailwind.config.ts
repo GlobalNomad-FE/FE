@@ -16,7 +16,7 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'custom-gradient':
-            'linear-gradient(90deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 100%)',
+          'linear-gradient(90deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 100%)',
       },
       fontSize: {
         title: ['32px', { lineHeight: 'normal', fontWeight: '700' }],
@@ -81,7 +81,6 @@ const config: Config = {
       screens: {
         mobile: { max: '767px' },
         tablet: { min: '768px', max: '1023px' },
-        underPc: { max: '1248px'},
       },
     },
   },
