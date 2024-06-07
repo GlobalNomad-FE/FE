@@ -1,5 +1,5 @@
 import { FormValues, PostAuthLoginReq, PostAuthLoginRes } from './auth.type';
-import { instance } from '../instance';
+import instance from '../axios';
 
 export const auth = {
   signup: async (userData: FormValues) => {

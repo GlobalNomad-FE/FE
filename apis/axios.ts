@@ -1,7 +1,8 @@
 import axios from 'axios';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const instance = axios.create({
-  baseURL: 'https://sp-globalnomad-api.vercel.app/4-13',
+const instance = axios.create({
+  baseURL: BASE_URL,
 });
 
 instance.interceptors.request.use((config) => {
@@ -42,3 +43,4 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+export default instance;
