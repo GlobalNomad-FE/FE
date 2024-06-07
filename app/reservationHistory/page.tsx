@@ -13,9 +13,7 @@ export default function Page() {
     <div className="text-black200 bg-gray50">
       <Gnb />
       <div className="pt-[142px] tablet:pt-[94px] w-full flex justify-center">
-        <div className="mobile:invisible mobile:w-0">
-          <SideNavigationMenu />
-        </div>
+        <SideNavigationMenu />
         <div className="pl-[24px] mobile:w-full mobile:px-4 tablet:[17px] text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] tablet:w-[429px] mobile:w-full font-bold">
             예약현황
