@@ -3,7 +3,7 @@ import { instance } from '../instance';
 
 export const auth = {
   signIn: async (userData: FormValues) => {
-    const response = await instance.post('/auth/login', userData);
+    const response = await instance.post('/auth/signIn', userData);
     return response.data;
   },
   signUp: async (userData: FormValues) => {
