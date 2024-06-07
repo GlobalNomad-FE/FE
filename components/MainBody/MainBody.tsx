@@ -1,10 +1,21 @@
 'use client';
 import React, { useState } from 'react';
-import SearchBar from './commons/SearchBar';
+import SearchBar from '@/components/commons/SearchBar';
 import MonthBest from './MonthBest';
+import useGetActivities from '@/apis/activities/useGetActivities';
 
 const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const page = 1;
+  const size = 8;
+
+  const { data } = useGetActivities({
+    method: 'offset',
+    page: page,
+    size: size,
+  });
+
+  console.log(data);
 
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
