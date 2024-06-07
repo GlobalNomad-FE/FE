@@ -1,8 +1,69 @@
 import Input from '@/components/commons/Input';
 import Link from 'next/link';
 import Image from 'next/image';
+import { AxiosError } from 'axios';
+import { USER_INPUT_VALIDATION } from '@/utils/user';
+import { useRouter } from 'next/router';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
 
-const SignIn = () => {
+const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
+
+const rules = {
+  emailRules: {
+    required: email.errorMessage.empty,
+    pattern: {
+      value: email.regex,
+      message: email.errorMessage.invalid,
+    },
+  },
+  passwordRules: {
+    required: password.errorMessage.empty,
+    pattern: {
+      value: password.regex,
+      message: password.errorMessage.invalid,
+    },
+    minLength: {
+      value: 8,
+      message: password.errorMessage.minLength,
+    },
+  },
+  nicknameRules: {
+    required: nickname.errorMessage.empty,
+    pattern: {
+      value: nickname.regex,
+      message: nickname.errorMessage.invalid,
+    },
+  },
+};
+
+const SignUp = () => {
+  const router = useRouter();
+  const { formState, register, handleSubmit, getValues } = useForm<FormValues>({
+    mode: 'onBlur',
+  });
+
+  const signUpMutation = useMutation({
+    mutationFn: (data: FormValues) => auth.signUp(data),
+    mutationKey: ['signUp'],
+    onSuccess: () => {
+      router.push('/login');
+    },
+    onError: (error: AxiosError<ErrorMessage>) => {
+      if (error.response && error.response.status >= 400) {
+        console.log('AxiosError');
+        return;
+      }
+      console.error('AxiosError', error);
+    },
+  });
+
+  const { isValid, errors } = formState;
+
+  const onSubmit = (data: FormValues) => {
+    signUpMutation.mutate(data);
+  };
+
   return (
     <div className="flex w-full flex-col items-center pt-40 ">
       <div>
@@ -39,4 +100,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
