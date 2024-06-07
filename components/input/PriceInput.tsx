@@ -43,7 +43,7 @@ export default function PriceInput({
         value={field.value}
         name={field.name}
         onChange={field.onChange}
-        type="text"
+        type="number"
       />
       {error && (
         <div className="pl-1 text-body2-regular text-red-500">
