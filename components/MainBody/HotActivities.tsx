@@ -4,6 +4,9 @@ import useGetActivities from '@/apis/activities/useGetActivities';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import HotActivitiesPagination from './HotActivitiesPagination';
 
+//TODO: 스크린 창 크기 훅으로 쓰지말고 보여졌다 안보여졌다하는걸 하위컴포넌트 안에서 조절 display-none으로
+//맵 쓰는 부분 컴포넌트 하나로~
+
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [history, setHistory] = useState<number[]>([]);
@@ -36,7 +39,7 @@ const HotActivities = () => {
     >
       <div className="flex justify-between px-[24px]">
         <h1 className="text-4xl font-bold">🔥 인기 체험</h1>
-        {isSmallPCScreen || (
+        {!isSmallPCScreen && (
           <HotActivitiesPagination
             totalCount={data.totalCount}
             history={history}
