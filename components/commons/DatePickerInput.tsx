@@ -1,11 +1,11 @@
 import DatePicker from 'react-datepicker';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-
+import { DateType } from './input/TimeInput';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface SelectDateProps {
-  onSelectedDateChange: (date: Date | null) => void; // 선택된 날짜 변경 시 호출될 콜백 함수
+  onSelectedDateChange: (date: DateType) => void; // 선택된 날짜 변경 시 호출될 콜백 함수
 }
 
 /**
@@ -15,14 +15,12 @@ interface SelectDateProps {
 const DatePickerInput: React.FC<SelectDateProps> = ({
   onSelectedDateChange,
 }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<DateType>(new Date());
 
   const datePickerRef = useRef<DatePicker>(null);
 
   const handleImageClick = () => {
-    if (datePickerRef.current) {
-      datePickerRef.current.setFocus();
-    }
+    datePickerRef.current?.setFocus();
   };
 
   return (
