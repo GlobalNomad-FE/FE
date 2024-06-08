@@ -112,6 +112,7 @@ const Selectbox: React.FC<SelectBoxProps> = ({
   };
   return (
     <Select
+      instanceId={'select-unique-id'}
       options={options}
       value={selectedOption}
       onChange={(option) => {
