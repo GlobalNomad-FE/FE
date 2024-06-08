@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useMediaQuery from '@/hooks/useMediaQuery';
 import Select, {
   components,
   DropdownIndicatorProps,
@@ -14,7 +15,6 @@ interface Option {
 interface SelectBoxProps {
   options: Option[];
   onSelect: (value: any) => void;
-  width: string;
   placeholder: string;
 }
 
@@ -27,12 +27,12 @@ interface SelectBoxProps {
 const Selectbox: React.FC<SelectBoxProps> = ({
   options,
   onSelect,
-  width,
   placeholder,
 }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const inputClassName = `w-[${width}]`;
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const DropdownIndicator = (props: DropdownIndicatorProps<Option>) => {
     return (
@@ -53,7 +53,7 @@ const Selectbox: React.FC<SelectBoxProps> = ({
       boxShadow: 'none',
       borderRadius: '4px',
       borderColor: '#79747e',
-      padding: '4px 0px 4px 16px',
+      padding: isMobile ? '4px 0px 4px 12px' : '4px 0px 4px 16px',
       height: '56px',
 
       ':hover': {
@@ -96,6 +96,7 @@ const Selectbox: React.FC<SelectBoxProps> = ({
         padding: '8px',
       };
     },
+
     valueContainer: (styles) => {
       return {
         ...styles,
