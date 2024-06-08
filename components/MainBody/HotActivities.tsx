@@ -41,9 +41,17 @@ const HotActivities = () => {
           />
         )}
       </div>
+      {isLoading && (
+        <div className="w-[1248px] h-[400px] text-2xl flex justify-center items-center">
+          데이터 로딩 중..
+        </div>
+      )}
+      {isError && (
+        <div className="w-[1248px] h-[400px] text-2xl">
+          불러오는 것에 실패했습니다
+        </div>
+      )}
       <div className="flex gap-[24px] px-[24px] overflow-x-scroll">
-        {isLoading && <div>Loading...</div>}
-        {isError && <div>Error occurred</div>}
         {data?.activities.map((item) => (
           <HotActivitiesItems
             key={item.id}

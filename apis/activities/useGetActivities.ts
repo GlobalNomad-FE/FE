@@ -22,7 +22,7 @@ interface PaginationRequest extends BaseRequest {
 
 type GetActivitiesRequest = InfinityScrollRequest | PaginationRequest;
 
-interface GetActivitiesResponse {
+export interface GetActivitiesResponse {
   cursorId: number;
   totalCount: number;
   activities: {
