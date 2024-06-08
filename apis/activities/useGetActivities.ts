@@ -22,23 +22,25 @@ interface PaginationRequest extends BaseRequest {
 
 type GetActivitiesRequest = InfinityScrollRequest | PaginationRequest;
 
-export interface GetActivitiesResponse {
+export interface Activity {
+  id: number;
+  userId: number;
+  title: string;
+  description: string;
+  category: string;
+  price: number;
+  address: string;
+  bannerImageUrl: string;
+  rating: number;
+  reviewCount: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface GetActivitiesResponse {
   cursorId: number;
   totalCount: number;
-  activities: {
-    id: number;
-    userId: number;
-    title: string;
-    description: string;
-    category: string;
-    price: number;
-    address: string;
-    bannerImageUrl: string;
-    rating: number;
-    reviewCount: number;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+  activities: Activity[];
 }
 
 async function getActivities(request: GetActivitiesRequest) {

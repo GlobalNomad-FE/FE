@@ -81,6 +81,7 @@ const config: Config = {
       screens: {
         mobile: { max: '767px' },
         tablet: { min: '768px', max: '1023px' },
+        minPc: { min: '1248px' },
       },
     },
   },

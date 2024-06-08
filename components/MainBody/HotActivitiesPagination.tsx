@@ -3,29 +3,29 @@ import Button from '@/components/commons/Button';
 
 interface Props {
   totalCount: number;
-  history: number[];
   clickPrev: () => void;
   clickNext: () => void;
+  scrollPoint: number;
 }
 
 const HotActivitiesPagination = ({
   totalCount,
-  history,
   clickPrev,
   clickNext,
+  scrollPoint,
 }: Props) => {
   return (
-    <div className="hidden xl:flex">
+    <div className="hidden minPc:flex">
       <Button
         width={44}
         height={44}
         fontSize={18}
         btnColor={'white'}
-        textColor={history.length > 0 ? 'nomadBlack' : 'gray'}
+        textColor={scrollPoint > 0 ? 'nomadBlack' : 'gray'}
         border={true}
-        borderColor={history.length > 0 ? 'nomadBlack' : 'gray'}
-        onClick={history.length > 0 ? clickPrev : undefined}
-        disabled={history.length === 0}
+        borderColor={scrollPoint > 0 ? 'nomadBlack' : 'gray'}
+        onClick={clickPrev}
+        disabled={scrollPoint <= 0}
         rounded={15}
       >
         {'<'}
@@ -35,11 +35,11 @@ const HotActivitiesPagination = ({
         height={44}
         fontSize={18}
         btnColor={'white'}
-        textColor={history.length + 3 < totalCount ? 'nomadBlack' : 'gray'}
+        textColor={scrollPoint < totalCount * 408 ? 'nomadBlack' : 'gray'}
         border={true}
-        borderColor={history.length + 3 < totalCount ? 'nomadBlack' : 'gray'}
-        onClick={history.length + 3 < totalCount ? clickNext : undefined}
-        disabled={history.length + 3 > totalCount}
+        borderColor={scrollPoint < totalCount * 408 ? 'nomadBlack' : 'gray'}
+        onClick={scrollPoint < totalCount * 408 ? clickNext : undefined}
+        disabled={scrollPoint >= totalCount * 408}
         rounded={15}
       >
         {'>'}
