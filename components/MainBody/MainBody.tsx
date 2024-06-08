@@ -1,22 +1,11 @@
 'use client';
-import React, { Suspense, useState } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '@/components/commons/SearchBar';
 import MonthBest from './MonthBest';
-import useGetActivities from '@/apis/activities/useGetActivities';
 import HotActivities from './HotActivities';
 
 const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  // const page = 1;
-  // const size = 2;
-
-  // const { data } = useGetActivities({
-  //   method: 'offset',
-  //   page: page,
-  //   size: size,
-  // });
-
-  // console.log(data);
 
   const handleSearch = (searchTerm: string) => {
     setSearchTerm(searchTerm);
@@ -29,9 +18,7 @@ const MainBody = () => {
         <SearchBar onSearch={handleSearch} />
       </div>
       <div className="w-full pt-[158px] mb-[120px] flex justify-center">
-        <Suspense fallback={<div>Loading...</div>}>
-          <HotActivities />
-        </Suspense>
+        <HotActivities />
       </div>
     </div>
   );

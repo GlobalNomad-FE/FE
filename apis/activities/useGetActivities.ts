@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import instance from '../axios';
 import { activitiesKey } from './keys';
 
@@ -63,7 +63,7 @@ async function getActivities(request: GetActivitiesRequest) {
 }
 
 const useGetActivities = (request: GetActivitiesRequest) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: activitiesKey.getActivities(
       request.method === 'cursor' ? request.cursorId : request.page,
       request.category,

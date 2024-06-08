@@ -15,7 +15,7 @@ const HotActivitiesPagination = ({
   clickNext,
 }: Props) => {
   return (
-    <div className="flex">
+    <div className="hidden xl:flex">
       <Button
         width={44}
         height={44}
