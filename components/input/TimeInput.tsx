@@ -2,7 +2,8 @@ import DatePickerInput from '../commons/DatePickerInput';
 import { useState } from 'react';
 import Selectbox from '../commons/Selectbox';
 import Image from 'next/image';
-import { formatDate } from '@/utils/dateFormatter';
+import formatDateToYYYYMMDD from '@/utils/dateFormatter';
+import { KeyActivitiesData } from '@/app/activities/register/page';
 
 export type DateType = Date | null;
 type StringNullType = string | null;
@@ -13,15 +14,16 @@ interface InputProps {
   control: any;
   placeholder: string;
   labelName: string;
+  handlevalue: (id: KeyActivitiesData, value: any) => void;
 }
 
 interface DateTimeRange {
-  date: DateType;
+  date: StringNullType;
   startTime: StringNullType;
   endTime: StringNullType;
 }
 
-export default function TimeInput({ labelName }: InputProps) {
+export default function TimeInput({ labelName, handlevalue }: InputProps) {
   const [date, setDate] = useState<DateType>(new Date());
   const [startTime, setStartTime] = useState<StringNullType>(null);
   const [endTime, setEndTime] = useState<StringNullType>(null);
@@ -36,6 +38,7 @@ export default function TimeInput({ labelName }: InputProps) {
   const handleEndTime = (value: StringNullType) => {
     setEndTime(value);
   };
+
   // 시간 배열 생성 (0:00 ~ 24:00)
   const selectList = Array.from({ length: 25 }, (_, i) => ({
     value: `${i}:00`,
@@ -61,7 +64,17 @@ export default function TimeInput({ labelName }: InputProps) {
 
     // 겹치지 않는 경우에만 스케줄을 추가
     if (!isOverlap) {
-      setDateTimeRanges([...dateTimeRanges, { date, startTime, endTime }]);
+      const addTimeRageConvert = [
+        ...dateTimeRanges,
+        {
+          date: formatDateToYYYYMMDD(date as Date),
+          startTime,
+          endTime,
+        },
+      ];
+
+      setDateTimeRanges([...addTimeRageConvert]);
+      handlevalue('schedules', addTimeRageConvert);
     } else {
       alert('이 시간대에는 이미 스케줄이 있습니다.');
     }
@@ -139,7 +152,7 @@ export default function TimeInput({ labelName }: InputProps) {
               className="flex gap-5 tablet:gap-2 mobile:gap-1.5 items-center h-[56px] text-black200 text-body1-regular"
             >
               <div className="w-full tablet:grow-[2] mobile:grow-[2] h-full bg-white border border-gray500 rounded px-4 flex items-center">
-                {formatDate(item.date?.toString() ?? '2024/05/22')}
+                {item.date}
               </div>
               <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 h-full grow">
                 <div className="mobile:max-w-[104px] tablet:max-w-[104px] w-[140px] h-full  bg-white border border-gray500 rounded px-4 flex items-center">
