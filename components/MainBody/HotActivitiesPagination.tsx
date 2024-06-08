@@ -35,11 +35,13 @@ const HotActivitiesPagination = ({
         height={44}
         fontSize={18}
         btnColor={'white'}
-        textColor={scrollPoint < totalCount * 408 ? 'nomadBlack' : 'gray'}
+        textColor={scrollPoint < (totalCount - 3) * 408 ? 'nomadBlack' : 'gray'}
         border={true}
-        borderColor={scrollPoint < totalCount * 408 ? 'nomadBlack' : 'gray'}
-        onClick={scrollPoint < totalCount * 408 ? clickNext : undefined}
-        disabled={scrollPoint >= totalCount * 408}
+        borderColor={
+          scrollPoint < (totalCount - 3) * 408 ? 'nomadBlack' : 'gray'
+        }
+        onClick={scrollPoint < (totalCount - 3) * 408 ? clickNext : undefined}
+        disabled={scrollPoint >= (totalCount - 3) * 408}
         rounded={15}
       >
         {'>'}

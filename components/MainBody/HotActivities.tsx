@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
 import HotActivitiesPagination from './HotActivitiesPagination';
 import HotActivitiesItems from './HotActivitesItems';
@@ -17,10 +17,31 @@ const HotActivities = () => {
   });
 
   useEffect(() => {
-    if (data) {
-      setDataArray([...dataArray, ...data.activities]);
+    if (data && dataArray.length < data.totalCount) {
+      setDataArray((prevDataArray) => [...prevDataArray, ...data.activities]);
     }
   }, [data]);
+
+  const checkScrollPosition = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    if (scrollLeft >= 0.8 * (scrollWidth - clientWidth) && data && !isLoading) {
+      setCursorId(data.cursorId);
+    }
+  }, [data, isLoading]);
+
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
+
+    const handleScroll = () => checkScrollPosition();
+
+    scrollContainer.addEventListener('scroll', handleScroll);
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [checkScrollPosition]);
 
   const handleGetPrevData = () => {
     const NextPoint = scrollPoint - 408;
@@ -34,10 +55,6 @@ const HotActivities = () => {
   const handleGetNextData = () => {
     const NextPoint = scrollPoint + 408;
     if (!scrollContainerRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-    if (scrollLeft >= 0.8 * (scrollWidth - clientWidth) && data && !isLoading) {
-      setCursorId(data.cursorId);
-    }
     scrollContainerRef.current.scroll({
       left: NextPoint,
       behavior: 'smooth',
@@ -63,7 +80,7 @@ const HotActivities = () => {
       )}
       <div
         ref={scrollContainerRef}
-        className="flex gap-[24px] px-[24px] w-[1248px] overflow-x-scroll minPc:overflow-x-hidden"
+        className="flex gap-[24px] px-[24px] overflow-x-scroll minPc:w-[1248px] minPc:overflow-x-hidden"
       >
         {dataArray.map((item) => (
           <HotActivitiesItems
