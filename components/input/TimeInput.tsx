@@ -1,5 +1,5 @@
 import DatePickerInput from '../commons/DatePickerInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Selectbox from '../commons/Selectbox';
 import Image from 'next/image';
 import formatDateToYYYYMMDD from '@/utils/dateFormatter';
@@ -15,19 +15,34 @@ interface InputProps {
   placeholder: string;
   labelName: string;
   handlevalue: (id: KeyActivitiesData, value: any) => void;
+  value?: DateTimeRange[];
 }
 
 interface DateTimeRange {
+  id: number;
   date: StringNullType;
   startTime: StringNullType;
   endTime: StringNullType;
 }
 
-export default function TimeInput({ labelName, handlevalue }: InputProps) {
+export default function TimeInput({
+  labelName,
+  handlevalue,
+  value,
+}: InputProps) {
   const [date, setDate] = useState<DateType>(new Date());
   const [startTime, setStartTime] = useState<StringNullType>(null);
   const [endTime, setEndTime] = useState<StringNullType>(null);
+
   const [dateTimeRanges, setDateTimeRanges] = useState<DateTimeRange[]>([]);
+
+  const [removeRanges, setRemvoeRanges] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (value) {
+      setDateTimeRanges([...value]);
+    }
+  }, [value]);
 
   const handleDate = (date: DateType) => {
     setDate(date);
@@ -67,6 +82,7 @@ export default function TimeInput({ labelName, handlevalue }: InputProps) {
       const addTimeRageConvert = [
         ...dateTimeRanges,
         {
+          id: dateTimeRanges.length + 1,
           date: formatDateToYYYYMMDD(date as Date),
           startTime,
           endTime,
@@ -79,8 +95,13 @@ export default function TimeInput({ labelName, handlevalue }: InputProps) {
       alert('이 시간대에는 이미 스케줄이 있습니다.');
     }
   };
-  const handleRemoveRange = (index: number) => {
-    setDateTimeRanges(dateTimeRanges.filter((_, i) => i !== index));
+  const handleRemoveRange = (id: number) => {
+    const removeRange = dateTimeRanges.filter((_, i) => _.id !== id);
+    setDateTimeRanges([...removeRange]);
+    const removeList = [...removeRanges, id];
+    setRemvoeRanges([...removeList]);
+    handlevalue('schedules', removeRange);
+    handlevalue('scheduleIdsToRemove', removeList);
   };
 
   return (
@@ -176,7 +197,7 @@ export default function TimeInput({ labelName, handlevalue }: InputProps) {
                 width={56}
                 height={56}
                 alt="시간빼기아이콘"
-                onClick={() => handleRemoveRange(index)}
+                onClick={() => handleRemoveRange(item.id)}
                 style={{ cursor: 'pointer' }}
               />
             </div>

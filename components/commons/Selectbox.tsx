@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Select, {
   components,
@@ -13,6 +13,7 @@ interface Option {
 }
 
 interface SelectBoxProps {
+  defaultValue?: Option;
   options: Option[];
   onSelect: (value: any) => void;
   placeholder: string;
@@ -28,11 +29,18 @@ const Selectbox: React.FC<SelectBoxProps> = ({
   options,
   onSelect,
   placeholder,
+  defaultValue,
 }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
+
+  useEffect(() => {
+    if (defaultValue) {
+      setSelectedOption(defaultValue);
+    }
+  }, [defaultValue]);
 
   const DropdownIndicator = (props: DropdownIndicatorProps<Option>) => {
     return (
