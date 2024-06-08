@@ -2,13 +2,13 @@ import ImageInput from './ImageInput';
 import Image from 'next/image';
 
 export interface FileInputProps {
-  files: File[];
-  setFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  files: string[];
+  setFiles: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function BannerImageInput({ files, setFiles }: FileInputProps) {
   const handleDeleteFile = (fileName: string) => {
-    setFiles((prev) => prev.filter((file) => file.name !== fileName));
+    setFiles((prev) => prev.filter((file) => file !== fileName));
   };
 
   return (
@@ -17,19 +17,19 @@ export default function BannerImageInput({ files, setFiles }: FileInputProps) {
       <div className="w-full flex gap-6">
         <ImageInput files={files} setFiles={setFiles} type="banner" />
         {files.map((file) => (
-          <div className="relative" key={file.name}>
+          <div className="relative" key={`${file}_key`}>
             <div className="w-[180px] h-[180px] rounded-3xl overflow-hidden relative">
               <Image
-                src={URL.createObjectURL(file)}
+                src={file}
                 fill
-                alt={file.name}
+                alt={file}
                 placeholder="blur"
-                blurDataURL={URL.createObjectURL(file)}
+                blurDataURL={file}
               />
             </div>
             <div
               className="absolute right-[-10px] top-[-15px] z-1"
-              onClick={() => handleDeleteFile(file.name)}
+              onClick={() => handleDeleteFile(file)}
             >
               <Image
                 src="/icons/file-close-btn.svg"
