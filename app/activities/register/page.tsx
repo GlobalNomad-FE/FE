@@ -2,17 +2,22 @@
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import Gnb from '@/components/commons/gnb/gnb';
 import Button from '@/components/commons/Button';
-import BaseInput from '@/components/commons/input/BaseInput';
+import BaseInput from '@/components/input/BaseInput';
 import { useForm, FieldValues } from 'react-hook-form';
 import Selectbox from '@/components/commons/Selectbox';
 import { useState } from 'react';
-import TextInput from '@/components/commons/input/TextInput';
-import PriceInput from '@/components/commons/input/PriceInput';
-import AddressInput from '@/components/commons/input/AddressInput';
-import TimeInput from '@/components/commons/input/TimeInput';
+import TextInput from '@/components/input/TextInput';
+import PriceInput from '@/components/input/PriceInput';
+import AddressInput from '@/components/input/AddressInput';
+import TimeInput from '@/components/input/TimeInput';
 import Footer from '@/components/commons/Footer';
+import BannerImageInput from '@/components/input/BannerImageInput';
+import BioImageInput from '@/components/input/BioImageInput';
 
 export default function Registerpage() {
+  const [bannerFiles, setBannerFiles] = useState<File[]>([]);
+  const [bioFiles, setBioFiles] = useState<File[]>([]);
+
   const methods = useForm<FieldValues>({
     mode: 'onBlur',
   });
@@ -24,7 +29,7 @@ export default function Registerpage() {
   } = methods;
   const [value, setValue] = useState();
 
-  const handlevalue = (value) => {
+  const handlevalue = (value: any) => {
     setValue(value);
   };
 
@@ -37,12 +42,12 @@ export default function Registerpage() {
   ];
 
   return (
-    <div>
+    <div className="bg-gray50 min-w-[350px]">
       <Gnb />
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
-        <div className="flex gap-6 w-[1200px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 mobile:px-4 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px] mb-[150px] mobile:mb-[100px]">
+        <div className="flex gap-6 w-[1200px] ">
           <SideNavigationMenu />
-          <div className="flex flex-col  gap-6 w-[792px]">
+          <div className="flex flex-col flex-grow gap-6">
             <div className="flex justify-between">
               <p className="text-title text-black">내 체험 등록 </p>
               <Button
@@ -63,7 +68,6 @@ export default function Registerpage() {
             <Selectbox
               options={selectList}
               onSelect={handlevalue}
-              width="792px"
               placeholder="카테고리"
             />
             <TextInput name="bio" placeholder="설명" control={control} />
@@ -80,6 +84,8 @@ export default function Registerpage() {
               control={control}
               labelName="예약 가능 시간대"
             />
+            <BannerImageInput files={bannerFiles} setFiles={setBannerFiles} />
+            <BioImageInput files={bioFiles} setFiles={setBioFiles} />
           </div>
         </div>
       </main>
