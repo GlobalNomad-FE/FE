@@ -8,7 +8,10 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   if (config.headers.Authorization) return config;
 
-  const accessToken = localStorage.getItem('accessToken');
+  // const accessToken = localStorage.getItem('accessToken');
+  //TODO: 임시토큰
+  const accessToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQ2LCJ0ZWFtSWQiOiI0LTEzIiwiaWF0IjoxNzE3NzM5NTYxLCJleHAiOjE3MTg5NDkxNjEsImlzcyI6InNwLWdsb2JhbG5vbWFkIn0.arOO-urUgGHYxA2oQi48wQ7752KjRBGbT2M5RoUO7-I';
   if (accessToken) {
     config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
