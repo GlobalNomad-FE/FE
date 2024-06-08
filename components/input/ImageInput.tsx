@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { uploadImagePost } from '@/apis/UploadImage';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRef } from 'react';
 
 interface ImageInputProps {
@@ -13,7 +13,6 @@ export default function ImageInput({ files, setFiles, type }: ImageInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const isDisabled = type === 'banner' ? files.length > 0 : files.length > 3;
 
-  const queryClient = useQueryClient();
   const uploadImagePostMutation = useMutation({
     mutationKey: ['uploadImagePost'],
     mutationFn: (newPost: File) => uploadImagePost(newPost),
@@ -22,7 +21,6 @@ export default function ImageInput({ files, setFiles, type }: ImageInputProps) {
   const handleUploadPost = (newPost: File) => {
     uploadImagePostMutation.mutate(newPost, {
       onSuccess: (data: { activityImageUrl: string }) => {
-        console.log('data', data.activityImageUrl);
         setFiles((prev) => [...prev, data.activityImageUrl]);
       },
     });
@@ -63,6 +61,7 @@ export default function ImageInput({ files, setFiles, type }: ImageInputProps) {
       }}
     >
       <button
+        type="button"
         className="w-[180px] h-[180px] rounded-xl border border-dashed border-gray600 flex flex-col gap-[30px] items-center justify-center cursor-pointer"
         onClick={() => !isDisabled && inputRef.current?.click()}
         disabled={isDisabled}

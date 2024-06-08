@@ -15,9 +15,13 @@ declare namespace daum {
 
 interface AddressInputProps {
   handlevalue: (id: KeyActivitiesData, value: any) => void;
+  value?: string;
 }
 
-export default function AddressInput({ handlevalue }: AddressInputProps) {
+export default function AddressInput({
+  handlevalue,
+  value,
+}: AddressInputProps) {
   const addressInputRef = useRef<any>(null);
 
   const handleOpenAddressSearch = () => {
@@ -39,6 +43,8 @@ export default function AddressInput({ handlevalue }: AddressInputProps) {
           주소
         </label>
         <input
+          value={value}
+          onChange={() => null}
           className="w-full text-nomad-black text-body1-regular border border-gray500 px-4 py-2 h-[56px] rounded"
           type="text"
           id="address-input"
