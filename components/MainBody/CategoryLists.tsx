@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Categories from './Categories';
 
 interface CategoryListsProps {
-  selectedCategory: string; // 선택된 카테고리 상태를 상위 컴포넌트에서 받아옴
+  selectedCategory: string;
   onCategoryClick: (categoryName: string) => void;
 }
 
@@ -11,6 +11,7 @@ const CategoryLists = ({
   onCategoryClick,
 }: CategoryListsProps) => {
   const categories = [
+    '전체',
     '문화 · 예술',
     '식음료',
     '스포츠',
@@ -20,13 +21,10 @@ const CategoryLists = ({
   ];
 
   return (
-    <div
-      // ref={scrollContainerRef}
-      className="flex gap-[24px] w-[882px] overflow-x-scroll"
-    >
-      {categories.map((category, index) => (
+    <div className="flex gap-[15px] w-[860px] overflow-x-scroll">
+      {categories.map((category) => (
         <Categories
-          key={index}
+          key={category}
           onClick={onCategoryClick}
           isSelected={selectedCategory === category}
         >

@@ -65,7 +65,7 @@ const HotActivities = () => {
 
   return (
     <div className="relative flex flex-col text-black200 gap-[33px] w-full mainPcSize:w-auto">
-      <div className="flex justify-between px-[24px] w-auto mainPcSize:w-[1248px]">
+      <div className="flex justify-between w-auto mainPcSize:w-[1200px]">
         <h1 className="text-4xl font-bold">🔥 인기 체험</h1>
         <HotActivitiesPagination
           totalCount={data ? data.totalCount : 0}
@@ -75,13 +75,13 @@ const HotActivities = () => {
         />
       </div>
       {isError && (
-        <div className="w-[1248px] h-[400px] text-2xl">
+        <div className="w-[1200px] h-[400px] text-2xl">
           데이터를 불러오는 것에 실패했습니다
         </div>
       )}
       <div
         ref={scrollContainerRef}
-        className="flex gap-[24px] px-[24px] overflow-x-scroll mainPcSize:w-[1248px] mainPcSize:overflow-x-hidden"
+        className="flex gap-[24px] overflow-x-scroll mainPcSize:w-[1200px] mainPcSize:overflow-x-hidden"
       >
         {dataArray.map((item) => (
           <HotActivitiesItems

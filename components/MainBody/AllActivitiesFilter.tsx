@@ -32,7 +32,7 @@ const AllActivitiesFilter = ({
   return (
     <div>
       <div
-        className="w-[127px] mainTabletSize:w-[120px] mobile:w-[90px] flex h-[53px] mobile:h-[41px] px-[30px] mobile:px-[20px] rounded-[15px] border border-green200 bg-white justify-between items-center cursor-pointer"
+        className="w-[110px] mobile:w-[80px] flex h-[50px] mobile:h-[41px] px-[15px] mobile:px-[12px] rounded-[15px] border border-green200 bg-white justify-between items-center cursor-pointer text-green200 font-medium"
         onClick={onDropDownOpen}
       >
         <span className="text-lg mobile:text-sm">필터</span>
@@ -44,7 +44,7 @@ const AllActivitiesFilter = ({
         />
       </div>
       {isOpen && (
-        <ul className="absolute w-[127px] mainTabletSize:w-[120px] mobile:w-[90px] z-20 mt-2 border border-gray200 rounded-md bg-white cursor-pointer">
+        <ul className="absolute w-[110px] mobile:w-[80px] z-20 mt-2 border border-gray200 rounded-md bg-white cursor-pointer">
           {filterOptions.map((item, index) => (
             <li
               key={item.label}
@@ -52,7 +52,7 @@ const AllActivitiesFilter = ({
                 index !== filterOptions.length - 1
                   ? 'border-b border-solid border-gray200'
                   : ''
-              } flex h-[53px] mobile:h-[41px] justify-center items-center text-lg mobile:text-sm hover:bg-gray100 `}
+              } flex h-[53px] mobile:h-[41px] justify-center items-center text-base mobile:text-xs hover:bg-gray100 `}
               onClick={() => onClickItemSelected(index)}
             >
               {item.label}

@@ -26,19 +26,21 @@ const MainBody = () => {
   }
 
   return (
-    <div className="relative">
+    <div className="relative w-full pb-[150px] mobile:pb-[100px]">
       <MonthBest />
-      <div className="absolute w-full flex justify-center top-[550px] z-30 text-black200 px-[24px] mobile:px-[16px] mobile:top-[250px]">
+      <div className="absolute flex w-full justify-center top-[550px] z-30 text-black200 mobile:px-[16px] mobile:top-[250px]">
         <SearchBar onSearch={handleSearch} />
       </div>
-      <div className="w-full pt-[158px] flex justify-center">
-        {searchTerm === '' && <HotActivities />}
-      </div>
-      <div className="w-full flex justify-center">
-        <AllActivities
-          searchTerm={searchTerm}
-          itemSize={isPC ? 8 : isMobile ? 4 : 9}
-        />
+      <div className="px-[24px]">
+        <div className="w-full pt-[158px] flex justify-center">
+          {searchTerm === '' && <HotActivities />}
+        </div>
+        <div className="w-full flex justify-center">
+          <AllActivities
+            searchTerm={searchTerm}
+            itemSize={isPC ? 8 : isMobile ? 4 : 9}
+          />
+        </div>
       </div>
     </div>
   );

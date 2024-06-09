@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useGetActivities from '@/apis/activities/useGetActivities';
 import Pagination from '@/components/commons/Pagination';
 import Image from 'next/image';
@@ -16,16 +16,24 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
   const [currentSort, setCurrentSort] = useState<
     'latest' | 'most_reviewed' | 'price_asc' | 'price_desc'
   >('latest');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('전체');
+
+  useEffect(() => {
+    if (searchTerm !== '') {
+      setCurrentPage(1);
+    }
+  }, [searchTerm]);
 
   const handleCategoryClick = (categoryName: string) => {
     setSelectedCategory(categoryName);
+    setCurrentPage(1);
   };
 
   const handleFilterSelect = (
     filterType: 'latest' | 'most_reviewed' | 'price_asc' | 'price_desc',
   ) => {
     setCurrentSort(filterType);
+    setCurrentPage(1);
   };
 
   const checkItemSize = searchTerm && itemSize !== 9 ? itemSize * 2 : itemSize;
@@ -41,14 +49,14 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
     size: checkItemSize,
     sort: currentSort,
     keyword: searchTerm !== '' ? searchTerm : undefined,
-    category: categoryValue,
+    category: categoryValue === '전체' ? undefined : categoryValue,
   });
 
   const handlePageChange = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
   return (
-    <div className="bg-white flex flex-col text-black200 gap-[33px] p-[24px] w-full mainPcSize:w-auto">
+    <div className="bg-white flex flex-col text-black200 gap-[33px] w-full mainPcSize:w-auto">
       {searchTerm ? (
         <div>
           <div className="text-3xl mobile:text-2xl">
@@ -73,20 +81,8 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
           </h1>
         </>
       )}
-      <div className="mx-max-0 grid grid-cols-3 gap-y-8 mainPcSize:grid-cols-4 mainPcSize:gap-y-12 mobile:grid-cols-2 mobile:gap-y-6">
-        {data?.activities.map((item) => (
-          <AllActivitiesItems
-            key={item.id}
-            title={item.title}
-            price={item.price}
-            bannerImageUrl={item.bannerImageUrl}
-            rating={item.rating}
-            reviewCount={item.reviewCount}
-          />
-        ))}
-      </div>
-      {isLoading && (
-        <div className="w-full h-[384px] flex justify-center items-center">
+      {isLoading ? (
+        <div className="w-auto mainPcSize:w-[1200px] h-[384px] flex justify-center items-center">
           <Image
             src="/icons/spinner.svg"
             width={150}
@@ -94,9 +90,27 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
             alt="loading icon"
           />
         </div>
+      ) : data?.activities && data.activities.length > 0 ? (
+        <div className="mx-max-0 grid grid-cols-3 gap-x-6 gap-y-8 mainPcSize:grid-cols-4 mainPcSize:gap-y-12 mobile:grid-cols-2 mobile:gap-y-6">
+          {data.activities.map((item) => (
+            <AllActivitiesItems
+              key={item.id}
+              title={item.title}
+              price={item.price}
+              bannerImageUrl={item.bannerImageUrl}
+              rating={item.rating}
+              reviewCount={item.reviewCount}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="w-auto mainPcSize:w-[1200px] mx-0 text-center text-xl py-20">
+          <p>조건에 맞는 체험이 없습니다.</p>
+          <p>다른 검색어를 입력하거나 카테고리를 바꿔보세요.</p>
+        </div>
       )}
       <div className="mt-[40px]">
-        {data && (
+        {data && data.totalCount !== 0 && (
           <Pagination
             totalCount={data.totalCount}
             itemsInPage={checkItemSize}
