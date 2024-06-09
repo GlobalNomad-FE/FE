@@ -17,6 +17,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'custom-gradient':
           'linear-gradient(90deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 100%)',
+        'custom-gradient2':
+          'linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0%, rgba(0, 0, 0, 0) 100%)',
       },
       fontSize: {
         title: ['32px', { lineHeight: 'normal', fontWeight: '700' }],

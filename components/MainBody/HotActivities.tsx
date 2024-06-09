@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
 import HotActivitiesPagination from './HotActivitiesPagination';
-import HotActivitiesItems from './HotActivitesItems';
 import Image from 'next/image';
+import HotActivitiesItems from './HotActivitiesItems';
 
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);

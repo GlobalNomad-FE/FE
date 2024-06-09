@@ -18,10 +18,12 @@ const MainBody = () => {
       <div className="absolute w-full flex justify-center top-[550px] z-30 text-black200 px-[24px] mobile:px-[16px] mobile:top-[250px]">
         <SearchBar onSearch={handleSearch} />
       </div>
-      <div className="w-full pt-[158px] mb-[120px] flex justify-center">
-        {/* <HotActivities /> */}
+      <div className="w-full pt-[158px] flex justify-center">
+        <HotActivities />
       </div>
-      <AllActivities />
+      <div className="w-full pt-[60px] flex justify-center">
+        <AllActivities />
+      </div>
     </div>
   );
 };

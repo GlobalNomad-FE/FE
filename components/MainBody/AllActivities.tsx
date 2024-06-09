@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useGetActivities from '@/apis/activities/useGetActivities';
 import Pagination from '@/components/commons/Pagination';
-import HotActivitiesItems from './HotActivitesItems';
 import Image from 'next/image';
+import AllActivitiesItems from './AllActivitiesItems';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 const AllActivities = () => {
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1248px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSort, setCurrentSort] = useState<
     'latest' | 'most_reviewed' | 'price_asc' | 'price_desc'
   >('latest');
 
+  let itemsSize = 8; // Default items per page
+  if (isTablet) {
+    itemsSize = 9;
+  } else if (isMobile) {
+    itemsSize = 4;
+  }
+
   const { data, isLoading, isError } = useGetActivities({
     method: 'offset',
     page: currentPage,
-    size: 8,
+    size: itemsSize,
     sort: currentSort,
   });
 
@@ -21,10 +31,11 @@ const AllActivities = () => {
     setCurrentPage(currentPage);
   };
   return (
-    <main className="p-10 bg-white">
-      <div className="grid grid-cols-4">
+    <div className="bg-white flex flex-col text-black200 gap-[33px] w-[1248px] p-[24px]">
+      <h1 className="text-4xl font-bold mobile:text-lg">🛼 모든 체험</h1>
+      <div className="grid grid-cols-3 gap-y-8 minPc:grid-cols-4 minPc:gap-y-12 mobile:grid-cols-2 mobile:gap-y-6">
         {data?.activities.map((item) => (
-          <HotActivitiesItems
+          <AllActivitiesItems
             key={item.id}
             title={item.title}
             price={item.price}
@@ -44,16 +55,18 @@ const AllActivities = () => {
           />
         </div>
       )}
-      {data && (
-        <Pagination
-          totalCount={data.totalCount}
-          itemsInPage={8}
-          visiblePages={5}
-          onPageChange={handlePageChange}
-          currentPage={currentPage}
-        />
-      )}
-    </main>
+      <div className="mt-[40px]">
+        {data && (
+          <Pagination
+            totalCount={data.totalCount}
+            itemsInPage={itemsSize}
+            visiblePages={5}
+            onPageChange={handlePageChange}
+            currentPage={currentPage}
+          />
+        )}
+      </div>
+    </div>
   );
 };
 
