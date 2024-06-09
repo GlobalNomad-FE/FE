@@ -64,8 +64,8 @@ const HotActivities = () => {
   };
 
   return (
-    <div className="relative flex flex-col text-black200 gap-[33px] w-full minPc:w-auto">
-      <div className="flex justify-between px-[24px] w-auto minPC:w-[1248px]">
+    <div className="relative flex flex-col text-black200 gap-[33px] w-full mainPcSize:w-auto">
+      <div className="flex justify-between px-[24px] w-auto mainPcSize:w-[1248px]">
         <h1 className="text-4xl font-bold">🔥 인기 체험</h1>
         <HotActivitiesPagination
           totalCount={data ? data.totalCount : 0}
@@ -81,7 +81,7 @@ const HotActivities = () => {
       )}
       <div
         ref={scrollContainerRef}
-        className="flex gap-[24px] px-[24px] overflow-x-scroll minPc:w-[1248px] minPc:overflow-x-hidden"
+        className="flex gap-[24px] px-[24px] overflow-x-scroll mainPcSize:w-[1248px] mainPcSize:overflow-x-hidden"
       >
         {dataArray.map((item) => (
           <HotActivitiesItems

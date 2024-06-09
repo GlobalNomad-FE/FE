@@ -19,8 +19,8 @@ const AllActivitiesItems = ({
   return (
     <>
       <div>
-        <div className="relative rounded-3xl overflow-hidden text-black200 w-[224px] h-[224px] minPc:w-[283px] minPc:h-[283px] mobile:w-[168px] mobile:h-[168px]">
-          <div className="absolute bg-custom-gradient2 w-[224px] h-[224px] minPc:w-[283px] minPc:h-[283px] mobile:w-[168px] mobile:h-[168px] z-10" />
+        <div className="relative rounded-3xl overflow-hidden text-black200 w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px]">
+          <div className="absolute bg-custom-gradient2 w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px] z-10" />
           <Image src={bannerImageUrl} alt={title} fill objectFit="cover" />
         </div>
         <div className="flex gap-[5px] text-base mt-[16px]">

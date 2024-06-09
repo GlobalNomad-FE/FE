@@ -1,47 +1,79 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useGetActivities from '@/apis/activities/useGetActivities';
 import Pagination from '@/components/commons/Pagination';
 import Image from 'next/image';
 import AllActivitiesItems from './AllActivitiesItems';
-import useMediaQuery from '@/hooks/useMediaQuery';
+import CategoryLists from './CategoryLists';
+import AllActivitiesFilter from './AllActivitiesFilter';
 
 interface Props {
   searchTerm: string;
+  itemSize: number;
 }
 
-const AllActivities = ({ searchTerm }: Props) => {
-  const isPC = useMediaQuery('(min-width: 1248px)');
-  const isMobile = useMediaQuery('(max-width: 767px)');
+const AllActivities = ({ searchTerm, itemSize }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSort, setCurrentSort] = useState<
     'latest' | 'most_reviewed' | 'price_asc' | 'price_desc'
   >('latest');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  let itemsSize;
+  const handleCategoryClick = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+  };
 
-  if (isPC) {
-    itemsSize = searchTerm ? 16 : 8;
-  } else if (isMobile) {
-    itemsSize = searchTerm ? 8 : 4;
-  } else {
-    itemsSize = 9;
-  }
+  const handleFilterSelect = (
+    filterType: 'latest' | 'most_reviewed' | 'price_asc' | 'price_desc',
+  ) => {
+    setCurrentSort(filterType);
+  };
+
+  const checkItemSize = searchTerm && itemSize !== 9 ? itemSize * 2 : itemSize;
+  const categoryValue = searchTerm
+    ? undefined
+    : selectedCategory !== ''
+    ? selectedCategory
+    : undefined;
 
   const { data, isLoading, isError } = useGetActivities({
     method: 'offset',
     page: currentPage,
-    size: itemsSize,
+    size: checkItemSize,
     sort: currentSort,
     keyword: searchTerm !== '' ? searchTerm : undefined,
+    category: categoryValue,
   });
 
   const handlePageChange = (currentPage: number) => {
     setCurrentPage(currentPage);
   };
   return (
-    <div className="bg-white flex flex-col text-black200 gap-[33px] w-[1248px] p-[24px]">
-      <h1 className="text-4xl font-bold mobile:text-lg">🛼 모든 체험</h1>
-      <div className="grid grid-cols-3 gap-y-8 minPc:grid-cols-4 minPc:gap-y-12 mobile:grid-cols-2 mobile:gap-y-6">
+    <div className="bg-white flex flex-col text-black200 gap-[33px] p-[24px] w-full mainPcSize:w-auto">
+      {searchTerm ? (
+        <div>
+          <div className="text-3xl mobile:text-2xl">
+            <span className="font-bold">{searchTerm}</span>(으)로 검색한
+            결과입니다.
+          </div>
+          <div className="text-base mt-[5px]">
+            총 {data?.totalCount}개의 결과
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex justify-between mt-[36px]">
+            <CategoryLists
+              selectedCategory={selectedCategory}
+              onCategoryClick={handleCategoryClick}
+            />
+            <AllActivitiesFilter onSelect={handleFilterSelect} />
+          </div>
+          <h1 className="text-4xl font-bold mobile:text-lg">
+            {categoryValue ? categoryValue : '🛼 모든 체험'}
+          </h1>
+        </>
+      )}
+      <div className="mx-max-0 grid grid-cols-3 gap-y-8 mainPcSize:grid-cols-4 mainPcSize:gap-y-12 mobile:grid-cols-2 mobile:gap-y-6">
         {data?.activities.map((item) => (
           <AllActivitiesItems
             key={item.id}
@@ -67,7 +99,7 @@ const AllActivities = ({ searchTerm }: Props) => {
         {data && (
           <Pagination
             totalCount={data.totalCount}
-            itemsInPage={itemsSize}
+            itemsInPage={checkItemSize}
             visiblePages={5}
             onPageChange={handlePageChange}
             currentPage={currentPage}
