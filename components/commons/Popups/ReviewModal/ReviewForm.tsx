@@ -38,7 +38,7 @@ const ReviewForm = ({ reservationId }: Props) => {
         {[1, 2, 3, 4, 5].map((id) => (
           <Image
             key={id}
-            src={id <= rating ? '/icons/star.svg' : '/icons/empty-star.svg'}
+            src={id <= rating ? '/icons/star-on.svg' : '/icons/star-off.svg'}
             alt={id <= rating ? '노란 별' : '빈 별'}
             width={56}
             height={56}

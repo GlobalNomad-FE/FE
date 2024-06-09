@@ -5,7 +5,7 @@ const MonthBest = () => {
   return (
     <div className="flex justify-center">
       <div className="relative mt-[70px] w-full mobile:h-[240px] h-[550px]">
-        <div className="absolute bg-custom-gradient w-full h-full z-10"></div>
+        <div className="absolute bg-custom-gradient w-full h-full z-10" />
         <Image
           src="/images/스트릿댄스.png"
           alt="스트릿댄스"

@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <main>
       <Gnb />
-      <Suspense fallback={<div>Loading...</div>}>
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
         <MainBody />
-      </Suspense>
+      {/* </Suspense> */}
       {/* <Footer /> */}
     </main>
   );
