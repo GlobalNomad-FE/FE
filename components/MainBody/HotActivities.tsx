@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
 import HotActivitiesPagination from './HotActivitiesPagination';
 import HotActivitiesItems from './HotActivitesItems';
+import Image from 'next/image';
 
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
@@ -93,8 +94,13 @@ const HotActivities = () => {
           />
         ))}
         {isLoading && (
-          <div className="w-[384px] h-[384px] rounded-3xl text-2x">
-            데이터 로딩 중...
+          <div className="w-full h-[384px] flex justify-center items-center">
+            <Image
+              src="/icons/spinner.svg"
+              width={150}
+              height={150}
+              alt="loading icon"
+            />
           </div>
         )}
       </div>
