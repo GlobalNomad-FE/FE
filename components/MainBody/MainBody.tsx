@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import SearchBar from '@/components/commons/SearchBar';
 import MonthBest from './MonthBest';
 import HotActivities from './HotActivities';
+import AllActivities from './AllActivities';
 
 const MainBody = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,8 +19,9 @@ const MainBody = () => {
         <SearchBar onSearch={handleSearch} />
       </div>
       <div className="w-full pt-[158px] mb-[120px] flex justify-center">
-        <HotActivities />
+        {/* <HotActivities /> */}
       </div>
+      <AllActivities />
     </div>
   );
 };
