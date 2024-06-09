@@ -22,7 +22,6 @@ const AllActivitiesItems = ({
         <div className="absolute bg-custom-gradient2 w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px] z-10" />
         <Image src={bannerImageUrl} alt={title} fill objectFit="cover" />
       </div>
-      ₩
       <div className="flex gap-[5px] text-base mt-[16px]">
         <Image
           src="/icons/star-on.svg"
