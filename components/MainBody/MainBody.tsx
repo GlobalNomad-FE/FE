@@ -19,10 +19,10 @@ const MainBody = () => {
         <SearchBar onSearch={handleSearch} />
       </div>
       <div className="w-full pt-[158px] flex justify-center">
-        <HotActivities />
+        {searchTerm === '' && <HotActivities />}
       </div>
-      <div className="w-full pt-[60px] flex justify-center">
-        <AllActivities />
+      <div className="w-full flex justify-center">
+        <AllActivities searchTerm={searchTerm} />
       </div>
     </div>
   );

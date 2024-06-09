@@ -5,19 +5,26 @@ import Image from 'next/image';
 import AllActivitiesItems from './AllActivitiesItems';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-const AllActivities = () => {
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1248px)');
+interface Props {
+  searchTerm: string;
+}
+
+const AllActivities = ({ searchTerm }: Props) => {
+  const isPC = useMediaQuery('(min-width: 1248px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
   const [currentPage, setCurrentPage] = useState(1);
   const [currentSort, setCurrentSort] = useState<
     'latest' | 'most_reviewed' | 'price_asc' | 'price_desc'
   >('latest');
 
-  let itemsSize = 8; // Default items per page
-  if (isTablet) {
-    itemsSize = 9;
+  let itemsSize;
+
+  if (isPC) {
+    itemsSize = searchTerm ? 16 : 8;
   } else if (isMobile) {
-    itemsSize = 4;
+    itemsSize = searchTerm ? 8 : 4;
+  } else {
+    itemsSize = 9;
   }
 
   const { data, isLoading, isError } = useGetActivities({
@@ -25,6 +32,7 @@ const AllActivities = () => {
     page: currentPage,
     size: itemsSize,
     sort: currentSort,
+    keyword: searchTerm !== '' ? searchTerm : undefined,
   });
 
   const handlePageChange = (currentPage: number) => {
