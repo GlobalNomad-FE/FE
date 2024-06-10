@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
 import HotActivitiesPagination from './HotActivitiesPagination';
-import HotActivitiesItems from './HotActivitesItems';
+import Image from 'next/image';
+import HotActivitiesItems from './HotActivitiesItems';
 
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
@@ -63,8 +64,8 @@ const HotActivities = () => {
   };
 
   return (
-    <div className="relative flex flex-col text-black200 gap-[33px] w-full minPc:w-auto">
-      <div className="flex justify-between px-[24px] w-auto minPC:w-[1248px]">
+    <div className="relative flex flex-col text-black200 gap-[33px] w-full mainPcSize:w-auto">
+      <div className="flex justify-between w-auto mainPcSize:w-[1200px]">
         <h1 className="text-4xl font-bold">🔥 인기 체험</h1>
         <HotActivitiesPagination
           totalCount={data ? data.totalCount : 0}
@@ -74,13 +75,13 @@ const HotActivities = () => {
         />
       </div>
       {isError && (
-        <div className="w-[1248px] h-[400px] text-2xl">
+        <div className="w-[1200px] h-[400px] text-2xl">
           데이터를 불러오는 것에 실패했습니다
         </div>
       )}
       <div
         ref={scrollContainerRef}
-        className="flex gap-[24px] px-[24px] overflow-x-scroll minPc:w-[1248px] minPc:overflow-x-hidden"
+        className="flex gap-[24px] overflow-x-scroll mainPcSize:w-[1200px] mainPcSize:overflow-x-hidden"
       >
         {dataArray.map((item) => (
           <HotActivitiesItems
@@ -93,8 +94,13 @@ const HotActivities = () => {
           />
         ))}
         {isLoading && (
-          <div className="w-[384px] h-[384px] rounded-3xl text-2x">
-            데이터 로딩 중...
+          <div className="w-full h-[384px] flex justify-center items-center">
+            <Image
+              src="/icons/spinner.svg"
+              width={150}
+              height={150}
+              alt="loading icon"
+            />
           </div>
         )}
       </div>

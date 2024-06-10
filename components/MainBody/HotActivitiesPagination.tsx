@@ -15,7 +15,7 @@ const HotActivitiesPagination = ({
   scrollPoint,
 }: Props) => {
   return (
-    <div className="hidden minPc:flex">
+    <div className="hidden mainPcSize:flex">
       <Button
         width={44}
         height={44}
