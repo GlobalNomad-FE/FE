@@ -126,8 +126,8 @@ const Experience = ({
           ) : (
             <div className="flex gap-[6px]">
               <Image
-                src="/icons/Star.svg"
-                alt="케밥 아이콘"
+                src="/icons/star-on.svg"
+                alt="별점아이콘"
                 width={19}
                 height={19}
               />
