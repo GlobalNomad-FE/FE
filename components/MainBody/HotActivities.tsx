@@ -75,7 +75,7 @@ const HotActivities = () => {
         />
       </div>
       {isError && (
-        <div className="w-[1200px] h-[400px] text-2xl">
+        <div className="w-[1200px] h-[400px] text-base flex justify-center items-center">
           데이터를 불러오는데 실패하였습니다.
           <br />
           다시 시도해주세요.
