@@ -37,7 +37,7 @@ export interface Activity {
   updatedAt: Date;
 }
 
-interface GetActivitiesResponse {
+export interface GetActivitiesResponse {
   cursorId: number;
   totalCount: number;
   activities: Activity[];
