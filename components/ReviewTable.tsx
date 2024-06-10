@@ -56,6 +56,7 @@ export default function ReviewTable({ data }: ReviewTableProps) {
         itemsInPage={3}
         visiblePages={5}
         onPageChange={handlePageChange}
+        currentPage={currentPage}
       />
     </div>
   );
