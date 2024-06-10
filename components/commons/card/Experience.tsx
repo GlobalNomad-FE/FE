@@ -146,7 +146,7 @@ const Experience = ({
           )}
         </div>
         <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
-          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">
+          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-medium">
             {type === 'reservations'
               ? `₩${totalPrice.toLocaleString('ko-KR')}`
               : `₩${totalPrice.toLocaleString('ko-KR')} /인`}
