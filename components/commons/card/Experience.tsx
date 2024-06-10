@@ -7,6 +7,7 @@ import Menu from '@/components/activitie/Menu';
 import Button from '../Button';
 import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
 
 interface Reservation {
   id: number;
@@ -60,6 +61,16 @@ const Experience = ({
   const [status, setStatus] = useState(experienceStatus);
   const [openPopup, setOpenPopup] = useState(false);
 
+  const { mutate: updateStatus } = useUpdateReservationStatus({
+    onSuccess: () => {
+      alert('취소가 완료되었습니다.');
+      setStatus('canceled');
+    },
+    onError: () => {
+      alert('취소에 실패했습니다.');
+    },
+  });
+
   const isDesktop = useMediaQuery('(min-width: 1024px)');
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -73,8 +84,7 @@ const Experience = ({
   };
 
   const showAlert = () => {
-    alert('취소가 완료되었습니다.');
-    setStatus('canceled');
+    updateStatus({ reservationId: id, status: 'canceled' });
   };
 
   const textProps = () => {
