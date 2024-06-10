@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
 import Menu from '@/components/activitie/Menu';
 import Button from '../Button';
@@ -76,7 +76,8 @@ const Experience = ({
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const handleOpenPopup = () => {
+  const handleOpenPopup = (e: MouseEvent) => {
+    e.preventDefault();
     setOpenPopup(true);
   };
 
