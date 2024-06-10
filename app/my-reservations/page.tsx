@@ -123,6 +123,7 @@ const MyReservations = () => {
                     totalPrice={item.totalPrice}
                     experienceStatus={item.status}
                     bannerImageUrl={item.activity.bannerImageUrl}
+                    activityId={item.activity.id}
                     type="reservations"
                   />
                 ))}
