@@ -76,7 +76,9 @@ const HotActivities = () => {
       </div>
       {isError && (
         <div className="w-[1200px] h-[400px] text-2xl">
-          데이터를 불러오는 것에 실패했습니다
+          데이터를 불러오는데 실패하였습니다.
+          <br />
+          다시 시도해주세요.
         </div>
       )}
       <div
