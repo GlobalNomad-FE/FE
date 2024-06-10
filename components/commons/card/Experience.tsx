@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
 import Menu from '@/components/activitie/Menu';
 import Button from '../Button';
@@ -116,6 +116,16 @@ const Experience = ({
 
     return textPropsObj;
   };
+
+  useEffect(() => {
+    if (status === 'confirmed') {
+      const now = new Date();
+      const endDateTime = new Date(`${date}T${endTime}`);
+      if (now > endDateTime) {
+        setStatus('completed');
+      }
+    }
+  }, [date, endTime, status]);
 
   return (
     <Link
