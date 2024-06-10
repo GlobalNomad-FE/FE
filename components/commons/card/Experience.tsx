@@ -8,6 +8,7 @@ import Button from '../Button';
 import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
+import Link from 'next/link';
 
 interface Reservation {
   id: number;
@@ -117,7 +118,10 @@ const Experience = ({
   };
 
   return (
-    <div className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white">
+    <Link
+      href={`activities/${activityId}`}
+      className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white"
+    >
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
         <Image
           src={bannerImageUrl}
@@ -235,7 +239,7 @@ const Experience = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
