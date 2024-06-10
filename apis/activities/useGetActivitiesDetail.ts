@@ -4,7 +4,7 @@ import { API } from '@/utils/constants/API';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { Activity } from './useGetActivities';
 
-interface ActivityDetail extends Activity {
+export interface ActivityDetail extends Activity {
   subImages: [];
 }
 

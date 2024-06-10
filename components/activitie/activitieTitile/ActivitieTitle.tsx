@@ -1,11 +1,11 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import data from '@/components/reservationWidget/mock.json';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import Menu from '../Menu';
+import { ActivityDetail } from '@/apis/activities/useGetActivitiesDetail';
 
 /* TODO 데이터들어오는 값으로 바꿔야함 (체험상세조회 api)*/
 interface BioImageType {
@@ -13,8 +13,8 @@ interface BioImageType {
   imageUrl: string;
 }
 
-export default function ActivitieTitle() {
-  const { subImageUrls: bioImage, bannerImageUrl } = data;
+export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
+  const { subImages: bioImage, bannerImageUrl } = data;
 
   const renderBioImages = (bioImage: BioImageType[]) => {
     switch (bioImage.length) {
@@ -140,11 +140,13 @@ export default function ActivitieTitle() {
       <div className="mt-[150px] flex justify-between max-w-[1200px] items-center">
         <div className="flex flex-col">
           <div>{data.category}</div>
-          <p className="text-title text-nomad-black mt-2.5 mb-4">타이틀</p>
+          <p className="text-title text-nomad-black mt-2.5 mb-4">
+            {data.title}
+          </p>
           <div className="flex gap-[12px]">
             <div className="flex gap-[6px] items-center">
               <Image
-                src="/icons/Star.svg"
+                src="/icons/star-on.svg"
                 alt="별점아이콘"
                 width={18}
                 height={18}
