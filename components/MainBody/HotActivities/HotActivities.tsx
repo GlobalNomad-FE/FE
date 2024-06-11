@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
-import HotActivitiesPagination from './HotActivitiesPagination';
 import Image from 'next/image';
+import HotActivitiesPagination from './HotActivitiesPagination';
 import HotActivitiesItems from './HotActivitiesItems';
 
 const HotActivities = () => {
@@ -88,6 +88,7 @@ const HotActivities = () => {
         {dataArray.map((item) => (
           <HotActivitiesItems
             key={item.id}
+            id={item.id}
             title={item.title}
             price={item.price}
             bannerImageUrl={item.bannerImageUrl}
