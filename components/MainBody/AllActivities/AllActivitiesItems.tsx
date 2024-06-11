@@ -38,7 +38,12 @@ const AllActivitiesItems = ({
         />
         {rating} <span className="gray400">({reviewCount})</span>
       </div>
-      <div className="text-2xl font-bold mt-[10px] mobile:text-lg">{title}</div>
+      <div
+        className="text-2xl font-bold mt-[10px] mobile:text-lg hover:underline cursor-pointer"
+        onClick={() => router.push(`/activities/${id}`)}
+      >
+        {title}
+      </div>
       <div className="text-3xl mt-[15px] mobile:text-xl">
         ₩ {price.toLocaleString('ko-KR')}{' '}
         <span className="text-gray400 text-xl mobile:text-base">/ 인</span>
