@@ -40,7 +40,7 @@ export default function Gnb() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     isDropdownOpenToggle();
-    router.push('/signin');
+    router.push('/login');
   };
 
   const handleMyPageClick = () => {

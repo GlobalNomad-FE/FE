@@ -32,7 +32,7 @@ const rules = {
   },
 };
 
-const SignIn = () => {
+const Login = () => {
   const { signIn } = useAuth();
 
   const { formState, register, handleSubmit } = useForm<FormValues>({
@@ -105,4 +105,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;
