@@ -46,7 +46,9 @@ const FilterDropdown = ({
 
   return (
     <div
-      className={`${type === 'bookingPage' && 'tablet:hidden mobile:hidden'}`}
+      className={`${
+        type === 'bookingPage' && 'tablet:hidden mobile:hidden'
+      } text-green200`}
     >
       <div
         className={`${

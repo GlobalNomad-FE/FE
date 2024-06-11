@@ -91,7 +91,7 @@ const MyReservations = () => {
           <SideNavigationMenu />
           <div className="flex flex-col flex-grow">
             <div className="flex justify-between">
-              <p className="text-[2rem] font-bold">예약내역</p>
+              <p className="text-[2rem] font-bold text-nomad-black">예약내역</p>
               {data?.totalCount !== 0 && (
                 <FilterDropdown type="bookingPage" onSelect={handleSelect} />
               )}
