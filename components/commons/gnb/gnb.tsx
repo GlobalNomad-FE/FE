@@ -74,7 +74,7 @@ export default function Gnb() {
         <div>
           {!Auth ? (
             <div className="flex gap-[25px] relative text-body2-regular font-medium text-black200">
-              <Link href="/signin">로그인</Link>
+              <Link href="/login">로그인</Link>
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
