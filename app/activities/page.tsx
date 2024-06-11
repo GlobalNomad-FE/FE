@@ -19,7 +19,7 @@ export default function page() {
           <div className="flex flex-col flex-grow">
             <div className="flex justify-between">
               <p className="text-title text-black">내 체험 관리</p>
-              <Link href={'/activities/registration'}>
+              <Link href={'/activities/register'}>
                 <Button
                   width={120}
                   height={45}

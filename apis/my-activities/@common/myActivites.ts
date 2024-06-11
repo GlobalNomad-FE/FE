@@ -1,18 +1,6 @@
 import instance from '@/apis/axios';
 import { API } from '@/utils/constants/API';
-
-interface ActivitesProp {
-  title: 'string';
-  category: '문화 · 예술' | '식음료' | '스포츠' | '투어' | '관광' | '웰빙';
-  description: 'string';
-  price: number;
-  address: 'string';
-  bannerImageUrl: 'string';
-  subImageIdsToRemove: [];
-  subImageUrlsToAdd: [];
-  scheduleIdsToRemove: [];
-  schedulesToAdd: [];
-}
+import { ActivitiesData } from '@/app/activities/register/page';
 
 type Status = {
   status: 'pedding' | 'confirmed' | 'declined';
@@ -124,6 +112,6 @@ export const deleteActivities = (activityId: number) => {
  * @param activityId
  * @param data 체험등록 폼 데이터
  */
-export const patchActivities = (activityId: number, data: ActivitesProp) => {
+export const patchActivities = (activityId: number, data: ActivitiesData) => {
   return instance.patch(`${API.MYACTIVITIE}/${activityId}`, data);
 };
