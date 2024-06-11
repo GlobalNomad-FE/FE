@@ -40,7 +40,7 @@ export default function Gnb() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     isDropdownOpenToggle();
-    router.push('/signin');
+    router.push('/login');
   };
 
   const handleMyPageClick = () => {
@@ -61,7 +61,7 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-10">
+    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-50">
       <div className="max-w-[1248px] w-full mx-auto flex items-center justify-between px-[24px]">
         <Link href="/">
           <Image
@@ -74,7 +74,7 @@ export default function Gnb() {
         <div>
           {!Auth ? (
             <div className="flex gap-[25px] relative text-body2-regular font-medium text-black200">
-              <Link href="/signin">로그인</Link>
+              <Link href="/login">로그인</Link>
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (

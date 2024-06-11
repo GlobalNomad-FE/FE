@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const instance = axios.create({
@@ -8,10 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use((config) => {
   if (config.headers.Authorization) return config;
 
-  // const accessToken = localStorage.getItem('accessToken');
-  //TODO: 임시토큰
-  const accessToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzQ2LCJ0ZWFtSWQiOiI0LTEzIiwiaWF0IjoxNzE3NzM5NTYxLCJleHAiOjE3MTg5NDkxNjEsImlzcyI6InNwLWdsb2JhbG5vbWFkIn0.arOO-urUgGHYxA2oQi48wQ7752KjRBGbT2M5RoUO7-I';
+  const accessToken = Cookies.get('accessToken');
   if (accessToken) {
     config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
@@ -22,7 +21,7 @@ instance.interceptors.response.use(
   (res) => res,
   async (error) => {
     const originalRequest = error.config;
-    const refreshToken = localStorage.getItem('refreshToken');
+    const refreshToken = Cookies.get('refreshToken');
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
@@ -37,8 +36,8 @@ instance.interceptors.response.use(
       );
       const accessToken = res.data.accessToken;
       const nextRefreshToken = res.data.refreshToken;
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', nextRefreshToken);
+      Cookies.set('accessToken', accessToken);
+      Cookies.set('refreshToken', nextRefreshToken);
       originalRequest._retry = true;
 
       return instance(originalRequest);
@@ -46,4 +45,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
 export default instance;
