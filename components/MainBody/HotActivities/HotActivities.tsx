@@ -83,7 +83,7 @@ const HotActivities = () => {
       )}
       <div
         ref={scrollContainerRef}
-        className="flex gap-[24px] overflow-x-scroll mainPcSize:w-[1200px] mainPcSize:overflow-x-hidden"
+        className="flex gap-[24px] overflow-x-scroll scrollbar-hide mainPcSize:w-[1200px] mainPcSize:overflow-x-hidden"
       >
         {dataArray.map((item) => (
           <HotActivitiesItems
