@@ -1,5 +1,5 @@
 import Portal from '@/utils/Portal';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@/components/commons/Button';
 import Image from 'next/image';
 import ReviewContent from './ReviewContent';
@@ -38,18 +38,23 @@ const ReviewModal = ({
   const [openModal, setOpenModal] = useState(false);
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const overlay = useRef(null);
 
-  const handleOpenModal = () => {
+  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === overlay.current) {
+      e.stopPropagation();
+      setOpenModal(false);
+    }
+  };
+
+  const handleOpenModal = (e: React.MouseEvent) => {
+    e.preventDefault();
     setOpenModal(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (e: React.MouseEvent) => {
+    e.preventDefault();
     setOpenModal(false);
-  };
-
-  //모달 안쪽 클릭시 모달이 꺼지는 현상을 없애기위해 버블링 막음
-  const handleStopBubbling = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
   };
 
   return (
@@ -69,12 +74,10 @@ const ReviewModal = ({
         {openModal && (
           <div
             className="fixed z-20 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
-            onClick={handleCloseModal}
+            onClick={handleClickOverlay}
+            ref={overlay}
           >
-            <div
-              onClick={handleStopBubbling}
-              className="px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center mobile:w-full mobile:h-full mobile:pb-0 w-[480px] pb-[46px] rounded-[24px] mobile:rounded-none"
-            >
+            <div className="px-[24px] pt-[35px] bg-white flex flex-col items-center justify-center mobile:w-full mobile:h-full mobile:pb-0 w-[480px] pb-[46px] rounded-[24px] mobile:rounded-none">
               <div className="flex w-full justify-between items-center mobile:mb-[24px] mb-[41px]">
                 <h1 className="text-h1 text-black200">후기 작성</h1>
                 <Image
