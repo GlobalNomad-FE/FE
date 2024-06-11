@@ -11,7 +11,7 @@ const MonthBest = () => {
   });
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center text-white">
       <div className="relative mt-[70px] w-full mobile:h-[240px] h-[550px]">
         <div className="absolute bg-custom-gradient w-full h-full z-10" />
         {isError && (
