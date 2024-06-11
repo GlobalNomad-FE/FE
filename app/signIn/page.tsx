@@ -51,7 +51,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center pt-32">
+    <div className="flex w-full flex-col items-center pt-40">
       <div>
         <Link href="/">
           <Image
