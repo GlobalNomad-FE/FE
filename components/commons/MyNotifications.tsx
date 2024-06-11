@@ -5,6 +5,31 @@ import Image from 'next/image';
 const MyNotifications = () => {
   const { data, error, isLoading } = useGetMyNotifications();
 
+  const renderContent = (content: string) => {
+    if (!content) return null;
+
+    // '승인'과 '거절'을 기준으로 문자열을 분리
+    const parts = content.split(/(승인|거절)/g);
+    console.log(parts);
+    return parts.map((part, index) => {
+      if (part === '승인') {
+        return (
+          <span key={index} className="text-blue300">
+            승인
+          </span>
+        );
+      }
+      if (part === '거절') {
+        return (
+          <span key={index} className="text-red100">
+            거절
+          </span>
+        );
+      }
+      return part;
+    });
+  };
+
   const formatDateDiff = (dateString: string) => {
     const now = new Date();
     const updatedAt = new Date(dateString);
@@ -46,7 +71,11 @@ const MyNotifications = () => {
               className="px-3 py-4 rounded-[5px] border border-[#CBC9CF] bg-white"
             >
               <div className="flex justify-between items-start">
-                <div className=" w-[5px] h-[5px] mt-1 rounded-full bg-blue300" />
+                <div
+                  className={`${
+                    item.content.includes('승인') ? 'bg-blue300' : 'bg-red100'
+                  } w-[5px] h-[5px] mt-1 rounded-full bg-blue300`}
+                />
                 <Image
                   src="/icons/btn-X-medium.svg"
                   alt="알림 삭제 버튼"
@@ -54,7 +83,9 @@ const MyNotifications = () => {
                   height={24}
                 />
               </div>
-              <p className="mb-1 text-body2-regular">{item.content}</p>
+              <p className="mb-1 text-body2-regular">
+                {renderContent(item.content)}
+              </p>
               <p className="text-caption text-gray400">
                 {formatDateDiff(item.updatedAt)}
               </p>
