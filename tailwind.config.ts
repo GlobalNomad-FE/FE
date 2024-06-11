@@ -88,6 +88,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')], //스크롤바 숨김가능(scrollbar-hide)
 };
 export default config;
