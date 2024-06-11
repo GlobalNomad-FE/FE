@@ -1,4 +1,6 @@
 // context/AuthContext.tsx
+'use client';
+
 import React, {
   createContext,
   useContext,
@@ -6,7 +8,7 @@ import React, {
   ReactNode,
   useEffect,
 } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { auth } from '@/apis/auth/auth';
 import { FormValues, PostAuthLoginRes, UserInfo } from '@/apis/auth/auth.type';
 import { useMutation } from '@tanstack/react-query';
