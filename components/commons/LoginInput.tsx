@@ -48,7 +48,7 @@ const LoginInput = forwardRef<HTMLInputElement, InputProps>(
             >
               <Image
                 alt={visibility ? 'Hide Password' : 'Show Password'}
-                src={`/icons/btn_visibility_${visibility ? 'on' : 'off'}.svg`}
+                src={`/icons/btn_visibility_${visibility ? 'off' : 'on'}.svg`}
                 width={24}
                 height={24}
               />
