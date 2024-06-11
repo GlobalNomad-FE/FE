@@ -141,7 +141,7 @@ const SignUp = () => {
       <div className="mt-8 flex gap-2 text-base font-normal text-gray800">
         <p>회원이신가요?</p>
         <Link
-          href="/signup"
+          href="/signin"
           className="text-base font-normal text-green200 underline"
         >
           로그인하기
