@@ -21,11 +21,11 @@ const AllActivitiesItems = ({
 }: Props) => {
   const router = useRouter();
   return (
-    <div
-      className="max-w-[283px] cursor-pointer"
-      onClick={() => router.push(`/activities/${id}`)}
-    >
-      <div className="relative rounded-3xl overflow-hidden text-black200 w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px]">
+    <div className="max-w-[283px] text-black200">
+      <div
+        className="relative rounded-3xl overflow-hidden w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px] cursor-pointer"
+        onClick={() => router.push(`/activities/${id}`)}
+      >
         <div className="absolute bg-custom-gradient2 w-[224px] h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:w-[168px] mobile:h-[168px] z-10" />
         <Image src={bannerImageUrl} alt={title} fill objectFit="cover" />
       </div>
