@@ -4,15 +4,17 @@ import { formatDate2 } from '@/utils/dateFormatter';
 import { ReviewsType, ReviewsDataType } from '@/types/reviewsType';
 import Pagination from './commons/Pagination';
 import { useState } from 'react';
+import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitesReviews';
 
-interface ReviewTableProps {
-  data: ReviewsDataType;
-}
+// interface ReviewTableProps {
+//   data: ReviewsDataType;
+// }
 
 //TODO - 데이터 연동하면 페이지네이션 수정할것.
-export default function ReviewTable({ data }: ReviewTableProps) {
-  const { totalCount, reviews } = data;
+export default function ReviewTable({ id }: { id: number }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const { data } = useGetActivitiesReviews(id, currentPage, 5);
+  console.log('리뷰데이터', data);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -20,7 +22,7 @@ export default function ReviewTable({ data }: ReviewTableProps) {
 
   return (
     <div>
-      {reviews.map((list: ReviewsType) => {
+      {/* {reviews.map((list: ReviewsType) => {
         const { user } = list;
         const { profileImageUrl, nickname } = user;
         return (
@@ -57,7 +59,7 @@ export default function ReviewTable({ data }: ReviewTableProps) {
         visiblePages={5}
         onPageChange={handlePageChange}
         currentPage={currentPage}
-      />
+      /> */}
     </div>
   );
 }

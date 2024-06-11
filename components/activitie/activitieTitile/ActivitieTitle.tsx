@@ -8,13 +8,14 @@ import Menu from '../Menu';
 import { ActivityDetail } from '@/apis/activities/useGetActivitiesDetail';
 
 /* TODO 데이터들어오는 값으로 바꿔야함 (체험상세조회 api)*/
-interface BioImageType {
+export interface BioImageType {
   id: number;
   imageUrl: string;
 }
 
 export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
   const { subImages: bioImage, bannerImageUrl } = data;
+  console.log(bioImage);
 
   const renderBioImages = (bioImage: BioImageType[]) => {
     switch (bioImage.length) {

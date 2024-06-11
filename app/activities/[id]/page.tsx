@@ -7,10 +7,16 @@ import ActivitieBio from '@/components/activitie/ActivitieBio';
 import Map from '@/components/activitie/Map';
 import Review from '@/components/activitie/Review';
 import { useGetActivitiesDetail } from '@/apis/activities/useGetActivitiesDetail';
+import Footer from '@/components/commons/Footer';
 
-export default function ActivitiesDetailPage() {
-  const id = 1123;
-  const { data } = useGetActivitiesDetail(id);
+export default function ActivitiesDetailPage({
+  params,
+}: {
+  params: { id: number };
+}) {
+  const activitieId = params?.id;
+
+  const { data } = useGetActivitiesDetail(activitieId);
 
   console.log(data);
   return (
@@ -23,9 +29,13 @@ export default function ActivitiesDetailPage() {
             <div className="w-[790px] flex flex-col">
               <ActivitieBio description={data.description} />
               <Map location={data.address} />
-              <Review />
+              <Review
+                averageRating={data.rating}
+                totalCount={data.reviewCount}
+                id={data.id}
+              />
             </div>
-            <div className="">
+            <div>
               <CalendarProvider>
                 <ReservationWidgetContainerSelector />
               </CalendarProvider>
@@ -33,6 +43,7 @@ export default function ActivitiesDetailPage() {
           </div>
         </main>
       )}
+      <Footer />
     </>
   );
 }

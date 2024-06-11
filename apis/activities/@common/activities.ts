@@ -67,8 +67,8 @@ export const getActivitiesSchedule = (
  */
 export const getActivitiesReviews = (
   activityId: number,
-  page: number,
-  size: number,
+  page?: number,
+  size?: number,
 ) => {
   return instance.get(`${API.ACTIVITIE}/${activityId}/reviews`, {
     params: {
