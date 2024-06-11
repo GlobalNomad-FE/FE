@@ -5,6 +5,25 @@ import Image from 'next/image';
 const MyNotifications = () => {
   const { data, error, isLoading } = useGetMyNotifications();
 
+  const formatDateDiff = (dateString: string) => {
+    const now = new Date();
+    const updatedAt = new Date(dateString);
+    const diffInMilliseconds = now.getTime() - updatedAt.getTime();
+    const diffInMinutes = Math.round(diffInMilliseconds / (1000 * 60));
+
+    if (diffInMinutes < 1) {
+      return '방금 전';
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes}분 전`;
+    } else if (diffInMinutes < 1440) {
+      const diffInHours = Math.round(diffInMinutes / 60);
+      return `${diffInHours}시간 전`;
+    } else {
+      const diffInDays = Math.round(diffInMinutes / 1440);
+      return `${diffInDays}일 전`;
+    }
+  };
+
   return (
     <div
       className="w-[368px] px-5 py-6 rounded-[10px] border border-[#CBC9CF] bg-green400 text-black200"
@@ -27,7 +46,7 @@ const MyNotifications = () => {
               className="px-3 py-4 rounded-[5px] border border-[#CBC9CF] bg-white"
             >
               <div className="flex justify-between items-start">
-                <div className=" w-[5px] h-[5px] mt-1 rounded-full bg-blue300"></div>
+                <div className=" w-[5px] h-[5px] mt-1 rounded-full bg-blue300" />
                 <Image
                   src="/icons/btn-X-medium.svg"
                   alt="알림 삭제 버튼"
@@ -35,11 +54,10 @@ const MyNotifications = () => {
                   height={24}
                 />
               </div>
-              <p className="mb-1 text-body2-regular">
-                함께하면 즐거운 스트릿 댄스(2023-01-14 15:00~18:00) 예약이{' '}
-                <span>승인</span>되었어요.
+              <p className="mb-1 text-body2-regular">{item.content}</p>
+              <p className="text-caption text-gray400">
+                {formatDateDiff(item.updatedAt)}
               </p>
-              <p className="text-caption text-gray400">1분전</p>
             </div>
           ))
         ) : (
