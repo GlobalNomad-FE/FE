@@ -11,13 +11,15 @@ type Status = {
  * @param cursorId
  * @param size Default value : 20
  */
-export const getMyActivites = (cursorId: number, size: number) => {
-  return instance.get(API.MYACTIVITIE, {
-    params: {
-      cursorId: cursorId,
-      size: size,
-    },
-  });
+export const getMyActivites = (cursorId?: number, size?: number) => {
+  return instance
+    .get(API.MYACTIVITIE, {
+      params: {
+        cursorId: cursorId,
+        size: size,
+      },
+    })
+    .then((res) => res.data);
 };
 
 /**
