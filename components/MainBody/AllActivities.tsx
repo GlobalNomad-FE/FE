@@ -104,7 +104,7 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
           ))}
         </div>
       ) : isError ? (
-        <div className="w-auto mainPcSize:w-[1200px] h-[384px] flex justify-center items-center">
+        <div className="w-auto mainPcSize:w-[1200px] h-[384px] flex justify-center items-center text-base">
           데이터를 불러오는데 실패하였습니다.
           <br />
           다시 시도해주세요.
