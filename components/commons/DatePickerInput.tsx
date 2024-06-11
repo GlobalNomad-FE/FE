@@ -1,11 +1,12 @@
 import DatePicker from 'react-datepicker';
 import Image from 'next/image';
 import { useState, useRef } from 'react';
-
+import { DateType } from '../input/TimeInput';
 import 'react-datepicker/dist/react-datepicker.css';
+import './DateInput.css';
 
 interface SelectDateProps {
-  onSelectedDateChange: (date: Date | null) => void; // 선택된 날짜 변경 시 호출될 콜백 함수
+  onSelectedDateChange: (date: DateType) => void; // 선택된 날짜 변경 시 호출될 콜백 함수
 }
 
 /**
@@ -15,21 +16,19 @@ interface SelectDateProps {
 const DatePickerInput: React.FC<SelectDateProps> = ({
   onSelectedDateChange,
 }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [selectedDate, setSelectedDate] = useState<DateType>(new Date());
 
   const datePickerRef = useRef<DatePicker>(null);
 
   const handleImageClick = () => {
-    if (datePickerRef.current) {
-      datePickerRef.current.setFocus();
-    }
+    datePickerRef.current?.setFocus();
   };
 
   return (
-    <div className="relative w-[379px] h-[56px]">
+    <div className="relative w-full h-[56px]">
       <DatePicker
         ref={datePickerRef}
-        className="text-black200 border border-black100 rounded px-[16px] py-[8px] bg-white w-[379px] h-[56px] text-[16px]"
+        className="text-black200 border border-black100 rounded px-[16px] py-[8px] bg-white h-[56px] text-[16px] w-full"
         dateFormat="YY/MM/dd"
         selected={selectedDate}
         onChange={(date) => {

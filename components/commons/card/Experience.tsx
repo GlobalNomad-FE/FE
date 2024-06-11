@@ -246,7 +246,7 @@ const Experience = ({
                 reservationId={activityId}
               />
             )}
-            {type === 'activities' && <Menu />}
+            {type === 'activities' && <Menu id={id} />}
           </div>
         </div>
       </div>
