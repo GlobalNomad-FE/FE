@@ -27,17 +27,20 @@ const BasePopupTwoBtns = ({
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === overlay.current) {
+      e.stopPropagation();
       closePopup();
     }
   };
 
   //팝업 끄기
-  const handleClosePopup = () => {
+  const handleClosePopup = (e: React.MouseEvent) => {
+    e.stopPropagation();
     closePopup();
   };
 
   //위에서 넘겨받은 클릭이벤트
-  const handleClickEvent = () => {
+  const handleClickEvent = (e: React.MouseEvent) => {
+    e.stopPropagation();
     clickEvent();
     closePopup();
   };

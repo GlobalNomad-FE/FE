@@ -1,9 +1,14 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
 import Menu from '@/components/activitie/Menu';
+import Button from '../Button';
+import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
+import Link from 'next/link';
 
 interface Reservation {
   id: number;
@@ -55,6 +60,34 @@ const Experience = ({
   reviewCount,
 }: Reservation) => {
   const [status, setStatus] = useState(experienceStatus);
+  const [openPopup, setOpenPopup] = useState(false);
+
+  const { mutate: updateStatus } = useUpdateReservationStatus({
+    onSuccess: () => {
+      alert('취소가 완료되었습니다.');
+      setStatus('canceled');
+    },
+    onError: () => {
+      alert('취소에 실패했습니다.');
+    },
+  });
+
+  const isDesktop = useMediaQuery('(min-width: 1024px)');
+  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  const handleOpenPopup = (e: MouseEvent) => {
+    e.preventDefault();
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
+  const showAlert = () => {
+    updateStatus({ reservationId: id, status: 'canceled' });
+  };
 
   const textProps = () => {
     const textPropsObj = { color: '', text: '-' };
@@ -85,19 +118,27 @@ const Experience = ({
     return textPropsObj;
   };
 
-  const handleReservationCancellation = () => {
-    setStatus('canceled');
-    //TODO : 예약 취소 진행 api연결 필요 /4-13/my-reservations/{reservationId}
-  };
+  useEffect(() => {
+    if (status === 'confirmed') {
+      const now = new Date();
+      const endDateTime = new Date(`${date}T${endTime}`);
+      if (now > endDateTime) {
+        setStatus('completed');
+      }
+    }
+  }, [date, endTime, status]);
 
   return (
-    <div className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white">
+    <Link
+      href={`activities/${activityId}`}
+      className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white"
+    >
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
         <Image
           src={bannerImageUrl}
           alt="체험 이미지"
           fill
-          objectFit="cover"
+          object-fit="cover"
           className="rounded-l-[24px]"
         />
       </div>
@@ -110,8 +151,8 @@ const Experience = ({
           ) : (
             <div className="flex gap-[6px]">
               <Image
-                src="/icons/Star.svg"
-                alt="케밥 아이콘"
+                src="/icons/star-on.svg"
+                alt="별점아이콘"
                 width={19}
                 height={19}
               />
@@ -130,19 +171,68 @@ const Experience = ({
           )}
         </div>
         <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
-          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-mediu">
+          <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-medium">
             {type === 'reservations'
               ? `₩${totalPrice.toLocaleString('ko-KR')}`
               : `₩${totalPrice.toLocaleString('ko-KR')} /인`}
           </p>
           <div className="">
             {status === 'pending' && (
-              <button
-                className="w-[144px] tablet:w-[112px] mobile:w-[80px] h-10 mobile:h-8 text-[16px] mobile:text-[14px] px-3 py-2 mobile:py-1 border rounded-md font-bold border-black200"
-                onClick={() => handleReservationCancellation()}
-              >
-                예약 취소
-              </button>
+              <>
+                {isDesktop && (
+                  <Button
+                    width={144}
+                    height={40}
+                    fontSize={15}
+                    btnColor={'white'}
+                    textColor={'nomadBlack'}
+                    textBold={true}
+                    hover={true}
+                    border={true}
+                    onClick={handleOpenPopup}
+                  >
+                    예약취소
+                  </Button>
+                )}
+                {isTablet && (
+                  <Button
+                    width={112}
+                    height={40}
+                    fontSize={15}
+                    btnColor={'white'}
+                    textColor={'nomadBlack'}
+                    textBold={true}
+                    hover={true}
+                    border={true}
+                    onClick={handleOpenPopup}
+                  >
+                    예약취소
+                  </Button>
+                )}
+                {isMobile && (
+                  <Button
+                    width={80}
+                    height={32}
+                    fontSize={15}
+                    btnColor={'white'}
+                    textColor={'nomadBlack'}
+                    textBold={true}
+                    hover={true}
+                    border={true}
+                    onClick={handleOpenPopup}
+                  >
+                    예약취소
+                  </Button>
+                )}
+                <BasePopupTwoBtns
+                  buttonText="취소하기"
+                  isOpen={openPopup}
+                  closePopup={handleClosePopup}
+                  clickEvent={showAlert}
+                >
+                  예약을 취소하시겠어요?
+                </BasePopupTwoBtns>
+              </>
             )}
             {status === 'completed' && (
               <ReviewModal
@@ -160,7 +250,7 @@ const Experience = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

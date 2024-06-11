@@ -3,11 +3,10 @@ import { useState, useEffect } from 'react';
 import Gnb from '@/components/commons/gnb/gnb';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import FilterDropdown from '@/components/commons/FilterDropdown';
-import data from './mock.json';
 import Image from 'next/image';
-import useMediaQuery from '@/hooks/useMediaQuery';
 import Experience from '@/components/commons/card/Experience';
 import Footer from '@/components/commons/Footer';
+import useGetMyReservations from '@/apis/my-reservations/useGetMyReservations';
 
 interface Activity {
   bannerImageUrl: string;
@@ -26,12 +25,14 @@ interface Reservation {
   endTime: string;
 }
 
-// pending   - 보류중 ( 예약 완료 )
-// confirmed - 승인됨 ( 예약 승인 )
-// declined  - 거부됨 ( 예약 거절 )
-// canceled  - 취소된 ( 예약 취소 )
-// completed - 완전한 ( 체험 완료 )
-const statusArr = ['pending', 'confirmed', 'declined', 'canceled', 'completed'];
+// pending   - ( 예약 완료 )
+// confirmed - ( 예약 승인 )
+// declined  - ( 예약 거절 )
+// canceled  - ( 예약 취소 )
+// completed - ( 체험 완료 )
+const statusArr: Array<
+  'pending' | 'confirmed' | 'declined' | 'canceled' | 'completed'
+> = ['pending', 'canceled', 'confirmed', 'declined', 'completed'];
 
 const ITEMS_PER_PAGE = 5; // 페이지당 표시할 항목 수
 
@@ -40,7 +41,7 @@ const MyReservations = () => {
   const [page, setPage] = useState(1); // 현재 페이지 상태 추가
   const [reservations, setReservations] = useState<Reservation[]>([]);
 
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const { data, error, isLoading } = useGetMyReservations(); // API 데이터 가져오기
 
   const handleSelect = (index: number) => {
     setSelectedIndex(index);
@@ -61,15 +62,17 @@ const MyReservations = () => {
 
   // 데이터 필터링 및 페이지에 따른 데이터 슬라이싱
   useEffect(() => {
+    if (!data) return;
+
     const filteredReservations =
       selectedIndex !== null
         ? data.reservations
             .filter((item) => item.status === statusArr[selectedIndex])
             .sort(
-              (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
             )
         : data.reservations.sort(
-            (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
           );
     setReservations((prevReservations) => [
       ...(page === 1 ? [] : prevReservations), // 페이지 1이면 기존 데이터 초기화
@@ -78,22 +81,22 @@ const MyReservations = () => {
         page * ITEMS_PER_PAGE,
       ),
     ]);
-  }, [selectedIndex, page]);
+  }, [data, selectedIndex, page]);
 
   return (
     <div>
       <Gnb />
       <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
         <div className="flex gap-6 w-[1200px]">
-          {!isMobile && <SideNavigationMenu />}
+          <SideNavigationMenu />
           <div className="flex flex-col flex-grow">
             <div className="flex justify-between">
-              <p className="text-[2rem] font-bold">예약내역</p>
-              {data.totalCount !== 0 && (
+              <p className="text-[2rem] font-bold text-nomad-black">예약내역</p>
+              {data?.totalCount !== 0 && (
                 <FilterDropdown type="bookingPage" onSelect={handleSelect} />
               )}
             </div>
-            {data.totalCount === 0 ? (
+            {data?.totalCount === 0 ? (
               <div className="flex flex-col flex-grow gap-5 items-center mt-[90px]">
                 <Image
                   src="/icons/empty.svg"
@@ -120,6 +123,7 @@ const MyReservations = () => {
                     totalPrice={item.totalPrice}
                     experienceStatus={item.status}
                     bannerImageUrl={item.activity.bannerImageUrl}
+                    activityId={item.activity.id}
                     type="reservations"
                   />
                 ))}
