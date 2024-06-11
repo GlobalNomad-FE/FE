@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const signInMutation = useMutation({
-    mutationFn: (data: FormValues) => auth.signin(data),
+    mutationFn: (data: FormValues) => auth.login(data),
     mutationKey: ['signIn'],
     onSuccess: (data: PostAuthLoginRes) => {
       Cookies.remove('accessToken');

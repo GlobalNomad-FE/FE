@@ -56,7 +56,7 @@ const SignUp = () => {
     mutationFn: (data: FormValues) => auth.signup(data),
     mutationKey: ['signUp'],
     onSuccess: () => {
-      router.push('/signin');
+      router.push('/login');
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       if (error.response && error.response.status >= 400) {
@@ -74,7 +74,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center pt-40 ">
+    <div className="flex w-full flex-col items-center pt-40 text-black200 ">
       <div>
         <Link href="/">
           <Image
@@ -141,7 +141,7 @@ const SignUp = () => {
       <div className="mt-8 flex gap-2 text-base font-normal text-gray800">
         <p>회원이신가요?</p>
         <Link
-          href="/signin"
+          href="/login"
           className="text-base font-normal text-green200 underline"
         >
           로그인하기
