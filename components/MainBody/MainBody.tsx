@@ -15,16 +15,6 @@ const MainBody = () => {
     setSearchTerm(searchTerm);
   };
 
-  let itemsSize;
-
-  if (isPC) {
-    itemsSize = searchTerm ? 16 : 8;
-  } else if (isMobile) {
-    itemsSize = searchTerm ? 8 : 4;
-  } else {
-    itemsSize = 9;
-  }
-
   return (
     <div className="relative w-full pb-[150px] mobile:pb-[100px]">
       <MonthBest />
