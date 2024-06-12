@@ -41,8 +41,8 @@ const ReviewModal = ({
   const overlay = useRef(null);
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     if (e.target === overlay.current) {
-      e.stopPropagation();
       setOpenModal(false);
     }
   };
