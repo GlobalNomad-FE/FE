@@ -20,7 +20,7 @@
   font-weight: 900;
   background-color: #ced8d5;
   color: #0b3b2d;
-  border-radius: 8px;
+  border-radius: 50%;
 }
 .react-datepicker__month-container {
   float: none;
@@ -65,6 +65,10 @@
   background: url(/icons/Next.svg) no-repeat;
   border: none;
 }
+.react-datepicker__day--highlighted {
+  background-color: #6be074;
+  border-radius: 8px;
+}
 .custom-day {
   width: 35px;
   height: 34px;
@@ -96,4 +100,10 @@
   font-size: 14px;
   color: #1b1b1b;
   font-weight: 700;
+}
+
+.scheduled-day {
+  background-color: #ced8d5;
+  color: #0b3b2d;
+  border-radius: 16px;
 }
