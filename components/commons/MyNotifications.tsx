@@ -2,7 +2,11 @@
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
 import Image from 'next/image';
 
-const MyNotifications = () => {
+interface MyNotificationsProps {
+  onClose: () => void;
+}
+
+const MyNotifications = ({ onClose }: MyNotificationsProps) => {
   const { data, error, isLoading } = useGetMyNotifications();
 
   const renderContent = (content: string) => {
@@ -10,7 +14,6 @@ const MyNotifications = () => {
 
     // '승인'과 '거절'을 기준으로 문자열을 분리
     const parts = content.split(/(승인|거절)/g);
-    console.log(parts);
     return parts.map((part, index) => {
       if (part === '승인') {
         return (
@@ -58,9 +61,11 @@ const MyNotifications = () => {
         <p className="text-h3-bold">알림 {data?.totalCount}개</p>
         <Image
           src="/icons/notifications-close.svg"
+          className="cursor-pointer"
           alt="알림창 닫기 버튼"
           width={24}
           height={24}
+          onClick={onClose}
         />
       </div>
       <div className="flex flex-col gap-2">
