@@ -2,6 +2,7 @@
 import { useDeleteNotification } from '@/apis/my-notifications/useDeleteMyNotification';
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
 import Image from 'next/image';
+import { useRef, useEffect } from 'react';
 
 interface MyNotificationsProps {
   onClose: () => void;
@@ -10,10 +11,27 @@ interface MyNotificationsProps {
 const MyNotifications = ({ onClose }: MyNotificationsProps) => {
   const { data, error, isLoading } = useGetMyNotifications();
   const { mutate } = useDeleteNotification();
+  const notificationsRef = useRef<HTMLDivElement | null>(null);
 
   const handleDeleteNotification = (notificationId: number) => {
     mutate({ notificationId });
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      notificationsRef.current &&
+      !notificationsRef.current.contains(event.target as Node)
+    ) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const renderContent = (content: string) => {
     if (!content) return null;
@@ -60,6 +78,7 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
 
   return (
     <div
+      ref={notificationsRef}
       className="w-[368px] px-5 py-6 rounded-[10px] border border-[#CBC9CF] bg-green400 text-black200 z-50 mobile:w-full mobile:h-full mobile:fixed mobile:top-0 mobile:right-0 mobile:py-10 mobile:rounded-none mobile:overflow-scroll"
       style={{ boxShadow: '0px 2px 8px 0px rgba(120, 116, 134, 0.25)' }}
     >
