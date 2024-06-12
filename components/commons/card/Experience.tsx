@@ -1,5 +1,4 @@
 'use client';
-
 import Image from 'next/image';
 import { MouseEvent, useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
@@ -9,6 +8,7 @@ import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface Reservation {
   id: number;
@@ -76,6 +76,8 @@ const Experience = ({
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
 
+  const router = useRouter();
+
   const handleOpenPopup = (e: MouseEvent) => {
     e.preventDefault();
     setOpenPopup(true);
@@ -129,8 +131,8 @@ const Experience = ({
   }, [date, endTime, status]);
 
   return (
-    <Link
-      href={`activities/${activityId}`}
+    <button
+      onClick={() => router.push(`activities/${activityId}`)}
       className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white"
     >
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
@@ -250,7 +252,7 @@ const Experience = ({
           </div>
         </div>
       </div>
-    </Link>
+    </button>
   );
 };
 
