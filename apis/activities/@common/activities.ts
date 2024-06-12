@@ -18,8 +18,8 @@ export interface Schedule {
   endTime: string;
 }
 
-interface ReservationData {
-  scheduleId: number;
+export interface ReservationData {
+  scheduleId: number | undefined;
   headCount: number;
 }
 
