@@ -2,7 +2,7 @@
 import { useDeleteNotification } from '@/apis/my-notifications/useDeleteMyNotification';
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
 import Image from 'next/image';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 interface MyNotificationsProps {
   onClose: () => void;
@@ -17,26 +17,28 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
     mutate({ notificationId });
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      notificationsRef.current &&
-      !notificationsRef.current.contains(event.target as Node)
-    ) {
-      onClose();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (
+        notificationsRef.current &&
+        !notificationsRef.current.contains(event.target as Node)
+      ) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   const renderContent = (content: string) => {
     if (!content) return null;
 
-    // '승인'과 '거절'을 기준으로 문자열을 분리
     const parts = content.split(/(승인|거절)/g);
     return parts.map((part, index) => {
       if (part === '승인') {
