@@ -67,6 +67,7 @@ export default function MyactivitieListpage() {
                       reviewCount={item.reviewCount}
                       title={item.title}
                       totalPrice={item.price}
+                      activityId={item.id}
                     />
                   )),
                 )}

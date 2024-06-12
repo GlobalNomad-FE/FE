@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import useGetActivities from '@/apis/activities/useGetActivities';
 import Pagination from '@/components/commons/Pagination';
 import Image from 'next/image';
-import AllActivitiesItems from './AllActivitiesItems';
 import CategoryLists from './CategoryLists';
 import AllActivitiesFilter from './AllActivitiesFilter';
+import AllActivitiesItems from './AllActivitiesItems';
 
 interface Props {
   searchTerm: string;
@@ -95,6 +95,7 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
           {data.activities.map((item) => (
             <AllActivitiesItems
               key={item.id}
+              id={item.id}
               title={item.title}
               price={item.price}
               bannerImageUrl={item.bannerImageUrl}

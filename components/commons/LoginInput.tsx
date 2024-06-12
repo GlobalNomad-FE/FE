@@ -1,8 +1,6 @@
 import React, { forwardRef, useState } from 'react';
-import { USER_INPUT_VALIDATION } from '@/utils/user';
-import Image from 'next/image';
 
-const { email, password } = USER_INPUT_VALIDATION;
+import Image from 'next/image';
 
 interface InputProps {
   label: string;
