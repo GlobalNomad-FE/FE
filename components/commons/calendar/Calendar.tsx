@@ -19,7 +19,6 @@ const customLocale: Locale = {
   },
 };
 
-//TODO - 스케줄있는 날만 달력에 표시해줘야하나??? =>데이터처리 완료하고 차차 수정하기
 export default function Calendar() {
   const {
     selectMonth,

@@ -28,7 +28,7 @@ export default function PopupCalendar({ handleClose }: Props) {
 
   return (
     <div
-      className={`flex h-fit flex-col justify-between w-30 z-10  top-0 right-0   bg-white rounded-2xl p-6 border border-gray200 mobile:w-full mobile:border-none mobile:h-full ${
+      className={`flex h-fit flex-col justify-between w-30 z-[5]  top-0 right-0   bg-white rounded-2xl p-6 border border-gray200 mobile:w-full mobile:border-none mobile:h-full ${
         isTabletOrMobile ? 'absolute' : 'fixed'
       }`}
       style={{ boxShadow: '0px 4px 16px rgba(17, 34, 17, 0.05)' }}
