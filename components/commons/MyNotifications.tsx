@@ -96,7 +96,10 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
                   onClick={() => handleDeleteNotification(item.id)}
                 />
               </div>
-              <p className="mb-1 text-body2-regular">
+              <p
+                className="mb-1 text-body2-regular"
+                style={{ wordBreak: 'keep-all', wordWrap: 'break-word' }}
+              >
                 {renderContent(item.content)}
               </p>
               <p className="text-caption text-gray400">
