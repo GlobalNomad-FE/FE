@@ -4,9 +4,11 @@ import { API } from '@/utils/constants/API';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { Activity } from './useGetActivities';
 import { BioImageType } from '@/components/activitie/activitieTitile/ActivitieTitle';
+import { Schedule } from '@/components/reservationWidget/lib/Calendar.types';
 
 export interface ActivityDetail extends Activity {
   subImages: BioImageType[];
+  schedules: Schedule[];
 }
 
 const getActivities = (activityId: number): Promise<ActivityDetail> => {
