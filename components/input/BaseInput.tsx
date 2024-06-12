@@ -17,8 +17,8 @@ export default function BaseInput({ name, control, placeholder }: InputProps) {
     rules: {
       required: { value: true, message: '필수 입력 값입니다.' },
       pattern: {
-        value: /^[A-Za-z가-힣\s]+$/,
-        message: '문자열로 입력해주세요.',
+        value: /^(?=.*[A-Za-z가-힣])[\dA-Za-z가-힣\s]+$/,
+        message: '문자열을 포함하여 작성해주세요.',
       },
     },
   });
