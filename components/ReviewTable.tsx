@@ -8,8 +8,7 @@ import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitesReview
 
 export default function ReviewTable({ id }: { id: number }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data } = useGetActivitiesReviews(id, currentPage, 5);
-  console.log('리뷰데이터', data);
+  const { data } = useGetActivitiesReviews(id, currentPage, 3);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -17,37 +16,45 @@ export default function ReviewTable({ id }: { id: number }) {
 
   return (
     <div>
-      {data?.reviews.map((list: ReviewsType) => {
-        const { user } = list;
-        const { profileImageUrl, nickname } = user;
-        return (
-          <div
-            className="flex gap-4 border-b border-gray400 py-6 last:border-none first:pt-0"
-            key={list.id}
-          >
-            <div className="w-[45px] h-[45px] rounded-[45px] bg-gray200 overflow-hidden relative">
-              <Image
-                src={profileImageUrl}
-                alt="기본프로필이미지"
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2 items-center">
-                <p className="text-nomad-black text-body1-bold">{nickname}</p>
-                <p>|</p>
-                <p className="text-gray400 text-body1-regular">
-                  {formatDate2(list.updatedAt)}
-                </p>
+      {data &&
+        data.reviews.map((item: ReviewsType) => {
+          const { user } = item;
+          console.log('item', item);
+          const { profileImageUrl, nickname } = user;
+          console.log('profileImageUrl', profileImageUrl);
+          return (
+            <div
+              className="flex gap-4 border-b border-gray400 py-6 last:border-none first:pt-0"
+              key={item.id}
+            >
+              <div
+                style={{ minHeight: '45px', minWidth: '45px' }}
+                className="w-[45px] h-[45px] rounded-[45px] bg-gray200 overflow-hidden relative"
+              >
+                {profileImageUrl && (
+                  <Image
+                    src={profileImageUrl}
+                    alt="기본프로필이미지"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                )}
               </div>
-              <div className="text-nomad-black text-body1-regular">
-                {list.content}
+              <div className="flex flex-col gap-2">
+                <div className="flex gap-2 items-center">
+                  <p className="text-nomad-black text-body1-bold">{nickname}</p>
+                  <p>|</p>
+                  <p className="text-gray400 text-body1-regular">
+                    {formatDate2(item.updatedAt)}
+                  </p>
+                </div>
+                <div className="text-nomad-black text-body1-regular">
+                  {item.content}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
       {data && (
         <Pagination
           totalCount={data.totalCount}

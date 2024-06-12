@@ -29,7 +29,7 @@ export const useGetActivitiesReviews = (
   size: number,
 ): UseQueryResult<ReviewsDataType> => {
   return useQuery({
-    queryKey: ['activities', 'reviews', activityId],
+    queryKey: ['activities', 'reviews', activityId, page],
     queryFn: () => getActivitiesReviews(activityId, page, size),
     placeholderData: keepPreviousData,
   });
