@@ -6,15 +6,16 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import Menu from '../Menu';
 import { ActivityDetail } from '@/apis/activities/useGetActivitiesDetail';
+import Cookies from 'js-cookie';
 
-/* TODO userId가 같을때만 menu(케밥)보이게하기 */
 export interface BioImageType {
   id: number;
   imageUrl: string;
 }
 
 export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
-  const { subImages: bioImage, bannerImageUrl, id } = data;
+  const { subImages: bioImage, bannerImageUrl, id, userId } = data;
+  const cookiesUserId = Cookies.get('userID');
 
   const renderBioImages = (bioImage: BioImageType[]) => {
     switch (bioImage.length) {
@@ -168,7 +169,7 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
             </div>
           </div>
         </div>
-        <Menu id={id} />
+        {Number(cookiesUserId) === userId ? <Menu id={id} /> : ''}
       </div>
       <div
         className="mt-[42px] flex h-[540px] tablet:h-[310px] rounded-2xl overflow-hidden gap-2 tablet:gap-1 mobile:h-[310px] mobile:rounded-none"
