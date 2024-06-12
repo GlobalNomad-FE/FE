@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import 'react-kakao-maps-sdk';
 import Image from 'next/image';
-import { MapProps, _MapProps } from 'react-kakao-maps-sdk';
+import { _MapProps } from 'react-kakao-maps-sdk';
 
 export default function Map({ location }: { location: string }) {
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function Map({ location }: { location: string }) {
       const options = {
         center: new kakao.maps.LatLng(37.502, 127.026581),
         level: 3,
-        draggable: false,
+        draggable: true,
       };
       const map = new kakao.maps.Map(container as HTMLElement, options);
 

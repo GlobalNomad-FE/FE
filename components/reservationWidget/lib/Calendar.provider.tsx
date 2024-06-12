@@ -2,15 +2,17 @@
 import { ReactNode, createContext, useState, useContext } from 'react';
 import { CalendarContextProps, Schedule } from './Calendar.types';
 import formatDateToYYYYMMDD from '@/utils/dateFormatter';
+import { ActivityDetail } from '@/apis/activities/useGetActivitiesDetail';
 
 const CalendarContext = createContext<CalendarContextProps | undefined>(
   undefined,
 );
 export interface CalendarProviderProps {
   children: ReactNode | ReactNode[];
+  data: ActivityDetail;
 }
 
-export const CalendarProvider = ({ children }: CalendarProviderProps) => {
+export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
   const [selectDate, setSelectDate] = useState<Date>(new Date());
   const [selectSchedule, setSelectSchedule] = useState<Schedule | null>(null);
   const [members, setMembers] = useState<number>(1);
@@ -45,6 +47,7 @@ export const CalendarProvider = ({ children }: CalendarProviderProps) => {
         onChangeSchedule,
         onChangeSelectDate,
         onChangeSelectMonth,
+        data,
       }}
     >
       {children}

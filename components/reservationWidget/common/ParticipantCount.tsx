@@ -21,7 +21,7 @@ const ParticipantCount = ({
       >
         <MinusIcon />
       </button>
-      <div className="p-[8px] w-[52px] flex justify-center items-center text-body2-regular">
+      <div className="p-[8px] w-[52px] flex justify-center items-center text-body2-regular text-gray600 ">
         {count}
       </div>
       <button className="p-[1rem]" onClick={handleCountPlus}>

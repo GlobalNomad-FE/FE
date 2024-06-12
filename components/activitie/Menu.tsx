@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
-import { useDeleteActivites } from '@/apis/activities/useDeleteActivites';
+import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
 
 export default function Menu({ id: activityId }: { id: number }) {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
@@ -16,14 +16,16 @@ export default function Menu({ id: activityId }: { id: number }) {
   const { mutate: deleteMutation } = useDeleteActivites(activityId);
 
   // 메뉴 열고 닫기
-  const handleKebabToggle = () => {
+  const handleKebabToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsKebabOpen(!isKebabOpen);
   };
 
   // 외부 클릭을 감지하여 케밥 메뉴를 닫습니다.
-  useOutsideClick(ref, isKebabOpen, handleKebabToggle);
+  useOutsideClick(ref, isKebabOpen, () => handleKebabToggle);
 
-  const handleDeletePopupOpen = () => {
+  const handleDeletePopupOpen = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsPopupOpen(!isPopupOpen);
   };
 
@@ -48,7 +50,8 @@ export default function Menu({ id: activityId }: { id: number }) {
         >
           <div
             className="px-[46px] py-[18px] cursor-pointer text-h4-regular text-gray600 hover:bg-green400 hover:text-green200"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               router.push(`/activities/register/${activityId}`);
             }}
           >

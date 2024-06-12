@@ -41,8 +41,8 @@ const ReviewModal = ({
   const overlay = useRef(null);
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     if (e.target === overlay.current) {
-      e.stopPropagation();
       setOpenModal(false);
     }
   };
@@ -73,7 +73,7 @@ const ReviewModal = ({
       <Portal>
         {openModal && (
           <div
-            className="fixed z-20 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+            className="fixed z-50 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
             onClick={handleClickOverlay}
             ref={overlay}
           >
