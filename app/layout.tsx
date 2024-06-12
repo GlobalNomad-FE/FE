@@ -33,6 +33,10 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
             />
+            <Script
+              src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+              strategy="beforeInteractive"
+            />
             {children}
           </AuthProvider>
         </ReactQueryProviders>

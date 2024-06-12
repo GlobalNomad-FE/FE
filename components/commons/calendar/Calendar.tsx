@@ -19,13 +19,21 @@ const customLocale: Locale = {
   },
 };
 
-//TODO - 스케줄있는 날만 달력에 표시해줘야하나??? =>데이터처리 완료하고 차차 수정하기
 export default function Calendar() {
-  const { selectMonth, selectDate, onChangeSelectDate, onChangeSelectMonth } =
-    useCalendar();
+  const {
+    selectMonth,
+    selectDate,
+    onChangeSelectDate,
+    onChangeSelectMonth,
+    data,
+  } = useCalendar();
 
   const handleMonthChange = (date: Date) => {
     onChangeSelectMonth(date.getMonth());
+  };
+
+  const isScheduledDate = () => {
+    return data.schedules.map((schedule) => new Date(schedule.date));
   };
 
   return (
@@ -40,6 +48,7 @@ export default function Calendar() {
         locale={customLocale}
         minDate={new Date()} //이전날짜 선택못함
         onMonthChange={handleMonthChange}
+        highlightDates={isScheduledDate()}
         dayClassName={(d) => {
           return d.getMonth() === selectMonth
             ? 'custom-day'

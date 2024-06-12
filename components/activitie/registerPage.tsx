@@ -23,6 +23,7 @@ import { useMutation, useQuery, queryOptions } from '@tanstack/react-query';
 import { ActivitiesDataType } from '@/types/activitiesType';
 import { patchActivities } from '@/apis/my-activities/@common/myActivites';
 import { useQueryClient } from '@tanstack/react-query';
+import BasePopup from '../commons/Popups/BasePopup';
 
 interface RegisterpageProps {
   id?: number;
@@ -33,6 +34,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const [bannerImageUrl, setBannerImageUrl] = useState<string[]>([]);
   const [subImageUrls, setSubImageUrls] = useState<string[]>([]);
   const [subImageIds, setSubImageIds] = useState<number[]>([]);
+  const [PopupOpen, setPopupOpen] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -89,8 +91,8 @@ export default function Registerpage({ id }: RegisterpageProps) {
     };
 
     registerMutation(formData, {
-      onSuccess: (data) => {
-        console.log('onSuccess', data);
+      onSuccess: () => {
+        setPopupOpen(true);
         router.push('/activities');
       },
       onError: () => {
@@ -223,6 +225,16 @@ export default function Registerpage({ id }: RegisterpageProps) {
         </main>
         <Footer />
       </div>
+      {PopupOpen && (
+        <BasePopup
+          isOpen={PopupOpen}
+          closePopup={() => {
+            setPopupOpen(false);
+          }}
+        >
+          {id ? '수정이 완료되었습니다' : '등록이 완료되었습니다'}
+        </BasePopup>
+      )}
     </FormProvider>
   );
 }

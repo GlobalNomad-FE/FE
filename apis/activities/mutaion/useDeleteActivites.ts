@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteActivities } from '../my-activities/@common/myActivites';
+import { deleteActivities } from '../../my-activities/@common/myActivites';
 
 export const useDeleteActivites = (activityId: number) => {
   const queryClient = useQueryClient();

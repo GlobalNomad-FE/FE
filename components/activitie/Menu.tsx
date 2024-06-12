@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
-import { useDeleteActivites } from '@/apis/activities/useDeleteActivites';
+import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
 
 export default function Menu({ id: activityId }: { id: number }) {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
