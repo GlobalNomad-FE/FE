@@ -12,7 +12,7 @@ const TimeSelector = ({ schedules }: { schedules: any[] }) => {
     const filter = schedules.find((v) => v.date === formatedDate);
     if (!filter) {
       return (
-        <div className="text-body1-medium text-nomad-black mb-4">
+        <div className="text-h4-regular text-nomad-black mb-4">
           예약가능한 시간이 없습니다
         </div>
       );
