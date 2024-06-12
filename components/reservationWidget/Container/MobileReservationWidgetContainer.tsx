@@ -48,7 +48,7 @@ export default function MobileReservationWidgetContainer() {
   };
 
   return (
-    <div className="w-full fixed border-t border-[#A1A1A1] p-4 bg-white flex justify-between left-0 bottom-0 z-10">
+    <div className="w-full fixed border-t border-[#A1A1A1] p-4 bg-white flex justify-between left-0 bottom-0 z-50">
       <div className=" flex flex-col">
         <div className="flex gap-[6px] items-center">
           <p className="text-h3-bold text-nomad-black">
