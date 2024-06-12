@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 const TestNotifications = () => {
-  const [isnNotificationsOpen, setIsnNotificationsOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
   const handleNotificationOpen = () => {
-    setIsnNotificationsOpen(!isnNotificationsOpen);
+    setIsNotificationsOpen(!isNotificationsOpen);
   };
 
   const handleNotificationClose = () => {
-    setIsnNotificationsOpen(false);
+    setIsNotificationsOpen(false);
   };
 
   return (
@@ -24,7 +24,7 @@ const TestNotifications = () => {
         className="mb-6 cursor-pointer"
         onClick={handleNotificationOpen}
       />
-      {isnNotificationsOpen && (
+      {isNotificationsOpen && (
         <MyNotifications onClose={() => handleNotificationClose()} />
       )}
     </div>
