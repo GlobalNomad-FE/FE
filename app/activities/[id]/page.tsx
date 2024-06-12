@@ -8,6 +8,7 @@ import Map from '@/components/activitie/Map';
 import Review from '@/components/activitie/Review';
 import { useGetActivitiesDetail } from '@/apis/activities/useGetActivitiesDetail';
 import Footer from '@/components/commons/Footer';
+import Cookies from 'js-cookie';
 
 export default function ActivitiesDetailPage({
   params,
@@ -15,18 +16,21 @@ export default function ActivitiesDetailPage({
   params: { id: number };
 }) {
   const activitieId = params?.id;
-
+  const cookiesUserId = Cookies.get('userID');
   const { data } = useGetActivitiesDetail(activitieId);
-
-  console.log(data);
+  const isFullWidth = Number(cookiesUserId) !== data?.userId;
   return (
     <>
       <Gnb />
       {data && (
-        <main className="max-w-[1200px] mx-auto px-[24px]">
+        <main className="max-w-[1200px] mx-auto px-[24px] mb-24">
           <ActivitieTitle data={data} />
           <div className="flex gap-5 mt-[50px]">
-            <div className="w-[790px] flex flex-col">
+            <div
+              className={`flex flex-col ${
+                isFullWidth ? 'w-[790px]' : 'w-full'
+              }`}
+            >
               <ActivitieBio description={data.description} />
               <Map location={data.address} />
               <Review
@@ -35,12 +39,13 @@ export default function ActivitiesDetailPage({
                 id={data.id}
               />
             </div>
-            {/*TODO - userId확인해서 내꺼면 안보이게 */}
-            <div>
-              <CalendarProvider data={data}>
-                <ReservationWidgetContainerSelector />
-              </CalendarProvider>
-            </div>
+            {isFullWidth && (
+              <div>
+                <CalendarProvider data={data}>
+                  <ReservationWidgetContainerSelector />
+                </CalendarProvider>
+              </div>
+            )}
           </div>
         </main>
       )}
