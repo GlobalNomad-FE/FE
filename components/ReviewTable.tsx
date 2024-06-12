@@ -1,16 +1,11 @@
 'use client';
 import Image from 'next/image';
 import { formatDate2 } from '@/utils/dateFormatter';
-import { ReviewsType, ReviewsDataType } from '@/types/reviewsType';
+import { ReviewsType } from '@/types/reviewsType';
 import Pagination from './commons/Pagination';
 import { useState } from 'react';
 import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitesReviews';
 
-// interface ReviewTableProps {
-//   data: ReviewsDataType;
-// }
-
-//TODO - 데이터 연동하면 페이지네이션 수정할것.
 export default function ReviewTable({ id }: { id: number }) {
   const [currentPage, setCurrentPage] = useState(1);
   const { data } = useGetActivitiesReviews(id, currentPage, 5);
@@ -22,7 +17,7 @@ export default function ReviewTable({ id }: { id: number }) {
 
   return (
     <div>
-      {/* {reviews.map((list: ReviewsType) => {
+      {data?.reviews.map((list: ReviewsType) => {
         const { user } = list;
         const { profileImageUrl, nickname } = user;
         return (
@@ -53,13 +48,15 @@ export default function ReviewTable({ id }: { id: number }) {
           </div>
         );
       })}
-      <Pagination
-        totalCount={totalCount}
-        itemsInPage={3}
-        visiblePages={5}
-        onPageChange={handlePageChange}
-        currentPage={currentPage}
-      /> */}
+      {data && (
+        <Pagination
+          totalCount={data.totalCount}
+          itemsInPage={3}
+          visiblePages={5}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
 }

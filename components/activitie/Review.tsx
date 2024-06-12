@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import ReviewTable from '../ReviewTable';
-import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitesReviews';
 
 export default function Review({
   averageRating,
@@ -15,8 +14,6 @@ export default function Review({
   return (
     <div className="border-t border-gray200 py-[40px] flex flex-col gap-6">
       <p className="text-h3-bold text-nomad-black">후기</p>
-      {/* {data && (
-        <> */}
       <div className="flex gap-4 items-center">
         <p className="text-[50px] text-nomad-black font-semibold leading-normal ">
           {averageRating}
@@ -36,9 +33,13 @@ export default function Review({
           </div>
         </div>
       </div>
-      <ReviewTable id={id} />
-      {/* </>
-      )} */}
+      {totalCount === 0 ? (
+        <div className="text-h2 text-gray600 flex items-center">
+          아직 후기가 없어요.
+        </div>
+      ) : (
+        <ReviewTable id={id} />
+      )}
     </div>
   );
 }
