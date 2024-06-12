@@ -15,7 +15,6 @@ export interface BioImageType {
 
 export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
   const { subImages: bioImage, bannerImageUrl, id } = data;
-  console.log(bioImage);
 
   const renderBioImages = (bioImage: BioImageType[]) => {
     switch (bioImage.length) {
@@ -89,7 +88,7 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
           top: 130,
           right: 10,
           zIndex: 2,
-          opacity: 0.8,
+          opacity: 0.6,
         }}
       >
         <Image
@@ -113,7 +112,7 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
           top: 130,
           left: 10,
           zIndex: 2,
-          opacity: 0.8,
+          opacity: 0.6,
         }}
       >
         <Image
@@ -171,7 +170,10 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
         </div>
         <Menu id={id} />
       </div>
-      <div className="mt-[42px] flex h-[540px] tablet:h-[310px] rounded-2xl overflow-hidden gap-2 tablet:gap-1 mobile:h-[310px] mobile:rounded-none">
+      <div
+        className="mt-[42px] flex h-[540px] tablet:h-[310px] rounded-2xl overflow-hidden gap-2 tablet:gap-1 mobile:h-[310px] mobile:rounded-none"
+        style={{ boxShadow: '0px 4px 12px rgba(17, 34, 17, 0.05)' }}
+      >
         <div className="w-1/2 h-full mobile:hidden">
           <img
             src={bannerImageUrl}
@@ -183,7 +185,7 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
           <div className="mobile:hidden grid grid-cols-2 grid-rows-2 gap-2 tablet:gap-1 h-full">
             {renderBioImages(bioImage)}
           </div>
-          <div className="mobile:block  ">
+          <div className="mobile:block">
             <Slider {...settings}>
               <div>
                 <img
