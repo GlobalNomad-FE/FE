@@ -19,7 +19,7 @@ export default function TabletCalendar() {
   return (
     <>
       <div onClick={hadleOpenCalender}>
-        <p className="text-body1-medium text-green200 underline">
+        <p className="text-body1-medium text-green200 underline cursor-pointer">
           {date
             ? `${formatDate(date)} ${selectSchedule?.startTime}~${
                 selectSchedule?.endTime

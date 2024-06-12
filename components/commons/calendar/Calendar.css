@@ -20,7 +20,7 @@
   font-weight: 900;
   background-color: #ced8d5;
   color: #0b3b2d;
-  border-radius: 50%;
+  border-radius: 50% !important;
 }
 .react-datepicker__month-container {
   float: none;
@@ -49,7 +49,7 @@
 
 .react-datepicker__day--selected {
   background: #0b3b2d;
-  border-radius: 8px;
+  border-radius: 8px !important;
   color: white !important;
 }
 
@@ -66,8 +66,14 @@
   border: none;
 }
 .react-datepicker__day--highlighted {
-  background-color: #6be074;
+  background-color: none;
   border-radius: 8px;
+}
+.react-datepicker__day--highlighted,
+.react-datepicker__month-text--highlighted,
+.react-datepicker__quarter-text--highlighted,
+.react-datepicker__year-text--highlighted {
+  background-color: none;
 }
 .custom-day {
   width: 35px;

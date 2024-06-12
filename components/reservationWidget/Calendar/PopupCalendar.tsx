@@ -4,7 +4,6 @@ import Calendar from '@/components/commons/calendar/Calendar';
 import TimeSelector from '@common/TimeSelector';
 import ReservationButton from '@common/ReservationButton';
 import ParticipantCount from '@common/ParticipantCount';
-import data from '../mock.json';
 import CloseIcon from '@/public/icons/btn-X-big.svg';
 import { useMediaQuery } from 'react-responsive';
 import { useCalendar } from '../lib/Calendar.provider';
@@ -14,7 +13,7 @@ interface Props {
 }
 
 export default function PopupCalendar({ handleClose }: Props) {
-  const { members, onChangeMembers, selectSchedule } = useCalendar();
+  const { members, onChangeMembers, selectSchedule, data } = useCalendar();
   const id = selectSchedule?.id;
   //TODO: api로 불러오는 데이터 Provider로 관리예정
   const { schedules } = data;
