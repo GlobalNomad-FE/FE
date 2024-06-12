@@ -1,4 +1,5 @@
 'use client';
+import { useDeleteNotification } from '@/apis/my-notifications/useDeleteMyNotification';
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
 import Image from 'next/image';
 
@@ -8,6 +9,11 @@ interface MyNotificationsProps {
 
 const MyNotifications = ({ onClose }: MyNotificationsProps) => {
   const { data, error, isLoading } = useGetMyNotifications();
+  const { mutate } = useDeleteNotification();
+
+  const handleDeleteNotification = (notificationId: number) => {
+    mutate({ notificationId });
+  };
 
   const renderContent = (content: string) => {
     if (!content) return null;
@@ -83,9 +89,11 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
                 />
                 <Image
                   src="/icons/btn-X-medium.svg"
+                  className="cursor-pointer"
                   alt="알림 삭제 버튼"
                   width={24}
                   height={24}
+                  onClick={() => handleDeleteNotification(item.id)}
                 />
               </div>
               <p className="mb-1 text-body2-regular">
