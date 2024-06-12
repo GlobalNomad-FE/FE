@@ -24,6 +24,7 @@ import { ActivitiesDataType } from '@/types/activitiesType';
 import { patchActivities } from '@/apis/my-activities/@common/myActivites';
 import { useQueryClient } from '@tanstack/react-query';
 import BasePopup from '../commons/Popups/BasePopup';
+import { AxiosError } from 'axios';
 
 interface RegisterpageProps {
   id?: number;
@@ -35,6 +36,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const [subImageUrls, setSubImageUrls] = useState<string[]>([]);
   const [subImageIds, setSubImageIds] = useState<number[]>([]);
   const [PopupOpen, setPopupOpen] = useState(false);
+  const [imagePopupOpen, setImagePopupOpen] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -54,6 +56,18 @@ export default function Registerpage({ id }: RegisterpageProps) {
   });
   const { handleSubmit, control, setValue, reset, getValues } = methods;
 
+  const getImagePopupMessage = () => {
+    if (bannerImageUrl.length === 0 && subImageUrls.length === 0) {
+      return '배너이미지와 소개이미지를 모두 등록해주세요.';
+    } else if (bannerImageUrl.length === 0) {
+      return '배너이미지를 등록해주세요.';
+    } else if (subImageUrls.length === 0) {
+      return '소개이미지를 등록해주세요.';
+    } else {
+      return '';
+    }
+  };
+
   const { mutate: registerMutation } = useMutation({
     mutationKey: ['register'],
     mutationFn: (data: ActivitiesData) => postActivities(data),
@@ -67,6 +81,18 @@ export default function Registerpage({ id }: RegisterpageProps) {
       queryClient.invalidateQueries({ queryKey: ['register', 'detail', id] });
       router.push('/activities');
     },
+    onError: () => (error: AxiosError) => {
+      switch (error.response?.status) {
+        case 401:
+          alert('로그인을 해주세요.');
+          break;
+        case 409:
+          alert('겹치는 예약 가능 시간대가 존재합니다.');
+        default:
+          alert('다시 시도해주세요.');
+          break;
+      }
+    },
   });
 
   const handlevalue = (id: keyof ActivitiesData, value: any) => {
@@ -76,8 +102,11 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const onsubmit: SubmitHandler<ActivitiesData> = async (
     data: ActivitiesData,
   ) => {
-    if (bannerImageUrl.length === 0) {
+    if (bannerImageUrl.length === 0 || subImageUrls.length === 0) {
+      setImagePopupOpen(true);
       return;
+    }
+    if (data.schedules.length === 0) {
     }
     if (modifyState) {
       await handleModifyRegister(data);
@@ -233,6 +262,16 @@ export default function Registerpage({ id }: RegisterpageProps) {
           }}
         >
           {id ? '수정이 완료되었습니다' : '등록이 완료되었습니다'}
+        </BasePopup>
+      )}
+      {imagePopupOpen && (
+        <BasePopup
+          isOpen={imagePopupOpen}
+          closePopup={() => {
+            setImagePopupOpen(false);
+          }}
+        >
+          {getImagePopupMessage()}
         </BasePopup>
       )}
     </FormProvider>
