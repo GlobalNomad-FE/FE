@@ -35,8 +35,9 @@ export default function ActivitiesDetailPage({
                 id={data.id}
               />
             </div>
+            {/*TODO - userId확인해서 내꺼면 안보이게 */}
             <div>
-              <CalendarProvider>
+              <CalendarProvider data={data}>
                 <ReservationWidgetContainerSelector />
               </CalendarProvider>
             </div>
