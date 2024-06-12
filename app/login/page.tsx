@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import LoginInput from '@/components/commons/LoginInput';
 import Link from 'next/link';
 import { FormValues } from '@/apis/auth/auth.type';
@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { USER_INPUT_VALIDATION } from '@/utils/user';
 import { useAuth } from '@/context/Authcontext';
 import Image from 'next/image';
+import BasePopup from '@/components/commons/Popups/BasePopup';
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -40,6 +41,18 @@ const Login = () => {
     mode: 'onBlur',
   });
 
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const handleOpenPopup = (message: string) => {
+    setPopupMessage(message);
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
   const { isValid, errors } = formState;
 
   const onSubmit = async (data: FormValues) => {
@@ -47,6 +60,7 @@ const Login = () => {
       await signIn(data);
     } catch (error) {
       console.error('Login failed:', error);
+      handleOpenPopup('아이디 또는 비밀번호를 잘못 입력했습니다.');
     }
   };
 
@@ -101,6 +115,10 @@ const Login = () => {
           회원가입
         </Link>
       </div>
+
+      <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+        {popupMessage}
+      </BasePopup>
     </div>
   );
 };

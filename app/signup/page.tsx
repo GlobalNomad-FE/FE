@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import LoginInput from '@/components/commons/LoginInput';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -11,6 +11,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { FormValues } from '@/apis/auth/auth.type';
 import { auth } from '@/apis/auth/auth';
+import BasePopup from '@/components/commons/Popups/BasePopup';
 
 const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
 
@@ -52,18 +53,34 @@ const SignUp = () => {
     mode: 'onBlur',
   });
 
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const handleOpenPopup = (message: string) => {
+    setPopupMessage(message);
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
   const signUpMutation = useMutation({
     mutationFn: (data: FormValues) => auth.signup(data),
     mutationKey: ['signUp'],
     onSuccess: () => {
-      router.push('/login');
+      handleOpenPopup('가입이 완료되었습니다.');
+      setTimeout(() => {
+        router.push('/login');
+      }, 2000);
     },
     onError: (error: AxiosError<ErrorMessage>) => {
-      if (error.response && error.response.status >= 400) {
-        console.log('AxiosError');
+      if (error.response && error.response.status === 409) {
+        handleOpenPopup('이미 사용 중인 회원입니다.');
         return;
       }
       console.error('AxiosError', error);
+      handleOpenPopup('회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.');
     },
   });
 
@@ -147,6 +164,10 @@ const SignUp = () => {
           로그인하기
         </Link>
       </div>
+
+      <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+        {popupMessage}
+      </BasePopup>
     </div>
   );
 };
