@@ -20,7 +20,7 @@ const TimeSelector = ({ schedules }: { schedules: any[] }) => {
           return (
             isDate && (
               <button
-                className={`border rounded-lg border-nomad-black active:bg-nomad-black active:text-white text-body1-regular font-medium-w py-[1rem] px-[1.2rem] text-nomad-black mr-[1.2rem] mb-[1.2rem] ${
+                className={`border rounded-lg border-nomad-black active:bg-nomad-black active:text-white text-base font-medium py-[1rem] px-[1.2rem] text-nomad-black mr-[1.2rem] mb-[1.2rem] ${
                   isSelected
                     ? 'bg-nomad-black text-white'
                     : 'bg-white text-nomad-black'
