@@ -7,7 +7,6 @@ import Button from '../Button';
 import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 interface Reservation {
@@ -134,6 +133,7 @@ const Experience = ({
     <button
       onClick={() => router.push(`activities/${activityId}`)}
       className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white"
+      style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
     >
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
         <Image
@@ -144,7 +144,7 @@ const Experience = ({
           className="rounded-l-[24px]"
         />
       </div>
-      <div className="flex flex-col justify-between w-full p-6 tablet:p-[12px] mobile:p-[9px]">
+      <div className="flex flex-col justify-between w-full h-full p-6 text-left tablet:p-[12px] mobile:p-[9px]">
         <div>
           {type === 'reservations' ? (
             <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
