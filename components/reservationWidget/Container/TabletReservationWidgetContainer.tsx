@@ -50,7 +50,7 @@ const TabletReservationWidgetContainer = () => {
               setErrorMessage('확정 예약이 있는 일정은 예약할 수 없습니다.');
               break;
             default:
-              setErrorMessage('scheduleId는 숫자로 입력해주세요.');
+              setErrorMessage('내가 등록한 체험은 예약할 수 없습니다.');
               break;
           }
         },
