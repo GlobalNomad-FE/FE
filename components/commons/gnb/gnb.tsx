@@ -61,7 +61,7 @@ export default function Gnb() {
   ];
 
   return (
-    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-10">
+    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-40">
       <div className="max-w-[1248px] w-full mx-auto flex items-center justify-between px-[24px]">
         <Link href="/">
           <Image
