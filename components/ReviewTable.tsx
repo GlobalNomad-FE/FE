@@ -19,12 +19,10 @@ export default function ReviewTable({ id }: { id: number }) {
       {data &&
         data.reviews.map((item: ReviewsType) => {
           const { user } = item;
-          console.log('item', item);
           const { profileImageUrl, nickname } = user;
-          console.log('profileImageUrl', profileImageUrl);
           return (
             <div
-              className="flex gap-4 border-b border-gray400 py-6 last:border-none first:pt-0"
+              className="flex gap-4 border-t border-gray400 py-6 first:border-none first:pt-0"
               key={item.id}
             >
               <div
