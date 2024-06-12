@@ -69,11 +69,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       console.error(error);
+      throw error;
     },
   });
 
   const signIn = async (data: FormValues) => {
-    signInMutation.mutate(data);
+    try {
+      await signInMutation.mutateAsync(data); // 비동기로 실행하고 성공하지 않으면 자동으로 에러를 던짐
+    } catch (error) {
+      throw error; // 에러를 던짐
+    }
   };
 
   const signOut = () => {
