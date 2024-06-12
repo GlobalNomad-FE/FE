@@ -62,6 +62,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           expires: 7,
         });
         Cookies.set('refreshToken', data.refreshToken, { expires: 7 }); // 7일 동안 유효
+        Cookies.set('userID', data.user.id.toString(), { expires: 7 }); // userID를 쿠키에 설정
         setUser(data);
         router.push('/');
       }
@@ -79,6 +80,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
+    Cookies.remove('userID');
   };
 
   return (
