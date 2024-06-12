@@ -79,7 +79,7 @@ const FilterDropdown = ({
                 index !== listItem.length - 1
                   ? 'border-b border-solid border-gray200'
                   : ''
-              } flex h-[3.625rem] justify-center items-center font-family text-lg font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-sm`}
+              } flex h-[3.625rem] justify-center items-center font-family text-lg text-gray600 font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-sm`}
               onClick={() => onClickItemSelected(index)}
             >
               {item}
