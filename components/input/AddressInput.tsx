@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import Script from 'next/script';
 import { KeyActivitiesData } from '@/app/activities/register/page';
 
 interface DaumPostcode {
@@ -53,10 +52,6 @@ export default function AddressInput({
           onClick={handleOpenAddressSearch}
         />
       </div>
-      <Script
-        src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
-        strategy="beforeInteractive"
-      />
     </>
   );
 }
