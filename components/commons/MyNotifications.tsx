@@ -3,13 +3,17 @@ import { useDeleteNotification } from '@/apis/my-notifications/useDeleteMyNotifi
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
 import formatDateDiff from '@/utils/formatDateDiff';
 import Image from 'next/image';
-import { useRef, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface MyNotificationsProps {
   onClose: () => void;
+  notificationIconRef: React.RefObject<HTMLImageElement>;
 }
 
-const MyNotifications = ({ onClose }: MyNotificationsProps) => {
+const MyNotifications = ({
+  onClose,
+  notificationIconRef,
+}: MyNotificationsProps) => {
   const { data, error, isLoading } = useGetMyNotifications();
   const { mutate } = useDeleteNotification();
   const notificationsRef = useRef<HTMLDivElement | null>(null);
@@ -22,12 +26,14 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
     (event: MouseEvent) => {
       if (
         notificationsRef.current &&
-        !notificationsRef.current.contains(event.target as Node)
+        !notificationsRef.current.contains(event.target as Node) &&
+        notificationIconRef.current &&
+        !notificationIconRef.current.contains(event.target as Node)
       ) {
         onClose();
       }
     },
-    [onClose],
+    [onClose, notificationIconRef],
   );
 
   useEffect(() => {
