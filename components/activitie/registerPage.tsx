@@ -88,6 +88,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
           break;
         case 409:
           alert('겹치는 예약 가능 시간대가 존재합니다.');
+          break;
         default:
           alert('다시 시도해주세요.');
           break;
