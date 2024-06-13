@@ -1,8 +1,6 @@
 import React, { forwardRef, useState } from 'react';
-import { USER_INPUT_VALIDATION } from '@/utils/user';
-import Image from 'next/image';
 
-const { email, password } = USER_INPUT_VALIDATION;
+import Image from 'next/image';
 
 interface InputProps {
   label: string;
@@ -48,7 +46,7 @@ const LoginInput = forwardRef<HTMLInputElement, InputProps>(
             >
               <Image
                 alt={visibility ? 'Hide Password' : 'Show Password'}
-                src={`/icons/btn_visibility_${visibility ? 'on' : 'off'}.svg`}
+                src={`/icons/btn_visibility_${visibility ? 'off' : 'on'}.svg`}
                 width={24}
                 height={24}
               />

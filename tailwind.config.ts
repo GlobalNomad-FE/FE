@@ -17,6 +17,8 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'custom-gradient':
           'linear-gradient(90deg, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.40) 100%)',
+        'custom-gradient2':
+          'linear-gradient(90deg, rgba(0, 0, 0, 0.07) 0%, rgba(0, 0, 0, 0) 100%)',
       },
       fontSize: {
         title: ['32px', { lineHeight: 'normal', fontWeight: '700' }],
@@ -81,10 +83,11 @@ const config: Config = {
       screens: {
         mobile: { max: '767px' },
         tablet: { min: '768px', max: '1023px' },
-        minPc: { min: '1248px' },
+        mainTabletSize: { min: '768px', max: '1248px' },
+        mainPcSize: { min: '1248px' },
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')], //스크롤바 숨김가능(scrollbar-hide)
 };
 export default config;

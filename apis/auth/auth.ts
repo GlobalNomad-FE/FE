@@ -6,7 +6,7 @@ export const auth = {
     const response = await instance.post('/users', userData);
     return response.data;
   },
-  signin: async (userData: FormValues) => {
+  login: async (userData: FormValues) => {
     const response = await instance.post('/auth/login', userData);
     return response.data;
   },

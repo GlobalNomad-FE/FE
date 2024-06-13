@@ -1,3 +1,5 @@
+import { ActivityDetail } from '@/apis/activities/useGetActivitiesDetail';
+
 export interface Schedule {
   id: number;
   date: string;
@@ -15,4 +17,5 @@ export interface CalendarContextProps {
   onChangeMembers: (members: number) => void;
   selectMonth: number | null;
   onChangeSelectMonth: (month: number | null) => void;
+  data: ActivityDetail;
 }

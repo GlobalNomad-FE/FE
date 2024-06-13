@@ -4,10 +4,8 @@ import { z } from 'zod';
 import Image from 'next/image';
 
 interface Props {
-  type: 'text' | 'password' | 'email' | 'number' | 'time';
+  type: 'email' | 'password'; //email, password
   password?: string; //비밀번호 확인의 경우 기존 비밀번호가 담김
-  isError?: boolean;
-  errorMessage?: string;
 }
 
 // 이메일 스키마 정의
@@ -44,7 +42,6 @@ const Input = ({ type, password = '' }: Props) => {
 
   const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length < 8 && type === 'password') {
-      setErrorMessageColor('red100');
       return setErrorMessage('8자 이상 입력해주세요');
     }
     //TODO : 비밀번호 확인 시 비밀번호가 다른 경우, 오류 발생

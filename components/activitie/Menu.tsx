@@ -2,27 +2,35 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRef } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
+import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
 
-export default function Menu() {
+export default function Menu({ id: activityId }: { id: number }) {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const router = useRouter();
-  const pathname = usePathname(); //나중에 데이터 연동할때 쓸 것
   const ref = useRef<HTMLDivElement>(null);
 
+  const { mutate: deleteMutation } = useDeleteActivites(activityId);
+
   // 메뉴 열고 닫기
-  const handleKebabToggle = () => {
+  const handleKebabToggle = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsKebabOpen(!isKebabOpen);
   };
 
   // 외부 클릭을 감지하여 케밥 메뉴를 닫습니다.
-  useOutsideClick(ref, isKebabOpen, handleKebabToggle);
+  useOutsideClick(ref, isKebabOpen, () => handleKebabToggle);
 
-  const handleDeletePopupOpen = () => {
+  const handleDeletePopupOpen = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsPopupOpen(!isPopupOpen);
+  };
+
+  const handleDeleteData = () => {
+    deleteMutation({ activityId });
   };
 
   return (
@@ -42,14 +50,9 @@ export default function Menu() {
         >
           <div
             className="px-[46px] py-[18px] cursor-pointer text-h4-regular text-gray600 hover:bg-green400 hover:text-green200"
-            onClick={() => {
-              router.push(
-                '/',
-                //   {
-                //   pathname: '/',
-                //   query: { pid: data.activityId } =>나중에 수정페이지로 activityId 넘겨줘야함
-                // }
-              );
+            onClick={(e) => {
+              e.preventDefault();
+              router.push(`/activities/register/${activityId}`);
             }}
           >
             수정하기
@@ -69,7 +72,7 @@ export default function Menu() {
           closePopup={() => {
             setIsPopupOpen(false);
           }}
-          clickEvent={handleDeletePopupOpen} //TODO - 데이터 연동하고 삭제하기 이벤트함수 바꿔야함(임시)
+          clickEvent={handleDeleteData}
         >
           정말 삭제 하시겠습니까?
         </BasePopupTwoBtns>

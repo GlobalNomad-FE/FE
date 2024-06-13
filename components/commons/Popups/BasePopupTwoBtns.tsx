@@ -1,5 +1,5 @@
 import Portal from '@/utils/Portal';
-import React from 'react';
+import React, { useRef } from 'react';
 import Button from '@/components/commons/Button';
 import Image from 'next/image';
 
@@ -23,18 +23,24 @@ const BasePopupTwoBtns = ({
   clickEvent,
   children,
 }: Props) => {
+  const overlay = useRef(null);
+
+  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (e.target === overlay.current) {
+      closePopup();
+    }
+  };
+
   //팝업 끄기
-  const handleClosePopup = () => {
+  const handleClosePopup = (e: React.MouseEvent) => {
+    e.stopPropagation();
     closePopup();
   };
 
-  //팝업 안쪽 클릭시 팝업이 꺼지는 현상을 없애기위해 버블링 막음
-  const handleStopBubbling = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-  };
-
   //위에서 넘겨받은 클릭이벤트
-  const handleClickEvent = () => {
+  const handleClickEvent = (e: React.MouseEvent) => {
+    e.stopPropagation();
     clickEvent();
     closePopup();
   };
@@ -44,13 +50,11 @@ const BasePopupTwoBtns = ({
       <Portal>
         {isOpen && (
           <div
-            className="fixed z-20 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
-            onClick={handleClosePopup}
+            className="fixed z-50 left-0 top-0 w-full h-full bg-black200 bg-opacity-45 flex items-center justify-center"
+            onClick={handleClickOverlay}
+            ref={overlay}
           >
-            <div
-              onClick={handleStopBubbling}
-              className="w-[298px] p-[24px] bg-white rounded-[12px] flex flex-col items-center justify-center"
-            >
+            <div className="w-[298px] p-[24px] bg-white rounded-[12px] flex flex-col items-center justify-center">
               <Image
                 src="/icons/cancel-reservation.svg"
                 alt="체크 버튼"

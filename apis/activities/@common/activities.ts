@@ -3,7 +3,7 @@ import { API } from '@/utils/constants/API';
 
 export interface ActivitiesProps {
   title: string;
-  category: '문화 · 예술' | '식음료' | '스포츠' | '투어' | '관광' | '웰빙';
+  category: string;
   description: string;
   address: string;
   price: number;
@@ -18,8 +18,8 @@ export interface Schedule {
   endTime: string;
 }
 
-interface ReservationData {
-  scheduleId: number;
+export interface ReservationData {
+  scheduleId: number | undefined;
   headCount: number;
 }
 
@@ -35,8 +35,8 @@ export const postActivities = (data: ActivitiesProps) => {
  * 체험 상세 조회
  * @param activityId
  */
-export const getActivities = (activityId: number) => {
-  return instance.get(`${API.ACTIVITIE}/${activityId}`);
+export const getActivitiesID = (activityId: number) => {
+  return instance.get(`${API.ACTIVITIE}/${activityId}`).then((res) => res.data);
 };
 
 /**
@@ -67,8 +67,8 @@ export const getActivitiesSchedule = (
  */
 export const getActivitiesReviews = (
   activityId: number,
-  page: number,
-  size: number,
+  page?: number,
+  size?: number,
 ) => {
   return instance.get(`${API.ACTIVITIE}/${activityId}/reviews`, {
     params: {

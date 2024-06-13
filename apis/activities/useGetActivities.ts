@@ -37,7 +37,7 @@ export interface Activity {
   updatedAt: Date;
 }
 
-interface GetActivitiesResponse {
+export interface GetActivitiesResponse {
   cursorId: number;
   totalCount: number;
   activities: Activity[];
@@ -68,6 +68,7 @@ const useGetActivities = (request: GetActivitiesRequest) => {
   return useQuery({
     queryKey: activitiesKey.getActivities(
       request.method === 'cursor' ? request.cursorId : request.page,
+      request.size,
       request.category,
       request.keyword,
       request.sort,
