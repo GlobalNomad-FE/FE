@@ -10,7 +10,7 @@ interface MyNotificationsProps {
   notificationIconRef: React.RefObject<HTMLImageElement>;
 }
 
-const MyNotifications = ({
+const Notifications = ({
   onClose,
   notificationIconRef,
 }: MyNotificationsProps) => {
@@ -69,7 +69,7 @@ const MyNotifications = ({
   return (
     <div
       ref={notificationsRef}
-      className="w-[368px] px-5 py-6 rounded-[10px] border border-[#CBC9CF] bg-green400 text-black200 z-50 mobile:w-full mobile:h-full mobile:fixed mobile:top-0 mobile:right-0 mobile:py-10 mobile:rounded-none mobile:overflow-scroll"
+      className="relative right-[212px] w-[368px] px-5 py-6 rounded-[10px] border border-[#CBC9CF] bg-green400 text-black200 z-50 mobile:w-full mobile:h-full mobile:fixed mobile:top-0 mobile:right-0 mobile:py-10 mobile:rounded-none mobile:overflow-scroll"
       style={{ boxShadow: '0px 2px 8px 0px rgba(120, 116, 134, 0.25)' }}
     >
       <div className="flex justify-between items-center mb-4">
@@ -124,4 +124,4 @@ const MyNotifications = ({
   );
 };
 
-export default MyNotifications;
+export default Notifications;
