@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteActivities } from '../../my-activities/@common/myActivites';
+import { AxiosError } from 'axios';
 
 export const useDeleteActivites = (activityId: number) => {
   const queryClient = useQueryClient();
@@ -9,6 +10,7 @@ export const useDeleteActivites = (activityId: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['activities'] });
     },
+    onError: (error: AxiosError) => {},
   });
 
   return { mutate };

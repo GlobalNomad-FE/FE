@@ -6,10 +6,14 @@ import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
 import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
+import { AxiosError } from 'axios';
+import BasePopup from '../commons/Popups/BasePopup';
 
 export default function Menu({ id: activityId }: { id: number }) {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
+  const [errorMessage, setErroeMessage] = useState('');
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -30,7 +34,31 @@ export default function Menu({ id: activityId }: { id: number }) {
   };
 
   const handleDeleteData = () => {
-    deleteMutation({ activityId });
+    deleteMutation(
+      { activityId },
+      {
+        onError: (error: AxiosError) => {
+          setIsErrorPopupOpen(true);
+          switch (error.response?.status) {
+            case 400:
+              setErroeMessage('신청 예약이 있는 체험은 삭제할 수 없습니다.');
+              break;
+            case 401:
+              setErroeMessage('로그인을 해주세요.');
+              break;
+            case 403:
+              setErroeMessage('본인의 체험만 삭제할 수 있습니다.');
+              break;
+            case 404:
+              setErroeMessage('존재하지 않는 체험입니다.');
+              break;
+            default:
+              setErroeMessage('다시 시도해주세요.');
+              break;
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -76,6 +104,16 @@ export default function Menu({ id: activityId }: { id: number }) {
         >
           정말 삭제 하시겠습니까?
         </BasePopupTwoBtns>
+      )}
+      {isErrorPopupOpen && (
+        <BasePopup
+          isOpen={isErrorPopupOpen}
+          closePopup={() => {
+            setIsErrorPopupOpen(false);
+          }}
+        >
+          {errorMessage}
+        </BasePopup>
       )}
     </div>
   );
