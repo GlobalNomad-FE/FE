@@ -7,9 +7,10 @@ import BasePopup from '@/components/commons/Popups/BasePopup';
 
 interface Props {
   reservationId: number;
+  closeModal: () => void;
 }
 
-const ReviewForm = ({ reservationId }: Props) => {
+const ReviewForm = ({ reservationId, closeModal }: Props) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const isMobile = useMediaQuery('(max-width: 767px)');
@@ -98,7 +99,15 @@ const ReviewForm = ({ reservationId }: Props) => {
           작성하기
         </Button>
       </form>
-      <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+      <BasePopup
+        isOpen={openPopup}
+        closePopup={handleClosePopup}
+        closeAllPopup={
+          popupMessage === '리뷰를 성공적으로 저장 했습니다.'
+            ? closeModal
+            : undefined
+        }
+      >
         {popupMessage}
       </BasePopup>
     </>

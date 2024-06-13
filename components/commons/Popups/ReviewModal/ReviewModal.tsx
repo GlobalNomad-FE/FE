@@ -95,7 +95,7 @@ const ReviewModal = ({
                 headCount={headCount}
                 totalPrice={totalPrice}
                 reservationId={reservationId}
-                closePopup={handleCloseModal}
+                closeModal={handleCloseModal}
               />
             </div>
           </div>

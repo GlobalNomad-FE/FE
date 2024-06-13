@@ -62,7 +62,7 @@ const ReviewContent = ({
           </span>
         </div>
       </div>
-      <ReviewForm reservationId={reservationId} />
+      <ReviewForm reservationId={reservationId} closeModal={closeModal} />
     </div>
   );
 };
