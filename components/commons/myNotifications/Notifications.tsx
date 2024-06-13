@@ -89,7 +89,10 @@ const Notifications = ({
       {data && data.notifications.length > 0 && (
         <div className="flex flex-col gap-2 mt-4 h-[632px] overflow-scroll scrollbar-hide mobile:h-full">
           {data.notifications.map((item) => (
-            <div key={item.id} className="min-h-[120px] px-3 py-4 bg-white">
+            <div
+              key={item.id}
+              className="h-[120px] px-3 py-4 rounded-[5px] border border-[#CBC9CF] bg-white"
+            >
               <div className="flex justify-between items-start">
                 <div
                   className={`${
@@ -104,7 +107,7 @@ const Notifications = ({
                   onClick={() => handleDeleteNotification(item.id)}
                 />
               </div>
-              <div className="flex flex-col justify-between">
+              <div className="flex flex-col justify-between h-[62px]">
                 <p
                   className="mb-1 text-body2-regular"
                   style={{ wordBreak: 'keep-all', wordWrap: 'break-word' }}
