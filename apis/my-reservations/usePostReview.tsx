@@ -20,14 +20,12 @@ async function postReview({ reservationId, rating, content }: Request) {
 }
 
 const usePostReview = () => {
-  const { mutate, isError } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (request: Request) => postReview(request),
-    onError: (error: AxiosError) => {
-      console.error('Error posting review:', error.message);
-    },
+    onError: (error: AxiosError) => {},
   });
 
-  return { mutate, isError };
+  return { mutate };
 };
 
 export default usePostReview;

@@ -3,6 +3,7 @@ import Button from '@/components/commons/Button';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Image from 'next/image';
 import usePostReview from '@/apis/my-reservations/usePostReview';
+import BasePopup from '@/components/commons/Popups/BasePopup';
 
 interface Props {
   reservationId: number;
@@ -13,9 +14,14 @@ const ReviewForm = ({ reservationId }: Props) => {
   const [reviewText, setReviewText] = useState('');
   const isMobile = useMediaQuery('(max-width: 767px)');
   const { mutate } = usePostReview();
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   const handleStars = (clicked: number) => {
     setRating(clicked);
+  };
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
 
   const handleReviewChange = (
@@ -26,11 +32,30 @@ const ReviewForm = ({ reservationId }: Props) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    mutate({
-      reservationId: reservationId,
-      rating: rating,
-      content: reviewText,
-    });
+    mutate(
+      {
+        reservationId: reservationId,
+        rating: rating,
+        content: reviewText,
+      },
+      {
+        onSuccess: () => {
+          setPopupMessage('리뷰를 성공적으로 저장 했습니다.');
+          setOpenPopup(true);
+        },
+        onError: (error: any) => {
+          if (error.response) {
+            setPopupMessage(error.response.data.message);
+            setOpenPopup(true);
+          } else {
+            setPopupMessage(
+              '알 수 없는 에러가 발생하였습니다. 다시 시도해주세요.',
+            );
+            setOpenPopup(true);
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -73,6 +98,9 @@ const ReviewForm = ({ reservationId }: Props) => {
           작성하기
         </Button>
       </form>
+      <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+        {popupMessage}
+      </BasePopup>
     </>
   );
 };
