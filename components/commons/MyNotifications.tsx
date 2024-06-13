@@ -95,12 +95,12 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
           onClick={onClose}
         />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 overflow-scroll scrollbar-hide h-[632px]">
         {data && data.notifications.length > 0 ? (
           data.notifications.map((item) => (
             <div
               key={item.id}
-              className="px-3 py-4 rounded-[5px] border border-[#CBC9CF] bg-white"
+              className="h-[120px] px-3 py-4 rounded-[5px] border border-[#CBC9CF] bg-white"
             >
               <div className="flex justify-between items-start">
                 <div
