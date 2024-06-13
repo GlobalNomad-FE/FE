@@ -78,7 +78,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-10 flex w-[640px] flex-col gap-7"
+        className="mt-10 flex flex-col gap-7 w-full max-w-4xl  lg:px-32 md:px-22 sm:px-16 px-6"
       >
         <LoginInput
           label="이메일"
