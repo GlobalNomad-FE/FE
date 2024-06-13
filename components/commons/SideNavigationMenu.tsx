@@ -22,7 +22,7 @@ export default function SideNavigationMenu() {
       icon: AccountCheckIcon,
       alt: '내정보 아이콘',
       label: '내 정보',
-      path: '/',
+      path: '/myProfile',
     },
     {
       icon: TextboxCheckIcon,
@@ -43,6 +43,11 @@ export default function SideNavigationMenu() {
       path: '/reservationHistory',
     },
   ];
+  const isPath = (path?: string) => {
+    if (!path) return false;
+    const regex = new RegExp(`(^|/)${path.replace('*', '.*')}($|/)`);
+    return regex.test(pathname);
+  };
 
   return (
     <div
@@ -76,7 +81,7 @@ export default function SideNavigationMenu() {
             <li
               className={`flex gap-[4px] items-center rounded-[12px] h-[44px] px-[16px] py-[9px] cursor-pointer
           ${
-            selectedItem === index || item.path === pathname
+            selectedItem === index || isPath(item.path)
               ? 'bg-green400 text-black200'
               : 'hover:bg-green400 hover:text-black200 text-[#A1A1A1]'
           }`}
