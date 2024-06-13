@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Image from 'next/image';
+import usePostReview from '@/apis/my-reservations/usePostReview';
 
 interface Props {
   reservationId: number;
@@ -11,6 +12,7 @@ const ReviewForm = ({ reservationId }: Props) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const { mutate } = usePostReview();
 
   const handleStars = (clicked: number) => {
     setRating(clicked);
@@ -22,14 +24,13 @@ const ReviewForm = ({ reservationId }: Props) => {
     setReviewText(event.target.value);
   };
 
-  const handleSubmit = () => {
-    alert(`${reservationId}에 대한 리뷰
-    별점: ${rating} 점
-    후기: ${reviewText}`);
-    //{teamId}/my-reservations/{reservationId}/reviews 로
-    //{"rating": 0,
-    //"content": "string"}
-    // post하면 됨
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    mutate({
+      reservationId: reservationId,
+      rating: rating,
+      content: reviewText,
+    });
   };
 
   return (
