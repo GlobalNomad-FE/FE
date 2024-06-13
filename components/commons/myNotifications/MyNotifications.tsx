@@ -16,13 +16,13 @@ const MyNotifications = () => {
   };
 
   return (
-    <>
+    <div className="relative mobile:static">
       <Image
         src="/icons/notification.svg"
         alt="알림"
         width={20}
         height={20}
-        className="mb-[37px] cursor-pointer"
+        className="cursor-pointer"
         onClick={handleNotificationsOpen}
         ref={notificationIconRef}
       />
@@ -32,7 +32,7 @@ const MyNotifications = () => {
           notificationIconRef={notificationIconRef}
         />
       )}
-    </>
+    </div>
   );
 };
 
