@@ -245,7 +245,7 @@ const Experience = ({
                 endTime={endTime}
                 headCount={headCount}
                 totalPrice={totalPrice}
-                reservationId={activityId}
+                reservationId={id}
               />
             )}
             {type === 'activities' && <Menu id={id} />}
