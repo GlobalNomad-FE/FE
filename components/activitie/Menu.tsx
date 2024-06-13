@@ -16,13 +16,12 @@ export default function Menu({ id: activityId }: { id: number }) {
   const { mutate: deleteMutation } = useDeleteActivites(activityId);
 
   // 메뉴 열고 닫기
-  const handleKebabToggle = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleKebabToggle = () => {
     setIsKebabOpen(!isKebabOpen);
   };
 
   // 외부 클릭을 감지하여 케밥 메뉴를 닫습니다.
-  useOutsideClick(ref, isKebabOpen, () => handleKebabToggle);
+  useOutsideClick(ref, isKebabOpen, handleKebabToggle);
 
   const handleDeletePopupOpen = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -34,7 +33,7 @@ export default function Menu({ id: activityId }: { id: number }) {
   };
 
   return (
-    <div className="relative">
+    <div onClick={(e) => e.stopPropagation()} className="relative">
       <button onClick={handleKebabToggle}>
         <Image
           src="/icons/meatball.svg"
