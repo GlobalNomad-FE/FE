@@ -45,15 +45,15 @@ const ReviewForm = ({ reservationId, closeModal }: Props) => {
           setOpenPopup(true);
         },
         onError: (error: any) => {
-          if (error.response) {
+          if (error.response.data.message) {
             setPopupMessage(error.response.data.message);
             setOpenPopup(true);
-          } else {
-            setPopupMessage(
-              '알 수 없는 에러가 발생하였습니다. 다시 시도해주세요.',
-            );
-            setOpenPopup(true);
+            return;
           }
+          setPopupMessage(
+            '알 수 없는 에러가 발생하였습니다. 다시 시도해주세요.',
+          );
+          setOpenPopup(true);
         },
       },
     );
@@ -102,7 +102,7 @@ const ReviewForm = ({ reservationId, closeModal }: Props) => {
       <BasePopup
         isOpen={openPopup}
         closePopup={handleClosePopup}
-        closeAllPopup={
+        clickEvent={
           popupMessage === '리뷰를 성공적으로 저장 했습니다.'
             ? closeModal
             : undefined

@@ -6,11 +6,11 @@ import useMediaQuery from '@/hooks/useMediaQuery';
 interface Props {
   isOpen: boolean;
   closePopup: () => void;
-  closeAllPopup?: () => void;
+  clickEvent?: () => void;
   children: React.ReactNode;
 }
 
-const BasePopup = ({ isOpen, closePopup, closeAllPopup, children }: Props) => {
+const BasePopup = ({ isOpen, closePopup, clickEvent, children }: Props) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const overlay = useRef(null);
 
@@ -23,8 +23,8 @@ const BasePopup = ({ isOpen, closePopup, closeAllPopup, children }: Props) => {
   //팝업 끄기
   const handleClickPopupClose = () => {
     closePopup();
-    if (closeAllPopup) {
-      closeAllPopup();
+    if (clickEvent) {
+      clickEvent();
     }
   };
 
