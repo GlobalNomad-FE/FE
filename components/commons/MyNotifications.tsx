@@ -1,6 +1,7 @@
 'use client';
 import { useDeleteNotification } from '@/apis/my-notifications/useDeleteMyNotification';
 import useGetMyNotifications from '@/apis/my-notifications/useGetMyNotifications';
+import formatDateDiff from '@/utils/formatDateDiff';
 import Image from 'next/image';
 import { useRef, useEffect, useCallback } from 'react';
 
@@ -57,25 +58,6 @@ const MyNotifications = ({ onClose }: MyNotificationsProps) => {
       }
       return part;
     });
-  };
-
-  const formatDateDiff = (dateString: string) => {
-    const now = new Date();
-    const updatedAt = new Date(dateString);
-    const diffInMilliseconds = now.getTime() - updatedAt.getTime();
-    const diffInMinutes = Math.round(diffInMilliseconds / (1000 * 60));
-
-    if (diffInMinutes < 1) {
-      return '방금 전';
-    } else if (diffInMinutes < 60) {
-      return `${diffInMinutes}분 전`;
-    } else if (diffInMinutes < 1440) {
-      const diffInHours = Math.round(diffInMinutes / 60);
-      return `${diffInHours}시간 전`;
-    } else {
-      const diffInDays = Math.round(diffInMinutes / 1440);
-      return `${diffInDays}일 전`;
-    }
   };
 
   return (
