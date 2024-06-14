@@ -40,7 +40,19 @@ export default function ReviewTable({ id }: { id: number }) {
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
+                  <div className="flex gap-[3px] items-center">
+                    <Image
+                      src="/icons/star-on.svg"
+                      alt="별점아이콘"
+                      width={18}
+                      height={18}
+                    />
+                    <p className="text-nomad-black text-body1-regular">
+                      {item.rating}
+                    </p>
+                  </div>
                   <p className="text-nomad-black text-body1-bold">{nickname}</p>
+
                   <p>|</p>
                   <p className="text-gray400 text-body1-regular">
                     {formatDate2(item.updatedAt)}
