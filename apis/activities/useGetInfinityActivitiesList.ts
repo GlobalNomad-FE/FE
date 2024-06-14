@@ -1,13 +1,10 @@
 'use client';
 import { getMyActivites } from '../my-activities/@common/myActivites';
-import {
-  useSuspenseInfiniteQuery,
-  infiniteQueryOptions,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, infiniteQueryOptions } from '@tanstack/react-query';
 import { GetActivitiesResponse } from './useGetActivities';
 
 export const useGetInfinityActivitiesList = () => {
-  const { data, fetchNextPage, ...rest } = useSuspenseInfiniteQuery(
+  const { data, fetchNextPage, ...rest } = useInfiniteQuery(
     infiniteQueryOptions<GetActivitiesResponse>({
       queryKey: ['activities', 'list'],
       queryFn: ({ pageParam }) => {

@@ -8,20 +8,20 @@ import Footer from '@/components/commons/Footer';
 import Image from 'next/image';
 import { useGetInfinityActivitiesList } from '@/apis/activities/useGetInfinityActivitiesList';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { Suspense } from 'react';
 import MyActivitiyExperienceSkeleton from '@/components/skeleton/MyActivitiyExperienceSkeleton';
 
 const SuspenseList = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isError, error } =
     useGetInfinityActivitiesList();
+
   const { setTarget } = useIntersectionObserver({
     threshold: 0.1,
     hasNextPage,
     fetchNextPage,
   });
-  // if (isLoading) {
-  //   return <ReviewExperienceSkeleton />;
-  // }
+  if (isLoading) {
+    return <MyActivitiyExperienceSkeleton />;
+  }
   if (isError) {
     return <div>Error: {error?.message}</div>;
   }
@@ -53,15 +53,12 @@ const SuspenseList = () => {
               />
             )),
           )}
-          <MyActivitiyExperienceSkeleton />
         </div>
       )}
       <div className="observer" ref={setTarget} />
     </>
   );
 };
-
-//TODO - isLoading 일때 로딩이미지 돌아가게
 
 export default function MyactivitieListpage() {
   return (
@@ -70,7 +67,6 @@ export default function MyactivitieListpage() {
       <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
-
           <div className="flex flex-col flex-grow">
             <div className="flex justify-between">
               <p className="text-title text-black">내 체험 관리</p>
@@ -89,9 +85,7 @@ export default function MyactivitieListpage() {
                 </Button>
               </Link>
             </div>
-            <Suspense fallback={<MyActivitiyExperienceSkeleton />}>
-              <SuspenseList />
-            </Suspense>
+            <SuspenseList />
           </div>
         </div>
       </main>
