@@ -13,7 +13,7 @@ const Chips: React.FC<Props> = ({ reservations }) => {
   const { pending, confirmed, completed } = reservations;
 
   return (
-    <div className="flex flex-col justify-end h-[69px] w-[108.5px]">
+    <div className="flex flex-col justify-end h-[69px] w-[108.5px] tablet:w-[55px] tablet:h-[23px] mobile:w-[45px] mobile:h-[20px]">
       {pending !== 0 && <StatusChipStyle count={pending} status="pending" />}
       {confirmed !== 0 && (
         <StatusChipStyle count={confirmed} status="confirmed" />
@@ -54,7 +54,7 @@ const StatusChipStyle: React.FC<StatusProps> = ({ status, count }) => {
 
   return (
     <div
-      className={`bg-${bgColor} text-${fontColor} rounded-[4px] px-1 py-[1px] text-[14px]`}
+      className={`bg-${bgColor} text-${fontColor} rounded-[4px] px-1 py-[1px] text-[14px] mobile:text-[12px]`}
     >
       {text} {count}
     </div>
