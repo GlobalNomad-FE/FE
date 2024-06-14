@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Chips from '@/components/reservationHistory/Chips';
+import { ReservationMonthInfosType } from '@/types/activitiesReservationType';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-const Calendar: React.FC = () => {
+const Calendar: React.FC<ReservationMonthInfosType> = ({ myActivityes }) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -63,7 +65,7 @@ const Calendar: React.FC = () => {
 
   const renderDays = () => {
     return (
-      <div className="grid grid-cols-7 content-center justify-items-start w-[792px] h-[45px] divide-x border-b">
+      <div className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[417px] mobile:w-[326px] h-[45px]  divide-x border-b">
         {daysOfWeek.map((day, index) => (
           <div
             className="text-center font-medium text-[16px] p-3 pb-1 text-[#969696]"
@@ -111,7 +113,6 @@ const Calendar: React.FC = () => {
       );
     }
 
-    // 이번 달의 날짜 채우기
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDate = new Date(
         currentMonth.getFullYear(),
@@ -119,15 +120,32 @@ const Calendar: React.FC = () => {
         day,
       );
 
+      // 현재 날짜의 YYYY-MM-DD 형식 추출
+      const currentDateStr = currentDate.toISOString().substring(0, 10);
+      let dayData = {
+        completed: 0,
+        confirmed: 0,
+        pending: 0,
+      };
+      myActivityes.forEach((activity) => {
+        if (activity.date === currentDateStr) {
+          dayData = { ...dayData, ...activity.reservations };
+        }
+      });
+
       cells.push(
         <div
-          className={`h-[154px] p-3 text-[#969696] text-[21px] bg-white ${
+          className={`h-[154px] p-[2px] text-[#969696] bg-white flex justify-between flex-col ${
             cells.length !== 0 ? 'border-l' : ''
-          }${day !== daysInMonth ? '' : ''}`}
+          }`}
           key={day}
-          onClick={() => setSelectedDate(currentDate)}
+          onClick={() => {
+            //TODO: 모달 팝업
+            setSelectedDate(currentDate);
+          }}
         >
-          <span>{day}</span>
+          <span className="p-3 text-[21px]">{day}</span>
+          <Chips reservations={dayData} />
         </div>,
       );
 
@@ -162,13 +180,15 @@ const Calendar: React.FC = () => {
       );
     }
 
-    return <div className="w-[792px]">{rows}</div>;
+    return (
+      <div className="w-[792px] tablet:w-[417px] mobile:w-[326px]">{rows}</div>
+    );
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] flex flex-col items-center">
+    <div className="mx-auto mt-10 w-[792px] tablet:w-[417px] mobile:w-[326px] flex flex-col items-center">
       {renderHeader()}
-      <div className="mt-6 w-[797px] border-y border-x rounded-t-lg rounded-b-lg bg-white">
+      <div className="mt-6 w-full border-y border-x rounded-t-lg rounded-b-lg bg-white">
         {renderDays()}
         {renderCells()}
       </div>
