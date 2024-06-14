@@ -47,7 +47,7 @@ const StatusChipStyle: React.FC<StatusProps> = ({ status, count }) => {
       text = '승인';
     } else if (status === 'completed') {
       //completed : 완료
-      bgColor = 'gray-200';
+      bgColor = 'gray200';
       fontColor = 'gray600';
       text = '완료';
     }
