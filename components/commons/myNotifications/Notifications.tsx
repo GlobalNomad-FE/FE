@@ -83,6 +83,7 @@ const Notifications = ({
           alt="알림창 닫기 버튼"
           width={24}
           height={24}
+          className="cursor-pointer"
           onClick={onClose}
         />
       </div>
