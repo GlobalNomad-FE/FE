@@ -112,26 +112,22 @@ const MyReservations = () => {
               </div>
             ) : (
               <div className="flex flex-col gap-6 mt-[16px]">
-                {reservations.map((item) =>
-                  isLoading ? (
-                    <ReviewExperienceSkeleton />
-                  ) : (
-                    <Experience
-                      key={item.id}
-                      id={item.id}
-                      title={item.activity.title}
-                      date={item.date}
-                      startTime={item.startTime}
-                      endTime={item.endTime}
-                      headCount={item.headCount}
-                      totalPrice={item.totalPrice}
-                      experienceStatus={item.status}
-                      bannerImageUrl={item.activity.bannerImageUrl}
-                      activityId={item.activity.id}
-                      type="reservations"
-                    />
-                  ),
-                )}
+                {reservations.map((item) => (
+                  <Experience
+                    key={item.id}
+                    id={item.id}
+                    title={item.activity.title}
+                    date={item.date}
+                    startTime={item.startTime}
+                    endTime={item.endTime}
+                    headCount={item.headCount}
+                    totalPrice={item.totalPrice}
+                    experienceStatus={item.status}
+                    bannerImageUrl={item.activity.bannerImageUrl}
+                    activityId={item.activity.id}
+                    type="reservations"
+                  />
+                ))}
               </div>
             )}
           </div>
