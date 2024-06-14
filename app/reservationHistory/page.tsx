@@ -5,7 +5,7 @@ import Footer from '@/components/commons/Footer';
 import Calendar from '@/components/reservationHistory/Calendar';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
-
+import Image from 'next/image';
 import React from 'react';
 
 export default function Page() {
