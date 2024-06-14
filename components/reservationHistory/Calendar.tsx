@@ -5,7 +5,9 @@ import { ReservationMonthInfosType } from '@/types/activitiesReservationType';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-const Calendar: React.FC<ReservationMonthInfosType> = ({ myActivityes }) => {
+const Calendar: React.FC<ReservationMonthInfosType> = ({
+  MonthReservations,
+}) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -128,7 +130,7 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({ myActivityes }) => {
         pending: 0,
       };
 
-      myActivityes.forEach((activity) => {
+      MonthReservations.forEach((activity) => {
         if (activity.date === currentDateStr) {
           dayData = { ...activity.reservations };
         }

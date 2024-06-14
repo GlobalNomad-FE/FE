@@ -19,5 +19,5 @@ export interface ReservationDayInfoType {
  * 예약현황 월간 상태정보 리스트
  */
 export interface ReservationMonthInfosType {
-  myActivityes: ReservationDayInfoType[];
+  MonthReservations: ReservationDayInfoType[];
 }

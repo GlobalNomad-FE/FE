@@ -3,11 +3,11 @@ import { Activity, MyActivitieType } from '@/types/myActivitiesType';
 import { useState } from 'react';
 
 interface SelectBoxProps {
-  activities: Activity[];
+  myActivityes: Activity[];
   onSelect: (id: number) => void;
 }
 
-const SelectBox: React.FC<SelectBoxProps> = ({ activities, onSelect }) => {
+const SelectBox: React.FC<SelectBoxProps> = ({ myActivityes, onSelect }) => {
   const [selectActivity, setSelectActivity] = useState<Activity | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -38,7 +38,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({ activities, onSelect }) => {
       </div>
       {isOpen && (
         <ul className="absolute z-10 w-full bg-white border border-gray500 rounded-[4px] mt-1 max-h-60 overflow-auto">
-          {activities.map((activity) => (
+          {myActivityes.map((activity) => (
             <li
               key={activity.id}
               className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
