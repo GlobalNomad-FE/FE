@@ -10,6 +10,12 @@ interface Props {
   children: React.ReactNode;
 }
 
+/**
+ * BasePopup Props
+ * @param {boolean} isOpen - 팝업이 열린상태인지 닫힌상태인지 알려주는 값.
+ * @param {function} closePopup - 팝업을 닫기 위한 콜백함수.
+ * @param {function} clickEvent - 확인 버튼을 눌렀을때 닫기 이외에 실행할 함수(선택사항)
+ */
 const BasePopup = ({ isOpen, closePopup, clickEvent, children }: Props) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const overlay = useRef(null);
