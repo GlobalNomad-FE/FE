@@ -11,7 +11,6 @@ interface Props {
  */
 const Chips: React.FC<Props> = ({ reservations }) => {
   const { pending, confirmed, completed } = reservations;
-  console.log(reservations);
 
   return (
     <div className="flex flex-col h-[69px] w-[108.5px]">
