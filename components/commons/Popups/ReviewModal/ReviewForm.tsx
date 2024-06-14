@@ -45,6 +45,11 @@ const ReviewForm = ({ reservationId, closeModal }: Props) => {
           setOpenPopup(true);
         },
         onError: (error: any) => {
+          if (error.response.status === 401) {
+            setPopupMessage('로그인 후 이용 해주세요.');
+            setOpenPopup(true);
+            return;
+          }
           if (error.response.data.message) {
             setPopupMessage(error.response.data.message);
             setOpenPopup(true);
