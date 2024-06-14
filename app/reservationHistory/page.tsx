@@ -9,6 +9,58 @@ import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import React from 'react';
 
 export default function Page() {
+  //TODO:목업데이터
+  const myActivityes = [
+    {
+      date: '2024-06-01',
+      reservations: {
+        completed: 3,
+        confirmed: 0,
+        pending: 0,
+      },
+    },
+    {
+      date: '2024-06-13',
+      reservations: {
+        completed: 0,
+        confirmed: 0,
+        pending: 1,
+      },
+    },
+    {
+      date: '2024-06-15',
+      reservations: {
+        completed: 5,
+        confirmed: 2,
+        pending: 0,
+      },
+    },
+    {
+      date: '2024-06-18',
+      reservations: {
+        completed: 9,
+        confirmed: 10,
+        pending: 11,
+      },
+    },
+    {
+      date: '2024-06-23',
+      reservations: {
+        completed: 7,
+        confirmed: 0,
+        pending: 2,
+      },
+    },
+    {
+      date: '2024-06-27',
+      reservations: {
+        completed: 0,
+        confirmed: 3,
+        pending: 1,
+      },
+    },
+  ];
+
   return (
     <div className="text-black200 bg-gray50">
       <Gnb />
@@ -28,7 +80,7 @@ export default function Page() {
               height={24}
             />
           </div>
-          <Calendar />
+          <Calendar myActivityes={myActivityes} />
         </div>
       </div>
       <Footer />
