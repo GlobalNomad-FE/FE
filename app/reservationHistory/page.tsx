@@ -9,7 +9,7 @@ import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import React from 'react';
 
 export default function Page() {
-  //TODO:목업데이터
+  //TODO:목업 데이터
   const myActivityes = [
     {
       date: '2024-06-01',
