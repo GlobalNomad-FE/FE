@@ -8,7 +8,10 @@ export default function page() {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   return (
     <div className="flex gap-6 justify-center bg-[#FAFAFA] pt-[65px]">
-      <MyPageForm uploadedImage={uploadedImage} />
+      <MyPageForm
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+      />
     </div>
   );
 }
