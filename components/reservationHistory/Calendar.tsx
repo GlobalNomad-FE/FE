@@ -127,11 +127,17 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({ myActivityes }) => {
         confirmed: 0,
         pending: 0,
       };
+
       myActivityes.forEach((activity) => {
         if (activity.date === currentDateStr) {
-          dayData = { ...dayData, ...activity.reservations };
+          dayData = { ...activity.reservations };
         }
       });
+
+      const { completed, confirmed, pending } = dayData;
+
+      const iconCompleted = completed >= 1 && confirmed === 0 && pending === 0;
+      const iconReservation = confirmed >= 1 || pending >= 1;
 
       cells.push(
         <div
@@ -144,7 +150,29 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({ myActivityes }) => {
             setSelectedDate(currentDate);
           }}
         >
-          <span className="p-3 text-[21px]">{day}</span>
+          <div className="p-3 text-[21px] flex flex-row">
+            {day}
+            {(iconCompleted || iconReservation) && (
+              <div className="h-10px mt-1 ml-1">
+                {iconCompleted && (
+                  <Image
+                    src="/icons/ellipse_gray.svg"
+                    alt="예약 데이터 완료 표시 아이콘"
+                    width={8}
+                    height={8}
+                  />
+                )}
+                {iconReservation && (
+                  <Image
+                    src="/icons/ellipse_blue.svg"
+                    alt="예약 데이터 예약 표시 아이콘"
+                    width={8}
+                    height={8}
+                  />
+                )}
+              </div>
+            )}
+          </div>
           <Chips reservations={dayData} />
         </div>,
       );
