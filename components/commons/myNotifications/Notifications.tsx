@@ -98,7 +98,7 @@ const Notifications = ({
                 <div
                   className={`${
                     item.content.includes('승인') ? 'bg-blue300' : 'bg-red100'
-                  } w-[5px] h-[5px] mt-1 rounded-full bg-blue300`}
+                  } w-[5px] h-[5px] mt-1 rounded-full`}
                 ></div>
                 <Image
                   src="/icons/btn-X-medium.svg"
