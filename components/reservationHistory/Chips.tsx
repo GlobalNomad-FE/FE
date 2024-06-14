@@ -13,16 +13,14 @@ const Chips: React.FC<Props> = ({ reservations }) => {
   const { pending, confirmed, completed } = reservations;
 
   return (
-    <div className="flex flex-col h-[69px] w-[108.5px]">
-      <div className="mb-2">
-        {pending !== 0 && <StatusChipStyle count={pending} status="pending" />}
-        {confirmed !== 0 && (
-          <StatusChipStyle count={confirmed} status="confirmed" />
-        )}
-        {completed !== 0 && (
-          <StatusChipStyle count={completed} status="completed" />
-        )}
-      </div>
+    <div className="flex flex-col justify-end h-[69px] w-[108.5px]">
+      {pending !== 0 && <StatusChipStyle count={pending} status="pending" />}
+      {confirmed !== 0 && (
+        <StatusChipStyle count={confirmed} status="confirmed" />
+      )}
+      {completed !== 0 && (
+        <StatusChipStyle count={completed} status="completed" />
+      )}
     </div>
   );
 };
@@ -33,23 +31,25 @@ interface StatusProps {
 }
 
 const StatusChipStyle: React.FC<StatusProps> = ({ status, count }) => {
-  //status에 따른 기본 값 : pending(거절)
-  let bgColor = 'blue300';
-  let fontColor = 'white';
-  let text = '예약';
+  let bgColor = '';
+  let fontColor = '';
+  let text = '';
 
-  if (status !== 'pending') {
-    if (status === 'confirmed') {
-      //confirmed : 승인
-      bgColor = '[#FFF4E8]';
-      fontColor = '[#FF7C1D]';
-      text = '승인';
-    } else if (status === 'completed') {
-      //completed : 완료
-      bgColor = 'gray200';
-      fontColor = 'gray600';
-      text = '완료';
-    }
+  if (status === 'confirmed') {
+    //confirmed : 승인
+    bgColor = '[#FFF4E8]';
+    fontColor = '[#FF7C1D]';
+    text = '승인';
+  } else if (status === 'pending') {
+    //pending : 거절
+    bgColor = '[#3366FF]';
+    fontColor = 'white';
+    text = '예약';
+  } else {
+    //completed : 완료
+    bgColor = 'gray200';
+    fontColor = 'gray600';
+    text = '완료';
   }
 
   return (
