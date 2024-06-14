@@ -12,13 +12,11 @@ export default function Page() {
   return (
     <div className="text-black200 bg-gray50">
       <Gnb />
-      <div className="pt-[142px] tablet:pt-[94px] w-full flex justify-center">
+      <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center">
         <SideNavigationMenu />
-        <div className="pl-[24px] mobile:w-full mobile:px-4 tablet:[17px] text-[32px] mb-[142px] tablet:mb-[128px]">
-          <p className="w-[800px] tablet:w-[429px] mobile:w-full font-bold">
-            예약현황
-          </p>
-          <div className="w-[800px] tablet:w-[429px] mobile:w-full h-[48px] mt-[42px] px-4 py-3 border border-gray500 rounded-[4px] bg-white relative flex justify-between">
+        <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
+          <p className="w-[800px] mobile:w-full font-bold">예약현황</p>
+          <div className="w-[800px] tablet:w-[429px] mobile:w-[326px] h-[48px] mt-[42px] px-4 py-3 border border-gray500 rounded-[4px] bg-white relative flex justify-between">
             <p className="bg-white w-[45px] px-1 text-[14px] bottom-10 absolute">
               체험명
             </p>
