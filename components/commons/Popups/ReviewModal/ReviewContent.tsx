@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import ReviewForm from './ReviewForm';
-
+//1632 1633 1634
 interface Props {
   title: string;
   bannerImageUrl: string;
@@ -11,6 +11,7 @@ interface Props {
   headCount: number;
   totalPrice: number;
   reservationId: number;
+  closeModal: () => void;
 }
 /**
  * @param {string} title - 체험 이름.
@@ -31,6 +32,7 @@ const ReviewContent = ({
   headCount,
   totalPrice,
   reservationId,
+  closeModal,
 }: Props) => {
   return (
     <div className="flex w-full flex-col mobile:gap-[12px] gap-[24px]">
@@ -60,7 +62,7 @@ const ReviewContent = ({
           </span>
         </div>
       </div>
-      <ReviewForm reservationId={reservationId} />
+      <ReviewForm reservationId={reservationId} closeModal={closeModal} />
     </div>
   );
 };

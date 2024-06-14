@@ -41,24 +41,21 @@ const ReviewModal = ({
   const overlay = useRef(null);
 
   const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
     if (e.target === overlay.current) {
       setOpenModal(false);
     }
   };
 
-  const handleOpenModal = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleOpenModal = () => {
     setOpenModal(true);
   };
 
-  const handleCloseModal = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleCloseModal = () => {
     setOpenModal(false);
   };
 
   return (
-    <>
+    <div onClick={(e) => e.stopPropagation()}>
       <Button
         width={isMobile ? 80 : isTablet ? 112 : 140}
         height={isMobile ? 32 : 40}
@@ -98,12 +95,13 @@ const ReviewModal = ({
                 headCount={headCount}
                 totalPrice={totalPrice}
                 reservationId={reservationId}
+                closeModal={handleCloseModal}
               />
             </div>
           </div>
         )}
       </Portal>
-    </>
+    </div>
   );
 };
 
