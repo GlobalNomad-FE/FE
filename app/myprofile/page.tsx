@@ -8,10 +8,7 @@ const MyPage = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   return (
     <div className="flex gap-6 justify-center bg-[#FAFAFA] pt-[65px]">
-      <SideNavigationMenu
-        uploadedImage={uploadedImage}
-        setUploadedImage={setUploadedImage}
-      />
+      <SideNavigationMenu />
       <MyPageForm
         uploadedImage={uploadedImage}
         setUploadedImage={setUploadedImage}
