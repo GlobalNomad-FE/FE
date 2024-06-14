@@ -2,9 +2,9 @@
 import React, { useState } from 'react';
 import SearchBar from '@/components/commons/SearchBar';
 import MonthBest from './MonthBest';
-import HotActivities from './HotActivities';
-import AllActivities from './AllActivities';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import AllActivities from './AllActivities/AllActivities';
+import HotActivities from './HotActivities/HotActivities';
 
 const MainBody = () => {
   const isPC = useMediaQuery('(min-width: 1248px)');

@@ -1,7 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface Props {
+  id: number;
   title: string;
   price: number;
   bannerImageUrl: string;
@@ -10,14 +12,20 @@ interface Props {
 }
 
 const HotActivitiesItems = ({
+  id,
   title,
   price,
   bannerImageUrl,
   rating,
   reviewCount,
 }: Props) => {
+  const router = useRouter();
+
   return (
-    <div className="relative min-w-[384px] min-h-[384px] rounded-3xl overflow-hidden">
+    <div
+      className="relative min-w-[384px] min-h-[384px] rounded-3xl overflow-hidden cursor-pointer"
+      onClick={() => router.push(`/activities/${id}`)}
+    >
       <div className="absolute bg-custom-gradient w-[384px] h-[384px] z-10" />
       <Image src={bannerImageUrl} alt={title} fill objectFit="cover" />
       <div className="text-white text-body2-bold absolute top-[170px] z-20 py-[30px] px-[20px] flex flex-col gap-[20px]">

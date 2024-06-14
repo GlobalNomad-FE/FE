@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import ReservationWidgetWraaper from '@common/ReservationWidgetWraaper';
 import Price from '@common/Price';
@@ -6,15 +7,23 @@ import TimeSelector from '@common/TimeSelector';
 import ParticipantCount from '@common/ParticipantCount';
 import TotalPrice from '@common/TotalPrice';
 import ReservationButton from '@common/ReservationButton';
-import data from '../mock.json';
 import { useCalendar } from '../lib/Calendar.provider';
+import BasePopup from '@/components/commons/Popups/BasePopup';
+import { useState } from 'react';
+import { usePostActivityReservation } from '@/apis/activities/mutaion/usePostActivityReservation';
 
 const DesktopReservationWidgetContainer = () => {
-  const { members, onChangeMembers, selectSchedule } = useCalendar();
-  //TODO - 데이터 들어오면 provider에서 불러오거나 바꿔야할것
-  const { schedules, price } = data;
-
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { members, onChangeMembers, selectSchedule, data } = useCalendar();
+  const { schedules, price, id: activityId } = data;
   const id = selectSchedule?.id;
+  const reservationData = {
+    scheduleId: id,
+    headCount: members,
+  };
+
+  const { mutate } = usePostActivityReservation();
 
   const handleCountPlus = () => {
     onChangeMembers(members + 1);
@@ -23,9 +32,32 @@ const DesktopReservationWidgetContainer = () => {
     onChangeMembers(members > 1 ? members - 1 : 1);
   };
 
-  //TODO - 임시 (팝업모달 나오게 해야함.)
   const handleReservation = () => {
-    alert(`예약이 완료되었습니다. ${selectSchedule?.id}`);
+    mutate(
+      { activityId, reservationData },
+      {
+        onSuccess: () => {
+          setIsPopupOpen(true);
+        },
+        onError: (error) => {
+          setIsPopupOpen(true);
+          switch (error.response?.status) {
+            case 401:
+              setErrorMessage('로그인을 해주세요.');
+              break;
+            case 404:
+              setErrorMessage('존재하지 않는 체험입니다');
+              break;
+            case 409:
+              setErrorMessage('확정 예약이 있는 일정은 예약할 수 없습니다.');
+              break;
+            default:
+              setErrorMessage('scheduleId는 숫자로 입력해주세요.');
+              break;
+          }
+        },
+      },
+    );
   };
 
   return (
@@ -44,6 +76,16 @@ const DesktopReservationWidgetContainer = () => {
         text={'예약하기'}
       />
       <TotalPrice total={price * members} />
+      {isPopupOpen && (
+        <BasePopup
+          isOpen={isPopupOpen}
+          closePopup={() => {
+            setIsPopupOpen(false);
+          }}
+        >
+          {errorMessage ? errorMessage : '예약이 완료되었습니다.'}
+        </BasePopup>
+      )}
     </ReservationWidgetWraaper>
   );
 };

@@ -21,7 +21,7 @@ const CategoryLists = ({
   ];
 
   return (
-    <div className="flex gap-[15px] w-[860px] overflow-x-scroll">
+    <div className="flex gap-[15px] w-[860px] overflow-x-scroll scrollbar-hide">
       {categories.map((category) => (
         <Categories
           key={category}

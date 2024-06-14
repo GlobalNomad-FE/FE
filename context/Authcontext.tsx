@@ -62,23 +62,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           expires: 7,
         });
         Cookies.set('refreshToken', data.refreshToken, { expires: 7 }); // 7일 동안 유효
+        Cookies.set('userID', data.user.id.toString(), { expires: 7 }); // userID를 쿠키에 설정
         setUser(data);
         router.push('/');
       }
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       console.error(error);
+      throw error;
     },
   });
 
   const signIn = async (data: FormValues) => {
-    signInMutation.mutate(data);
+    try {
+      await signInMutation.mutateAsync(data); // 비동기로 실행하고 성공하지 않으면 자동으로 에러를 던짐
+    } catch (error) {
+      throw error; // 에러를 던짐
+    }
   };
 
   const signOut = () => {
     setUser(null);
     Cookies.remove('accessToken');
     Cookies.remove('refreshToken');
+    Cookies.remove('userID');
   };
 
   return (

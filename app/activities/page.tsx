@@ -1,7 +1,6 @@
 'use client';
 import Button from '@/components/commons/Button';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
-import data from '@/app/activities/mock.json';
 import Gnb from '@/components/commons/gnb/gnb';
 import Link from 'next/link';
 import Experience from '@/components/commons/card/Experience';
@@ -46,7 +45,7 @@ export default function MyactivitieListpage() {
               </Link>
             </div>
 
-            {data && data?.pages.length === 0 ? (
+            {data?.pages.length === 0 ? (
               <div className="flex flex-col flex-grow gap-5 items-center mt-[90px] tablet:mt-[64px] mobile:mt-[64px]">
                 <div className="w-[130px] h-[177px] my-[31px] mx-[55px]tablet:w-[110px] tablet:h-[149px] mobile:w-[110px] mobile:h-[149px] relative">
                   <Image src="/icons/empty.svg" fill alt="빈 예약 내역" />
@@ -68,6 +67,7 @@ export default function MyactivitieListpage() {
                       reviewCount={item.reviewCount}
                       title={item.title}
                       totalPrice={item.price}
+                      activityId={item.id}
                     />
                   )),
                 )}
