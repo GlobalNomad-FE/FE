@@ -1,5 +1,5 @@
 /**
- * 예약 상태별 카운트
+ * 예약 상태별 카운팅
  */
 export interface ReservationStatusCountType {
   completed: number;
@@ -8,9 +8,16 @@ export interface ReservationStatusCountType {
 }
 
 /**
- * 예약 상태 일별 정보
+ * 예약현황 일별 상태정보
  */
 export interface ReservationDayInfoType {
-  date: Date;
+  date: string;
   reservations: ReservationStatusCountType;
+}
+
+/**
+ * 예약현황 월간 상태정보 리스트
+ */
+export interface ReservationMonthInfosType {
+  myActivityes: ReservationDayInfoType[];
 }
