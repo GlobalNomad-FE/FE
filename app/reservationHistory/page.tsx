@@ -8,60 +8,9 @@ import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import React, { useState } from 'react';
 
 export default function Page() {
-  //TODO:목업 데이터
+  //TODO: 내 체험 리스트 데이터 가져오기
+  //TODO: 내 체험 리스트 목업
   const myActivityes = [
-    {
-      date: '2024-06-01',
-      reservations: {
-        completed: 3,
-        confirmed: 0,
-        pending: 0,
-      },
-    },
-    {
-      date: '2024-06-13',
-      reservations: {
-        completed: 0,
-        confirmed: 0,
-        pending: 1,
-      },
-    },
-    {
-      date: '2024-06-15',
-      reservations: {
-        completed: 5,
-        confirmed: 2,
-        pending: 0,
-      },
-    },
-    {
-      date: '2024-06-18',
-      reservations: {
-        completed: 9,
-        confirmed: 10,
-        pending: 11,
-      },
-    },
-    {
-      date: '2024-06-23',
-      reservations: {
-        completed: 7,
-        confirmed: 0,
-        pending: 2,
-      },
-    },
-    {
-      date: '2024-06-27',
-      reservations: {
-        completed: 0,
-        confirmed: 3,
-        pending: 1,
-      },
-    },
-  ];
-
-  //TODO : 내 체험 리스트 목업
-  const activities = [
     {
       id: 1154,
       userId: 409,
@@ -114,8 +63,61 @@ export default function Page() {
   );
 
   const handleSelect = (id: number) => {
-    setSelectedActivityId(id);
+    setSelectedActivityId(id); //선택한 체험의 id셋팅
   };
+
+  //TODO: selectedActivityId로 월별 예약 리스트 데이터 가져오기
+  //TODO: 월별 예약 리스트 목업 데이터
+  const MonthReservations = [
+    {
+      date: '2024-06-01',
+      reservations: {
+        completed: 3,
+        confirmed: 0,
+        pending: 0,
+      },
+    },
+    {
+      date: '2024-06-13',
+      reservations: {
+        completed: 0,
+        confirmed: 0,
+        pending: 1,
+      },
+    },
+    {
+      date: '2024-06-15',
+      reservations: {
+        completed: 5,
+        confirmed: 2,
+        pending: 0,
+      },
+    },
+    {
+      date: '2024-06-18',
+      reservations: {
+        completed: 9,
+        confirmed: 10,
+        pending: 11,
+      },
+    },
+    {
+      date: '2024-06-23',
+      reservations: {
+        completed: 7,
+        confirmed: 0,
+        pending: 2,
+      },
+    },
+    {
+      date: '2024-06-27',
+      reservations: {
+        completed: 0,
+        confirmed: 3,
+        pending: 1,
+      },
+    },
+  ];
 
   return (
     <div className="text-black200 bg-gray50">
@@ -123,11 +125,9 @@ export default function Page() {
       <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center">
         <SideNavigationMenu />
         <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
-          <p className="w-[800px] mobile:w-full font-bold">
-            예약현황 {selectedActivityId}
-          </p>
-          <SelectBox activities={activities} onSelect={handleSelect} />
-          <Calendar myActivityes={myActivityes} />
+          <p className="w-[800px] mobile:w-full font-bold">예약현황</p>
+          <SelectBox myActivityes={myActivityes} onSelect={handleSelect} />
+          <Calendar MonthReservations={MonthReservations} />
         </div>
       </div>
       <Footer />
