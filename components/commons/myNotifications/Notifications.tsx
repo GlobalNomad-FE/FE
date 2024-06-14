@@ -105,6 +105,7 @@ const Notifications = ({
                   alt="알림 삭제 버튼"
                   width={24}
                   height={24}
+                  className="cursor-pointer"
                   onClick={() => handleDeleteNotification(item.id)}
                 />
               </div>
