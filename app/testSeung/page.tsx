@@ -1,18 +1,13 @@
 'use client';
 
-import MyPageForm from '@/components/myPage/MyPageForm';
+import MyPageForm from '@/components/myProfile/MyPageForm';
 import React, { useState } from 'react';
-import Profile from '@/components/myPage/Profile';
 
 export default function page() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   return (
     <div className="flex gap-6 justify-center bg-[#FAFAFA] pt-[65px]">
-      <Profile
-        uploadedImage={uploadedImage}
-        setUploadedImage={setUploadedImage}
-      />
       <MyPageForm uploadedImage={uploadedImage} />
     </div>
   );

@@ -52,17 +52,17 @@ const MyPageInputBox = ({
     inputName === 'nickname' &&
     editInformationErrorMessage?.nicknameErrorMessage
   ) {
-    borderColorClass = 'border-red-40';
+    borderColorClass = 'border-red100';
   } else if (
     inputName === 'newPassword' &&
     editInformationErrorMessage?.passwordErrorMessage
   ) {
-    borderColorClass = 'border-red-40';
+    borderColorClass = 'border-red100';
   } else if (
     inputName === 'newPasswordConfirm' &&
     editInformationErrorMessage?.passwordConfirmErrorMessage
   ) {
-    borderColorClass = 'border-red-40';
+    borderColorClass = 'border-red100';
   }
 
   return (
@@ -80,20 +80,20 @@ const MyPageInputBox = ({
       />
       {inputName === 'nickname' &&
         editInformationErrorMessage?.nicknameErrorMessage && (
-          <div className="text-red-40 text-xs ml-1">
+          <div className="text-red100 text-xs ml-1">
             {editInformationErrorMessage.nicknameErrorMessage}
           </div>
         )}
 
       {inputName === 'newPassword' &&
         editInformationErrorMessage?.passwordErrorMessage && (
-          <div className="text-red-40 text-xs ml-1">
+          <div className="text-red100 text-xs ml-1">
             {editInformationErrorMessage.passwordErrorMessage}
           </div>
         )}
       {inputName === 'newPasswordConfirm' &&
         editInformationErrorMessage?.passwordConfirmErrorMessage && (
-          <div className="text-red-40 text-xs ml-1">
+          <div className="text-red100 text-xs ml-1">
             {editInformationErrorMessage.passwordConfirmErrorMessage}
           </div>
         )}

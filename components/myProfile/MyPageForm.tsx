@@ -6,8 +6,17 @@ import { QueryClient } from '@tanstack/react-query';
 import { EditInformationErrorMessageType } from '@/types/EditInformationErrorMessageType';
 import { AxiosError } from 'axios';
 import MyPageInputBox from './MyPageInputBox';
+import ProfileImage from './ProfileImage';
 
-const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
+const queryClient = new QueryClient();
+
+const MyPageForm = ({
+  uploadedImage,
+  setUploadedImage,
+}: {
+  uploadedImage: string | null;
+  setUploadedImage: React.Dispatch<React.SetStateAction<string | null>>;
+}) => {
   const [inputs, setInputs] = useState({
     nickname: '',
     email: '',
@@ -44,15 +53,12 @@ const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
   const { mutate } = useMutation({
     mutationFn: editMyInfo,
     onSuccess: () => {
-      const queryClient = new QueryClient();
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: (error: AxiosError) => {
       if (error.response) {
         const { nickname, newPassword } = inputs;
         if (error.request.status === 400) {
-          // 닉네임 확인
-
           if (nickname.length === 0 && newPassword.length === 0) {
             setEditInformationErrorMessage((prev) => ({
               ...prev,
@@ -75,7 +81,6 @@ const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
               ...prev,
               nicknameErrorMessage: null,
             }));
-            // 비밀번호 확인
             if (newPassword.length === 0) {
               setEditInformationErrorMessage((prev) => ({
                 ...prev,
@@ -145,7 +150,6 @@ const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
       return;
     }
 
-    // 비밀번호가 일치하면 에러 메시지 초기화
     setEditInformationErrorMessage((prev) => ({
       ...prev,
       passwordConfirmErrorMessage: null,
@@ -157,7 +161,6 @@ const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
     });
   };
 
-  console.log(editInformationErrorMessage);
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between font-bold">
@@ -170,6 +173,12 @@ const MyPageForm = ({ uploadedImage }: { uploadedImage: string | null }) => {
           저장하기
         </button>
       </div>
+      <ProfileImage
+        nickname={nickname}
+        profileImageUrl={data?.profileImageUrl || ''}
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+      />
       <form
         className="flex flex-col gap-8"
         noValidate

@@ -1,14 +1,21 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 import AccountCheckIcon from '@/public/icons/account-check.svg';
 import TextboxCheckIcon from '@/public/icons/textbox-check.svg';
 import SettingCheckIcon from '@/public/icons/setting-check.svg';
 import CalendarCheckIcon from '@/public/icons/calendar-check.svg';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import uploadProfileImage from '@/apis/user/uploadProfileImage';
 
-export default function SideNavigationMenu() {
+export default function SideNavigationMenu({
+  uploadedImage,
+  setUploadedImage,
+}: {
+  uploadedImage: string | null;
+  setUploadedImage: React.Dispatch<React.SetStateAction<string | null>>;
+}) {
   const pathname = usePathname();
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
@@ -16,13 +23,29 @@ export default function SideNavigationMenu() {
     setSelectedItem(index);
   };
 
-  //TODO - 주소 정해지면 경로 바꿔야함
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      try {
+        const imageData = await uploadProfileImage(file);
+        setUploadedImage(imageData.profileImageUrl);
+      } catch (error) {
+        console.error('Failed to upload image:', error);
+      }
+    }
+  };
+
+  const handlePenClick = () => {
+    const fileInput = document.getElementById('file-input');
+    if (fileInput) fileInput.click();
+  };
+
   const menuItems = [
     {
       icon: AccountCheckIcon,
       alt: '내정보 아이콘',
       label: '내 정보',
-      path: '/',
+      path: '/myprofile',
     },
     {
       icon: TextboxCheckIcon,
@@ -55,13 +78,23 @@ export default function SideNavigationMenu() {
           style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
         >
           <Image
-            src="/images/mangom.jpeg"
-            alt="기본프로필이미지"
+            src={uploadedImage || '/images/mangom.jpeg'}
+            alt="프로필 이미지"
             fill
             style={{ objectFit: 'cover' }}
           />
         </div>
-        <div className="absolute tablet:right-[30px] right-[90px] bottom-0 z-2 cursor-pointer">
+        <input
+          id="file-input"
+          type="file"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+          accept="image/*"
+        />
+        <div
+          className="absolute tablet:right-[30px] right-[90px] bottom-0 z-2 cursor-pointer"
+          onClick={handlePenClick}
+        >
           <Image
             src="/icons/penIcon.svg"
             alt="수정아이콘"
@@ -75,11 +108,11 @@ export default function SideNavigationMenu() {
           <Link href={item.path} key={index}>
             <li
               className={`flex gap-[4px] items-center rounded-[12px] h-[44px] px-[16px] py-[9px] cursor-pointer
-          ${
-            selectedItem === index || item.path === pathname
-              ? 'bg-green400 text-black200'
-              : 'hover:bg-green400 hover:text-black200 text-[#A1A1A1]'
-          }`}
+                ${
+                  selectedItem === index || item.path === pathname
+                    ? 'bg-green400 text-black200'
+                    : 'hover:bg-green400 hover:text-black200 text-[#A1A1A1]'
+                }`}
               onClick={() => handleClick(index)}
             >
               <item.icon />
