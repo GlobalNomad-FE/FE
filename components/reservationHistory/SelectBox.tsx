@@ -43,11 +43,13 @@ const SelectBox: React.FC<SelectBoxProps> = ({
       className={`relative ${
         myActivityes
           ? 'w-[800px] tablet:w-[429px] mobile:w-[326px] mt-[42px]'
-          : 'w-[381px] tablet:w-[317px] mobile:w-full'
+          : 'w-[381px] tablet:w-[381px] mobile:w-[303px] rounded-2xl '
       } h-[48px]`}
     >
       <div
-        className="px-4 py-3 border border-gray500 rounded-[4px] bg-white flex justify-between cursor-pointer"
+        className={`px-4 py-3 border border-gray500 ${
+          reservations && 'mobile:rounded-[15px]'
+        } rounded-[4px] bg-white flex justify-between cursor-pointer`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {myActivityes && (
