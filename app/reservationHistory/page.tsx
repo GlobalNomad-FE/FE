@@ -58,9 +58,7 @@ export default function Page() {
     },
   ];
 
-  const [selectedActivityId, setSelectedActivityId] = useState<number | null>(
-    null,
-  );
+  const [selectedActivityId, setSelectedActivityId] = useState<number>(0);
 
   const handleSelect = (id: number) => {
     setSelectedActivityId(id); //선택한 체험의 id셋팅
@@ -127,7 +125,10 @@ export default function Page() {
         <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] mobile:w-full font-bold">예약현황</p>
           <SelectBox myActivityes={myActivityes} onSelect={handleSelect} />
-          <Calendar MonthReservations={MonthReservations} />
+          <Calendar
+            MonthReservations={MonthReservations}
+            selectedActivityId={selectedActivityId}
+          />
         </div>
       </div>
       <Footer />

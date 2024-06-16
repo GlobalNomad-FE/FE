@@ -2,14 +2,39 @@ import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 
-const ReservationInfoModal = () => {
-  const [openModal, setOpenModal] = useState(false);
+interface Props {
+  closePopup: () => void;
+  selectedDate: Date;
+  selectedActivityId: number;
+}
+
+const ReservationInfoModal = ({
+  closePopup,
+  selectedDate,
+  selectedActivityId,
+}: Props) => {
   const [selectTab, setSelectTab] = useState('신청');
 
-  const handleCloseModal = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setOpenModal(false);
+  const handleDateFormat = () => {
+    const currentDate = new Date(
+      selectedDate.getFullYear(),
+      selectedDate.getMonth(),
+      selectedDate.getDay() + 1,
+    );
+
+    // 날짜를 "yyyy년 mm월 dd일" 형식으로 변환
+    const formattedDate = currentDate.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+
+    return formattedDate;
   };
+
+  const selectDate = handleDateFormat();
+
+  handleDateFormat();
   return (
     <div
       className={`w-[429px] ${
@@ -23,7 +48,7 @@ const ReservationInfoModal = () => {
           alt="닫기 버튼"
           width={40}
           height={40}
-          onClick={handleCloseModal}
+          onClick={closePopup}
           className="cursor-pointer"
         />
       </div>
@@ -71,7 +96,7 @@ const ReservationInfoModal = () => {
         <h2 className="text-[20px] font-semibold text-black200 mt-7">
           예약날짜
         </h2>
-        <p className="my-4 text-[20px]">2024년 6월 15일</p>
+        <p className="my-4 text-[20px]">{selectDate}</p>
         <div className="p-4 text-[16px] border">14:00 ~15 : 00</div>
         {/* <SelectBox /> */}
       </div>

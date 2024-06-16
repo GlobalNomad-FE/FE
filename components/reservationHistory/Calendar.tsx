@@ -1,15 +1,25 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
-import { ReservationMonthInfosType } from '@/types/activitiesReservationType';
+import ReviewModal from '@/components/commons/Popups/ReviewModal/ReviewModal';
+import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
+import { ReservationDayInfoType } from '@/types/activitiesReservationType';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-const Calendar: React.FC<ReservationMonthInfosType> = ({
-  MonthReservations,
-}) => {
+interface Props {
+  MonthReservations: ReservationDayInfoType[];
+  selectedActivityId: number;
+}
+
+const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsReeservationModalOpen(false);
+  };
 
   const getDaysInMonth = (year: number, month: number) => {
     return new Date(year, month + 1, 0).getDate();
@@ -119,7 +129,7 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({
       const currentDate = new Date(
         currentMonth.getFullYear(),
         currentMonth.getMonth(),
-        day,
+        day + 1,
       );
 
       // 현재 날짜의 YYYY-MM-DD 형식 추출
@@ -143,13 +153,13 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({
 
       cells.push(
         <div
-          className={`h-[154px] p-[2px] text-[#969696] bg-white flex justify-between flex-col ${
+          className={`h-[154px] p-[2px] text-[#969696] bg-white flex justify-between flex-col cursor-pointer ${
             cells.length !== 0 ? 'border-l' : ''
           }`}
           key={day}
           onClick={() => {
-            //TODO: 모달 팝업
             setSelectedDate(currentDate);
+            setIsReeservationModalOpen(true);
           }}
         >
           <div className="p-3 text-[21px] flex flex-row">
@@ -216,8 +226,19 @@ const Calendar: React.FC<ReservationMonthInfosType> = ({
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] tablet:w-[417px] mobile:w-[326px] flex flex-col items-center">
+    <div className="mx-auto mt-10 w-[792px] tablet:w-[417px] mobile:w-[326px] flex flex-col items-center relative">
       {renderHeader()}
+      <div
+        className={`absolute right-0 top-12 ${
+          !isReservationModalOpen && 'hidden'
+        }`}
+      >
+        <ReservationInfoModal
+          closePopup={handleCloseModal}
+          selectedDate={selectedDate}
+          selectedActivityId={selectedActivityId}
+        />
+      </div>
       <div className="mt-6 w-full border-y border-x rounded-t-lg rounded-b-lg bg-white">
         {renderDays()}
         {renderCells()}
