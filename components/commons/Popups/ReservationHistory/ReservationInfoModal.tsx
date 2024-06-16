@@ -6,7 +6,7 @@ import { ReservationStatusCountType } from '@/types/activitiesReservationType';
 
 interface Props {
   closePopup: () => void;
-  selectedDate: Date;
+  selectedDate: string;
   selectedActivityId: number;
   reservationByDay: ReservationStatusCountType;
 }
@@ -25,24 +25,12 @@ const ReservationInfoModal = ({
   });
   const [selectTab, setSelectTab] = useState('신청');
 
-  const currentDateStr = selectedDate.toISOString().substring(0, 10); //YYYY-MM-DD
-
   //YYYY년 MM월 DD일
   const handleDateFormat = () => {
-    const currentDate = new Date(
-      selectedDate.getFullYear(),
-      selectedDate.getMonth(),
-      selectedDate.getDay() + 1,
-    );
+    // 문자열을 Date 객체로 변환
+    const dateParts = selectedDate.split('-');
 
-    // 날짜를 "yyyy년 mm월 dd일" 형식으로 변환
-    const formattedDate = currentDate.toLocaleDateString('ko-KR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-
-    return formattedDate;
+    return dateParts[0] + '년 ' + dateParts[1] + '월 ' + dateParts[2] + '일';
   };
 
   // TODO : 내 체험 날짜별 예약정보(신청, 승인, 거절)이 있는 스케쥴 조회
@@ -92,7 +80,7 @@ const ReservationInfoModal = ({
       { declined: 0, confirmed: 0, pending: 0 },
     );
     setStatusCounts(totalCounts);
-  }, [dayReservations]);
+  }, []);
 
   const handleSelect = (scheduleId: number) => {
     setSelectedScheduleId(scheduleId);

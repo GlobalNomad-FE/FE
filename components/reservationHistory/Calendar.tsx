@@ -14,7 +14,7 @@ interface Props {
 
 const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState('');
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
   const [selectedReservationDate, setSelectedReservationDate] = useState({
     completed: 0,
@@ -163,7 +163,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           }`}
           key={day}
           onClick={() => {
-            setSelectedDate(currentDate);
+            setSelectedDate(currentDateStr);
             setIsReeservationModalOpen(true);
             setSelectedReservationDate(dayData);
           }}

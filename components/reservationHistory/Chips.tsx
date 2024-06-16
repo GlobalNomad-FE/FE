@@ -14,10 +14,10 @@ const Chips = ({ reservations }: Props) => {
 
   return (
     <div className="flex flex-col justify-end h-[69px] w-[108.5px] tablet:w-[55px] tablet:h-[23px] mobile:w-[45px] mobile:h-[20px]">
-      {pending !== 0 && <StatusChipStyle count={pending} status="pending" />}
       {confirmed !== 0 && (
         <StatusChipStyle count={confirmed} status="confirmed" />
       )}
+      {pending !== 0 && <StatusChipStyle count={pending} status="pending" />}
       {completed !== 0 && (
         <StatusChipStyle count={completed} status="completed" />
       )}
@@ -40,12 +40,14 @@ const StatusChipStyle: React.FC<StatusProps> = ({ status, count }) => {
     bgColor = '[#FFF4E8]';
     fontColor = '[#FF7C1D]';
     text = '승인';
-  } else if (status === 'pending') {
+  }
+  if (status === 'pending') {
     //pending : 거절
-    bgColor = '[#3366FF]';
+    bgColor = '[#0085FF]';
     fontColor = 'white';
     text = '예약';
-  } else {
+  }
+  if (status === 'completed') {
     //completed : 완료
     bgColor = 'gray200';
     fontColor = 'gray600';
