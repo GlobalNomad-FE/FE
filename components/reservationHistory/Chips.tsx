@@ -9,7 +9,7 @@ interface Props {
  * 캘린더의 예약 관련 카운터 정보를 담은 칩 컴포넌트
  * @param data activitiesReservationType - ReservationStatusCountType
  */
-const Chips: React.FC<Props> = ({ reservations }) => {
+const Chips = ({ reservations }: Props) => {
   const { pending, confirmed, completed } = reservations;
 
   return (
