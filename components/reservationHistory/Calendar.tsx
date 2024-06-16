@@ -120,7 +120,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     for (let i = startDate - 1; i >= 0; i--) {
       cells.push(
         <div
-          className={`h-[154px] p-3 text-gray-200 text-[21px] bg-gray-100 ${
+          className={`h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 ${
             i !== startDate - 1 ? 'border-l' : ''
           }`}
           key={`prev-${i}`}
@@ -158,7 +158,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
 
       cells.push(
         <div
-          className={`h-[154px] p-[2px] text-[#969696] bg-white flex justify-between flex-col cursor-pointer ${
+          className={`h-[154px] tablet:h-[125px] p-[2px] text-[#969696] bg-white flex justify-between flex-col cursor-pointer ${
             cells.length !== 0 ? 'border-l' : ''
           }`}
           key={day}
@@ -210,7 +210,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     while (cells.length < 7) {
       cells.push(
         <div
-          className="h-[154px] p-3 text-gray-200 text-[21px] bg-gray-100 border-l"
+          className="h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 border-l"
           key={`next-${day}`}
         >
           <span>{day}</span>
