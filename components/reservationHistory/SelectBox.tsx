@@ -42,7 +42,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     <div
       className={`relative ${
         myActivityes
-          ? 'w-[800px] tablet:w-[429px] mobile:w-full mt-[42px]'
+          ? 'w-[800px] tablet:w-[429px] mobile:w-[326px] mt-[42px]'
           : 'w-[381px] tablet:w-[317px] mobile:w-full'
       } h-[48px]`}
     >

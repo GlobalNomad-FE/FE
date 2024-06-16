@@ -80,12 +80,16 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     );
   };
 
+  //요일 랜더링
   const renderDays = () => {
     return (
-      <div className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[417px] mobile:w-[326px] h-[45px]  divide-x border-b">
+      <div
+        style={{ minWidth: '326px' }}
+        className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[413px] mobile:w-[326px] h-[45px]  divide-x border-b"
+      >
         {daysOfWeek.map((day, index) => (
           <div
-            className="text-center font-medium text-[16px] p-3 pb-1 text-[#969696]"
+            className="w-[61px] tablet:w-[61px] mobile:w-[37px] text-center font-medium text-[16px] p-3 pb-1 text-[#969696]"
             key={index}
           >
             {day}
@@ -95,6 +99,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     );
   };
 
+  //날짜 랜더링
   const renderCells = () => {
     const monthStart = new Date(
       currentMonth.getFullYear(),
@@ -121,7 +126,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
       cells.push(
         <div
           className={`h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 ${
-            i !== startDate - 1 ? 'border-l' : ''
+            i !== startDate - 1 && 'border-l'
           }`}
           key={`prev-${i}`}
         >
@@ -159,7 +164,9 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
       cells.push(
         <div
           className={`h-[154px] tablet:h-[125px] p-[2px] text-[#969696] bg-white flex justify-between flex-col cursor-pointer ${
-            cells.length !== 0 ? 'border-l' : ''
+            cells.length !== 0 && 'border-l'
+          } ${cells.length === 6 && 'border-r'} ${
+            cells.length === 0 && 'rounded-bl-lg'
           }`}
           key={day}
           onClick={() => {
@@ -197,7 +204,10 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
 
       if ((day + startDate) % 7 === 0) {
         rows.push(
-          <div className="grid grid-cols-7 w-full border-b" key={day}>
+          <div
+            className="grid grid-cols-7 w-[792px] tablet:w-[413px] mobile:w-[326px] border-b"
+            key={day}
+          >
             {cells}
           </div>,
         );
@@ -210,7 +220,9 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     while (cells.length < 7) {
       cells.push(
         <div
-          className="h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 border-l"
+          className={`h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 border-l ${
+            cells.length === 6 && 'border-r rounded-br-lg'
+          }`}
           key={`next-${day}`}
         >
           <span>{day}</span>
@@ -220,19 +232,27 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     }
     if (cells.length > 0) {
       rows.push(
-        <div className="grid grid-cols-7 w-full border-b-none" key="next">
+        <div
+          className="grid grid-cols-7 w-[792px] tablet:w-[413px] mobile:w-[326px] border-b-none"
+          key="next"
+        >
           {cells}
         </div>,
       );
     }
 
     return (
-      <div className="w-[792px] tablet:w-[417px] mobile:w-[326px]">{rows}</div>
+      <div
+        style={{ minWidth: '326px' }}
+        className="w-[792px] tablet:w-[413px] mobile:w-[326px]"
+      >
+        {rows}
+      </div>
     );
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] tablet:w-[417px] mobile:w-[326px] flex flex-col items-center relative">
+    <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
       {renderHeader()}
       <div
         className={`absolute right-0 top-12 ${
@@ -246,7 +266,11 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           reservationByDay={selectedReservationDate}
         />
       </div>
-      <div className="mt-6 w-full border-y border-x rounded-t-lg rounded-b-lg bg-white">
+      <div
+        style={{ minWidth: '326px' }}
+        className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
+      >
+        {/* <div className="mt-6 w-full border-y border-x ounded-t-lg rounded-b-lg bg-white"> */}
         {renderDays()}
         {renderCells()}
       </div>

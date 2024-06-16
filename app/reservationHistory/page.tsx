@@ -117,10 +117,8 @@ export default function Page() {
     },
   ];
 
-  myActivityes = [];
-
   return (
-    <div className="text-black200 bg-gray50">
+    <div style={{ minWidth: '350px' }} className="text-black200 bg-gray50">
       <Gnb />
       <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center">
         <SideNavigationMenu />
