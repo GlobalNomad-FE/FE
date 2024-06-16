@@ -16,6 +16,11 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
+  const [selectedReservationDate, setSelectedReservationDate] = useState({
+    completed: 0,
+    confirmed: 0,
+    pending: 0,
+  });
 
   const handleCloseModal = () => {
     setIsReeservationModalOpen(false);
@@ -160,6 +165,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           onClick={() => {
             setSelectedDate(currentDate);
             setIsReeservationModalOpen(true);
+            setSelectedReservationDate(dayData);
           }}
         >
           <div className="p-3 text-[21px] flex flex-row">
@@ -237,6 +243,7 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           closePopup={handleCloseModal}
           selectedDate={selectedDate}
           selectedActivityId={selectedActivityId}
+          reservationByDay={selectedReservationDate}
         />
       </div>
       <div className="mt-6 w-full border-y border-x rounded-t-lg rounded-b-lg bg-white">
