@@ -4,9 +4,9 @@ import Gnb from '@/components/commons/gnb/gnb';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import FilterDropdown from '@/components/commons/FilterDropdown';
 import Image from 'next/image';
-import Experience from '@/components/commons/card/Experience';
 import Footer from '@/components/commons/Footer';
 import useGetMyReservations from '@/apis/my-reservations/useGetMyReservations';
+import ReservationsExperience from '@/components/commons/card/ReservationsExperience';
 
 interface Activity {
   bannerImageUrl: string;
@@ -18,6 +18,7 @@ interface Reservation {
   id: number;
   activity: Activity;
   status: string;
+  reviewSubmitted: boolean;
   totalPrice: number;
   headCount: number;
   date: string;
@@ -112,7 +113,7 @@ const MyReservations = () => {
             ) : (
               <div className="flex flex-col gap-6 mt-[16px]">
                 {reservations.map((item) => (
-                  <Experience
+                  <ReservationsExperience
                     key={item.id}
                     id={item.id}
                     title={item.activity.title}
@@ -124,7 +125,7 @@ const MyReservations = () => {
                     experienceStatus={item.status}
                     bannerImageUrl={item.activity.bannerImageUrl}
                     activityId={item.activity.id}
-                    type="reservations"
+                    reviewSubmitted={item.reviewSubmitted}
                   />
                 ))}
               </div>
