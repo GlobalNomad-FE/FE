@@ -1,7 +1,10 @@
 export default function MyActivitiyExperienceSkeleton() {
   return (
     <>
-      <div className="animate-pulse mt-4 max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex bg-white">
+      <div
+        className="animate-pulse mt-4 max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex bg-white"
+        style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
+      >
         <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative bg-gray-300 rounded-l-[24px]"></div>
         <div className="flex flex-col justify-between w-full p-6 tablet:p-[12px] mobile:p-[9px]">
           <div>
@@ -13,7 +16,10 @@ export default function MyActivitiyExperienceSkeleton() {
           </div>
         </div>
       </div>
-      <div className="animate-pulse mt-4 max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex bg-white">
+      <div
+        className="animate-pulse mt-6 max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex bg-white"
+        style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
+      >
         <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative bg-gray-300 rounded-l-[24px]"></div>
         <div className="flex flex-col justify-between w-full p-6 tablet:p-[12px] mobile:p-[9px]">
           <div>
