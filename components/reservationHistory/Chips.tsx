@@ -36,19 +36,16 @@ const StatusChipStyle: React.FC<StatusProps> = ({ status, count }) => {
   let text = '';
 
   if (status === 'confirmed') {
-    //confirmed : 승인
     bgColor = '[#FFF4E8]';
     fontColor = '[#FF7C1D]';
     text = '승인';
   }
   if (status === 'pending') {
-    //pending : 거절
-    bgColor = '[#0085FF]';
+    bgColor = 'blue300';
     fontColor = 'white';
     text = '예약';
   }
   if (status === 'completed') {
-    //completed : 완료
     bgColor = 'gray200';
     fontColor = 'gray600';
     text = '완료';
