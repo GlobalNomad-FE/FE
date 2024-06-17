@@ -11,12 +11,18 @@ instance.interceptors.request.use((config) => {
   if (config.headers.Authorization) return config;
 
   const accessToken = Cookies.get('accessToken');
+  const userID = Cookies.get('userID');
+
   if (accessToken) {
     config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
+
+  if (userID) {
+    config.headers['UserID'] = userID;
+  }
+
   return config;
 });
-
 instance.interceptors.response.use(
   (res) => res,
   async (error) => {

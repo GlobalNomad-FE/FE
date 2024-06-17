@@ -13,7 +13,7 @@ import { FormValues } from '@/apis/auth/auth.type';
 import { auth } from '@/apis/auth/auth';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 
-const { email, password, nickname, passwordConfirm } = USER_INPUT_VALIDATION;
+const { email, password, nickname } = USER_INPUT_VALIDATION;
 
 interface ErrorMessage {
   message: string;
@@ -70,9 +70,6 @@ const SignUp = () => {
     mutationKey: ['signUp'],
     onSuccess: () => {
       handleOpenPopup('가입이 완료되었습니다.');
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
     },
     onError: (error: AxiosError<ErrorMessage>) => {
       if (error.response && error.response.status === 409) {
@@ -90,6 +87,10 @@ const SignUp = () => {
     signUpMutation.mutate(data);
   };
 
+  const moveToLoginPage = () => {
+    router.push('/login');
+  };
+
   return (
     <div className="flex w-full flex-col items-center pt-40 text-black200 ">
       <div>
@@ -104,7 +105,7 @@ const SignUp = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-10 flex w-[640px] flex-col gap-7"
+        className="mt-10 flex flex-col gap-7 w-full max-w-4xl  lg:px-32 md:px-20 sm:px-12 px-6"
       >
         <LoginInput
           label="이메일"
@@ -165,7 +166,15 @@ const SignUp = () => {
         </Link>
       </div>
 
-      <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+      <BasePopup
+        isOpen={openPopup}
+        closePopup={handleClosePopup}
+        clickEvent={
+          popupMessage === '가입이 완료되었습니다.'
+            ? moveToLoginPage
+            : undefined
+        }
+      >
         {popupMessage}
       </BasePopup>
     </div>
