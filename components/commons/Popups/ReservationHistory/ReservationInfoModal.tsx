@@ -86,6 +86,61 @@ const ReservationInfoModal = ({
     setSelectedScheduleId(scheduleId);
   };
 
+  //TODO: select버튼을 통해 받은 selectedScheduleId로 내 체험 예약 시간대별 예약 내역 조회
+  const reservationInfos = [
+    {
+      id: 1605,
+      status: 'pending',
+      totalPrice: 112220,
+      headCount: 11,
+      nickname: '차박좋아',
+      userId: 362,
+      date: '2024-06-13',
+      startTime: '4:00',
+      endTime: '5:00',
+      createdAt: '2024-06-13T00:36:50.264Z',
+      updatedAt: '2024-06-13T00:36:50.264Z',
+      activityId: 1154,
+      scheduleId: 3991,
+      reviewSubmitted: false,
+      teamId: '4-13',
+    },
+    {
+      id: 1605,
+      status: 'pending',
+      totalPrice: 112220,
+      headCount: 5,
+      nickname: '캠핑갈래',
+      userId: 362,
+      date: '2024-06-13',
+      startTime: '4:00',
+      endTime: '5:00',
+      createdAt: '2024-06-13T00:36:50.264Z',
+      updatedAt: '2024-06-13T00:36:50.264Z',
+      activityId: 1154,
+      scheduleId: 3991,
+      reviewSubmitted: false,
+      teamId: '4-13',
+    },
+    {
+      id: 1605,
+      status: 'pending',
+      totalPrice: 112220,
+      headCount: 5,
+      nickname: '캠핑갈래!!',
+      userId: 362,
+      date: '2024-06-13',
+      startTime: '4:00',
+      endTime: '5:00',
+      createdAt: '2024-06-13T00:36:50.264Z',
+      updatedAt: '2024-06-13T00:36:50.264Z',
+      activityId: 1154,
+      scheduleId: 3991,
+      reviewSubmitted: false,
+      teamId: '4-13',
+    },
+  ];
+
   const selectDate = handleDateFormat();
 
   handleDateFormat();
@@ -160,7 +215,13 @@ const ReservationInfoModal = ({
             selectTab === '신청' && 'h-[286px] overflow-scroll'
           } mt-4`}
         >
-          <ReservationInfo selectTab={selectTab} />
+          {reservationInfos.map((reservationInfo, index) => (
+            <ReservationInfo
+              key={index}
+              selectTab={selectTab}
+              reservationInfo={reservationInfo}
+            />
+          ))}
         </div>
       </div>
       {selectTab !== '신청' && (

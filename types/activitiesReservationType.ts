@@ -39,3 +39,33 @@ export interface ReservationScheduleType {
   endTime: string;
   count: ModalReservationStatusCountType;
 }
+
+/**
+ * 내 체험 예약 시간대 별 예약 내역 조회
+ */
+export interface ReservationInfoType {
+  id: number;
+  status: string;
+  totalPrice: number;
+  headCount: number;
+  nickname: string;
+  userId: number;
+  date: string;
+  startTime: string;
+  endTime: string;
+  createdAt: string;
+  updatedAt: string;
+  activityId: number;
+  scheduleId: number;
+  reviewSubmitted: boolean;
+  teamId: string;
+}
+
+/**
+ * 내 체험 예약 시간대 별 예약 내역 리스트 조회
+ */
+export interface ReservationInfosType {
+  reservations: ReservationInfoType[];
+  totalCount: number;
+  cursorId: number;
+}
