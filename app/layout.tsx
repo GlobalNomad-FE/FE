@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import 'react-toastify/dist/ReactToastify.css';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 import ReactQueryProviders from '@/apis/ReactQueryProviders';
 import React from 'react';
 import { AuthProvider } from '@/context/Authcontext';
+import { ToastContainer } from 'react-toastify';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -36,6 +38,17 @@ export default function RootLayout({
             <Script
               src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
               strategy="beforeInteractive"
+            />
+            <ToastContainer
+              position="top-center"
+              limit={2}
+              autoClose={4000}
+              closeOnClick
+              pauseOnHover={false}
+              draggable
+              bodyClassName={pretendard.className}
+              toastStyle={{ width: '350px' }}
+              bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
             />
             {children}
           </AuthProvider>

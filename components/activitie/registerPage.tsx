@@ -24,7 +24,8 @@ import { ActivitiesDataType } from '@/types/activitiesType';
 import { patchActivities } from '@/apis/my-activities/@common/myActivites';
 import { useQueryClient } from '@tanstack/react-query';
 import BasePopup from '../commons/Popups/BasePopup';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 
 interface RegisterpageProps {
   id?: number;
@@ -54,6 +55,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
       scheduleIdsToRemove: [],
     },
   });
+
   const { handleSubmit, control, setValue, reset, getValues } = methods;
 
   const getImagePopupMessage = () => {
@@ -68,7 +70,11 @@ export default function Registerpage({ id }: RegisterpageProps) {
     }
   };
 
-  const { mutate: registerMutation } = useMutation({
+  const { mutate: registerMutation } = useMutation<
+    AxiosResponse,
+    AxiosError<{ message: string }>,
+    ActivitiesData
+  >({
     mutationKey: ['register'],
     mutationFn: (data: ActivitiesData) => postActivities(data),
   });
@@ -78,24 +84,35 @@ export default function Registerpage({ id }: RegisterpageProps) {
     mutationFn: ({ id, data }: { id: number; data: ActivitiesData }) =>
       patchActivities(id, data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activities', 'list'] });
       queryClient.invalidateQueries({ queryKey: ['register', 'detail', id] });
+      toast.success('수정이 완료되었습니다.');
       router.push('/activities');
     },
-    onError: () => (error: AxiosError) => {
-      switch (error.response?.status) {
-        case 401:
-          alert('로그인을 해주세요.');
-          break;
-        case 409:
-          alert('겹치는 예약 가능 시간대가 존재합니다.');
-          break;
-        default:
-          alert('다시 시도해주세요.');
-          break;
+    onError: (error: AxiosError<{ message: string }>) => {
+      console.log('에러메세지', error.response?.data.message);
+      if (error.response?.status === 401) {
+        toast.error('로그인 후 이용 해주세요.');
+        return;
       }
+      toast.error(error.response?.data.message);
+      // switch (error.response?.data.message) {
+      //   case 401:
+      //     alert('로그인을 해주세요.');
+      //     break;
+      //   case 409:
+      //     alert('겹치는 예약 가능 시간대가 존재합니다.');
+      //     break;
+      //   default:
+      //     alert('다시 시도해주세요.');
+      //     break;
+      // }
     },
   });
 
+  const toastOpen = () => {
+    toast.error('로그인 후 이용 해주세요.');
+  };
   const handlevalue = (id: keyof ActivitiesData, value: any) => {
     setValue(id, value);
   };
@@ -122,11 +139,15 @@ export default function Registerpage({ id }: RegisterpageProps) {
 
     registerMutation(formData, {
       onSuccess: () => {
-        setPopupOpen(true);
+        toast.success('등록이 완료되었습니다.');
         router.push('/activities');
       },
-      onError: () => {
-        console.warn('onError', data);
+      onError: (error: AxiosError<{ message: string }>) => {
+        if (error.response?.status === 401) {
+          toast('로그인 후 이용 해주세요.');
+          return;
+        }
+        toast.error(error.response?.data.message);
       },
     });
   };
