@@ -9,6 +9,7 @@ import ReservationButton from '@common/ReservationButton';
 import { useCalendar } from '../lib/Calendar.provider';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 import { usePostActivityReservation } from '@/apis/activities/mutaion/usePostActivityReservation';
+import { AxiosError } from 'axios';
 
 const TabletReservationWidgetContainer = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -37,21 +38,14 @@ const TabletReservationWidgetContainer = () => {
         onSuccess: () => {
           setIsPopupOpen(true);
         },
-        onError: (error) => {
+        onError: (error: AxiosError<{ message: string }>) => {
           setIsPopupOpen(true);
-          switch (error.response?.status) {
-            case 401:
-              setErrorMessage('로그인을 해주세요.');
-              break;
-            case 404:
-              setErrorMessage('존재하지 않는 체험입니다');
-              break;
-            case 409:
-              setErrorMessage('확정 예약이 있는 일정은 예약할 수 없습니다.');
-              break;
-            default:
-              setErrorMessage('내가 등록한 체험은 예약할 수 없습니다.');
-              break;
+          if (error.response?.status === 401) {
+            setErrorMessage('로그인을 해주세요.');
+          } else if (error.response?.status === 400) {
+            setErrorMessage('이미 지난 일정은 예약할 수 없습니다.');
+          } else if (error.response?.data.message) {
+            setErrorMessage(error.response?.data.message);
           }
         },
       },

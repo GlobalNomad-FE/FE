@@ -36,7 +36,6 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const [bannerImageUrl, setBannerImageUrl] = useState<string[]>([]);
   const [subImageUrls, setSubImageUrls] = useState<string[]>([]);
   const [subImageIds, setSubImageIds] = useState<number[]>([]);
-  const [PopupOpen, setPopupOpen] = useState(false);
   const [imagePopupOpen, setImagePopupOpen] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -90,29 +89,14 @@ export default function Registerpage({ id }: RegisterpageProps) {
       router.push('/activities');
     },
     onError: (error: AxiosError<{ message: string }>) => {
-      console.log('에러메세지', error.response?.data.message);
       if (error.response?.status === 401) {
         toast.error('로그인 후 이용 해주세요.');
         return;
       }
       toast.error(error.response?.data.message);
-      // switch (error.response?.data.message) {
-      //   case 401:
-      //     alert('로그인을 해주세요.');
-      //     break;
-      //   case 409:
-      //     alert('겹치는 예약 가능 시간대가 존재합니다.');
-      //     break;
-      //   default:
-      //     alert('다시 시도해주세요.');
-      //     break;
-      // }
     },
   });
 
-  const toastOpen = () => {
-    toast.error('로그인 후 이용 해주세요.');
-  };
   const handlevalue = (id: keyof ActivitiesData, value: any) => {
     setValue(id, value);
   };
@@ -141,10 +125,11 @@ export default function Registerpage({ id }: RegisterpageProps) {
       onSuccess: () => {
         toast.success('등록이 완료되었습니다.');
         router.push('/activities');
+        queryClient.invalidateQueries({ queryKey: ['activities', 'list'] });
       },
       onError: (error: AxiosError<{ message: string }>) => {
         if (error.response?.status === 401) {
-          toast('로그인 후 이용 해주세요.');
+          toast.error('로그인 후 이용 해주세요.');
           return;
         }
         toast.error(error.response?.data.message);
@@ -276,16 +261,6 @@ export default function Registerpage({ id }: RegisterpageProps) {
         </main>
         <Footer />
       </div>
-      {PopupOpen && (
-        <BasePopup
-          isOpen={PopupOpen}
-          closePopup={() => {
-            setPopupOpen(false);
-          }}
-        >
-          {id ? '수정이 완료되었습니다' : '등록이 완료되었습니다'}
-        </BasePopup>
-      )}
       {imagePopupOpen && (
         <BasePopup
           isOpen={imagePopupOpen}

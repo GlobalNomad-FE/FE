@@ -23,7 +23,7 @@ const SuspenseList = () => {
     return <MyActivitiyExperienceSkeleton />;
   }
   if (isError) {
-    return <div>Error: {error?.message}</div>;
+    return <div>Error: 로그인 후 이용해주세요</div>;
   }
   return (
     <>
