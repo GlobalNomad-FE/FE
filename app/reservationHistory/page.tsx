@@ -5,58 +5,18 @@ import Footer from '@/components/commons/Footer';
 import Calendar from '@/components/reservationHistory/Calendar';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
+import useGetMyActivities from '@/apis/my-activitie-reservation-status/useGetMyActivities';
 import React, { useState } from 'react';
 
 export default function Page() {
-  //TODO: 내 체험 리스트 데이터 가져오기
-  //TODO: 내 체험 리스트 목업
-  let myActivityes = [
-    {
-      id: 1154,
-      userId: 409,
-      title: '길다길어111',
-      description: '길어요',
-      category: '식음료',
-      price: 112220,
-      address: '대전 동구 판교1길 3',
-      bannerImageUrl:
-        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/4-13_346_1718181839344.jpeg',
-      rating: 0,
-      reviewCount: 0,
-      createdAt: '2024-06-12T17:44:04.519Z',
-      updatedAt: '2024-06-12T17:44:04.519Z',
-    },
-    {
-      id: 1155,
-      userId: 409,
-      title: '길다길어222',
-      description: '길어요',
-      category: '식음료',
-      price: 112220,
-      address: '대전 동구 판교1길 3',
-      bannerImageUrl:
-        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/4-13_346_1718181839344.jpeg',
-      rating: 0,
-      reviewCount: 0,
-      createdAt: '2024-06-12T17:44:04.519Z',
-      updatedAt: '2024-06-12T17:44:04.519Z',
-    },
-    {
-      id: 1156,
-      userId: 409,
-      title: '길다길어333',
-      description: '길어요',
-      category: '식음료',
-      price: 112220,
-      address: '대전 동구 판교1길 3',
-      bannerImageUrl:
-        'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/activity_registration_image/4-13_346_1718181839344.jpeg',
-      rating: 0,
-      reviewCount: 0,
-      createdAt: '2024-06-12T17:44:04.519Z',
-      updatedAt: '2024-06-12T17:44:04.519Z',
-    },
-  ];
+  //내 체험 리스트
+  const { data, isLoading, isError } = useGetMyActivities({
+    method: 'cursor',
+    cursorId: null,
+    size: 15,
+  });
+
+  const myActivityes = data?.activities;
 
   const [selectedActivityId, setSelectedActivityId] = useState<number>(0);
 
@@ -124,7 +84,7 @@ export default function Page() {
         <SideNavigationMenu />
         <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] mobile:w-full font-bold">예약 현황</p>
-          {myActivityes.length > 0 ? (
+          {myActivityes ? (
             <>
               <SelectBox myActivityes={myActivityes} onSelect={handleSelect} />
               <Calendar
