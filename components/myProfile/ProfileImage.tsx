@@ -62,7 +62,7 @@ const ProfileImage = ({
         className="absolute p-[10px] w-11 h-11 inline-flex items-start bottom-0 right-3 z-10 rounded-full bg-green-80 cursor-pointer"
         onClick={handlePenClick}
       >
-        <Image width={24} height={24} src="/icons/penIcon.svg" alt="penIcon" />
+        <Image width={44} height={44} src="/icons/penIcon.svg" alt="penIcon" />
       </div>
     </div>
   );

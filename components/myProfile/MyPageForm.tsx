@@ -116,6 +116,7 @@ const MyPageForm = ({
       });
     }
   }, [isSuccess, data]);
+
   const { nickname, email, newPassword, newPasswordConfirm } = inputs;
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -162,7 +163,7 @@ const MyPageForm = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 px-6">
       <div className="flex justify-between font-bold">
         <div className="text-[#1b1b1b] text-[32px]">내정보</div>
         <button
@@ -173,12 +174,7 @@ const MyPageForm = ({
           저장하기
         </button>
       </div>
-      <ProfileImage
-        nickname={nickname}
-        profileImageUrl={data?.profileImageUrl || ''}
-        uploadedImage={uploadedImage}
-        setUploadedImage={setUploadedImage}
-      />
+
       <form
         className="flex flex-col gap-8"
         noValidate

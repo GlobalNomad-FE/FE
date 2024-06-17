@@ -1,3 +1,4 @@
+// SideNavigationMenu.tsx
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -7,16 +8,19 @@ import SettingCheckIcon from '@/public/icons/setting-check.svg';
 import CalendarCheckIcon from '@/public/icons/calendar-check.svg';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ProfileImage from '../myProfile/ProfileImage';
+import useUserStore from '@/libs/useUserStore';
 
 export default function SideNavigationMenu() {
   const pathname = usePathname();
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
+  const { uploadedImage, setUploadedImage } = useUserStore(); // zustand 스토어 사용
+  const [nickname] = useState<string>('기본 닉네임');
 
   const handleClick = (index: number) => {
     setSelectedItem(index);
   };
 
-  //TODO - 주소 정해지면 경로 바꿔야함
   const menuItems = [
     {
       icon: AccountCheckIcon,
@@ -54,14 +58,14 @@ export default function SideNavigationMenu() {
           className="w-[160px] h-[160px] rounded-[160px] bg-gray200 overflow-hidden relative "
           style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
         >
-          <Image
-            src="/images/mangom.jpeg"
-            alt="기본프로필이미지"
-            fill
-            style={{ objectFit: 'cover' }}
+          <ProfileImage
+            nickname={nickname}
+            profileImageUrl="/images/mangom.jpeg"
+            uploadedImage={uploadedImage}
+            setUploadedImage={setUploadedImage}
           />
         </div>
-        <div className="absolute tablet:right-[30px] right-[90px] bottom-0 z-2 cursor-pointer">
+        <div className="absolute bottom-0 z-2 cursor-pointer">
           <Image
             src="/icons/penIcon.svg"
             alt="수정아이콘"
