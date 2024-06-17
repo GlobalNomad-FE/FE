@@ -2,18 +2,27 @@ import React, { useState } from 'react';
 import Button from '@/components/commons/Button';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import Image from 'next/image';
+import usePostReview from '@/apis/my-reservations/usePostReview';
+import BasePopup from '@/components/commons/Popups/BasePopup';
 
 interface Props {
   reservationId: number;
+  closeModal: () => void;
 }
 
-const ReviewForm = ({ reservationId }: Props) => {
+const ReviewForm = ({ reservationId, closeModal }: Props) => {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState('');
   const isMobile = useMediaQuery('(max-width: 767px)');
+  const { mutate } = usePostReview();
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
 
   const handleStars = (clicked: number) => {
     setRating(clicked);
+  };
+  const handleClosePopup = () => {
+    setOpenPopup(false);
   };
 
   const handleReviewChange = (
@@ -22,14 +31,37 @@ const ReviewForm = ({ reservationId }: Props) => {
     setReviewText(event.target.value);
   };
 
-  const handleSubmit = () => {
-    alert(`${reservationId}에 대한 리뷰
-    별점: ${rating} 점
-    후기: ${reviewText}`);
-    //{teamId}/my-reservations/{reservationId}/reviews 로
-    //{"rating": 0,
-    //"content": "string"}
-    // post하면 됨
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    mutate(
+      {
+        reservationId: reservationId,
+        rating: rating,
+        content: reviewText,
+      },
+      {
+        onSuccess: () => {
+          setPopupMessage('리뷰를 성공적으로 저장 했습니다.');
+          setOpenPopup(true);
+        },
+        onError: (error: any) => {
+          if (error.response.status === 401) {
+            setPopupMessage('로그인 후 이용 해주세요.');
+            setOpenPopup(true);
+            return;
+          }
+          if (error.response.data.message) {
+            setPopupMessage(error.response.data.message);
+            setOpenPopup(true);
+            return;
+          }
+          setPopupMessage(
+            '알 수 없는 에러가 발생하였습니다. 다시 시도해주세요.',
+          );
+          setOpenPopup(true);
+        },
+      },
+    );
   };
 
   return (
@@ -72,6 +104,17 @@ const ReviewForm = ({ reservationId }: Props) => {
           작성하기
         </Button>
       </form>
+      <BasePopup
+        isOpen={openPopup}
+        closePopup={handleClosePopup}
+        clickEvent={
+          popupMessage === '리뷰를 성공적으로 저장 했습니다.'
+            ? closeModal
+            : undefined
+        }
+      >
+        {popupMessage}
+      </BasePopup>
     </>
   );
 };
