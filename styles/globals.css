@@ -68,4 +68,39 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+
+  .custom-scrollbar {
+    height: 100%; /* 자식 요소의 높이를 지정 */
+    overflow-y: overlay; /* 자식 요소에 overflow-y: scroll 적용 */
+    box-sizing: content-box; /* 패딩을 포함하지 않도록 설정 */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px; /* 스크롤바의 너비를 줄임 */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(
+      181,
+      181,
+      181,
+      0
+    ); /* 기본 스크롤바 색상을 투명하게 설정 */
+    border-radius: 10px;
+    border: 2px solid transparent; /* 스크롤바 손잡이 주위에 투명한 공간을 만듦 */
+    background-clip: content-box; /* 배경을 내용 상자에 맞춤 */
+  }
+
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(
+      181,
+      181,
+      181,
+      1
+    ); /* 호버 시 스크롤바 손잡이 색상을 회색으로 변경 */
+  }
 }

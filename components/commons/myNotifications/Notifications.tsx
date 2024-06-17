@@ -13,8 +13,8 @@ const Notifications = ({
   onClose,
   notificationIconRef,
 }: MyNotificationsProps) => {
-  const { data, error, isLoading } = useGetMyNotifications();
-    const notificationsRef = useRef<HTMLDivElement | null>(null);
+  const { data, error } = useGetMyNotifications();
+  const notificationsRef = useRef<HTMLDivElement | null>(null);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -59,7 +59,7 @@ const Notifications = ({
         />
       </div>
       {data && data.notifications.length > 0 && (
-        <div className="flex flex-col gap-2 mt-4 h-[632px] overflow-scroll scrollbar-hide mobile:h-full">
+        <div className="flex flex-col gap-2 max-h-[632px] w-full mt-4 custom-scrollbar mobile:h-full">
           {data.notifications.map((item) => (
             <NotificationItem
               key={item.id}
