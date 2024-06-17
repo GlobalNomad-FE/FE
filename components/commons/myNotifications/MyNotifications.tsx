@@ -22,18 +22,20 @@ const MyNotifications = () => {
 
   return (
     <div className="relative mobile:static">
-      <Image
-        src="/icons/notification.svg"
-        alt="알림"
-        width={20}
-        height={20}
-        className="cursor-pointer"
-        onClick={handleNotificationsOpen}
-        ref={notificationIconRef}
-      />
-      {hasNotifications && (
-        <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red100"></div>
-      )}
+      <div className="relative">
+        <Image
+          src="/icons/notification.svg"
+          alt="알림"
+          width={20}
+          height={20}
+          className="relative cursor-pointer"
+          onClick={handleNotificationsOpen}
+          ref={notificationIconRef}
+        />
+        {hasNotifications && (
+          <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red100"></div>
+        )}
+      </div>
       {isNotificationsOpen && (
         <Notifications
           onClose={handleNotificationClose}
