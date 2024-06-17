@@ -65,14 +65,6 @@ export default function SideNavigationMenu() {
             setUploadedImage={setUploadedImage}
           />
         </div>
-        <div className="absolute bottom-0 z-2 cursor-pointer">
-          <Image
-            src="/icons/penIcon.svg"
-            alt="수정아이콘"
-            width={44}
-            height={44}
-          />
-        </div>
       </div>
       <ul className="text-body1-bold flex flex-col gap-[8px]">
         {menuItems.map((item, index) => (
