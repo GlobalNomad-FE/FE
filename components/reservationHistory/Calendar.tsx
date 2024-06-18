@@ -185,7 +185,6 @@ const Calendar = ({ selectedActivityId }: Props) => {
             setSelectedDate(currentDateStr);
             setIsReeservationModalOpen(true);
             setIsSeletedDay(day);
-            setSelectedReservationDate(dayData);
           }}
         >
           <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
@@ -281,14 +280,12 @@ const Calendar = ({ selectedActivityId }: Props) => {
           closePopup={handleCloseModal}
           selectedDate={selectedDate}
           selectedActivityId={selectedActivityId}
-          reservationByDay={selectedReservationDate}
         />
       </div>
       <div
         style={{ minWidth: '326px' }}
         className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
       >
-        {/* <div className="mt-6 w-full border-y border-x ounded-t-lg rounded-b-lg bg-white"> */}
         {renderDays()}
         {renderCells()}
       </div>
