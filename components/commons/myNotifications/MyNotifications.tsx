@@ -33,7 +33,10 @@ const MyNotifications = () => {
           ref={notificationIconRef}
         />
         {hasNotifications && (
-          <div className="absolute top-0 right-0 w-2 h-2 rounded-full bg-red100"></div>
+          <div className="absolute top-0 right-0 w-2 h-2">
+            <div className="animate-ping absolute top-0 right-0 w-full h-full rounded-full bg-red100"></div>
+            <div className="absolute top-0 right-0 w-full h-full rounded-full bg-red100"></div>
+          </div>
         )}
       </div>
       {isNotificationsOpen && (
