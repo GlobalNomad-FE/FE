@@ -29,7 +29,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
         </div>
       </div>
       <div className="flex justify-end text-[16px] gap-4">
-        {selectTab === '신청' ? (
+        {selectTab === 'pending' ? (
           <>
             <Button
               width={82}
@@ -53,10 +53,14 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
               거절하기
             </Button>
           </>
-        ) : selectTab === '승인' ? (
-          <>예약승인</>
+        ) : selectTab === 'confirmed' ? (
+          <p className="w-[85px] h-[38px] bg-[#FFF4E8] text-[#FF7C1D] flex items-center justify-center rounded-3xl">
+            예약승인
+          </p>
         ) : (
-          <button>예약거절</button>
+          <p className="w-[85px] h-[38px] bg-[#FFE4E0] text-[#FF472E] flex items-center justify-center rounded-3xl">
+            예약거절
+          </p>
         )}
       </div>
     </div>
