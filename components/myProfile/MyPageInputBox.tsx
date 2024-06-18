@@ -66,10 +66,10 @@ const MyPageInputBox = ({
   }
 
   return (
-    <div className="flex flex-col w-[792px] gap-4">
+    <div className="flex flex-col w-[792px] ">
       <MyPageInputLabel labelName={labelName} />
       <input
-        className={`w-full py-4 pl-4 border border-gray-50 rounded ${borderColorClass}`}
+        className={`w-full text-[1rem] flex py-4 pl-5 border h-14 border-gray400 rounded ${borderColorClass}`}
         type={inputType}
         id={inputName}
         onChange={onChangeInput}
@@ -80,20 +80,20 @@ const MyPageInputBox = ({
       />
       {inputName === 'nickname' &&
         editInformationErrorMessage?.nicknameErrorMessage && (
-          <div className="text-red100 text-xs ml-1">
+          <div className="text-red100 text-[1rem] ml-1">
             {editInformationErrorMessage.nicknameErrorMessage}
           </div>
         )}
 
       {inputName === 'newPassword' &&
         editInformationErrorMessage?.passwordErrorMessage && (
-          <div className="text-red100 text-xs ml-1">
+          <div className="text-red100 text-[1rem] ml-1">
             {editInformationErrorMessage.passwordErrorMessage}
           </div>
         )}
       {inputName === 'newPasswordConfirm' &&
         editInformationErrorMessage?.passwordConfirmErrorMessage && (
-          <div className="text-red100 text-xs ml-1">
+          <div className="text-red100 text-[1rem] ml-1">
             {editInformationErrorMessage.passwordConfirmErrorMessage}
           </div>
         )}

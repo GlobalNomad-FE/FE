@@ -6,7 +6,6 @@ import { QueryClient } from '@tanstack/react-query';
 import { EditInformationErrorMessageType } from '@/types/EditInformationErrorMessageType';
 import { AxiosError } from 'axios';
 import MyPageInputBox from './MyPageInputBox';
-import ProfileImage from './ProfileImage';
 
 const queryClient = new QueryClient();
 
@@ -41,11 +40,13 @@ const MyPageForm = ({
       setEditInformationErrorMessage((prev) => ({
         ...prev,
         passwordErrorMessage: '비밀번호가 일치하지 않습니다.',
+        passwordConfirmErrorMessage: '비밀번호가 일치하지 않습니다.',
       }));
     } else {
       setEditInformationErrorMessage((prev) => ({
         ...prev,
         passwordErrorMessage: null,
+        passwordConfirmErrorMessage: null,
       }));
     }
   };
@@ -129,31 +130,28 @@ const MyPageForm = ({
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const profileImageUrl = uploadedImage ?? data?.profileImageUrl ?? null;
-    if (newPassword !== newPasswordConfirm) {
-      if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
-        setEditInformationErrorMessage((prev) => ({
-          ...prev,
-          passwordErrorMessage: '8자 이상 작성해 주세요.',
-        }));
-      }
-      if (newPasswordConfirm.length === 0) {
-        setEditInformationErrorMessage((prev) => ({
-          ...prev,
-          passwordConfirmErrorMessage: '비밀번호 확인값을 입력해주세요.',
-        }));
-      } else {
-        setEditInformationErrorMessage((prev) => ({
-          ...prev,
-          passwordErrorMessage: '비밀번호가 일치하지 않습니다.',
-        }));
-      }
+    if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
+      setEditInformationErrorMessage((prev) => ({
+        ...prev,
+        passwordErrorMessage: '8자 이상 작성해 주세요.',
+        passwordConfirmErrorMessage: '8자 이상 작성해 주세요.',
+      }));
+      return;
+    }
 
+    if (newPassword !== newPasswordConfirm) {
+      setEditInformationErrorMessage((prev) => ({
+        ...prev,
+        passwordErrorMessage: '비밀번호가 일치하지 않습니다.',
+        passwordConfirmErrorMessage: '비밀번호가 일치하지 않습니다.',
+      }));
       return;
     }
 
     setEditInformationErrorMessage((prev) => ({
       ...prev,
       passwordConfirmErrorMessage: null,
+      passwordErrorMessage: null,
     }));
     mutate({
       nickname,
@@ -163,9 +161,9 @@ const MyPageForm = ({
   };
 
   return (
-    <div className="flex flex-col gap-4 px-6">
+    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6  mobile:px-4">
       <div className="flex justify-between font-bold">
-        <div className="text-[#1b1b1b] text-[32px]">내정보</div>
+        <div className=" text-[32px]">내정보</div>
         <button
           type="submit"
           form="myPageForm"
