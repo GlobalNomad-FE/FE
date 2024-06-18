@@ -14,7 +14,7 @@ export default function BannerImageInput({ files, setFiles }: FileInputProps) {
   return (
     <>
       <div className="text-h2 text-black200">배너 이미지</div>
-      <div className="w-full flex gap-6">
+      <div className="w-full flex gap-6 tablet:gap-4 mobile:gap-2">
         <ImageInput files={files} setFiles={setFiles} type="banner" />
         {files.map((file) => (
           <div className="relative" key={`${file}_key`}>

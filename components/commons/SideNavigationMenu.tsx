@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation';
 
 export default function SideNavigationMenu() {
   const pathname = usePathname();
+
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
 
   const handleClick = (index: number) => {
@@ -22,7 +23,7 @@ export default function SideNavigationMenu() {
       icon: AccountCheckIcon,
       alt: '내정보 아이콘',
       label: '내 정보',
-      path: '/',
+      path: '/myprofile',
     },
     {
       icon: TextboxCheckIcon,
@@ -43,11 +44,18 @@ export default function SideNavigationMenu() {
       path: '/reservationHistory',
     },
   ];
+  const isPath = (path?: string) => {
+    if (!path) return false;
+    const regex = new RegExp(`(^|/)${path.replace('*', '.*')}($|/)`);
+    return regex.test(pathname);
+  };
 
   return (
     <div
-      className="w-[385px] h-[432px] tablet:w-[250px] flex flex-col bg-white border border-gray200 rounded-xl p-[24px] gap-[24px] mobile:hidden"
-      style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
+      className="w-[385px] h-[432px] tablet:w-[250px] flex flex-col bg-white border border-gray200 rounded-xl p-[24px] gap-[24px] mobile:hidden sticky top-[100px]"
+      style={{
+        boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)',
+      }}
     >
       <div className="flex justify-center relative">
         <div
@@ -76,7 +84,7 @@ export default function SideNavigationMenu() {
             <li
               className={`flex gap-[4px] items-center rounded-[12px] h-[44px] px-[16px] py-[9px] cursor-pointer
           ${
-            selectedItem === index || item.path === pathname
+            selectedItem === index || isPath(item.path)
               ? 'bg-green400 text-black200'
               : 'hover:bg-green400 hover:text-black200 text-[#A1A1A1]'
           }`}

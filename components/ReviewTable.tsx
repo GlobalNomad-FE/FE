@@ -19,12 +19,10 @@ export default function ReviewTable({ id }: { id: number }) {
       {data &&
         data.reviews.map((item: ReviewsType) => {
           const { user } = item;
-          console.log('item', item);
           const { profileImageUrl, nickname } = user;
-          console.log('profileImageUrl', profileImageUrl);
           return (
             <div
-              className="flex gap-4 border-b border-gray400 py-6 last:border-none first:pt-0"
+              className="flex gap-4 border-t border-gray400 py-6 first:border-none first:pt-0"
               key={item.id}
             >
               <div
@@ -42,7 +40,19 @@ export default function ReviewTable({ id }: { id: number }) {
               </div>
               <div className="flex flex-col gap-2">
                 <div className="flex gap-2 items-center">
+                  <div className="flex gap-[3px] items-center">
+                    <Image
+                      src="/icons/star-on.svg"
+                      alt="별점아이콘"
+                      width={18}
+                      height={18}
+                    />
+                    <p className="text-nomad-black text-body1-regular">
+                      {item.rating}
+                    </p>
+                  </div>
                   <p className="text-nomad-black text-body1-bold">{nickname}</p>
+
                   <p>|</p>
                   <p className="text-gray400 text-body1-regular">
                     {formatDate2(item.updatedAt)}

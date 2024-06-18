@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Experience from '@/components/commons/card/Experience';
 import Footer from '@/components/commons/Footer';
 import useGetMyReservations from '@/apis/my-reservations/useGetMyReservations';
+import ReviewExperienceSkeleton from '@/components/skeleton/ReviewExperienceSkeleton';
 
 interface Activity {
   bannerImageUrl: string;
