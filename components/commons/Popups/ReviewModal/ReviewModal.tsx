@@ -14,6 +14,7 @@ interface Props {
   headCount: number;
   totalPrice: number;
   reservationId: number;
+  reviewSubmitted: boolean;
 }
 /**
  * @param {string} title - 체험 이름.
@@ -34,6 +35,7 @@ const ReviewModal = ({
   headCount,
   totalPrice,
   reservationId,
+  reviewSubmitted,
 }: Props) => {
   const [openModal, setOpenModal] = useState(false);
   const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
@@ -60,9 +62,10 @@ const ReviewModal = ({
         width={isMobile ? 80 : isTablet ? 112 : 140}
         height={isMobile ? 32 : 40}
         fontSize={isMobile ? 14 : 16}
-        btnColor={'nomadBlack'}
-        textColor={'white'}
+        btnColor={reviewSubmitted ? 'disabledBackground' : 'nomadBlack'}
+        textColor={reviewSubmitted ? 'disabledText' : 'white'}
         hover={true}
+        disabled={reviewSubmitted}
         onClick={handleOpenModal}
       >
         후기 작성
