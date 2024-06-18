@@ -16,6 +16,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState('');
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
+  const [isSeletedDay, setIsSeletedDay] = useState(0);
   const [selectedReservationDate, setSelectedReservationDate] = useState({
     completed: 0,
     confirmed: 0,
@@ -33,6 +34,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
 
   const handleCloseModal = () => {
     setIsReeservationModalOpen(false);
+    setIsSeletedDay(0);
   };
 
   const getDaysInMonth = (year: number, month: number) => {
@@ -182,11 +184,19 @@ const Calendar = ({ selectedActivityId }: Props) => {
           onClick={() => {
             setSelectedDate(currentDateStr);
             setIsReeservationModalOpen(true);
+            setIsSeletedDay(day);
             setSelectedReservationDate(dayData);
           }}
         >
-          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
-            {day}
+          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row relative">
+            <div
+              className={`${
+                isSeletedDay === day &&
+                'w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-black text-[23px] mobile:text-[18px]'
+              }`}
+            >
+              {day}
+            </div>
             {(iconCompleted || iconReservation) && (
               <div className="h-10px mt-1 ml-1 w-2 h-2 relative">
                 {iconCompleted && (
