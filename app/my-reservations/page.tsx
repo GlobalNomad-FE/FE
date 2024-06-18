@@ -98,7 +98,7 @@ const MyReservations = () => {
                 <FilterDropdown type="bookingPage" onSelect={handleSelect} />
               )}
             </div>
-            {data?.totalCount === 0 ? (
+            {data?.totalCount === 0 && (
               <div className="flex flex-col flex-grow gap-5 items-center mt-[90px]">
                 <Image
                   src="/icons/empty.svg"
@@ -111,6 +111,9 @@ const MyReservations = () => {
                   아직 등록한 체험이 없어요
                 </p>
               </div>
+            )}
+            {isLoading ? (
+              <ReviewExperienceSkeleton />
             ) : (
               <div className="flex flex-col gap-6 mt-[16px]">
                 {reservations.map((item) => (
