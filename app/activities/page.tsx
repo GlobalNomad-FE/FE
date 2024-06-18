@@ -3,12 +3,12 @@ import Button from '@/components/commons/Button';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import Gnb from '@/components/commons/gnb/gnb';
 import Link from 'next/link';
-import Experience from '@/components/commons/card/Experience';
 import Footer from '@/components/commons/Footer';
 import Image from 'next/image';
 import { useGetInfinityActivitiesList } from '@/apis/activities/useGetInfinityActivitiesList';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import MyActivitiyExperienceSkeleton from '@/components/skeleton/MyActivitiyExperienceSkeleton';
+import ActivitiesExperience from '@/components/commons/card/ActivitiesExperience';
 
 const SuspenseList = () => {
   const { data, isLoading, fetchNextPage, hasNextPage, isError, error } =
@@ -40,8 +40,7 @@ const SuspenseList = () => {
         <div className="flex flex-col gap-6 mt-[16px]">
           {data?.pages.map((page) =>
             page.activities.map((item) => (
-              <Experience
-                type="activities"
+              <ActivitiesExperience
                 id={item.id}
                 key={item.id}
                 bannerImageUrl={item.bannerImageUrl}
