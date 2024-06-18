@@ -24,6 +24,8 @@ import { ActivitiesDataType } from '@/types/activitiesType';
 import { patchActivities } from '@/apis/my-activities/@common/myActivites';
 import { useQueryClient } from '@tanstack/react-query';
 import BasePopup from '../commons/Popups/BasePopup';
+import { AxiosError, AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 
 interface RegisterpageProps {
   id?: number;
@@ -34,7 +36,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const [bannerImageUrl, setBannerImageUrl] = useState<string[]>([]);
   const [subImageUrls, setSubImageUrls] = useState<string[]>([]);
   const [subImageIds, setSubImageIds] = useState<number[]>([]);
-  const [PopupOpen, setPopupOpen] = useState(false);
+  const [imagePopupOpen, setImagePopupOpen] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -52,9 +54,26 @@ export default function Registerpage({ id }: RegisterpageProps) {
       scheduleIdsToRemove: [],
     },
   });
+
   const { handleSubmit, control, setValue, reset, getValues } = methods;
 
-  const { mutate: registerMutation } = useMutation({
+  const getImagePopupMessage = () => {
+    if (bannerImageUrl.length === 0 && subImageUrls.length === 0) {
+      return '배너이미지와 소개이미지를 모두 등록해주세요.';
+    } else if (bannerImageUrl.length === 0) {
+      return '배너이미지를 등록해주세요.';
+    } else if (subImageUrls.length === 0) {
+      return '소개이미지를 등록해주세요.';
+    } else {
+      return '';
+    }
+  };
+
+  const { mutate: registerMutation } = useMutation<
+    AxiosResponse,
+    AxiosError<{ message: string }>,
+    ActivitiesData
+  >({
     mutationKey: ['register'],
     mutationFn: (data: ActivitiesData) => postActivities(data),
   });
@@ -64,8 +83,17 @@ export default function Registerpage({ id }: RegisterpageProps) {
     mutationFn: ({ id, data }: { id: number; data: ActivitiesData }) =>
       patchActivities(id, data),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['activities', 'list'] });
       queryClient.invalidateQueries({ queryKey: ['register', 'detail', id] });
+      toast.success('수정이 완료되었습니다.');
       router.push('/activities');
+    },
+    onError: (error: AxiosError<{ message: string }>) => {
+      if (error.response?.status === 401) {
+        toast.error('로그인 후 이용 해주세요.');
+        return;
+      }
+      toast.error(error.response?.data.message);
     },
   });
 
@@ -76,8 +104,11 @@ export default function Registerpage({ id }: RegisterpageProps) {
   const onsubmit: SubmitHandler<ActivitiesData> = async (
     data: ActivitiesData,
   ) => {
-    if (bannerImageUrl.length === 0) {
+    if (bannerImageUrl.length === 0 || subImageUrls.length === 0) {
+      setImagePopupOpen(true);
       return;
+    }
+    if (data.schedules.length === 0) {
     }
     if (modifyState) {
       await handleModifyRegister(data);
@@ -92,11 +123,16 @@ export default function Registerpage({ id }: RegisterpageProps) {
 
     registerMutation(formData, {
       onSuccess: () => {
-        setPopupOpen(true);
+        toast.success('등록이 완료되었습니다.');
         router.push('/activities');
+        queryClient.invalidateQueries({ queryKey: ['activities', 'list'] });
       },
-      onError: () => {
-        console.warn('onError', data);
+      onError: (error: AxiosError<{ message: string }>) => {
+        if (error.response?.status === 401) {
+          toast.error('로그인 후 이용 해주세요.');
+          return;
+        }
+        toast.error(error.response?.data.message);
       },
     });
   };
@@ -225,14 +261,14 @@ export default function Registerpage({ id }: RegisterpageProps) {
         </main>
         <Footer />
       </div>
-      {PopupOpen && (
+      {imagePopupOpen && (
         <BasePopup
-          isOpen={PopupOpen}
+          isOpen={imagePopupOpen}
           closePopup={() => {
-            setPopupOpen(false);
+            setImagePopupOpen(false);
           }}
         >
-          {id ? '수정이 완료되었습니다' : '등록이 완료되었습니다'}
+          {getImagePopupMessage()}
         </BasePopup>
       )}
     </FormProvider>
