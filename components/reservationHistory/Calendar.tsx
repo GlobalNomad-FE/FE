@@ -188,7 +188,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
             setSelectedReservationDate(dayData);
           }}
         >
-          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row relative">
+          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
             <div
               className={`${
                 isSeletedDay === day &&
