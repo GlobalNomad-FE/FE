@@ -21,3 +21,18 @@ export const myReservationStatusKey = {
     month?: string,
   ) => ['reservation-dashboard', activityId, year, month],
 };
+
+export const reservedScheduleKey = {
+  getReservedSchedule: (activityId?: number, date?: string) => [
+    'reserved-schedule',
+    activityId,
+    date,
+  ],
+};
+export const reservedTimeKey = {
+  getReservedTime: (
+    activityId: number | undefined,
+    scheduleId: number | undefined,
+    status: string,
+  ) => ['reserved-time', activityId, scheduleId, status],
+};
