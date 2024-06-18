@@ -78,7 +78,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
           {myActivityes?.map((activity) => (
             <li
               key={activity.id}
-              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
+              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelect(activity)}
             >
               {activity.title}
