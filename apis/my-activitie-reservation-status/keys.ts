@@ -13,3 +13,11 @@ export const myActivitiesKey = {
     sort?: 'most_reviewed' | 'price_asc' | 'price_desc' | 'latest',
   ) => ['my-activities', methodValue, size, category, keyword, sort],
 };
+
+export const myReservationStatusKey = {
+  getMyReservationStatus: (
+    activityId?: number,
+    year?: string,
+    month?: string,
+  ) => ['reservation-dashboard', activityId, year, month],
+};

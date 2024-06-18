@@ -1,18 +1,18 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
 import ReviewModal from '@/components/commons/Popups/ReviewModal/ReviewModal';
 import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
+import useGetReservationDashboard from '@/apis/my-activitie-reservation-status/useGetReservationDashboard';
 import { ReservationDayInfoType } from '@/types/activitiesReservationType';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 interface Props {
-  MonthReservations: ReservationDayInfoType[];
   selectedActivityId: number;
 }
 
-const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
+const Calendar = ({ selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState('');
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
@@ -20,6 +20,15 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
     completed: 0,
     confirmed: 0,
     pending: 0,
+  });
+
+  const [dashboardData, setDashboardData] = useState(null);
+  const shouldFetchData = selectedActivityId !== 0;
+
+  const { data, isLoading, isError } = useGetReservationDashboard({
+    activityId: shouldFetchData ? selectedActivityId : undefined,
+    year: '2024',
+    month: '06',
   });
 
   const handleCloseModal = () => {
@@ -150,9 +159,10 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
         pending: 0,
       };
 
-      MonthReservations.forEach((activity) => {
-        if (activity.date === currentDateStr) {
-          dayData = { ...activity.reservations };
+      //해당일에 예약이 있는 경우 값 셋팅
+      data?.forEach(({ date, reservations }) => {
+        if (date == currentDateStr) {
+          dayData = { ...reservations };
         }
       });
 
@@ -175,24 +185,22 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
             setSelectedReservationDate(dayData);
           }}
         >
-          <div className="p-3 text-[21px] flex flex-row">
+          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
             {day}
             {(iconCompleted || iconReservation) && (
-              <div className="h-10px mt-1 ml-1">
+              <div className="h-10px mt-1 ml-1 w-2 h-2 relative">
                 {iconCompleted && (
                   <Image
                     src="/icons/ellipse_gray.svg"
                     alt="예약 데이터 완료 표시 아이콘"
-                    width={8}
-                    height={8}
+                    fill
                   />
                 )}
                 {iconReservation && (
                   <Image
                     src="/icons/ellipse_blue.svg"
                     alt="예약 데이터 예약 표시 아이콘"
-                    width={8}
-                    height={8}
+                    fill
                   />
                 )}
               </div>

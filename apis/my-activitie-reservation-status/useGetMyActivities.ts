@@ -67,11 +67,11 @@ async function getActivities(request: GetActivitiesRequest) {
 const useGetMyActivities = (request: GetActivitiesRequest) => {
   return useQuery({
     queryKey: myActivitiesKey.getActivities(
-      // request.method === 'cursor' ? request.cursorId : request.page,
+      request.method === 'cursor' ? request.cursorId : request.page,
       request.size,
-      // request.category,
-      // request.keyword,
-      // request.sort,
+      request.category,
+      request.keyword,
+      request.sort,
     ),
     queryFn: () => getActivities(request),
   });
