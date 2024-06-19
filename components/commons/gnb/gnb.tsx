@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
+import MyNotifications from '../myNotifications/MyNotifications';
 
 export default function Gnb() {
   const router = useRouter();
@@ -79,16 +80,8 @@ export default function Gnb() {
             </div>
           ) : (
             //TODO 로그인 되면 알람이 뜰 수 있게
-            <div className=" flex gap-[40px] static">
-              <button onClick={isNotificationOpenToggle}>
-                <Image
-                  src="/icons/notification.svg"
-                  alt="알림"
-                  height={20}
-                  width={20}
-                />
-              </button>
-              {isNotificationOpen && '모달 자리'}
+            <div className=" flex items-center gap-[40px] static">
+              <MyNotifications />
               <div className=" flex relative gap-10 ">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
