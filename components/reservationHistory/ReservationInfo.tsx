@@ -1,5 +1,8 @@
 import Button from '@/components/commons/Button';
 import { ReservationInfoType } from '@/types/activitiesReservationType';
+import useUpdateResevationRequest from '@/apis/my-activitie-reservation-status/usePatchResevationRequest';
+import { useState } from 'react';
+import BasePopup from '@/components/commons/Popups/BasePopup';
 
 interface Props {
   selectTab: string;
@@ -11,11 +14,57 @@ interface Props {
  * @param selectTab 선택한 상태 탭 이름
  */
 const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
-  const { nickname, headCount, activityId, id } = reservationInfo;
+  const {
+    nickname,
+    headCount,
+    activityId,
+    id: reservationId,
+  } = reservationInfo;
+  const { mutate } = useUpdateResevationRequest();
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [isUpdate, setIsUpdate] = useState(false); //업데이트 여부
 
-  //TODO : 내 체험 예약 상태 업데이트 /{teamId}/my-activities/{activityId}/reservations/{reservationId}
-  // activityId = reservationInfo.activityId
-  //reservationId= reservationInfo.id
+  //내 체험 예약 상태 업데이트
+  const handleResultUpdate = (status: string) => {
+    mutate(
+      {
+        activityId: activityId,
+        reservationId: reservationId,
+        status: status,
+      },
+      {
+        onSuccess: () => {
+          status === 'confirmed'
+            ? setPopupMessage('승인되었습니다.')
+            : setPopupMessage('거절되었습니다.');
+          setOpenPopup(true);
+          setIsUpdate(true);
+        },
+        onError: (error: any) => {
+          setIsUpdate(false);
+          if (error.response.status === 401) {
+            setPopupMessage('로그인 후 이용 해주세요.');
+            setOpenPopup(true);
+            return;
+          }
+          if (error.response.data.message) {
+            setPopupMessage(error.response.data.message);
+            setOpenPopup(true);
+            return;
+          }
+          setPopupMessage(
+            '알 수 없는 에러가 발생하였습니다. 다시 시도해주세요.',
+          );
+          setOpenPopup(true);
+        },
+      },
+    );
+  };
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
+
   return (
     <div className="p-4 border border-gray200 rounded mt-4">
       <div className="text-[16px]">
@@ -38,6 +87,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
               btnColor="nomadBlack"
               textColor="white"
               textBold={true}
+              onClick={() => handleResultUpdate('confirmed')}
             >
               승인하기
             </Button>
@@ -49,6 +99,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
               textColor="nomadBlack"
               textBold={true}
               border={true}
+              onClick={() => handleResultUpdate('declined')}
             >
               거절하기
             </Button>
@@ -63,6 +114,15 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
           </p>
         )}
       </div>
+      <BasePopup
+        isOpen={openPopup}
+        closePopup={handleClosePopup}
+        clickEvent={
+          popupMessage === '승인되었습니다.' ? handleClosePopup : undefined
+        }
+      >
+        {popupMessage}
+      </BasePopup>
     </div>
   );
 };

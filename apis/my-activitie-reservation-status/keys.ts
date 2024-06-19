@@ -36,3 +36,9 @@ export const reservedTimeKey = {
     status: string,
   ) => ['reserved-time', activityId, scheduleId, status],
 };
+
+export const reservationRequestKey = {
+  getReservationRequest: (
+    status?: 'pending' | 'confirmed' | 'declined' | 'canceled' | 'completed',
+  ) => ['reservation-request', status],
+};
