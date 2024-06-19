@@ -52,12 +52,35 @@ export default function Gnb() {
 
   const MyMenuList = [
     {
-      text: '내 정보',
-      handleClick: handleMyPageClick,
+      icon: '/icons/account-check.svg',
+      alt: '내정보 아이콘',
+      label: '내 정보',
+      path: '/myprofile',
     },
     {
-      text: '로그아웃',
-      handleClick: handleLogout,
+      icon: '/icons/textbox-check.svg',
+      alt: '예약내역 아이콘',
+      label: '예약 내역',
+      path: '/my-reservations',
+    },
+    {
+      icon: '/icons/setting-check.svg',
+      alt: '체험관리 아이콘',
+      label: '내 체험 관리',
+      path: '/activities',
+    },
+    {
+      icon: '/icons/calendar-check.svg',
+      alt: '예약현황 아이콘',
+      label: '예약 현황',
+      path: '/reservationHistory',
+    },
+    {
+      icon: '/icons/logout-check.png',
+      alt: '로그아웃 아이콘',
+      label: '로그아웃',
+      path: '',
+      handleClick: () => handleLogout,
     },
   ];
 
