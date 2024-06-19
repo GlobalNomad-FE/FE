@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import { EditInformationErrorMessageType } from '@/types/EditInformationErrorMessageType';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MyPageInputBox from './MyPageInputBox';
 import useUserProfile from '@/hooks/useUserProfile';
 
@@ -64,7 +65,7 @@ const MyPageForm = () => {
     }
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const profileImageUrl = uploadedImage ?? user?.profileImageUrl ?? null;
     if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
@@ -97,11 +98,16 @@ const MyPageForm = () => {
       passwordConfirmErrorMessage: null,
       passwordErrorMessage: null,
     }));
-    editUserProfile({
-      nickname,
-      profileImageUrl,
-      newPassword,
-    });
+    try {
+      await editUserProfile({
+        nickname,
+        profileImageUrl,
+        newPassword,
+      });
+      toast.success('비밀번호가 성공적으로 변경되었습니다.');
+    } catch (error) {
+      toast.error('비밀번호 변경에 실패했습니다.');
+    }
   };
 
   return (
