@@ -42,29 +42,30 @@ const ProfileImage = ({
   }
 
   return (
-    <div
-      className="relative w-40 h-40 shrink-0 rounded-full shadow-md bg-cover bg-no-repeat bg-center"
-      style={{
-        backgroundImage: `url(${uploadedImage || profileImageUrl})`,
-        backgroundColor: '#E3E5E8',
-        backgroundSize: 'contain',
-      }}
-    >
-      <input
-        id="file-input"
-        type="file"
-        onChange={handleFileChange}
-        style={{ display: 'none' }}
-        accept="image/*"
-      />
-
+    <>
       <div
-        className="absolute p-[10px] w-22 h-22  items-start bottom-0 right-3 z-10 rounded-full bg-green-80 cursor-pointer"
+        className="relative w-40 h-40 shrink-0 rounded-full shadow-md bg-cover bg-no-repeat bg-center"
+        style={{
+          backgroundImage: `url(${uploadedImage || profileImageUrl})`,
+          backgroundColor: '#E3E5E8',
+          backgroundSize: 'contain',
+        }}
+      >
+        <input
+          id="file-input"
+          type="file"
+          onChange={handleFileChange}
+          style={{ display: 'none' }}
+          accept="image/*"
+        />
+      </div>
+      <div
+        className="absolute p-[10px] w-22 h-22  items-start bottom-0 right-3 z-10 rounded-full cursor-pointer"
         onClick={handlePenClick}
       >
         <Image width={44} height={44} src="/icons/penIcon.svg" alt="penIcon" />
       </div>
-    </div>
+    </>
   );
 };
 

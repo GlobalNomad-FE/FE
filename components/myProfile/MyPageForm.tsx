@@ -138,6 +138,13 @@ const MyPageForm = ({
       }));
       return;
     }
+    if (newPasswordConfirm.length === 0) {
+      setEditInformationErrorMessage((prev) => ({
+        ...prev,
+        passwordConfirmErrorMessage: '비밀번호 확인값을 입력해주세요.',
+      }));
+      return;
+    }
 
     if (newPassword !== newPasswordConfirm) {
       setEditInformationErrorMessage((prev) => ({
@@ -161,7 +168,7 @@ const MyPageForm = ({
   };
 
   return (
-    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6  mobile:px-4">
+    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6  ">
       <div className="flex justify-between font-bold">
         <div className=" text-[32px]">내정보</div>
         <button
@@ -174,7 +181,7 @@ const MyPageForm = ({
       </div>
 
       <form
-        className="flex flex-col gap-8"
+        className="flex flex-col gap-8 width-[100%] tablet:w-[429px] mobile:w-[343px] px-[24px] mobile:px-4 "
         noValidate
         onSubmit={onSubmit}
         id="myPageForm"

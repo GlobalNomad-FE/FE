@@ -8,15 +8,17 @@ import Gnb from '@/components/commons/gnb/gnb';
 const MyPage = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   return (
-    <div className="flex gap-6 justify-center bg-[#FAFAFA] pt-[100px]">
+    <div className="flex gap-6 justify-center px-4 bg-[#FAFAFA]">
       <Gnb />
-      <main className="flex justify-center min-h-[100vh] max-h-[100%]  bg-gray50 pt-[142px] pb-[72px]">
-        <div className="flex gap-6 w-[1200px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%]  bg-gray50 pt-[142px] pb-[72px] ">
+        <div className="width-[800px] pl-[24px] mobile:px-4 flex gap-6 ">
           <SideNavigationMenu />
-          <MyPageForm
-            uploadedImage={uploadedImage}
-            setUploadedImage={setUploadedImage}
-          />
+          <div className="flex tablet:w-[429px] mobile:w-[343px]">
+            <MyPageForm
+              uploadedImage={uploadedImage}
+              setUploadedImage={setUploadedImage}
+            />
+          </div>
         </div>
       </main>
     </div>

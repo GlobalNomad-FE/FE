@@ -66,10 +66,10 @@ const MyPageInputBox = ({
   }
 
   return (
-    <div className="flex flex-col w-[792px] ">
+    <div className="flex flex-col w-[792px] text-black ">
       <MyPageInputLabel labelName={labelName} />
       <input
-        className={`w-full text-[1rem] flex py-4 pl-5 border h-14 border-gray400 rounded ${borderColorClass}`}
+        className={`w-full tablet:w-[429px] mobile:w-[343px] text-[1rem] text-black flex py-4 pl-5 border h-14 border-gray400 rounded ${borderColorClass}`}
         type={inputType}
         id={inputName}
         onChange={onChangeInput}
