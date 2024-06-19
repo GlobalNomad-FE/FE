@@ -42,8 +42,8 @@ const BasePopup = ({ isOpen, closePopup, clickEvent, children }: Props) => {
           onClick={handleClickOverlay}
           ref={overlay}
         >
-          <div className="bg-white rounded-[8px] flex flex-col items-center mobile:w-[327px] mobile:h-[220px] w-[540px] p-[28px] mobile:p-0">
-            <div className="text-black200 text-h4-regular mt-[80px]">
+          <div className="bg-white rounded-[8px] flex flex-col items-center mobile:w-[327px] mobile:h-[220px] w-[540px] p-[28px] mobile:p-0 mobile:px-5">
+            <div className="text-black200 text-h4-regular mt-[80px] mobile:mt-[70px]">
               {children}
             </div>
             <div className="flex w-full mt-[45px] mobile:justify-center justify-end">

@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import ReviewTable from '../ReviewTable';
 
@@ -11,6 +10,18 @@ export default function Review({
   totalCount: number;
   id: number;
 }) {
+  let averageRatingText = '';
+  if (averageRating) {
+    if (averageRating <= 2) {
+      averageRatingText = '매우 별로';
+    } else if (averageRating <= 3) {
+      averageRatingText = '별로';
+    } else if (averageRating <= 4) {
+      averageRatingText = '만족';
+    } else if (averageRating <= 5) {
+      averageRatingText = '매우 만족';
+    }
+  }
   return (
     <div className="border-t border-gray200 py-[40px] flex flex-col gap-6">
       <p className="text-h3-bold text-nomad-black">후기</p>
@@ -19,7 +30,9 @@ export default function Review({
           {averageRating}
         </p>
         <div className="flex flex-col gap-[8px]">
-          <p>매우 만족</p>
+          <p className="text-h4-regular text-nomad-black">
+            {averageRatingText}
+          </p>
           <div className="flex gap-[6px] items-center">
             <Image
               src="/icons/star-on.svg"

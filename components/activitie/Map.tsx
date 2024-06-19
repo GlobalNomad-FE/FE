@@ -56,6 +56,14 @@ export default function Map({ location }: { location: string }) {
 
           // 6. 지도의 중심을 결과값으로 받은 위치로 이동
           map.setCenter(coords);
+
+          const handleResizeMap = () => {
+            map.setCenter(coords);
+            return;
+          };
+
+          window.addEventListener('resize', handleResizeMap);
+          return () => window.removeEventListener('resize', handleResizeMap);
         }
       });
       // 마우스 드래그로 지도 이동 가능여부를 설정

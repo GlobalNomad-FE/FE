@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
 import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
+import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 export default function Menu({ id: activityId }: { id: number }) {
   const [isKebabOpen, setIsKebabOpen] = useState(false);
@@ -29,7 +31,18 @@ export default function Menu({ id: activityId }: { id: number }) {
   };
 
   const handleDeleteData = () => {
-    deleteMutation({ activityId });
+    deleteMutation(
+      { activityId },
+      {
+        onError: (error: AxiosError<{ message: string }>) => {
+          if (error.response?.status === 401) {
+            toast.error('로그인 후 이용 해주세요.');
+            return;
+          }
+          toast.error(error.response?.data.message);
+        },
+      },
+    );
   };
 
   return (
