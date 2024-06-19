@@ -1,21 +1,18 @@
 import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import getUserInfo from '@/apis/user/getUserInfo';
-import editMyInfo from '@/apis/user/editMyInfo';
-import { QueryClient } from '@tanstack/react-query';
 import { EditInformationErrorMessageType } from '@/types/EditInformationErrorMessageType';
-import { AxiosError } from 'axios';
+
 import MyPageInputBox from './MyPageInputBox';
+import useUserProfile from '@/hooks/useUserProfile';
 
-const queryClient = new QueryClient();
+const MyPageForm = () => {
+  const {
+    user,
+    uploadedImage,
+    setUploadedImage,
+    handleFileChange,
+    editUserProfile,
+  } = useUserProfile();
 
-const MyPageForm = ({
-  uploadedImage,
-  setUploadedImage,
-}: {
-  uploadedImage: string | null;
-  setUploadedImage: React.Dispatch<React.SetStateAction<string | null>>;
-}) => {
   const [inputs, setInputs] = useState({
     nickname: '',
     email: '',
@@ -30,10 +27,26 @@ const MyPageForm = ({
       unexpectedErrorMessage: null,
     });
   const PASSWORD_MIN_LENGTH = 8;
-  const { data, isSuccess } = useQuery({
-    queryKey: ['user'],
-    queryFn: getUserInfo,
-  });
+
+  useEffect(() => {
+    if (user) {
+      setInputs({
+        nickname: user.nickname,
+        email: user.email,
+        newPassword: '',
+        newPasswordConfirm: '',
+      });
+    }
+  }, [user]);
+
+  const { nickname, email, newPassword, newPasswordConfirm } = inputs;
+  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  };
 
   const newPasswordConfirmFocusOut = () => {
     if (inputs.newPassword !== inputs.newPasswordConfirm) {
@@ -51,85 +64,9 @@ const MyPageForm = ({
     }
   };
 
-  const { mutate } = useMutation({
-    mutationFn: editMyInfo,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['user'] });
-    },
-    onError: (error: AxiosError) => {
-      if (error.response) {
-        const { nickname, newPassword } = inputs;
-        if (error.request.status === 400) {
-          if (nickname.length === 0 && newPassword.length === 0) {
-            setEditInformationErrorMessage((prev) => ({
-              ...prev,
-              nicknameErrorMessage: '닉네임을 입력해주세요.',
-              passwordErrorMessage: '비밀번호를 입력해주세요.',
-            }));
-          }
-          if (nickname.length === 0) {
-            setEditInformationErrorMessage((prev) => ({
-              ...prev,
-              nicknameErrorMessage: '닉네임을 입력해주세요.',
-            }));
-          } else if (nickname.length > 10) {
-            setEditInformationErrorMessage((prev) => ({
-              ...prev,
-              nicknameErrorMessage: '닉네임은 10자 이하로 작성해주세요.',
-            }));
-          } else {
-            setEditInformationErrorMessage((prev) => ({
-              ...prev,
-              nicknameErrorMessage: null,
-            }));
-            if (newPassword.length === 0) {
-              setEditInformationErrorMessage((prev) => ({
-                ...prev,
-                passwordErrorMessage: '비밀번호를 입력해주세요.',
-              }));
-            } else if (
-              newPassword.length > 0 &&
-              newPassword.length < PASSWORD_MIN_LENGTH
-            ) {
-              setEditInformationErrorMessage((prev) => ({
-                ...prev,
-                passwordErrorMessage: '8자 이상 작성해 주세요.',
-              }));
-            } else {
-              setEditInformationErrorMessage((prev) => ({
-                ...prev,
-                passwordErrorMessage: null,
-              }));
-            }
-          }
-        }
-      }
-    },
-  });
-
-  useEffect(() => {
-    if (data) {
-      setInputs({
-        nickname: data.nickname,
-        email: data.email,
-        newPassword: '',
-        newPasswordConfirm: '',
-      });
-    }
-  }, [isSuccess, data]);
-
-  const { nickname, email, newPassword, newPasswordConfirm } = inputs;
-  const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const profileImageUrl = uploadedImage ?? data?.profileImageUrl ?? null;
+    const profileImageUrl = uploadedImage ?? user?.profileImageUrl ?? null;
     if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
       setEditInformationErrorMessage((prev) => ({
         ...prev,
@@ -160,7 +97,7 @@ const MyPageForm = ({
       passwordConfirmErrorMessage: null,
       passwordErrorMessage: null,
     }));
-    mutate({
+    editUserProfile({
       nickname,
       profileImageUrl,
       newPassword,
@@ -168,9 +105,9 @@ const MyPageForm = ({
   };
 
   return (
-    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6  ">
+    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6">
       <div className="flex justify-between font-bold">
-        <div className=" text-[32px]">내정보</div>
+        <div className="text-[32px]">내정보</div>
         <button
           type="submit"
           form="myPageForm"
@@ -181,7 +118,7 @@ const MyPageForm = ({
       </div>
 
       <form
-        className="flex flex-col gap-8 width-[100%] tablet:w-[429px] mobile:w-[343px] px-[24px] mobile:px-4 "
+        className="flex flex-col gap-8 width-[100%] tablet:w-[429px] mobile:w-[343px] px-[24px] mobile:px-4"
         noValidate
         onSubmit={onSubmit}
         id="myPageForm"
