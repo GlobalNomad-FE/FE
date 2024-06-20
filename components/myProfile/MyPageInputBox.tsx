@@ -8,6 +8,7 @@ interface MyPageInputBoxProps {
   value: string;
   labelName: string;
   inputType: string;
+  placeholder: string;
   editInformationErrorMessage?: EditInformationErrorMessageType | null;
   setEditInformationErrorMessage?: React.Dispatch<
     React.SetStateAction<EditInformationErrorMessageType>
@@ -21,6 +22,7 @@ const MyPageInputBox = ({
   value,
   labelName,
   inputType,
+  placeholder,
   editInformationErrorMessage,
   setEditInformationErrorMessage,
   onFocusOut,
@@ -75,6 +77,7 @@ const MyPageInputBox = ({
         onChange={onChangeInput}
         value={value}
         name={inputName}
+        placeholder={placeholder}
         onBlur={inputName === 'newPasswordConfirm' ? onFocusOut : undefined}
         onClick={onClickInput}
       />

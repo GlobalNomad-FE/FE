@@ -134,6 +134,7 @@ const MyPageForm = () => {
           onChangeInput={onChangeInput}
           value={nickname}
           labelName="닉네임"
+          placeholder="변경할 닉네임을 입력해 주세요"
           inputType="text"
           editInformationErrorMessage={editInformationErrorMessage}
           setEditInformationErrorMessage={setEditInformationErrorMessage}
@@ -143,6 +144,7 @@ const MyPageForm = () => {
           value={email}
           labelName="이메일"
           inputType="email"
+          placeholder="이메일"
         />
         <MyPageInputBox
           inputName="newPassword"
@@ -150,6 +152,7 @@ const MyPageForm = () => {
           value={newPassword}
           labelName="비밀번호"
           inputType="password"
+          placeholder="8자 이상 작성해 주세요"
           editInformationErrorMessage={editInformationErrorMessage}
           setEditInformationErrorMessage={setEditInformationErrorMessage}
         />
@@ -159,6 +162,7 @@ const MyPageForm = () => {
           value={newPasswordConfirm}
           labelName="비밀번호 재입력"
           inputType="password"
+          placeholder="비밀번호를 재입력해 주세요"
           editInformationErrorMessage={editInformationErrorMessage}
           setEditInformationErrorMessage={setEditInformationErrorMessage}
           onFocusOut={newPasswordConfirmFocusOut}
