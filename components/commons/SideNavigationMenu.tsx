@@ -1,4 +1,3 @@
-// SideNavigationMenu.tsx
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -12,7 +11,7 @@ import ProfileImage from '../myProfile/ProfileImage';
 import { useGetProfile } from '@/apis/user/useGetProfile';
 
 interface Props {
-  url: (url: string) => void;
+  url?: (url: string) => void | undefined;
 }
 
 export default function SideNavigationMenu({ url }: Props) {
@@ -65,7 +64,7 @@ export default function SideNavigationMenu({ url }: Props) {
     >
       <div className="flex justify-center relative">
         {pathname === '/myprofile' ? (
-          <ProfileImage url={url} />
+          url && <ProfileImage url={url} />
         ) : (
           <>
             {data && (

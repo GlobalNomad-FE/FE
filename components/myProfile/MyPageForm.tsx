@@ -6,13 +6,7 @@ import MyPageInputBox from './MyPageInputBox';
 import useUserProfile from '@/hooks/useUserProfile';
 
 const MyPageForm = ({ profileImage }: { profileImage: string }) => {
-  const {
-    user,
-    uploadedImage,
-    setUploadedImage,
-    handleFileChange,
-    editUserProfile,
-  } = useUserProfile();
+  const { user, editUserProfile } = useUserProfile();
 
   const [inputs, setInputs] = useState({
     nickname: '',
