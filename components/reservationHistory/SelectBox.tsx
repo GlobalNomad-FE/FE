@@ -4,15 +4,17 @@ import {
   ReservationScheduleType,
   ReservationStatusCountType,
 } from '@/types/activitiesReservationType';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SelectBoxProps {
+  selectedDate?: string;
   myActivityes?: Activity[];
   reservations?: ReservationScheduleType[];
   onSelect: (id: number) => void;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
+  selectedDate,
   myActivityes,
   reservations,
   onSelect,
@@ -25,7 +27,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   const handleSelect = (activity: Activity) => {
     setSelectActivity(activity);
-    setIsOpen(false);
+    setIsOpen(true);
     onSelect(activity.id); // 선택된 활동의 id 값을 상위 컴포넌트로 전달
   };
 
@@ -37,6 +39,12 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     setIsOpen(false);
     onSelect(scheduleId); // 선택된 활동의 id 값을 상위 컴포넌트로 전달
   };
+
+  useEffect(() => {
+    // selectedDate가 변경될 때 selectActivity와 selectReservation 상태를 초기화
+    setSelectActivity(null);
+    setSelectReservation('');
+  }, [selectedDate]);
 
   return (
     <div
@@ -109,7 +117,5 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     </div>
   );
 };
-
-// const;
 
 export default SelectBox;
