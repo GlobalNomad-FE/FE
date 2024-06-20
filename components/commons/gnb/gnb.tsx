@@ -10,9 +10,9 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
-import BasePopup from '../Popups/BasePopup';
 import { myInfo } from '@/types/myInfo';
 import Cookies from 'js-cookie';
+import MyNotifications from '../myNotifications/MyNotifications';
 
 export default function GNB() {
   const router = useRouter();
@@ -38,22 +38,10 @@ export default function GNB() {
     retry: 1,
   });
 
-  const [openPopup, setOpenPopup] = useState(false);
-  const [popupMessage, setPopupMessage] = useState('');
-
-  const handleOpenPopup = (message: string) => {
-    setPopupMessage(message);
-    setOpenPopup(true);
-  };
-
-  const handleClosePopup = () => {
-    setOpenPopup(false);
-  };
-
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    if (!localStorage.getItem('accessToken')) {
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+    if (!Cookies.get('accessToken')) {
       isDropdownOpenToggle();
       router.push('/login');
     }
@@ -105,28 +93,16 @@ export default function GNB() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            <div className=" flex gap-[40px] static">
-              <button onClick={isNotificationOpenToggle}>
-                <Image
-                  src="/icons/notification.svg"
-                  alt="알림"
-                  height={20}
-                  width={20}
-                />
-              </button>
-              {isNotificationOpen && (
-                <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
-                  {popupMessage}
-                </BasePopup>
-              )}
-              <div className=" flex relative ">
-                <div className=" h-[35.2px] border-r-[1px_gray300]" />
+            <div className=" flex items-center gap-[40px] static">
+              <MyNotifications />
+              <div className="flex relative">
+                <div className="h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content">
                   <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className=" flex text-[16px]  items-center body1-regular text-[nomad-black]"
+                    className="flex text-[16px] items-center body1-regular text-[nomad-black]"
                   >
                     {MyInfoData?.nickname}
                   </button>
