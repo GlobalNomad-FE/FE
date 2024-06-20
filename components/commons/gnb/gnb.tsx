@@ -74,7 +74,7 @@ export default function GNB() {
       alt: '로그아웃 아이콘',
       label: '로그아웃',
       path: '',
-      handleClick: () => handleLogout,
+      handleClick: handleLogout,
     },
   ];
 
