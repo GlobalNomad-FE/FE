@@ -19,10 +19,7 @@ export default function GNB() {
   const [Auth, setAuth] = useState(false);
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } =
     useToggleButton();
-  const {
-    isToggle: isNotificationOpen,
-    handleToggleClick: isNotificationOpenToggle,
-  } = useToggleButton();
+
   const ref = useRef<HTMLButtonElement>(null);
 
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
@@ -45,11 +42,6 @@ export default function GNB() {
       isDropdownOpenToggle();
       router.push('/login');
     }
-  };
-
-  const handleMyPageClick = () => {
-    isDropdownOpenToggle();
-    router.push('/mypage');
   };
 
   const MyMenuList = [
@@ -116,15 +108,12 @@ export default function GNB() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            //TODO 로그인 되면 알람이 뜰 수 있게
             <div className=" flex items-center gap-[40px] static">
               <MyNotifications />
-              <div className=" flex relative gap-10 ">
+              <div className=" flex relative">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
-                  <Avatar
-                    profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
-                  />
+                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
