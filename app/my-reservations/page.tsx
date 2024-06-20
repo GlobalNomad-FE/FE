@@ -85,7 +85,7 @@ const MyReservations = () => {
 
   return (
     <div>
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px] mobile:pt-[94px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
           <div className="flex flex-col flex-grow">
