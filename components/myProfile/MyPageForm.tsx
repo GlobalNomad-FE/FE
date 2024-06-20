@@ -111,20 +111,19 @@ const MyPageForm = () => {
   };
 
   return (
-    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6">
+    <div className="flex flex-col flex-grow text-black200 gap-4">
       <div className="flex justify-between font-bold">
         <div className="text-[32px]">내정보</div>
         <button
           type="submit"
           form="myPageForm"
-          className="text-[16px] text-white bg-[#112211] px-8 py-[10px] rounded cursor-pointer"
+          className="text-[16px] text-white bg-nomad-black px-8 py-[10px] rounded cursor-pointer"
         >
           저장하기
         </button>
       </div>
-
       <form
-        className="flex flex-col gap-8 width-[100%] tablet:w-[429px] mobile:w-[343px] px-[24px] mobile:px-4"
+        className="flex flex-col gap-8"
         noValidate
         onSubmit={onSubmit}
         id="myPageForm"
