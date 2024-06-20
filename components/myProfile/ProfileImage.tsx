@@ -2,6 +2,8 @@ import React, { ChangeEvent } from 'react';
 import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import Image from 'next/image';
 import InformationNoImage from './InformationImage';
+import Cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 const ProfileImage = ({
   nickname,
@@ -14,12 +16,20 @@ const ProfileImage = ({
   uploadedImage?: string | null;
   setUploadedImage?: React.Dispatch<React.SetStateAction<string | null>>;
 }) => {
+  useEffect(() => {
+    const storedImageUrl = Cookies.get('uploadedImage');
+    if (storedImageUrl) {
+      setUploadedImage(storedImageUrl);
+    }
+  }, [setUploadedImage]);
+
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       try {
         const imageData = await uploadProfileImage(file);
         setUploadedImage(imageData.profileImageUrl);
+        Cookies.set('uploadedImage', imageData.profileImageUrl);
       } catch (error) {
         console.error('Failed to upload image:', error);
       }
