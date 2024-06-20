@@ -119,14 +119,14 @@ export default function GNB() {
                   {popupMessage}
                 </BasePopup>
               )}
-              <div className=" flex relative gap-10 ">
+              <div className=" flex relative ">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
-                <div className="flex w-fit-content gap-[16px]">
+                <div className="flex w-fit-content">
                   <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className=" flex text-[22.4px] body1-regular text-[nomad-black]"
+                    className=" flex text-[16px]  items-center body1-regular text-[nomad-black]"
                   >
                     {MyInfoData?.nickname}
                   </button>
