@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyPageInputBox from './MyPageInputBox';
 import useUserProfile from '@/hooks/useUserProfile';
 
-const MyPageForm = () => {
+const MyPageForm = ({ profileImage }: { profileImage: string }) => {
   const {
     user,
     uploadedImage,
@@ -67,7 +67,7 @@ const MyPageForm = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const profileImageUrl = uploadedImage ?? user?.profileImageUrl ?? null;
+    const profileImageUrl = profileImage;
     if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
       setEditInformationErrorMessage((prev) => ({
         ...prev,
@@ -104,7 +104,6 @@ const MyPageForm = () => {
         profileImageUrl,
         newPassword,
       });
-      toast.success('비밀번호가 성공적으로 변경되었습니다.');
     } catch (error) {
       toast.error('비밀번호 변경에 실패했습니다.');
     }
