@@ -113,12 +113,12 @@ export default function GNB() {
               <div className=" flex relative gap-10">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
-                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
                     className="flex text-[16px] items-center body1-regular text-nomad-black "
                   >
+                    <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                     {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && (
