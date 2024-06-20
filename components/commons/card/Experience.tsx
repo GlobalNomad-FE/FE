@@ -132,7 +132,7 @@ const Experience = ({
   return (
     <button
       onClick={() => router.push(`activities/${activityId}`)}
-      className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white hover:-translate-y-3 tablet:hover:-translate-y-2 mobile:hover:-translate-y-1 duration-300"
+      className="max-w-[792px] h-[204px] tablet:h-[156px] mobile:h-[128px] rounded-[24px] flex text-black200 text-[16px] bg-white"
       style={{ boxShadow: '0px 4px 16px 0px rgba(17, 34, 17, 0.05)' }}
     >
       <div className="min-w-[204px] h-[204px] tablet:min-w-[156px] tablet:h-[156px] mobile:min-w-[128px] mobile:h-[128px] relative">
