@@ -99,7 +99,7 @@ const ReservationInfoModal: React.FC<Props> = ({
       ref={modalRef}
       className={`w-[429px] ${
         selectTab === 'pending' ? 'h-[697px]' : 'h-[645px]'
-      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20  mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none`}
+      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none mobile:fixed mobile:top-0 mobile:left-0 mobile:z-50`}
     >
       <div className="h-[35px] flex justify-between items-center">
         <h1 className="text-h1 text-black200">예약 정보</h1>
@@ -152,7 +152,7 @@ const ReservationInfoModal: React.FC<Props> = ({
           }`}
         ></div>
       </div>
-      <div className="h-[420px]">
+      <div className="h-[420px] mobile:h-4/5">
         <div>
           <h2 className="text-[20px] font-semibold text-black200 mt-7">
             예약날짜
