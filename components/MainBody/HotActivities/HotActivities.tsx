@@ -22,6 +22,17 @@ const HotActivities = () => {
   });
 
   useEffect(() => {
+    if (scrollContainerRef.current && !useDrag) {
+      const alignedPoint = Math.round(scrollPoint / 408) * 408;
+      scrollContainerRef.current.scroll({
+        left: alignedPoint,
+        behavior: 'smooth',
+      });
+      setScrollPoint(alignedPoint);
+    }
+  }, [useDrag]);
+
+  useEffect(() => {
     if (data && dataArray.length < data.totalCount) {
       setDataArray((prevDataArray) => [...prevDataArray, ...data.activities]);
     }
@@ -83,12 +94,6 @@ const HotActivities = () => {
   const handleDragEnd = (e: React.MouseEvent<HTMLDivElement>) => {
     if (useDrag && scrollContainerRef.current) {
       onDragEnd(e);
-      const alignedPoint = Math.round(scrollPoint / 408) * 408;
-      scrollContainerRef.current.scroll({
-        left: alignedPoint,
-        behavior: 'smooth',
-      });
-      setScrollPoint(alignedPoint);
     }
   };
 
