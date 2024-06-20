@@ -6,6 +6,8 @@ const ColorValue: { [key: string]: string } = {
   gray: '#a4a1aa',
   white: 'white',
   nomadBlack: '#112211',
+  disabledBackground: '#dddddd',
+  disabledText: '#8f8f8f',
 };
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -13,12 +15,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   height: number;
   fontSize: number;
   textBold?: boolean;
-  btnColor: 'green' | 'white' | 'gray' | 'nomadBlack';
-  textColor: 'green' | 'white' | 'gray' | 'nomadBlack';
+  btnColor: 'green' | 'white' | 'gray' | 'nomadBlack' | 'disabledBackground';
+  textColor: 'green' | 'white' | 'gray' | 'nomadBlack' | 'disabledText';
   border?: boolean;
   borderColor?: 'green' | 'white' | 'gray' | 'nomadBlack';
   rounded?: number;
   hover?: boolean;
+  disabled?: boolean;
   children: React.ReactNode;
 }
 /**
@@ -38,6 +41,7 @@ const Button = ({
   borderColor = 'green',
   rounded = 8,
   hover,
+  disabled = false,
   children,
   ...rest
 }: ButtonProps) => {
@@ -49,6 +53,7 @@ const Button = ({
     <>
       <button
         {...rest}
+        disabled={disabled}
         style={{
           width: width === 'full' ? '100%' : pxToRem(width),
           height: pxToRem(height),

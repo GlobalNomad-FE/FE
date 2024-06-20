@@ -1,29 +1,38 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
-import ReviewModal from '@/components/commons/Popups/ReviewModal/ReviewModal';
 import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
-import { ReservationDayInfoType } from '@/types/activitiesReservationType';
+import useGetReservationDashboard from '@/apis/my-activitie-reservation-status/useGetReservationDashboard';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 interface Props {
-  MonthReservations: ReservationDayInfoType[];
-  selectedActivityId: number;
+  selectedActivityId: number | undefined;
 }
 
-const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
+const Calendar = ({ selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState('');
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
-  const [selectedReservationDate, setSelectedReservationDate] = useState({
-    completed: 0,
-    confirmed: 0,
-    pending: 0,
-  });
+  const [isSeletedDay, setIsSeletedDay] = useState(0);
+
+  const year = currentMonth.getFullYear().toString();
+  const month = (currentMonth.getMonth() + 1).toString().padStart(2, '0');
+
+  const shouldFetchData = selectedActivityId === undefined ? false : true;
+
+  const { data, isLoading, isError } = useGetReservationDashboard(
+    {
+      activityId: shouldFetchData ? selectedActivityId : undefined,
+      year: year,
+      month: month,
+    },
+    shouldFetchData,
+  );
 
   const handleCloseModal = () => {
     setIsReeservationModalOpen(false);
+    setIsSeletedDay(0);
   };
 
   const getDaysInMonth = (year: number, month: number) => {
@@ -150,9 +159,10 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
         pending: 0,
       };
 
-      MonthReservations.forEach((activity) => {
-        if (activity.date === currentDateStr) {
-          dayData = { ...activity.reservations };
+      //해당일에 예약이 있는 경우 값 셋팅
+      data?.forEach(({ date, reservations }) => {
+        if (date == currentDateStr) {
+          dayData = { ...reservations };
         }
       });
 
@@ -172,27 +182,32 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           onClick={() => {
             setSelectedDate(currentDateStr);
             setIsReeservationModalOpen(true);
-            setSelectedReservationDate(dayData);
+            setIsSeletedDay(day);
           }}
         >
-          <div className="p-3 text-[21px] flex flex-row">
-            {day}
+          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
+            <div
+              className={`${
+                isSeletedDay === day &&
+                'w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-black text-[23px] mobile:text-[18px]'
+              }`}
+            >
+              {day}
+            </div>
             {(iconCompleted || iconReservation) && (
-              <div className="h-10px mt-1 ml-1">
+              <div className="h-10px mt-1 ml-1 w-2 h-2 relative">
                 {iconCompleted && (
                   <Image
                     src="/icons/ellipse_gray.svg"
                     alt="예약 데이터 완료 표시 아이콘"
-                    width={8}
-                    height={8}
+                    fill
                   />
                 )}
                 {iconReservation && (
                   <Image
                     src="/icons/ellipse_blue.svg"
                     alt="예약 데이터 예약 표시 아이콘"
-                    width={8}
-                    height={8}
+                    fill
                   />
                 )}
               </div>
@@ -252,10 +267,19 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
-      {renderHeader()}
+    <>
+      <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
+        {renderHeader()}
+        <div
+          style={{ minWidth: '326px' }}
+          className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
+        >
+          {renderDays()}
+          {renderCells()}
+        </div>
+      </div>
       <div
-        className={`absolute right-0 top-12 ${
+        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 mobile:scrollbar-hide ${
           !isReservationModalOpen && 'hidden'
         }`}
       >
@@ -263,18 +287,10 @@ const Calendar = ({ MonthReservations, selectedActivityId }: Props) => {
           closePopup={handleCloseModal}
           selectedDate={selectedDate}
           selectedActivityId={selectedActivityId}
-          reservationByDay={selectedReservationDate}
+          isModalOpen={isReservationModalOpen}
         />
       </div>
-      <div
-        style={{ minWidth: '326px' }}
-        className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
-      >
-        {/* <div className="mt-6 w-full border-y border-x ounded-t-lg rounded-b-lg bg-white"> */}
-        {renderDays()}
-        {renderCells()}
-      </div>
-    </div>
+    </>
   );
 };
 

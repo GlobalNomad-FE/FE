@@ -1,12 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Gnb from '@/components/commons/gnb/gnb';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import FilterDropdown from '@/components/commons/FilterDropdown';
 import Image from 'next/image';
-import Experience from '@/components/commons/card/Experience';
-import Footer from '@/components/commons/Footer';
 import useGetMyReservations from '@/apis/my-reservations/useGetMyReservations';
+import ReservationsExperience from '@/components/commons/card/ReservationsExperience';
 import ReviewExperienceSkeleton from '@/components/skeleton/ReviewExperienceSkeleton';
 
 interface Activity {
@@ -19,6 +17,7 @@ interface Reservation {
   id: number;
   activity: Activity;
   status: string;
+  reviewSubmitted: boolean;
   totalPrice: number;
   headCount: number;
   date: string;
@@ -86,7 +85,6 @@ const MyReservations = () => {
 
   return (
     <div>
-      <Gnb />
       <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
@@ -97,7 +95,7 @@ const MyReservations = () => {
                 <FilterDropdown type="bookingPage" onSelect={handleSelect} />
               )}
             </div>
-            {data?.totalCount === 0 ? (
+            {data?.totalCount === 0 && (
               <div className="flex flex-col flex-grow gap-5 items-center mt-[90px]">
                 <Image
                   src="/icons/empty.svg"
@@ -110,10 +108,13 @@ const MyReservations = () => {
                   아직 등록한 체험이 없어요
                 </p>
               </div>
+            )}
+            {isLoading ? (
+              <ReviewExperienceSkeleton />
             ) : (
               <div className="flex flex-col gap-6 mt-[16px]">
                 {reservations.map((item) => (
-                  <Experience
+                  <ReservationsExperience
                     key={item.id}
                     id={item.id}
                     title={item.activity.title}
@@ -125,7 +126,7 @@ const MyReservations = () => {
                     experienceStatus={item.status}
                     bannerImageUrl={item.activity.bannerImageUrl}
                     activityId={item.activity.id}
-                    type="reservations"
+                    reviewSubmitted={item.reviewSubmitted}
                   />
                 ))}
               </div>
@@ -133,7 +134,6 @@ const MyReservations = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

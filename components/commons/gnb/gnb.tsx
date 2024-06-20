@@ -1,5 +1,7 @@
 'use client';
 
+import instance from '@/apis/axios';
+import { useQuery } from '@tanstack/react-query';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
@@ -8,57 +10,85 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
+import { myInfo } from '@/types/myInfo';
+import Cookies from 'js-cookie';
+import MyNotifications from '../myNotifications/MyNotifications';
 
-export default function Gnb() {
+export default function GNB() {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } =
     useToggleButton();
-  const {
-    isToggle: isNotificationOpen,
-    handleToggleClick: isNotificationOpenToggle,
-  } = useToggleButton();
+
   const ref = useRef<HTMLButtonElement>(null);
 
-  // 외부 클릭을 감지하여 드롭다운 메뉴를 닫습니다.
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
 
-  useEffect(() => {
-    // 로그인 상태를 확인하고 설정합니다.
-    if (
-      localStorage.getItem('accessToken') &&
-      localStorage.getItem('refreshToken')
-    ) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, []);
-
-  const handleLogout = () => {
-    // 로그아웃 시 처리하는 함수입니다.
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    isDropdownOpenToggle();
-    router.push('/login');
+  const getMyInfo = async () => {
+    const { data } = await instance.get<myInfo>('/users/me');
+    return data;
   };
 
-  const handleMyPageClick = () => {
-    // 마이 페이지로 이동하는 함수입니다.
-    isDropdownOpenToggle();
-    router.push('/mypage');
+  const { data: MyInfoData, isPending } = useQuery({
+    queryKey: ['myInfo'],
+    queryFn: getMyInfo,
+    retry: 1,
+  });
+
+  const handleLogout = () => {
+    Cookies.remove('accessToken');
+    Cookies.remove('refreshToken');
+    if (!Cookies.get('accessToken')) {
+      isDropdownOpenToggle();
+      router.push('/login');
+    }
   };
 
   const MyMenuList = [
     {
-      text: '내 정보',
-      handleClick: handleMyPageClick,
+      icon: '/icons/account-check.svg',
+      alt: '내정보 아이콘',
+      label: '내 정보',
+      path: '/myprofile',
     },
     {
-      text: '로그아웃',
-      handleClick: handleLogout,
+      icon: '/icons/textbox-check.svg',
+      alt: '예약내역 아이콘',
+      label: '예약 내역',
+      path: '/my-reservations',
+    },
+    {
+      icon: '/icons/setting-check.svg',
+      alt: '체험관리 아이콘',
+      label: '내 체험 관리',
+      path: '/activities',
+    },
+    {
+      icon: '/icons/calendar-check.svg',
+      alt: '예약현황 아이콘',
+      label: '예약 현황',
+      path: '/reservationHistory',
+    },
+    {
+      icon: '/icons/logout-check.png',
+      alt: '로그아웃 아이콘',
+      label: '로그아웃',
+      path: '',
+      handleClick: () => handleLogout,
     },
   ];
+
+  useEffect(() => {
+    if (Cookies.get('accessToken') && Cookies.get('refreshToken')) {
+      setAuth(true);
+      return;
+    }
+    setAuth(false);
+  }, []);
+
+  if (isPending) {
+    return null;
+  }
 
   return (
     <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-40">
@@ -78,30 +108,18 @@ export default function Gnb() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            //TODO 로그인 되면 알람이 뜰 수 있게
-            <div className=" flex gap-[40px] static">
-              <button onClick={isNotificationOpenToggle}>
-                <Image
-                  src="/icons/notification.svg"
-                  alt="알림"
-                  height={20}
-                  width={20}
-                />
-              </button>
-              {isNotificationOpen && '모달 자리'}
-              <div className=" flex relative gap-10 ">
+            <div className=" flex items-center gap-[40px] static">
+              <MyNotifications />
+              <div className=" flex relative">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
-                  <Avatar
-                    profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
-                  />
+                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className=" flex text-[22.4px] body1-regular text-[nomad-black]"
+                    className="flex text-[16px] items-center body1-regular text-[nomad-black]"
                   >
-                    메뉴
-                    {/* user 데이터 받아오면서 수정 */}
+                    {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && (
                     <DropdownMenu dropdownMenuList={MyMenuList} />

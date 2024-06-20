@@ -5,7 +5,7 @@ interface AvatarProps {
 }
 
 export default function Avatar({ profileImageUrl = null }: AvatarProps) {
-  const imageUrl = profileImageUrl || 'images/Image_default_profile_image.png';
+  const imageUrl = profileImageUrl || '/images/Image_default_profile_image.png';
 
   return (
     <div>

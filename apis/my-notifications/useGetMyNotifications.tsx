@@ -29,6 +29,7 @@ const useGetMyNotifications = () => {
   return useQuery<GetMyNotificationsResponse>({
     queryKey: notificationsKey.getMyNotifications(),
     queryFn: getMyNotifications,
+    refetchInterval: 1000, // 1초마다 데이터를 새로고침
   });
 };
 

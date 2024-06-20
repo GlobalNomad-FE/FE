@@ -1,27 +1,45 @@
 import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import { Activity, MyActivitieType } from '@/types/myActivitiesType';
 import {
   ReservationScheduleType,
   ReservationStatusCountType,
 } from '@/types/activitiesReservationType';
-import { useState } from 'react';
 
 interface SelectBoxProps {
+  selectedDate?: string;
   myActivityes?: Activity[];
   reservations?: ReservationScheduleType[];
   onSelect: (id: number) => void;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
+  selectedDate,
   myActivityes,
   reservations,
   onSelect,
 }) => {
-  //TODO : myActivityes, reservations별로 함수 구분?
-
   const [selectActivity, setSelectActivity] = useState<Activity | null>(null);
   const [selectReservation, setSelectReservation] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  const selectBoxRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      selectBoxRef.current &&
+      !selectBoxRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSelect = (activity: Activity) => {
     setSelectActivity(activity);
@@ -38,8 +56,15 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     onSelect(scheduleId); // 선택된 활동의 id 값을 상위 컴포넌트로 전달
   };
 
+  useEffect(() => {
+    // selectedDate가 변경될 때 selectActivity와 selectReservation 상태를 초기화
+    setSelectActivity(null);
+    setSelectReservation('');
+  }, [selectedDate]);
+
   return (
     <div
+      ref={selectBoxRef}
       className={`relative ${
         myActivityes
           ? 'w-[800px] tablet:w-[429px] mobile:w-[326px] mt-[42px]'
@@ -53,7 +78,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {myActivityes && (
-          <p className="bg-white w-[45px] px-1 text-[14px] bottom-10 absolute">
+          <p className="bg-white w-[45px] px-1 text-[14px] left-3 bottom-10 absolute">
             체험명
           </p>
         )}
@@ -78,7 +103,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
           {myActivityes?.map((activity) => (
             <li
               key={activity.id}
-              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
+              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelect(activity)}
             >
               {activity.title}
@@ -88,20 +113,18 @@ const SelectBox: React.FC<SelectBoxProps> = ({
             const reservationTime =
               reservation.startTime + '~ ' + reservation.endTime;
             return (
-              <>
-                <li
-                  key={reservation.scheduleId}
-                  className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
-                  onClick={() =>
-                    handleReservationSelect(
-                      reservation.scheduleId,
-                      reservationTime,
-                    )
-                  }
-                >
-                  {reservationTime}
-                </li>
-              </>
+              <li
+                key={reservation.scheduleId}
+                className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
+                onClick={() =>
+                  handleReservationSelect(
+                    reservation.scheduleId,
+                    reservationTime,
+                  )
+                }
+              >
+                {reservationTime}
+              </li>
             );
           })}
         </ul>
@@ -109,7 +132,5 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     </div>
   );
 };
-
-// const;
 
 export default SelectBox;
