@@ -108,16 +108,16 @@ export default function GNB() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            <div className=" flex items-center gap-[40px] static">
+            <div className=" flex items-center gap-10 static">
               <MyNotifications />
-              <div className=" flex relative">
+              <div className=" flex relative gap-10">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
                   <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className="flex text-[16px] items-center body1-regular text-[nomad-black]"
+                    className="flex text-[16px] items-center body1-regular text-nomad-black "
                   >
                     {MyInfoData?.nickname}
                   </button>
