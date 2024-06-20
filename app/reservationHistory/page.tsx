@@ -27,9 +27,8 @@ export default function Page() {
   };
 
   return (
-    <div style={{ minWidth: '350px' }} className="text-black200 bg-gray50">
-      <Gnb />
-      <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center relative">
+    <>
+      <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center relative text-black200 bg-gray50 min-w-[350px]">
         <SideNavigationMenu />
         <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] mobile:w-full font-bold">예약 현황</p>
@@ -55,7 +54,6 @@ export default function Page() {
           )}
         </div>
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }

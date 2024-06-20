@@ -21,7 +21,6 @@ export default function ActivitiesDetailPage({
   const isFullWidth = Number(cookiesUserId) !== data?.userId;
   return (
     <>
-      <Gnb />
       {data && (
         <main className="max-w-[1200px] mx-auto px-[24px] mb-24">
           <ActivitieTitle data={data} />
@@ -49,7 +48,6 @@ export default function ActivitiesDetailPage({
           </div>
         </main>
       )}
-      <Footer />
     </>
   );
 }

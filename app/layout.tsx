@@ -53,7 +53,7 @@ export default function RootLayout({
               bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
             />
             <GNB />
-            <main>{children}</main>
+            {children}
             <Footer />
           </AuthProvider>
         </ReactQueryProviders>

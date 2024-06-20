@@ -1,10 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Gnb from '@/components/commons/gnb/gnb';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
 import FilterDropdown from '@/components/commons/FilterDropdown';
 import Image from 'next/image';
-import Footer from '@/components/commons/Footer';
 import useGetMyReservations from '@/apis/my-reservations/useGetMyReservations';
 import ReservationsExperience from '@/components/commons/card/ReservationsExperience';
 import ReviewExperienceSkeleton from '@/components/skeleton/ReviewExperienceSkeleton';
@@ -87,7 +85,6 @@ const MyReservations = () => {
 
   return (
     <div>
-      <Gnb />
       <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
@@ -137,7 +134,6 @@ const MyReservations = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };
