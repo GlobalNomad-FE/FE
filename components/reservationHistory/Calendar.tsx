@@ -185,17 +185,17 @@ const Calendar = ({ selectedActivityId }: Props) => {
             setIsSeletedDay(day);
           }}
         >
-          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row">
-            <div
-              className={`${
-                isSeletedDay === day &&
-                'w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-black text-[23px] mobile:text-[18px]'
-              }`}
-            >
-              {day}
-            </div>
+          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row justify-between relative">
+            {isSeletedDay === day ? (
+              <div className="">
+                <div className="top-[7px] left-[3px] w-11 h-11 rounded-full bg-gray-100 text-black absolute" />
+                <p className="top-[12px] absolute">{day}</p>
+              </div>
+            ) : (
+              <p>{day}</p>
+            )}
             {(iconCompleted || iconReservation) && (
-              <div className="h-10px mt-1 ml-1 w-2 h-2 relative">
+              <div className="h-10px mr-14 tablet:mr-1 mobile:mr-1 right-[1px] w-2 h-2 relative">
                 {iconCompleted && (
                   <Image
                     src="/icons/ellipse_gray.svg"
