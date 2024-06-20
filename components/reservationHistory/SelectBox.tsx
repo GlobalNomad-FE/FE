@@ -27,7 +27,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   const handleSelect = (activity: Activity) => {
     setSelectActivity(activity);
-    setIsOpen(true);
+    setIsOpen(false);
     onSelect(activity.id); // 선택된 활동의 id 값을 상위 컴포넌트로 전달
   };
 
