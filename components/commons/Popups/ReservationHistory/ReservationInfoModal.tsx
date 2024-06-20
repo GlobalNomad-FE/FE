@@ -22,6 +22,7 @@ const ReservationInfoModal: React.FC<Props> = ({
     number | undefined
   >();
   const [selectTab, setSelectTab] = useState('pending');
+  const [showScroll, setShowScroll] = useState(true);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -77,6 +78,10 @@ const ReservationInfoModal: React.FC<Props> = ({
     setSelectTab('pending');
     setSelectedScheduleId(undefined);
   }, [selectedDate]);
+
+  useEffect(() => {
+    setShowScroll(!(selectTab === 'confirmed'));
+  }, [selectTab]);
 
   // 내 체험 예약 시간대별 예약 내역 조회
   const {
@@ -166,11 +171,7 @@ const ReservationInfoModal: React.FC<Props> = ({
         </div>
         <div className="mt-8">
           <h2 className="text-[20px] font-semibold text-black200">예약내역</h2>
-          <div
-            className={`${
-              selectTab === 'pending' && 'h-[286px] overflow-scroll'
-            } mt-4`}
-          >
+          <div className={`${showScroll && 'h-[286px] overflow-scroll'} mt-4`}>
             {reservedTimeData?.reservations.map((reservationInfo, index) => (
               <ReservationInfo
                 key={index}
