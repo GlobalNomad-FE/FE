@@ -2,28 +2,23 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import ReservationInfo from '@/components/reservationHistory/ReservationInfo';
-import { ReservationStatusCountType } from '@/types/activitiesReservationType';
+import { ModalReservationStatusCountType } from '@/types/activitiesReservationType';
+import useGetReservedSchedule from '@/apis/my-activitie-reservation-status/useGetReservedSchedule';
+import useGetReservedTime from '@/apis/my-activitie-reservation-status/useGetReservedTime';
 
 interface Props {
   closePopup: () => void;
   selectedDate: string;
   selectedActivityId: number;
-  reservationByDay: ReservationStatusCountType;
 }
 
 const ReservationInfoModal = ({
   closePopup,
   selectedDate,
   selectedActivityId,
-  reservationByDay,
 }: Props) => {
   const [selectedScheduleId, setSelectedScheduleId] = useState(0);
-  const [statusCounts, setStatusCounts] = useState({
-    declined: 0,
-    confirmed: 0,
-    pending: 0,
-  });
-  const [selectTab, setSelectTab] = useState('신청');
+  const [selectTab, setSelectTab] = useState('pending');
 
   //YYYY년 MM월 DD일
   const handleDateFormat = () => {
@@ -34,121 +29,50 @@ const ReservationInfoModal = ({
   };
 
   // TODO : 내 체험 날짜별 예약정보(신청, 승인, 거절)이 있는 스케쥴 조회
-  ///{teamId}/my-activities/{activityId}/reserved-schedule
-  //selectBox 및 상태별 카운팅을 위한 목업 데이터
-  const dayReservations = [
-    {
-      scheduleId: 3991,
-      startTime: '4:00',
-      endTime: '5:00',
-      count: {
-        declined: 0, //거절
-        confirmed: 0, //승인
-        pending: 1, //신청
-      },
-    },
-    {
-      scheduleId: 3992,
-      startTime: '7:00',
-      endTime: '8:00',
-      count: {
-        declined: 0,
-        confirmed: 0,
-        pending: 1,
-      },
-    },
-    {
-      scheduleId: 3993,
-      startTime: '11:00',
-      endTime: '13:00',
-      count: {
-        declined: 2,
-        confirmed: 3,
-        pending: 5,
-      },
-    },
-  ];
+  const shouldFetchData = selectedActivityId !== 0;
+  const {
+    data: dayReservations,
+    isLoading: dayReservationIsLoading,
+    isError: dayReservationsIsError,
+  } = useGetReservedSchedule({
+    activityId: shouldFetchData ? selectedActivityId : undefined,
+    date: selectedDate,
+  });
 
-  useEffect(() => {
-    const totalCounts = dayReservations.reduce(
-      (acc, reservation) => {
-        acc.declined += reservation.count.declined;
-        acc.confirmed += reservation.count.confirmed;
-        acc.pending += reservation.count.pending;
-        return acc;
-      },
-      { declined: 0, confirmed: 0, pending: 0 },
-    );
-    setStatusCounts(totalCounts);
-  }, []);
+  const statusTotalCounts = dayReservations?.reduce(
+    (acc, reservation) => {
+      acc.declined += reservation.count.declined;
+      acc.confirmed += reservation.count.confirmed;
+      acc.pending += reservation.count.pending;
+      return acc;
+    },
+    { declined: 0, confirmed: 0, pending: 0 },
+  );
 
   const handleSelect = (scheduleId: number) => {
     setSelectedScheduleId(scheduleId);
   };
 
-  //TODO: select버튼을 통해 받은 selectedScheduleId로 내 체험 예약 시간대별 예약 내역 조회
-  const reservationInfos = [
-    {
-      id: 1605,
-      status: 'pending',
-      totalPrice: 112220,
-      headCount: 11,
-      nickname: '차박좋아',
-      userId: 362,
-      date: '2024-06-13',
-      startTime: '4:00',
-      endTime: '5:00',
-      createdAt: '2024-06-13T00:36:50.264Z',
-      updatedAt: '2024-06-13T00:36:50.264Z',
-      activityId: 1154,
-      scheduleId: 3991,
-      reviewSubmitted: false,
-      teamId: '4-13',
-    },
-    {
-      id: 1605,
-      status: 'pending',
-      totalPrice: 112220,
-      headCount: 5,
-      nickname: '캠핑갈래',
-      userId: 362,
-      date: '2024-06-13',
-      startTime: '4:00',
-      endTime: '5:00',
-      createdAt: '2024-06-13T00:36:50.264Z',
-      updatedAt: '2024-06-13T00:36:50.264Z',
-      activityId: 1154,
-      scheduleId: 3991,
-      reviewSubmitted: false,
-      teamId: '4-13',
-    },
-    {
-      id: 1605,
-      status: 'pending',
-      totalPrice: 112220,
-      headCount: 5,
-      nickname: '캠핑갈래!!',
-      userId: 362,
-      date: '2024-06-13',
-      startTime: '4:00',
-      endTime: '5:00',
-      createdAt: '2024-06-13T00:36:50.264Z',
-      updatedAt: '2024-06-13T00:36:50.264Z',
-      activityId: 1154,
-      scheduleId: 3991,
-      reviewSubmitted: false,
-      teamId: '4-13',
-    },
-  ];
+  // 내 체험 예약 시간대별 예약 내역 조회
+  const {
+    data: reservedTimeData,
+    isLoading: reservedTimeIsLoading,
+    isError: reservedTimeIsError,
+  } = useGetReservedTime({
+    activityId: shouldFetchData ? selectedActivityId : undefined,
+    scheduleId: selectedScheduleId,
+    status: selectTab,
+  });
 
   const selectDate = handleDateFormat();
 
   handleDateFormat();
+
   return (
     <div
       className={`w-[429px] ${
-        selectTab === '신청' ? 'h-[697px]' : 'h-[645px]'
-      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200`}
+        selectTab === 'pending' ? 'h-[697px]' : 'h-[645px]'
+      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 absolute ml-[-420px]`}
     >
       <div className="h-[35px] flex justify-between items-center">
         <h1 className="text-h1 text-black200">예약 정보</h1>
@@ -161,30 +85,31 @@ const ReservationInfoModal = ({
           className="cursor-pointer"
         />
       </div>
+      {/* 예약정보 상태별 탭 */}
       <div className="flex gap-[22px] mt-8 pl-2">
         <div
           className={`text-[20px] ${
-            selectTab === '신청' && 'text-green200 font-semibold'
+            selectTab === 'pending' && 'text-green200 font-semibold'
           } cursor-pointer`}
-          onClick={() => setSelectTab('신청')}
+          onClick={() => setSelectTab('pending')}
         >
-          신청 {statusCounts.pending}
+          신청 {statusTotalCounts?.pending || 0}
         </div>
         <div
           className={`text-[20px] ${
-            selectTab === '승인' && 'text-green200 font-semibold'
+            selectTab === 'confirmed' && 'text-green200 font-semibold'
           } cursor-pointer`}
-          onClick={() => setSelectTab('승인')}
+          onClick={() => setSelectTab('confirmed')}
         >
-          승인 {statusCounts.confirmed}
+          승인 {statusTotalCounts?.confirmed || 0}
         </div>
         <div
           className={`text-[20px] ${
-            selectTab === '거절' && 'text-green200 font-semibold'
+            selectTab === 'declined' && 'text-green200 font-semibold'
           } cursor-pointer`}
-          onClick={() => setSelectTab('거절')}
+          onClick={() => setSelectTab('declined')}
         >
-          거절 {statusCounts.declined}
+          거절 {statusTotalCounts?.declined || 0}
         </div>
       </div>
       <div className="mt-3 relative">
@@ -196,36 +121,40 @@ const ReservationInfoModal = ({
         />
         <div
           className={`w-[72px] h-1 bg-green200 rounded-xl mt-[-2px] absolute ${
-            selectTab !== '신청' &&
-            (selectTab === '승인' ? 'ml-[72px]' : 'ml-[144px]')
+            selectTab !== 'pending' &&
+            (selectTab === 'confirmed' ? 'ml-[72px]' : 'ml-[144px]')
           }`}
         ></div>
       </div>
-      <div>
-        <h2 className="text-[20px] font-semibold text-black200 mt-7">
-          예약날짜
-        </h2>
-        <p className="my-4 text-[20px]">{selectDate}</p>
-        <SelectBox reservations={dayReservations} onSelect={handleSelect} />
-      </div>
-      <div className="mt-8">
-        <h2 className="text-[20px] font-semibold text-black200">예약내역</h2>
-        <div
-          className={`${
-            selectTab === '신청' && 'h-[286px] overflow-scroll'
-          } mt-4`}
-        >
-          {reservationInfos.map((reservationInfo, index) => (
-            <ReservationInfo
-              key={index}
-              selectTab={selectTab}
-              reservationInfo={reservationInfo}
-            />
-          ))}
+      {/* 예약날짜 */}
+      <div className="h-[420px]">
+        <div>
+          <h2 className="text-[20px] font-semibold text-black200 mt-7">
+            예약날짜
+          </h2>
+          <p className="my-4 text-[20px]">{selectDate}</p>
+          <SelectBox reservations={dayReservations} onSelect={handleSelect} />
+        </div>
+        {/* 예약내역 */}
+        <div className="mt-8">
+          <h2 className="text-[20px] font-semibold text-black200">예약내역</h2>
+          <div
+            className={`${
+              selectTab === 'pending' && 'h-[286px] overflow-scroll'
+            } mt-4`}
+          >
+            {reservedTimeData?.reservations.map((reservationInfo, index) => (
+              <ReservationInfo
+                key={index}
+                selectTab={selectTab}
+                reservationInfo={reservationInfo}
+              />
+            ))}
+          </div>
         </div>
       </div>
-      {selectTab !== '신청' && (
-        <div className="mt-[80px]  flex justify-between text-[24px] font-semibold font-black200">
+      {selectTab !== 'pending' && (
+        <div className="flex justify-between text-[24px] font-semibold font-black200">
           <p>예약 현황</p>
           <p>5</p>
         </div>

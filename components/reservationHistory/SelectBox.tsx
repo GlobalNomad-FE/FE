@@ -53,7 +53,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         onClick={() => setIsOpen(!isOpen)}
       >
         {myActivityes && (
-          <p className="bg-white w-[45px] px-1 text-[14px] bottom-10 absolute">
+          <p className="bg-white w-[45px] px-1 text-[14px] left-3 bottom-10 absolute">
             체험명
           </p>
         )}
@@ -78,7 +78,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
           {myActivityes?.map((activity) => (
             <li
               key={activity.id}
-              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
+              className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelect(activity)}
             >
               {activity.title}
