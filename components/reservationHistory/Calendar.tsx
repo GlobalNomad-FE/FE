@@ -267,10 +267,19 @@ const Calendar = ({ selectedActivityId }: Props) => {
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
-      {renderHeader()}
+    <>
+      <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
+        {renderHeader()}
+        <div
+          style={{ minWidth: '326px' }}
+          className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
+        >
+          {renderDays()}
+          {renderCells()}
+        </div>
+      </div>
       <div
-        className={`absolute right-0 top-12 ${
+        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 mobile:scrollbar-hide ${
           !isReservationModalOpen && 'hidden'
         }`}
       >
@@ -281,14 +290,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
           isModalOpen={isReservationModalOpen}
         />
       </div>
-      <div
-        style={{ minWidth: '326px' }}
-        className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
-      >
-        {renderDays()}
-        {renderCells()}
-      </div>
-    </div>
+    </>
   );
 };
 
