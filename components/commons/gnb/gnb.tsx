@@ -1,5 +1,7 @@
 'use client';
 
+import instance from '@/apis/axios';
+import { useQuery } from '@tanstack/react-query';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
@@ -8,8 +10,11 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
+import BasePopup from '../Popups/BasePopup';
+import { myInfo } from '@/types/myInfo';
+import Cookies from 'js-cookie';
 
-export default function Gnb() {
+export default function GNB() {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } =
@@ -20,31 +25,41 @@ export default function Gnb() {
   } = useToggleButton();
   const ref = useRef<HTMLButtonElement>(null);
 
-  // 외부 클릭을 감지하여 드롭다운 메뉴를 닫습니다.
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
 
-  useEffect(() => {
-    // 로그인 상태를 확인하고 설정합니다.
-    if (
-      localStorage.getItem('accessToken') &&
-      localStorage.getItem('refreshToken')
-    ) {
-      setAuth(true);
-    } else {
-      setAuth(false);
-    }
-  }, []);
+  const getMyInfo = async () => {
+    const { data } = await instance.get<myInfo>('/users/me');
+    return data;
+  };
+
+  const { data: MyInfoData, isPending } = useQuery({
+    queryKey: ['myInfo'],
+    queryFn: getMyInfo,
+    retry: 1,
+  });
+
+  const [openPopup, setOpenPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+
+  const handleOpenPopup = (message: string) => {
+    setPopupMessage(message);
+    setOpenPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setOpenPopup(false);
+  };
 
   const handleLogout = () => {
-    // 로그아웃 시 처리하는 함수입니다.
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    isDropdownOpenToggle();
-    router.push('/login');
+    if (!localStorage.getItem('accessToken')) {
+      isDropdownOpenToggle();
+      router.push('/login');
+    }
   };
 
   const handleMyPageClick = () => {
-    // 마이 페이지로 이동하는 함수입니다.
     isDropdownOpenToggle();
     router.push('/mypage');
   };
@@ -59,6 +74,18 @@ export default function Gnb() {
       handleClick: handleLogout,
     },
   ];
+
+  useEffect(() => {
+    if (Cookies.get('accessToken') && Cookies.get('refreshToken')) {
+      setAuth(true);
+      return;
+    }
+    setAuth(false);
+  }, []);
+
+  if (isPending) {
+    return null;
+  }
 
   return (
     <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-40">
@@ -78,7 +105,6 @@ export default function Gnb() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            //TODO 로그인 되면 알람이 뜰 수 있게
             <div className=" flex gap-[40px] static">
               <button onClick={isNotificationOpenToggle}>
                 <Image
@@ -88,20 +114,21 @@ export default function Gnb() {
                   width={20}
                 />
               </button>
-              {isNotificationOpen && '모달 자리'}
+              {isNotificationOpen && (
+                <BasePopup isOpen={openPopup} closePopup={handleClosePopup}>
+                  {popupMessage}
+                </BasePopup>
+              )}
               <div className=" flex relative gap-10 ">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
-                  <Avatar
-                    profileImageUrl={null} //TODO profileImageUrl 변수 정의 필요
-                  />
+                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
                     className=" flex text-[22.4px] body1-regular text-[nomad-black]"
                   >
-                    메뉴
-                    {/* user 데이터 받아오면서 수정 */}
+                    {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && (
                     <DropdownMenu dropdownMenuList={MyMenuList} />
