@@ -1,10 +1,10 @@
 import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
 import { Activity, MyActivitieType } from '@/types/myActivitiesType';
 import {
   ReservationScheduleType,
   ReservationStatusCountType,
 } from '@/types/activitiesReservationType';
-import { useEffect, useState } from 'react';
 
 interface SelectBoxProps {
   selectedDate?: string;
@@ -19,11 +19,27 @@ const SelectBox: React.FC<SelectBoxProps> = ({
   reservations,
   onSelect,
 }) => {
-  //TODO : myActivityes, reservations별로 함수 구분?
-
   const [selectActivity, setSelectActivity] = useState<Activity | null>(null);
   const [selectReservation, setSelectReservation] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+
+  const selectBoxRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      selectBoxRef.current &&
+      !selectBoxRef.current.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleSelect = (activity: Activity) => {
     setSelectActivity(activity);
@@ -48,6 +64,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
 
   return (
     <div
+      ref={selectBoxRef}
       className={`relative ${
         myActivityes
           ? 'w-[800px] tablet:w-[429px] mobile:w-[326px] mt-[42px]'
@@ -96,20 +113,18 @@ const SelectBox: React.FC<SelectBoxProps> = ({
             const reservationTime =
               reservation.startTime + '~ ' + reservation.endTime;
             return (
-              <>
-                <li
-                  key={reservation.scheduleId}
-                  className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
-                  onClick={() =>
-                    handleReservationSelect(
-                      reservation.scheduleId,
-                      reservationTime,
-                    )
-                  }
-                >
-                  {reservationTime}
-                </li>
-              </>
+              <li
+                key={reservation.scheduleId}
+                className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-200"
+                onClick={() =>
+                  handleReservationSelect(
+                    reservation.scheduleId,
+                    reservationTime,
+                  )
+                }
+              >
+                {reservationTime}
+              </li>
             );
           })}
         </ul>
