@@ -259,7 +259,6 @@ export default function Registerpage({ id }: RegisterpageProps) {
             </form>
           </div>
         </main>
-        <Footer />
       </div>
       {imagePopupOpen && (
         <BasePopup
