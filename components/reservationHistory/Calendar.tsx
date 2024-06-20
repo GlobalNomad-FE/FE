@@ -185,7 +185,11 @@ const Calendar = ({ selectedActivityId }: Props) => {
             setIsSeletedDay(day);
           }}
         >
-          <div className="pl-3 mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row justify-between relative">
+          <div
+            className={`${
+              day < 10 ? 'pl-[18px]' : 'pl-3'
+            } mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row justify-between relative`}
+          >
             {isSeletedDay === day ? (
               <div className="">
                 <div className="top-[7px] left-[3px] w-11 h-11 rounded-full bg-gray-100 text-black absolute" />
