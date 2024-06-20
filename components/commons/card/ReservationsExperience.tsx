@@ -8,22 +8,7 @@ import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
 import { useRouter } from 'next/navigation';
-
-interface Reservation {
-  id: number;
-  title: string;
-  date?: string;
-  startTime?: string;
-  endTime?: string;
-  headCount?: number;
-  experienceStatus?: string;
-  totalPrice: number;
-  bannerImageUrl: string;
-  activityId?: number;
-  rating?: number;
-  reviewCount?: number;
-  type: 'activities' | 'reservations';
-}
+import { ReservationsExperienceType } from './ExperienceType';
 
 /**
  * 이미지와 함께 체험정보와 예약상태를 볼 수 있는 카드 컴포넌트 입니다.
@@ -37,13 +22,9 @@ interface Reservation {
  * @param totalPrice 금액
  * @param bannerImageUrl 체험 이미지
  * @param activityId 예약 ID
- * @param rating 별점
- * @param reviewCount 리뷰 수
- * @param price 체험 가격
- * @param type 내 체험 관리 : 'activities' | 예약 내역 : 'reservations'
+ * @param reviewSubmitted 후기 작성 여부
  */
-
-const Experience = ({
+const ReservationsExperience = ({
   id,
   title,
   date = '',
@@ -54,10 +35,8 @@ const Experience = ({
   experienceStatus,
   bannerImageUrl,
   activityId = 0,
-  type,
-  rating,
-  reviewCount,
-}: Reservation) => {
+  reviewSubmitted,
+}: ReservationsExperienceType) => {
   const [status, setStatus] = useState(experienceStatus);
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -146,39 +125,21 @@ const Experience = ({
       </div>
       <div className="flex flex-col justify-between w-full h-full p-6 text-left tablet:p-[12px] mobile:p-[9px]">
         <div>
-          {type === 'reservations' ? (
-            <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
-              {textProps().text}
-            </p>
-          ) : (
-            <div className="flex gap-[6px]">
-              <Image
-                src="/icons/star-on.svg"
-                alt="별점아이콘"
-                width={19}
-                height={19}
-              />
-              <span>
-                {rating} ({reviewCount})
-              </span>
-            </div>
-          )}
+          <p className={`${textProps().color} font-bold mobile:text-[14px]`}>
+            {textProps().text}
+          </p>
           <p className="text-[20px] tablet:text-[18px] mobile:text-[14px] font-bold mt-2 tablet:m-0 mobile:mt-[5px]">
             {title}
           </p>
-          {type === 'reservations' && (
-            <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
-              {date} · {startTime} - {endTime} · {headCount}명
-            </p>
-          )}
+          <p className="text-[18px] tablet:text-[14px] mobile:text-[12px] mt-3 tablet:mt-[5px] mobile:mt-[5px]">
+            {date} · {startTime} - {endTime} · {headCount}명
+          </p>
         </div>
         <div className="h-10 mobile:h-[32px] flex justify-between mt-4 tablet:mt-[12px] mobile:mt-[5px] items-center mobile:mr-[3px]">
           <p className="text-[24px] tablet:text-[20px] mobile:text-[16px] font-medium">
-            {type === 'reservations'
-              ? `₩${totalPrice.toLocaleString('ko-KR')}`
-              : `₩${totalPrice.toLocaleString('ko-KR')} /인`}
+            ₩{totalPrice.toLocaleString('ko-KR')}
           </p>
-          <div className="">
+          <div>
             {status === 'pending' && (
               <>
                 {isDesktop && (
@@ -246,9 +207,9 @@ const Experience = ({
                 headCount={headCount}
                 totalPrice={totalPrice}
                 reservationId={id}
+                reviewSubmitted={reviewSubmitted}
               />
             )}
-            {type === 'activities' && <Menu id={id} />}
           </div>
         </div>
       </div>
@@ -256,4 +217,4 @@ const Experience = ({
   );
 };
 
-export default Experience;
+export default ReservationsExperience;
