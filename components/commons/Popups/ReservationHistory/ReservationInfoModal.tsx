@@ -83,6 +83,7 @@ const ReservationInfoModal: React.FC<Props> = ({
     setShowScroll(!(selectTab === 'confirmed'));
   }, [selectTab]);
 
+  const isSelectedScheduleId = selectedScheduleId !== undefined;
   // 내 체험 예약 시간대별 예약 내역 조회
   const {
     data: reservedTimeData,
@@ -94,7 +95,7 @@ const ReservationInfoModal: React.FC<Props> = ({
       scheduleId: selectedScheduleId,
       status: selectTab,
     },
-    shouldFetchData,
+    isSelectedScheduleId,
   );
 
   const selectDate = handleDateFormat();
