@@ -91,7 +91,7 @@ export default function GNB() {
   }
 
   return (
-    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-40">
+    <div className="fixed top-0 text-black bg-white w-full h-[70px] border-b border-gray200 flex z-40">
       <div className="max-w-[1248px] w-full mx-auto flex items-center justify-between px-[24px]">
         <Link href="/">
           <Image
