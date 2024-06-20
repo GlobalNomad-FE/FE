@@ -10,12 +10,14 @@ interface Props {
   closePopup: () => void;
   selectedDate: string;
   selectedActivityId: number | undefined;
+  isModalOpen: boolean;
 }
 
 const ReservationInfoModal: React.FC<Props> = ({
   closePopup,
   selectedDate,
   selectedActivityId,
+  isModalOpen,
 }) => {
   const [selectedScheduleId, setSelectedScheduleId] = useState<
     number | undefined
@@ -44,15 +46,18 @@ const ReservationInfoModal: React.FC<Props> = ({
   };
 
   // 내 체험 날짜별 예약정보(신청, 승인, 거절)이 있는 스케쥴 조회
-  const shouldFetchData = selectedActivityId !== 0;
+  const shouldFetchData = isModalOpen && selectedActivityId !== undefined;
   const {
     data: dayReservations,
     isLoading: dayReservationIsLoading,
     isError: dayReservationsIsError,
-  } = useGetReservedSchedule({
-    activityId: shouldFetchData ? selectedActivityId : undefined,
-    date: selectedDate,
-  });
+  } = useGetReservedSchedule(
+    {
+      activityId: selectedActivityId,
+      date: selectedDate,
+    },
+    shouldFetchData,
+  );
 
   const statusTotalCounts = dayReservations?.reduce(
     (acc, reservation) => {
@@ -79,11 +84,14 @@ const ReservationInfoModal: React.FC<Props> = ({
     data: reservedTimeData,
     isLoading: reservedTimeIsLoading,
     isError: reservedTimeIsError,
-  } = useGetReservedTime({
-    activityId: shouldFetchData ? selectedActivityId : undefined,
-    scheduleId: selectedScheduleId,
-    status: selectTab,
-  });
+  } = useGetReservedTime(
+    {
+      activityId: selectedActivityId,
+      scheduleId: selectedScheduleId,
+      status: selectTab,
+    },
+    shouldFetchData,
+  );
 
   const selectDate = handleDateFormat();
 

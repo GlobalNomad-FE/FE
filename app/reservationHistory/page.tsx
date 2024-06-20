@@ -18,7 +18,9 @@ export default function Page() {
 
   const myActivityes = data?.activities;
 
-  const [selectedActivityId, setSelectedActivityId] = useState<number>(0);
+  const [selectedActivityId, setSelectedActivityId] = useState<
+    number | undefined
+  >();
 
   const handleSelect = (id: number) => {
     setSelectedActivityId(id); //선택한 체험의 id
