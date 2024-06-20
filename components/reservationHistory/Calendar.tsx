@@ -1,15 +1,13 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
-import ReviewModal from '@/components/commons/Popups/ReviewModal/ReviewModal';
 import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
 import useGetReservationDashboard from '@/apis/my-activitie-reservation-status/useGetReservationDashboard';
-import { ReservationDayInfoType } from '@/types/activitiesReservationType';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 interface Props {
-  selectedActivityId: number;
+  selectedActivityId: number | undefined;
 }
 
 const Calendar = ({ selectedActivityId }: Props) => {
@@ -17,20 +15,20 @@ const Calendar = ({ selectedActivityId }: Props) => {
   const [selectedDate, setSelectedDate] = useState('');
   const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
   const [isSeletedDay, setIsSeletedDay] = useState(0);
-  const [selectedReservationDate, setSelectedReservationDate] = useState({
-    completed: 0,
-    confirmed: 0,
-    pending: 0,
-  });
 
-  const [dashboardData, setDashboardData] = useState(null);
-  const shouldFetchData = selectedActivityId !== 0;
+  const year = currentMonth.getFullYear().toString();
+  const month = (currentMonth.getMonth() + 1).toString().padStart(2, '0');
 
-  const { data, isLoading, isError } = useGetReservationDashboard({
-    activityId: shouldFetchData ? selectedActivityId : undefined,
-    year: '2024',
-    month: '06',
-  });
+  const shouldFetchData = selectedActivityId === undefined ? false : true;
+
+  const { data, isLoading, isError } = useGetReservationDashboard(
+    {
+      activityId: shouldFetchData ? selectedActivityId : undefined,
+      year: year,
+      month: month,
+    },
+    shouldFetchData,
+  );
 
   const handleCloseModal = () => {
     setIsReeservationModalOpen(false);
@@ -269,10 +267,19 @@ const Calendar = ({ selectedActivityId }: Props) => {
   };
 
   return (
-    <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
-      {renderHeader()}
+    <>
+      <div className="mx-auto mt-10 w-[792px] tablet:w-[413px] mobile:w-[326px] flex flex-col items-center relative">
+        {renderHeader()}
+        <div
+          style={{ minWidth: '326px' }}
+          className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
+        >
+          {renderDays()}
+          {renderCells()}
+        </div>
+      </div>
       <div
-        className={`absolute right-0 top-12 ${
+        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 mobile:scrollbar-hide ${
           !isReservationModalOpen && 'hidden'
         }`}
       >
@@ -280,16 +287,10 @@ const Calendar = ({ selectedActivityId }: Props) => {
           closePopup={handleCloseModal}
           selectedDate={selectedDate}
           selectedActivityId={selectedActivityId}
+          isModalOpen={isReservationModalOpen}
         />
       </div>
-      <div
-        style={{ minWidth: '326px' }}
-        className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
-      >
-        {renderDays()}
-        {renderCells()}
-      </div>
-    </div>
+    </>
   );
 };
 

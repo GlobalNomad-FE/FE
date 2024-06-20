@@ -46,7 +46,7 @@ async function getReservedTime(request: BaseRequest) {
   return response.data;
 }
 
-const useGetReservedTime = (request: BaseRequest) => {
+const useGetReservedTime = (request: BaseRequest, enabled: boolean) => {
   return useQuery({
     queryKey: reservedTimeKey.getReservedTime(
       request.activityId,
@@ -54,6 +54,7 @@ const useGetReservedTime = (request: BaseRequest) => {
       request.status,
     ),
     queryFn: () => getReservedTime(request),
+    enabled,
   });
 };
 

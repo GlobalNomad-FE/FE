@@ -33,13 +33,14 @@ async function getReservedSchedule(request: BaseRequest) {
   return response.data;
 }
 
-const useGetReservedSchedule = (request: BaseRequest) => {
+const useGetReservedSchedule = (request: BaseRequest, enabled: boolean) => {
   return useQuery({
     queryKey: reservedScheduleKey.getReservedSchedule(
       request.activityId,
       request.date,
     ),
     queryFn: () => getReservedSchedule(request),
+    enabled, // enabled 옵션 추가
   });
 };
 

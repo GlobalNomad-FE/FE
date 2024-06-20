@@ -2,42 +2,61 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import ReservationInfo from '@/components/reservationHistory/ReservationInfo';
-import { ModalReservationStatusCountType } from '@/types/activitiesReservationType';
 import useGetReservedSchedule from '@/apis/my-activitie-reservation-status/useGetReservedSchedule';
 import useGetReservedTime from '@/apis/my-activitie-reservation-status/useGetReservedTime';
 
 interface Props {
   closePopup: () => void;
   selectedDate: string;
-  selectedActivityId: number;
+  selectedActivityId: number | undefined;
+  isModalOpen: boolean;
 }
 
-const ReservationInfoModal = ({
+const ReservationInfoModal: React.FC<Props> = ({
   closePopup,
   selectedDate,
   selectedActivityId,
-}: Props) => {
-  const [selectedScheduleId, setSelectedScheduleId] = useState(0);
+  isModalOpen,
+}) => {
+  const [selectedScheduleId, setSelectedScheduleId] = useState<
+    number | undefined
+  >();
   const [selectTab, setSelectTab] = useState('pending');
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      closePopup();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   //YYYY년 MM월 DD일
   const handleDateFormat = () => {
-    // 문자열을 Date 객체로 변환
     const dateParts = selectedDate.split('-');
-
-    return dateParts[0] + '년 ' + dateParts[1] + '월 ' + dateParts[2] + '일';
+    return `${dateParts[0]}년 ${dateParts[1]}월 ${dateParts[2]}일`;
   };
 
-  // TODO : 내 체험 날짜별 예약정보(신청, 승인, 거절)이 있는 스케쥴 조회
-  const shouldFetchData = selectedActivityId !== 0;
+  // 내 체험 날짜별 예약정보(신청, 승인, 거절)이 있는 스케쥴 조회
+  const shouldFetchData = isModalOpen && selectedActivityId !== undefined;
   const {
     data: dayReservations,
     isLoading: dayReservationIsLoading,
     isError: dayReservationsIsError,
-  } = useGetReservedSchedule({
-    activityId: shouldFetchData ? selectedActivityId : undefined,
-    date: selectedDate,
-  });
+  } = useGetReservedSchedule(
+    {
+      activityId: selectedActivityId,
+      date: selectedDate,
+    },
+    shouldFetchData,
+  );
 
   const statusTotalCounts = dayReservations?.reduce(
     (acc, reservation) => {
@@ -49,30 +68,38 @@ const ReservationInfoModal = ({
     { declined: 0, confirmed: 0, pending: 0 },
   );
 
-  const handleSelect = (scheduleId: number) => {
+  const handleSelect = (scheduleId: number | undefined) => {
     setSelectedScheduleId(scheduleId);
   };
+
+  useEffect(() => {
+    handleSelect(undefined);
+    setSelectTab('pending');
+    setSelectedScheduleId(undefined);
+  }, [selectedDate]);
 
   // 내 체험 예약 시간대별 예약 내역 조회
   const {
     data: reservedTimeData,
     isLoading: reservedTimeIsLoading,
     isError: reservedTimeIsError,
-  } = useGetReservedTime({
-    activityId: shouldFetchData ? selectedActivityId : undefined,
-    scheduleId: selectedScheduleId,
-    status: selectTab,
-  });
+  } = useGetReservedTime(
+    {
+      activityId: selectedActivityId,
+      scheduleId: selectedScheduleId,
+      status: selectTab,
+    },
+    shouldFetchData,
+  );
 
   const selectDate = handleDateFormat();
 
-  handleDateFormat();
-
   return (
     <div
+      ref={modalRef}
       className={`w-[429px] ${
         selectTab === 'pending' ? 'h-[697px]' : 'h-[645px]'
-      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 absolute ml-[-420px]`}
+      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20  mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none`}
     >
       <div className="h-[35px] flex justify-between items-center">
         <h1 className="text-h1 text-black200">예약 정보</h1>
@@ -85,7 +112,6 @@ const ReservationInfoModal = ({
           className="cursor-pointer"
         />
       </div>
-      {/* 예약정보 상태별 탭 */}
       <div className="flex gap-[22px] mt-8 pl-2">
         <div
           className={`text-[20px] ${
@@ -126,16 +152,18 @@ const ReservationInfoModal = ({
           }`}
         ></div>
       </div>
-      {/* 예약날짜 */}
       <div className="h-[420px]">
         <div>
           <h2 className="text-[20px] font-semibold text-black200 mt-7">
             예약날짜
           </h2>
           <p className="my-4 text-[20px]">{selectDate}</p>
-          <SelectBox reservations={dayReservations} onSelect={handleSelect} />
+          <SelectBox
+            selectedDate={selectedDate}
+            reservations={dayReservations}
+            onSelect={handleSelect}
+          />
         </div>
-        {/* 예약내역 */}
         <div className="mt-8">
           <h2 className="text-[20px] font-semibold text-black200">예약내역</h2>
           <div
@@ -156,7 +184,11 @@ const ReservationInfoModal = ({
       {selectTab !== 'pending' && (
         <div className="flex justify-between text-[24px] font-semibold font-black200">
           <p>예약 현황</p>
-          <p>5</p>
+          <p>
+            {statusTotalCounts
+              ? statusTotalCounts.pending + statusTotalCounts.confirmed
+              : 0}
+          </p>
         </div>
       )}
     </div>

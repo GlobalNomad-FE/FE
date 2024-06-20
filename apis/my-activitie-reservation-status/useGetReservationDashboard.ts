@@ -1,11 +1,11 @@
-import { useQuery } from '@tanstack/react-query'; //
+import { useQuery } from '@tanstack/react-query';
 import instance from '../axios';
 import { myReservationStatusKey } from './keys';
 
 interface BaseRequest {
-  activityId: number | undefined;
-  year: string;
-  month: string;
+  activityId?: number | undefined;
+  year?: string;
+  month?: string;
 }
 
 interface reservationsStatusCount {
@@ -33,7 +33,7 @@ async function getMyReservationStatus(request: BaseRequest) {
   return response.data;
 }
 
-const useGetReservationDashboard = (request: BaseRequest) => {
+const useGetReservationDashboard = (request: BaseRequest, enabled: boolean) => {
   return useQuery({
     queryKey: myReservationStatusKey.getMyReservationStatus(
       request.activityId,
@@ -41,6 +41,7 @@ const useGetReservationDashboard = (request: BaseRequest) => {
       request.month,
     ),
     queryFn: () => getMyReservationStatus(request),
+    enabled, // enabled 옵션 추가
   });
 };
 
