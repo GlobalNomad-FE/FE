@@ -7,6 +7,8 @@ import ReactQueryProviders from '@/apis/ReactQueryProviders';
 import React from 'react';
 import { AuthProvider } from '@/context/Authcontext';
 import { ToastContainer } from 'react-toastify';
+import GNB from '@/components/commons/gnb/gnb';
+import Footer from '@/components/commons/Footer';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -50,7 +52,9 @@ export default function RootLayout({
               toastStyle={{ width: '350px' }}
               bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
             />
-            {children}
+            <GNB />
+            <main>{children}</main>
+            <Footer />
           </AuthProvider>
         </ReactQueryProviders>
       </body>

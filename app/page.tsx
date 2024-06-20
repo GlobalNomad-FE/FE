@@ -4,10 +4,10 @@ import MainBody from '@/components/MainBody/MainBody';
 
 export default function Home() {
   return (
-    <main>
-      <Gnb />
+    <>
+      {/* <Gnb /> */}
       <MainBody />
-      <Footer />
-    </main>
+      {/* <Footer /> */}
+    </>
   );
 }
