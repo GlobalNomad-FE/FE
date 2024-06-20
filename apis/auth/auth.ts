@@ -1,4 +1,4 @@
-import { FormValues, PostAuthLoginReq, PostAuthLoginRes } from './auth.type';
+import { FormValues } from './auth.type';
 import instance from '../axios';
 
 export const auth = {
