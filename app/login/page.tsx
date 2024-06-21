@@ -1,6 +1,7 @@
+// pages/login.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginInput from '@/components/commons/LoginInput';
 import Link from 'next/link';
 import { FormValues } from '@/apis/auth/auth.type';
@@ -9,6 +10,7 @@ import { USER_INPUT_VALIDATION } from '@/utils/user';
 import { useAuth } from '@/context/Authcontext';
 import Image from 'next/image';
 import BasePopup from '@/components/commons/Popups/BasePopup';
+import { useRouter } from 'next/navigation';
 
 const { email, password } = USER_INPUT_VALIDATION;
 
@@ -34,8 +36,7 @@ const rules = {
 };
 
 const Login = () => {
-  const { signIn } = useAuth();
-
+  const { signIn, user } = useAuth();
   const { formState, register, handleSubmit } = useForm<FormValues>({
     defaultValues: { email: '', password: '' },
     mode: 'onBlur',
@@ -43,6 +44,14 @@ const Login = () => {
 
   const [openPopup, setOpenPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+
+  useEffect(() => {
+    if (user) {
+      // 사용자 정보가 업데이트되면 루트 페이지로 리다이렉트
+      // 이때 페이지가 새로고침됨
+      window.location.href = '/';
+    }
+  }, [user]);
 
   const handleOpenPopup = (message: string) => {
     setPopupMessage(message);
