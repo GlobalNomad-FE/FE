@@ -2,6 +2,7 @@ import { ChangeEvent, useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
 
 const InformationNoImage = ({
   nickname,
@@ -20,8 +21,8 @@ const InformationNoImage = ({
     onSuccess: (data) => {
       setUploadedImage(data.profileImageUrl);
     },
-    onError: (error) => {
-      console.error('Failed to upload image:', error);
+    onError: () => {
+      toast.error('Failed to upload image:');
     },
   });
 

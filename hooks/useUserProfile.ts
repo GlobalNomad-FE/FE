@@ -30,7 +30,7 @@ const useUserProfile = () => {
       const imageData = await uploadProfileImage(file);
       setUploadedImage(imageData.profileImageUrl);
     } catch (error) {
-      console.error('Failed to upload image:', error);
+      toast.error('Failed to upload image:');
     }
   };
 

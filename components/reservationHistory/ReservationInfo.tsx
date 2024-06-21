@@ -1,6 +1,6 @@
 import Button from '@/components/commons/Button';
 import { ReservationInfoType } from '@/types/activitiesReservationType';
-import useUpdateResevationRequest from '@/apis/my-activitie-reservation-status/usePatchResevationRequest';
+import useUpdateReservationRequest from '@/apis/my-activity-reservation-status/usePatchReservationRequest';
 import { useState } from 'react';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 
@@ -20,7 +20,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
     activityId,
     id: reservationId,
   } = reservationInfo;
-  const { mutate } = useUpdateResevationRequest();
+  const { mutate } = useUpdateReservationRequest();
   const [openPopup, setOpenPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [isUpdate, setIsUpdate] = useState(false); //업데이트 여부

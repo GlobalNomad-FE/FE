@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import ReservationInfo from '@/components/reservationHistory/ReservationInfo';
-import useGetReservedSchedule from '@/apis/my-activitie-reservation-status/useGetReservedSchedule';
-import useGetReservedTime from '@/apis/my-activitie-reservation-status/useGetReservedTime';
+import useGetReservedSchedule from '@/apis/my-activity-reservation-status/useGetReservedSchedule';
+import useGetReservedTime from '@/apis/my-activity-reservation-status/useGetReservedTime';
 
 interface Props {
   closePopup: () => void;
@@ -22,6 +22,7 @@ const ReservationInfoModal: React.FC<Props> = ({
     number | undefined
   >();
   const [selectTab, setSelectTab] = useState('pending');
+  const [showScroll, setShowScroll] = useState(true);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -78,6 +79,11 @@ const ReservationInfoModal: React.FC<Props> = ({
     setSelectedScheduleId(undefined);
   }, [selectedDate]);
 
+  useEffect(() => {
+    setShowScroll(!(selectTab === 'confirmed'));
+  }, [selectTab]);
+
+  const isSelectedScheduleId = selectedScheduleId !== undefined;
   // 내 체험 예약 시간대별 예약 내역 조회
   const {
     data: reservedTimeData,
@@ -89,7 +95,7 @@ const ReservationInfoModal: React.FC<Props> = ({
       scheduleId: selectedScheduleId,
       status: selectTab,
     },
-    shouldFetchData,
+    isSelectedScheduleId,
   );
 
   const selectDate = handleDateFormat();
@@ -99,7 +105,7 @@ const ReservationInfoModal: React.FC<Props> = ({
       ref={modalRef}
       className={`w-[429px] ${
         selectTab === 'pending' ? 'h-[697px]' : 'h-[645px]'
-      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20  mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none`}
+      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none mobile:fixed mobile:top-0 mobile:left-0 mobile:z-50 mobile:scrollbar-hide`}
     >
       <div className="h-[35px] flex justify-between items-center">
         <h1 className="text-h1 text-black200">예약 정보</h1>
@@ -152,7 +158,7 @@ const ReservationInfoModal: React.FC<Props> = ({
           }`}
         ></div>
       </div>
-      <div className="h-[420px]">
+      <div className="h-[420px] mobile:h-4/5">
         <div>
           <h2 className="text-[20px] font-semibold text-black200 mt-7">
             예약날짜
@@ -166,11 +172,7 @@ const ReservationInfoModal: React.FC<Props> = ({
         </div>
         <div className="mt-8">
           <h2 className="text-[20px] font-semibold text-black200">예약내역</h2>
-          <div
-            className={`${
-              selectTab === 'pending' && 'h-[286px] overflow-scroll'
-            } mt-4`}
-          >
+          <div className={`${showScroll && 'h-[286px] overflow-scroll'} mt-4`}>
             {reservedTimeData?.reservations.map((reservationInfo, index) => (
               <ReservationInfo
                 key={index}
