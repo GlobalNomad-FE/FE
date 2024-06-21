@@ -29,6 +29,7 @@ export default function GNB() {
       isDropdownOpenToggle();
       router.push('/login');
     }
+    window.location.reload();
   };
 
   const MyMenuList = [

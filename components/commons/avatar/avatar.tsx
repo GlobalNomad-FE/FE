@@ -5,7 +5,9 @@ interface AvatarProps {
 }
 
 export default function Avatar({ profileImageUrl = null }: AvatarProps) {
-  const imageUrl = profileImageUrl || '/images/Image_default_profile_image.png';
+  const imageUrl =
+    profileImageUrl ||
+    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/globalnomad/profile_image/4-13_362_1718950132608.png';
 
   return (
     <div>
