@@ -1,14 +1,18 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import useGetActivities, { Activity } from '@/apis/activities/useGetActivities';
 import Image from 'next/image';
 import HotActivitiesPagination from './HotActivitiesPagination';
 import HotActivitiesItems from './HotActivitiesItems';
+import useMediaQuery from '@/hooks/useMediaQuery';
+import useDragScroll from '@/hooks/useDragScroll';
 
 const HotActivities = () => {
   const [cursorId, setCursorId] = useState<number | null>(null);
   const [dataArray, setDataArray] = useState<Activity[]>([]);
   const [scrollPoint, setScrollPoint] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement | null>(null);
+  const useDrag = useMediaQuery('(max-width: 1247px)');
+  const { scrollContainerRef, onDragStart, onDragMove, onDragEnd } =
+    useDragScroll();
 
   const { data, isLoading, isError } = useGetActivities({
     method: 'cursor',
@@ -16,6 +20,17 @@ const HotActivities = () => {
     size: 12,
     sort: 'most_reviewed',
   });
+
+  useEffect(() => {
+    if (scrollContainerRef.current && !useDrag) {
+      const alignedPoint = Math.round(scrollPoint / 408) * 408;
+      scrollContainerRef.current.scroll({
+        left: alignedPoint,
+        behavior: 'smooth',
+      });
+      setScrollPoint(alignedPoint);
+    }
+  }, [useDrag]);
 
   useEffect(() => {
     if (data && dataArray.length < data.totalCount) {
@@ -29,7 +44,7 @@ const HotActivities = () => {
     if (scrollLeft >= 0.8 * (scrollWidth - clientWidth) && data && !isLoading) {
       setCursorId(data.cursorId);
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, scrollContainerRef]);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
@@ -42,7 +57,7 @@ const HotActivities = () => {
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
     };
-  }, [checkScrollPosition]);
+  }, [checkScrollPosition, scrollContainerRef]);
 
   const handleGetPrevData = () => {
     const NextPoint = scrollPoint - 408;
@@ -61,6 +76,25 @@ const HotActivities = () => {
       behavior: 'smooth',
     });
     setScrollPoint(NextPoint);
+  };
+
+  const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (useDrag) onDragStart(e);
+  };
+
+  const handleDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (useDrag) {
+      onDragMove(e);
+      if (scrollContainerRef.current) {
+        setScrollPoint(scrollContainerRef.current.scrollLeft); // Update scrollPoint during drag
+      }
+    }
+  };
+
+  const handleDragEnd = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (useDrag && scrollContainerRef.current) {
+      onDragEnd(e);
+    }
   };
 
   return (
@@ -83,6 +117,10 @@ const HotActivities = () => {
       )}
       <div
         ref={scrollContainerRef}
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
         className="flex gap-[24px] overflow-x-scroll scrollbar-hide mainPcSize:w-[1200px] mainPcSize:overflow-x-hidden"
       >
         {dataArray.map((item) => (
