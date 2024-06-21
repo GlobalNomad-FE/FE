@@ -19,7 +19,9 @@ export default function GNB() {
 
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } =
     useToggleButton();
+
   const ref = useRef<HTMLButtonElement>(null);
+
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
 
   const handleLogout = () => {
@@ -78,9 +80,6 @@ export default function GNB() {
     return null;
   }
 
-  const storedImageUrl = Cookies.get('uploadedImage');
-  const profileImageUrl = storedImageUrl || MyInfoData?.profileImageUrl;
-
   return (
     <div className="fixed top-0 text-black bg-white w-full h-[70px] border-b border-gray200 flex z-40">
       <div className="max-w-[1248px] w-full mx-auto flex items-center justify-between px-[24px]">
@@ -107,9 +106,9 @@ export default function GNB() {
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className="flex text-[16px] gap-4 items-center body1-regular text-nomad-black "
+                    className="flex text-[16px] items-center body1-regular gap-4 text-nomad-black "
                   >
-                    <Avatar profileImageUrl={profileImageUrl} />
+                    <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                     {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && (
