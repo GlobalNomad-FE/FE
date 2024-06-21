@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteActivities } from '../../my-activities/@common/myActivites';
+import { deleteActivities } from '../../my-activities/@common/myActivity';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 
-export const useDeleteActivites = (activityId: number) => {
+export const useDeleteActivity = (activityId: number) => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation<
     AxiosResponse,

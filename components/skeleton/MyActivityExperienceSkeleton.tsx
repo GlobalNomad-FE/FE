@@ -1,4 +1,4 @@
-export default function MyActivitiyExperienceSkeleton() {
+export default function MyActivityExperienceSkeleton() {
   return (
     <>
       <div

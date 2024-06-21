@@ -25,7 +25,7 @@ interface SelectBoxProps {
  * @param onSelect: (value: string) => void , value에 선택한 값이 담깁니다.
  */
 
-const Selectbox: React.FC<SelectBoxProps> = ({
+const SelectBox: React.FC<SelectBoxProps> = ({
   options,
   onSelect,
   placeholder,
@@ -137,4 +137,4 @@ const Selectbox: React.FC<SelectBoxProps> = ({
   );
 };
 
-export default Selectbox;
+export default SelectBox;

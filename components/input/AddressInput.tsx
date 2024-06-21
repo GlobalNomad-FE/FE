@@ -13,12 +13,12 @@ declare namespace daum {
 }
 
 interface AddressInputProps {
-  handlevalue: (id: KeyActivitiesData, value: any) => void;
+  handleValue: (id: KeyActivitiesData, value: any) => void;
   value?: string;
 }
 
 export default function AddressInput({
-  handlevalue,
+  handleValue,
   value,
 }: AddressInputProps) {
   const addressInputRef = useRef<any>(null);
@@ -29,7 +29,7 @@ export default function AddressInput({
         // 팝업에서 검색 결과를 선택했을 때의 로직
         if (addressInputRef?.current && data.address) {
           addressInputRef.current.value = data.address;
-          handlevalue('address', data.address);
+          handleValue('address', data.address);
         }
       },
     }).open();

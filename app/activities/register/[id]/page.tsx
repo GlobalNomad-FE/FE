@@ -5,22 +5,22 @@ import {
   dehydrate,
 } from '@tanstack/react-query';
 import { getActivitiesID } from '@/apis/activities/@common/activities';
-import Registerpage from '@/components/activitie/registerPage';
+import RegisterPage from '@/components/activity/RegisterPage';
 
-export default function ResgiterModify({ params }: { params: { id: number } }) {
-  const activitieId = params?.id;
+export default function RegisterModify({ params }: { params: { id: number } }) {
+  const activityId = params?.id;
   const queryClient = new QueryClient();
 
   queryClient.prefetchQuery(
     queryOptions({
-      queryKey: ['register', 'detail', activitieId],
-      queryFn: () => getActivitiesID(Number(activitieId)),
+      queryKey: ['register', 'detail', activityId],
+      queryFn: () => getActivitiesID(Number(activityId)),
     }),
   );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Registerpage id={activitieId} />
+      <RegisterPage id={activityId} />
     </HydrationBoundary>
   );
 }

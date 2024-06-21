@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useGetInfinityActivitiesList } from '@/apis/activities/useGetInfinityActivitiesList';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import MyActivitiyExperienceSkeleton from '@/components/skeleton/MyActivitiyExperienceSkeleton';
+import MyActivityExperienceSkeleton from '@/components/skeleton/MyActivityExperienceSkeleton';
 import ActivitiesExperience from '@/components/commons/card/ActivitiesExperience';
 
 const SuspenseList = () => {
@@ -18,7 +18,7 @@ const SuspenseList = () => {
     fetchNextPage,
   });
   if (isLoading) {
-    return <MyActivitiyExperienceSkeleton />;
+    return <MyActivityExperienceSkeleton />;
   }
   if (isError) {
     return <div>Error: 로그인 후 이용해주세요</div>;
@@ -64,7 +64,7 @@ const SuspenseList = () => {
   );
 };
 
-export default function MyactivitieListpage() {
+export default function MyActivityListPage() {
   return (
     <>
       <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 mobile:px-4 bg-gray50 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
