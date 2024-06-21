@@ -21,7 +21,7 @@ const AllActivitiesItems = ({
 }: Props) => {
   const router = useRouter();
   return (
-    <div className="text-black200">
+    <div className="text-black200 hover:-translate-y-5 tablet:hover:-translate-y-3 mobile:hover:-translate-y-2 duration-500">
       <div
         className="relative rounded-3xl overflow-hidden h-[224px] mainPcSize:w-[283px] mainPcSize:h-[283px] mobile:h-[168px] cursor-pointer"
         onClick={() => router.push(`/activities/${id}`)}
