@@ -5,7 +5,6 @@ import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import editMyInfo, { EditMyInformationType } from '@/apis/user/editMyInfo';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import { useAuth } from '@/context/Authcontext';
 
 export interface UserInformation {
   id: number;
@@ -17,12 +16,10 @@ export interface UserInformation {
 }
 
 const useUserProfile = () => {
-  const { user: authUser } = useAuth(); // AuthContext에서 사용자 정보를 가져옴
   const queryClient = useQueryClient();
-  const { data, isSuccess, isError } = useQuery<UserInformation>({
+  const { data, isSuccess } = useQuery<UserInformation>({
     queryKey: ['user'],
     queryFn: getUserInfo,
-    enabled: !!authUser,
   });
 
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -56,13 +53,6 @@ const useUserProfile = () => {
       setUploadedImage(data.profileImageUrl);
     }
   }, [isSuccess, data]);
-
-  useEffect(() => {
-    if (isError) {
-      // 로그인 정보가 없는 경우 로그인 페이지로 리다이렉트
-      window.location.href = '/login';
-    }
-  }, [isError]);
 
   return {
     user: data,
