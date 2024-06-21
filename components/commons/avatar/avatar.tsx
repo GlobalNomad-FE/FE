@@ -14,9 +14,9 @@ export default function Avatar({ profileImageUrl = null }: AvatarProps) {
       <Image
         src={imageUrl}
         alt="프로필 이미지"
-        className="rounded-full object-cover"
-        height={45}
-        width={45}
+        className="w-8 h-8 rounded-full object-cover"
+        height={32}
+        width={32}
       />
     </div>
   );
