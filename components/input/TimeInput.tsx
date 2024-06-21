@@ -64,7 +64,7 @@ export default function TimeInput({
 
   const handleAddRange = () => {
     if (startTime === null || endTime === null) {
-      console.error('시작 시간 또는 종료 시간이 잘못되었습니다.');
+      alert('시작 시간 또는 종료 시간이 잘못되었습니다.');
       return;
     }
     // 새로운 스케줄이 겹치지 않는지 확인
@@ -118,7 +118,7 @@ export default function TimeInput({
               </div>
               <DatePickerInput onSelectedDateChange={handleDate} />
             </div>
-            <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 grow items-end">
+            <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 grow items-end mobile:mt-3">
               <div className="mobile:max-w-[104px] w-[140px] flex flex-col gap-4 tablet:gap-[10px] mobile:gap-2 mobile:w-[90px] font-[20px]">
                 <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                   시작 시간
