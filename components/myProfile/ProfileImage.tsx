@@ -1,9 +1,8 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import Image from 'next/image';
 import InformationNoImage from './InformationImage';
 import Cookies from 'js-cookie';
-import { useEffect } from 'react';
 
 const ProfileImage = ({
   nickname,
