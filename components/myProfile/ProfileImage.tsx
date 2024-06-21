@@ -83,11 +83,19 @@ const ProfileImage = ({ url }: Props) => {
       </>
     ) : (
       <Image
-        src={user.profileImageUrl}
+        src={
+          user.profileImageUrl
+            ? user.profileImageUrl
+            : '/images/Image_default_profile_image.png'
+        }
         fill
-        alt={user.profileImageUrl}
+        alt="프로필 사진"
         placeholder="blur"
-        blurDataURL={user.profileImageUrl}
+        blurDataURL={
+          user.profileImageUrl
+            ? user.profileImageUrl
+            : '/images/Image_default_profile_image.png'
+        }
         object-fit="contain"
       />
     );
