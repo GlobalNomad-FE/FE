@@ -1,7 +1,5 @@
 'use client';
 import Image from 'next/image';
-import Gnb from '@/components/commons/gnb/gnb';
-import Footer from '@/components/commons/Footer';
 import Calendar from '@/components/reservationHistory/Calendar';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
@@ -16,7 +14,7 @@ export default function Page() {
     size: 15,
   });
 
-  const myActivityes = data?.activities;
+  const myActivities = data?.activities;
 
   const [selectedActivityId, setSelectedActivityId] = useState<
     number | undefined
@@ -32,9 +30,9 @@ export default function Page() {
         <SideNavigationMenu />
         <div className="w-[800px] pl-[24px] tablet:w-[429px] mobile:w-[326px] mobile:px-4 text-[32px] mb-[142px] tablet:mb-[128px]">
           <p className="w-[800px] mobile:w-full font-bold">예약 현황</p>
-          {myActivityes ? (
+          {myActivities ? (
             <>
-              <SelectBox myActivityes={myActivityes} onSelect={handleSelect} />
+              <SelectBox myActivities={myActivities} onSelect={handleSelect} />
               <Calendar selectedActivityId={selectedActivityId} />
             </>
           ) : (

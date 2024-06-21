@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
-import { Activity, MyActivitieType } from '@/types/myActivitiesType';
+import { Activity } from '@/types/myActivitiesType';
 import {
   ReservationScheduleType,
   ReservationStatusCountType,
@@ -8,14 +8,14 @@ import {
 
 interface SelectBoxProps {
   selectedDate?: string;
-  myActivityes?: Activity[];
+  myActivities?: Activity[];
   reservations?: ReservationScheduleType[];
   onSelect: (id: number) => void;
 }
 
 const SelectBox: React.FC<SelectBoxProps> = ({
   selectedDate,
-  myActivityes,
+  myActivities,
   reservations,
   onSelect,
 }) => {
@@ -66,7 +66,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
     <div
       ref={selectBoxRef}
       className={`relative ${
-        myActivityes
+        myActivities
           ? 'w-[800px] tablet:w-[429px] mobile:w-[326px] mt-[42px]'
           : 'w-[381px] tablet:w-[381px] mobile:w-[303px] rounded-2xl '
       } h-[48px]`}
@@ -77,13 +77,13 @@ const SelectBox: React.FC<SelectBoxProps> = ({
         } rounded-[4px] bg-white flex justify-between cursor-pointer`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {myActivityes && (
+        {myActivities && (
           <p className="bg-white w-[45px] px-1 text-[14px] left-3 bottom-10 absolute">
             체험명
           </p>
         )}
         <p className="text-[16px]">
-          {myActivityes
+          {myActivities
             ? selectActivity
               ? selectActivity.title
               : '체험을 선택하세요'
@@ -100,7 +100,7 @@ const SelectBox: React.FC<SelectBoxProps> = ({
       </div>
       {isOpen && (
         <ul className="absolute z-10 w-full bg-white border border-gray500 rounded-[4px] mt-1 max-h-60 overflow-auto">
-          {myActivityes?.map((activity) => (
+          {myActivities?.map((activity) => (
             <li
               key={activity.id}
               className="px-4 py-2 text-[16px] cursor-pointer hover:bg-gray-100"
