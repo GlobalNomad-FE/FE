@@ -26,8 +26,6 @@ export default function Page() {
 
   return (
     <>
-      {/* <div className="pt-[142px] tablet:pt-[94px] mobile:pt-[94px] w-full flex justify-center relative text-black200 bg-gray50 min-w-[350px]"> */}
-
       <main className="flex justify-center min-h-[100vh] max-h-[100%] bg-gray50 text-black200 pt-[142px] tablet:pt-[94px] mobile:pt-[94px] pb-[72px] px-6 mobile:px-4">
         <div className="w-[1200px] flex gap-6">
           <SideNavigationMenu />

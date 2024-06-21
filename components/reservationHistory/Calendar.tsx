@@ -283,7 +283,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
         </div>
       </div>
       <div
-        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 mobile:scrollbar-hide ${
+        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 ${
           !isReservationModalOpen && 'hidden'
         }`}
       >
