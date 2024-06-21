@@ -1,7 +1,5 @@
 'use client';
 
-import instance from '@/apis/axios';
-import { useQuery } from '@tanstack/react-query';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
@@ -10,30 +8,21 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
-import { myInfo } from '@/types/myInfo';
 import Cookies from 'js-cookie';
 import MyNotifications from '../myNotifications/MyNotifications';
+import { useGetProfile } from '@/apis/user/useGetProfile';
 
 export default function GNB() {
   const router = useRouter();
   const [Auth, setAuth] = useState(false);
+  const { data: MyInfoData, isPending } = useGetProfile();
+
   const { isToggle: isDropdownOpen, handleToggleClick: isDropdownOpenToggle } =
     useToggleButton();
 
   const ref = useRef<HTMLButtonElement>(null);
 
   useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
-
-  const getMyInfo = async () => {
-    const { data } = await instance.get<myInfo>('/users/me');
-    return data;
-  };
-
-  const { data: MyInfoData, isPending } = useQuery({
-    queryKey: ['myInfo'],
-    queryFn: getMyInfo,
-    retry: 1,
-  });
 
   const handleLogout = () => {
     Cookies.remove('accessToken');
@@ -42,6 +31,7 @@ export default function GNB() {
       isDropdownOpenToggle();
       router.push('/login');
     }
+    window.location.reload();
   };
 
   const MyMenuList = [
@@ -116,7 +106,7 @@ export default function GNB() {
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className="flex text-[16px] items-center body1-regular text-nomad-black "
+                    className="flex text-[16px] items-center body1-regular gap-4 text-nomad-black "
                   >
                     <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                     {MyInfoData?.nickname}

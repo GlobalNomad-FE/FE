@@ -13,7 +13,7 @@ const Chips = ({ reservations }: Props) => {
   const { pending, confirmed, completed } = reservations;
 
   return (
-    <div className="flex flex-col justify-end h-[69px] w-[108.5px] tablet:w-[55px] tablet:h-[23px] mobile:w-[45px] mobile:h-[20px]">
+    <div className="flex flex-col justify-end h-[69px] w-[107.5px] tablet:w-[56px] tablet:h-[23px] mobile:w-[41px] mobile:h-[20px]">
       {confirmed !== 0 && (
         <StatusChipStyle count={confirmed} status="confirmed" />
       )}

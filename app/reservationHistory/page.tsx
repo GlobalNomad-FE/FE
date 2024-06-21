@@ -5,7 +5,7 @@ import Footer from '@/components/commons/Footer';
 import Calendar from '@/components/reservationHistory/Calendar';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
-import useGetMyActivities from '@/apis/my-activitie-reservation-status/useGetMyActivities';
+import useGetMyActivities from '@/apis/my-activity-reservation-status/useGetMyActivities';
 import React, { useState } from 'react';
 
 export default function Page() {

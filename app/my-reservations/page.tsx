@@ -69,10 +69,10 @@ const MyReservations = () => {
         ? data.reservations
             .filter((item) => item.status === statusArr[selectedIndex])
             .sort(
-              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+              (b, a) => new Date(a.date).getTime() - new Date(b.date).getTime(),
             )
         : data.reservations.sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+            (b, a) => new Date(a.date).getTime() - new Date(b.date).getTime(),
           );
     setReservations((prevReservations) => [
       ...(page === 1 ? [] : prevReservations), // 페이지 1이면 기존 데이터 초기화
@@ -85,7 +85,7 @@ const MyReservations = () => {
 
   return (
     <div>
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 mobile:px-4 bg-gray50 pt-[142px] tablet:pt-[94px] mobile:pt-[94px] pb-[72px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
           <div className="flex flex-col flex-grow">

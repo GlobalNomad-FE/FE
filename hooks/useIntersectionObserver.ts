@@ -23,7 +23,6 @@ export const useIntersectionObserver = ({
       entries.forEach((entry) => {
         //target이 화면에 관찰되고, 다음페이지가 있다면 다음페이지를 호출
         if (entry.isIntersecting && hasNextPage) {
-          console.log('isIntersecting', entry.isIntersecting);
           fetchNextPage();
         }
       });
