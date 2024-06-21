@@ -54,6 +54,7 @@ const ReviewModal = ({
 
   const handleCloseModal = () => {
     setOpenModal(false);
+    window.location.reload();
   };
 
   return (

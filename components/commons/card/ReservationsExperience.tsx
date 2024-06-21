@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { MouseEvent, useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
-import Menu from '@/components/activitie/Menu';
 import Button from '../Button';
 import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
@@ -58,7 +57,7 @@ const ReservationsExperience = ({
   const router = useRouter();
 
   const handleOpenPopup = (e: MouseEvent) => {
-    e.preventDefault();
+    e.stopPropagation();
     setOpenPopup(true);
   };
 

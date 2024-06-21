@@ -6,12 +6,7 @@ const uploadProfileImage = async (file: File): Promise<any> => {
   formData.append('image', file);
 
   try {
-    const response = await instance.post('/users/me/image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
+    const response = await instance.post('/users/me/image', formData);
     return response.data;
   } catch (error) {
     toast.error('Error Upload Image');

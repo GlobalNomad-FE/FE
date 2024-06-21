@@ -5,14 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import MyPageInputBox from './MyPageInputBox';
 import useUserProfile from '@/hooks/useUserProfile';
 
-const MyPageForm = () => {
-  const {
-    user,
-    uploadedImage,
-    setUploadedImage,
-    handleFileChange,
-    editUserProfile,
-  } = useUserProfile();
+const MyPageForm = ({ profileImage }: { profileImage: string }) => {
+  const { user, editUserProfile } = useUserProfile();
 
   const [inputs, setInputs] = useState({
     nickname: '',
@@ -67,7 +61,7 @@ const MyPageForm = () => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const profileImageUrl = uploadedImage ?? user?.profileImageUrl ?? null;
+    const profileImageUrl = profileImage;
     if (newPassword.length > 0 && newPassword.length < PASSWORD_MIN_LENGTH) {
       setEditInformationErrorMessage((prev) => ({
         ...prev,
@@ -104,27 +98,25 @@ const MyPageForm = () => {
         profileImageUrl,
         newPassword,
       });
-      toast.success('비밀번호가 성공적으로 변경되었습니다.');
     } catch (error) {
       toast.error('비밀번호 변경에 실패했습니다.');
     }
   };
 
   return (
-    <div className="flex flex-col text-[#1b1b1b] gap-4 px-6">
+    <div className="flex flex-col flex-grow text-black200 gap-4">
       <div className="flex justify-between font-bold">
         <div className="text-[32px]">내정보</div>
         <button
           type="submit"
           form="myPageForm"
-          className="text-[16px] text-white bg-[#112211] px-8 py-[10px] rounded cursor-pointer"
+          className="text-[16px] text-white bg-nomad-black px-8 py-[10px] rounded cursor-pointer"
         >
           저장하기
         </button>
       </div>
-
       <form
-        className="flex flex-col gap-8 width-[100%] tablet:w-[429px] mobile:w-[343px] px-[24px] mobile:px-4"
+        className="flex flex-col gap-8"
         noValidate
         onSubmit={onSubmit}
         id="myPageForm"

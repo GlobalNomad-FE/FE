@@ -4,10 +4,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import getUserInfo from '@/apis/user/getUserInfo';
 import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import editMyInfo, { EditMyInformationType } from '@/apis/user/editMyInfo';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 
-interface UserInformation {
+export interface UserInformation {
   id: number;
   email: string;
   nickname: string;
@@ -35,16 +35,17 @@ const useUserProfile = () => {
   };
 
   const { mutate: editUserProfile } = useMutation<
-    unknown,
-    AxiosError,
+    AxiosResponse,
+    AxiosError<{ message: string }>,
     EditMyInformationType
   >({
     mutationFn: editMyInfo,
     onSuccess: () => {
+      toast.success('수정이 완료 되었습니다.');
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
-    onError: (error: AxiosError) => {
-      toast.error('Failed to edit user info:');
+    onError: (error: AxiosError<{ message: string }>) => {
+      toast.error(error.response?.data.message);
     },
   });
 
