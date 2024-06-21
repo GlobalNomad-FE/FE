@@ -5,13 +5,7 @@ const uploadProfileImage = async (file: File): Promise<any> => {
   formData.append('image', file);
 
   try {
-    const response = await instance.post('/users/me/image', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    console.log(response);
+    const response = await instance.post('/users/me/image', formData);
     return response.data;
   } catch (error) {
     console.error('Error Upload Image');

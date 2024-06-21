@@ -1,4 +1,3 @@
-// SideNavigationMenu.tsx
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -9,15 +8,17 @@ import CalendarCheckIcon from '@/public/icons/calendar-check.svg';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ProfileImage from '../myProfile/ProfileImage';
-import useUserStore from '@/libs/useUserStore';
+import { useGetProfile } from '@/apis/user/useGetProfile';
 
-export default function SideNavigationMenu() {
+interface Props {
+  url?: (url: string) => void | undefined;
+}
+
+export default function SideNavigationMenu({ url }: Props) {
   const pathname = usePathname();
-
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
-  const { uploadedImage, setUploadedImage } = useUserStore(); // zustand 스토어 사용
-  const [nickname] = useState<string>('기본 닉네임');
 
+  const { data } = useGetProfile();
   const handleClick = (index: number) => {
     setSelectedItem(index);
   };
@@ -62,17 +63,29 @@ export default function SideNavigationMenu() {
       }}
     >
       <div className="flex justify-center relative">
-        <div
-          className="w-[160px] h-[160px] rounded-[160px] bg-gray200 overflow-hidden relative "
-          style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
-        >
-          <ProfileImage
-            nickname={nickname}
-            profileImageUrl="/images/mangom.jpeg"
-            uploadedImage={uploadedImage}
-            setUploadedImage={setUploadedImage}
-          />
-        </div>
+        {pathname === '/myprofile' ? (
+          url && <ProfileImage url={url} />
+        ) : (
+          <>
+            {data && (
+              <div
+                className="w-[160px] h-[160px] rounded-[160px] bg-gray200 overflow-hidden relative"
+                style={{ boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)' }}
+              >
+                <Image
+                  src={
+                    data.profileImageUrl
+                      ? data.profileImageUrl
+                      : '/images/mangom.jpeg'
+                  }
+                  object-fit="contain"
+                  alt="프로필이미지"
+                  fill
+                />
+              </div>
+            )}
+          </>
+        )}
       </div>
       <ul className="text-body1-bold flex flex-col gap-[8px]">
         {menuItems.map((item, index) => (
