@@ -48,8 +48,8 @@ const Selectbox: React.FC<SelectBoxProps> = ({
         <Image
           src={`/icons/arrow_${menuIsOpen ? 'up' : 'down'}.svg`}
           alt="arrow icon"
-          width={24}
-          height={24}
+          width={isMobile ? 16 : 24}
+          height={isMobile ? 16 : 24}
         />
       </components.DropdownIndicator>
     );
@@ -62,7 +62,8 @@ const Selectbox: React.FC<SelectBoxProps> = ({
       borderRadius: '4px',
       borderColor: '#79747e',
       padding: isMobile ? '4px 0px 4px 12px' : '4px 0px 4px 16px',
-      height: '56px',
+      height: isMobile ? 40 : 57,
+      fontSize: isMobile ? '14px' : '16px',
 
       ':hover': {
         ...styles[':active'],
@@ -75,7 +76,7 @@ const Selectbox: React.FC<SelectBoxProps> = ({
         backgroundColor: 'white',
         color: '#112211',
         cursor: 'pointer',
-        height: '40px',
+        height: isMobile ? 25 : 40,
         borderRadius: '6px',
 
         ':active': {
@@ -114,7 +115,7 @@ const Selectbox: React.FC<SelectBoxProps> = ({
     placeholder: (styles) => ({
       ...styles,
       color: '#a1a1aa',
-      fontSize: '16px',
+      fontSize: isMobile ? '14px' : '16px',
       fontWeight: '400',
     }),
   };

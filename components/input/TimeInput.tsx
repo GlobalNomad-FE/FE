@@ -2,8 +2,9 @@ import DatePickerInput from '../commons/DatePickerInput';
 import { useEffect, useState } from 'react';
 import Selectbox from '../commons/Selectbox';
 import Image from 'next/image';
-import formatDateToYYYYMMDD from '@/utils/dateFormatter';
+import formatDateToYYYYMMDD, { formatDate } from '@/utils/dateFormatter';
 import { KeyActivitiesData } from '@/app/activities/register/page';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 export type DateType = Date | null;
 type StringNullType = string | null;
@@ -37,6 +38,7 @@ export default function TimeInput({
   const [dateTimeRanges, setDateTimeRanges] = useState<DateTimeRange[]>([]);
 
   const [removeRanges, setRemvoeRanges] = useState<number[]>([]);
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {
     if (value) {
@@ -109,15 +111,15 @@ export default function TimeInput({
       <div className="text-h2 text-black200 mb-6">{labelName}</div>
       <div className="flex gap-[10px] flex-col items-center w-full">
         <div className="flex flex-col gap-5 w-full">
-          <div className="flex gap-5 tablet:gap-2 mobile:gap-1.5 w-full items-end justify-between">
+          <div className="flex gap-5 tablet:gap-2 mobile:gap-1.5 w-full items-end justify-between mobile:flex-col mobile:items-start">
             <div className="flex w-full tablet:grow-[2] mobile:grow-[2] flex-col gap-4 tablet:gap-[10px] mobile:gap-2">
               <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                 날짜
               </div>
               <DatePickerInput onSelectedDateChange={handleDate} />
             </div>
-            <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 grow">
-              <div className="mobile:max-w-[104px] w-[140px] tablet:max-w-[104px] flex  flex-col gap-4 tablet:gap-[10px] mobile:gap-2">
+            <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 grow items-end">
+              <div className="mobile:max-w-[104px] w-[140px] flex flex-col gap-4 tablet:gap-[10px] mobile:gap-2 mobile:w-[90px] font-[20px]">
                 <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                   시작 시간
                 </div>
@@ -127,19 +129,16 @@ export default function TimeInput({
                   options={selectList}
                 />
               </div>
-              <div
-                className="flex itmes-center mobile:hidden"
-                style={{ bottom: '-20px', position: 'relative' }}
-              >
+              <div className="pb-6 mobile:pb-4">
                 <Image
                   src="/icons/물결.svg"
-                  width={14}
-                  height={26}
+                  width={isMobile ? 7 : 14}
+                  height={isMobile ? 13 : 26}
                   alt="~아이콘"
                 />
               </div>
 
-              <div className="mobile:max-w-[104px] tablet:max-w-[104px] w-[140px] flex flex-col gap-4 tablet:gap-[10px] mobile:gap-2">
+              <div className="mobile:max-w-[104px] w-[140px] flex flex-col gap-4 tablet:gap-[10px] mobile:gap-2 mobile:w-[90px]">
                 <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                   종료 시간
                 </div>
@@ -149,15 +148,15 @@ export default function TimeInput({
                   options={selectList}
                 />
               </div>
+              <Image
+                src="/icons/time_plus.svg"
+                width={isMobile ? 40 : 56}
+                height={isMobile ? 40 : 56}
+                alt="시간추가아이콘"
+                onClick={handleAddRange}
+                style={{ cursor: 'pointer' }}
+              />
             </div>
-            <Image
-              src="/icons/time_plus.svg"
-              width={56}
-              height={56}
-              alt="시간추가아이콘"
-              onClick={handleAddRange}
-              style={{ cursor: 'pointer' }}
-            />
           </div>
           {dateTimeRanges.length !== 0 ? (
             <div
@@ -170,36 +169,35 @@ export default function TimeInput({
           {dateTimeRanges.map((item, index) => (
             <div
               key={index}
-              className="flex gap-5 tablet:gap-2 mobile:gap-1.5 items-center h-[56px] text-black200 text-body1-regular"
+              className="flex gap-5 tablet:gap-2 mobile:gap-1.5 w-full h-[56px] mobile:h-[40px] text-black200 text-body1-regular"
             >
-              <div className="w-full tablet:grow-[2] mobile:grow-[2] h-full bg-white border border-gray500 rounded px-4 flex items-center">
-                {item.date}
+              <div className="flex w-full tablet:grow-[2] mobile:grow-[2] h-full bg-white border border-gray500 rounded px-4 items-center">
+                {formatDate(item.date || '')}
               </div>
-              <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 h-full grow">
-                <div className="mobile:max-w-[104px] tablet:max-w-[104px] w-[140px] h-full  bg-white border border-gray500 rounded px-4 flex items-center">
+              <div className="flex gap-3 tablet:gap-2 mobile:gap-1.5 h-full grow items-end">
+                <div className="mobile:max-w-[104px] w-[140px] h-full bg-white border border-gray500 rounded px-4 flex items-center">
                   {item.startTime}
                 </div>
-                <div className="flex itmes-center mobile:hidden">
+                <div className="pb-6 mobile:pb-4">
                   <Image
                     src="/icons/물결.svg"
-                    width={14}
-                    height={26}
+                    width={isMobile ? 7 : 14}
+                    height={isMobile ? 13 : 26}
                     alt="~아이콘"
                   />
                 </div>
-                <div className="mobile:max-w-[104px] tablet:max-w-[104px] w-[140px] h-full bg-white border border-gray500 rounded px-4 flex items-center">
+                <div className="mobile:max-w-[104px] w-[140px] h-full bg-white border border-gray500 rounded px-4 flex items-center">
                   {item.endTime}
                 </div>
+                <Image
+                  src="/icons/time_minus.svg"
+                  width={isMobile ? 40 : 56}
+                  height={isMobile ? 40 : 56}
+                  alt="시간빼기아이콘"
+                  onClick={() => handleRemoveRange(item.id)}
+                  style={{ cursor: 'pointer' }}
+                />
               </div>
-
-              <Image
-                src="/icons/time_minus.svg"
-                width={56}
-                height={56}
-                alt="시간빼기아이콘"
-                onClick={() => handleRemoveRange(item.id)}
-                style={{ cursor: 'pointer' }}
-              />
             </div>
           ))}
         </div>
