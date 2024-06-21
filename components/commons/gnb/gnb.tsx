@@ -74,7 +74,7 @@ export default function GNB() {
       alt: '로그아웃 아이콘',
       label: '로그아웃',
       path: '',
-      handleClick: () => handleLogout,
+      handleClick: handleLogout,
     },
   ];
 
@@ -91,7 +91,7 @@ export default function GNB() {
   }
 
   return (
-    <div className="fixed top-0 bg-white w-full h-[70px] border-b border-gray200 flex z-40">
+    <div className="fixed top-0 text-black bg-white w-full h-[70px] border-b border-gray200 flex z-40">
       <div className="max-w-[1248px] w-full mx-auto flex items-center justify-between px-[24px]">
         <Link href="/">
           <Image
@@ -108,17 +108,17 @@ export default function GNB() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            <div className=" flex items-center gap-[40px] static">
+            <div className=" flex items-center gap-10 static">
               <MyNotifications />
-              <div className=" flex relative">
+              <div className=" flex relative gap-10">
                 <div className=" h-[35.2px] border-r-[1px_gray300]" />
                 <div className="flex w-fit-content gap-[16px]">
-                  <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className="flex text-[16px] items-center body1-regular text-[nomad-black]"
+                    className="flex text-[16px] items-center body1-regular text-nomad-black "
                   >
+                    <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                     {MyInfoData?.nickname}
                   </button>
                   {isDropdownOpen && (
