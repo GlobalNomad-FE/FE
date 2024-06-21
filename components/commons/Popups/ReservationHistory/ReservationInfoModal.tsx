@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
 import SelectBox from '@/components/reservationHistory/SelectBox';
 import ReservationInfo from '@/components/reservationHistory/ReservationInfo';
-import useGetReservedSchedule from '@/apis/my-activitie-reservation-status/useGetReservedSchedule';
-import useGetReservedTime from '@/apis/my-activitie-reservation-status/useGetReservedTime';
+import useGetReservedSchedule from '@/apis/my-activity-reservation-status/useGetReservedSchedule';
+import useGetReservedTime from '@/apis/my-activity-reservation-status/useGetReservedTime';
 
 interface Props {
   closePopup: () => void;
@@ -105,7 +105,7 @@ const ReservationInfoModal: React.FC<Props> = ({
       ref={modalRef}
       className={`w-[429px] ${
         selectTab === 'pending' ? 'h-[697px]' : 'h-[645px]'
-      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none mobile:fixed mobile:top-0 mobile:left-0 mobile:z-50`}
+      } rounded-3xl border border-[#DDD] bg-white p-6 text-black200 z-20 mobile:w-screen mobile:h-screen mobile:rounded-none mobile:border-none mobile:fixed mobile:top-0 mobile:left-0 mobile:z-50 mobile:scrollbar-hide`}
     >
       <div className="h-[35px] flex justify-between items-center">
         <h1 className="text-h1 text-black200">예약 정보</h1>

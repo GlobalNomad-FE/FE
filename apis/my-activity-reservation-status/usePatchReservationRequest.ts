@@ -22,7 +22,7 @@ async function updateReservationStatus({
   return response.data;
 }
 
-const useUpdateResevationRequest = () => {
+const usePatchReservationRequest = () => {
   const { mutate } = useMutation({
     mutationFn: (request: Request) => updateReservationStatus(request),
     onError: (error: AxiosError) => {},
@@ -31,4 +31,4 @@ const useUpdateResevationRequest = () => {
   return { mutate };
 };
 
-export default useUpdateResevationRequest;
+export default usePatchReservationRequest;

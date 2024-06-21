@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
 import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
-import useGetReservationDashboard from '@/apis/my-activitie-reservation-status/useGetReservationDashboard';
+import useGetReservationDashboard from '@/apis/my-activity-reservation-status/useGetReservationDashboard';
 
 const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
