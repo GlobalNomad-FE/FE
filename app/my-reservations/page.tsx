@@ -69,10 +69,10 @@ const MyReservations = () => {
         ? data.reservations
             .filter((item) => item.status === statusArr[selectedIndex])
             .sort(
-              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+              (b, a) => new Date(a.date).getTime() - new Date(b.date).getTime(),
             )
         : data.reservations.sort(
-            (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+            (b, a) => new Date(a.date).getTime() - new Date(b.date).getTime(),
           );
     setReservations((prevReservations) => [
       ...(page === 1 ? [] : prevReservations), // 페이지 1이면 기존 데이터 초기화

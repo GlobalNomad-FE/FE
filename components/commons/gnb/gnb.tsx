@@ -31,6 +31,7 @@ export default function GNB() {
       isDropdownOpenToggle();
       router.push('/login');
     }
+    window.location.reload();
   };
 
   const MyMenuList = [
@@ -105,7 +106,7 @@ export default function GNB() {
                   <button
                     onClick={isDropdownOpenToggle}
                     ref={ref}
-                    className="flex text-[16px] items-center body1-regular text-nomad-black "
+                    className="flex text-[16px] items-center body1-regular gap-4 text-nomad-black "
                   >
                     <Avatar profileImageUrl={MyInfoData?.profileImageUrl} />
                     {MyInfoData?.nickname}
