@@ -1,9 +1,7 @@
 'use client';
 import Button from '@/components/commons/Button';
 import SideNavigationMenu from '@/components/commons/SideNavigationMenu';
-import Gnb from '@/components/commons/gnb/gnb';
 import Link from 'next/link';
-import Footer from '@/components/commons/Footer';
 import Image from 'next/image';
 import { useGetInfinityActivitiesList } from '@/apis/activities/useGetInfinityActivitiesList';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
@@ -62,8 +60,7 @@ const SuspenseList = () => {
 export default function MyactivitieListpage() {
   return (
     <>
-      <Gnb />
-      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 bg-gray50 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
+      <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 mobile:px-4 bg-gray50 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
         <div className="flex gap-6 w-[1200px]">
           <SideNavigationMenu />
           <div className="flex flex-col flex-grow">
@@ -88,7 +85,6 @@ export default function MyactivitieListpage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

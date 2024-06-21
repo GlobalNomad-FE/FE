@@ -2,13 +2,13 @@
 import Image from 'next/image';
 import { MouseEvent, useEffect, useState } from 'react';
 import ReviewModal from '../Popups/ReviewModal/ReviewModal';
-import Menu from '@/components/activitie/Menu';
 import Button from '../Button';
 import BasePopupTwoBtns from '../Popups/BasePopupTwoBtns';
 import useMediaQuery from '@/hooks/useMediaQuery';
 import useUpdateReservationStatus from '@/apis/my-reservations/usePatchMyReservations';
 import { useRouter } from 'next/navigation';
 import { ReservationsExperienceType } from './ExperienceType';
+import { toast } from 'react-toastify';
 
 /**
  * 이미지와 함께 체험정보와 예약상태를 볼 수 있는 카드 컴포넌트 입니다.
@@ -42,11 +42,11 @@ const ReservationsExperience = ({
 
   const { mutate: updateStatus } = useUpdateReservationStatus({
     onSuccess: () => {
-      alert('취소가 완료되었습니다.');
+      toast.success('취소가 완료되었습니다.');
       setStatus('canceled');
     },
     onError: () => {
-      alert('취소에 실패했습니다.');
+      toast.error('취소에 실패했습니다.');
     },
   });
 
@@ -57,7 +57,7 @@ const ReservationsExperience = ({
   const router = useRouter();
 
   const handleOpenPopup = (e: MouseEvent) => {
-    e.preventDefault();
+    e.stopPropagation();
     setOpenPopup(true);
   };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Categories from './Categories';
+import useDragScroll from '@/hooks/useDragScroll';
 
 interface CategoryListsProps {
   selectedCategory: string;
@@ -20,12 +21,22 @@ const CategoryLists = ({
     '웰빙',
   ];
 
+  const { scrollContainerRef, onDragStart, onDragMove, onDragEnd } =
+    useDragScroll();
+
   return (
-    <div className="flex gap-[15px] w-[860px] overflow-x-scroll scrollbar-hide">
+    <div
+      className="flex gap-[15px] w-[860px] overflow-x-scroll scrollbar-hide"
+      onMouseDown={onDragStart}
+      onMouseMove={onDragMove}
+      onMouseUp={onDragEnd}
+      onMouseLeave={onDragEnd}
+      ref={scrollContainerRef}
+    >
       {categories.map((category) => (
         <Categories
           key={category}
-          onClick={onCategoryClick}
+          onClick={() => onCategoryClick(category)}
           isSelected={selectedCategory === category}
         >
           {category}
