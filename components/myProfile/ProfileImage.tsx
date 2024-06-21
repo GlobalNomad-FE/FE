@@ -4,6 +4,7 @@ import Image from 'next/image';
 import InformationNoImage from './InformationImage';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
 
 const ProfileImage = ({
   nickname,
@@ -31,7 +32,7 @@ const ProfileImage = ({
         setUploadedImage(imageData.profileImageUrl);
         Cookies.set('uploadedImage', imageData.profileImageUrl);
       } catch (error) {
-        console.error('Failed to upload image:', error);
+        toast.error('Failed to upload image:');
       }
     }
   };

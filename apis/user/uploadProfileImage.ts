@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import instance from '../axios';
 
 const uploadProfileImage = async (file: File): Promise<any> => {
@@ -11,10 +12,9 @@ const uploadProfileImage = async (file: File): Promise<any> => {
       },
     });
 
-    console.log(response);
     return response.data;
   } catch (error) {
-    console.error('Error Upload Image');
+    toast.error('Error Upload Image');
     throw error;
   }
 };

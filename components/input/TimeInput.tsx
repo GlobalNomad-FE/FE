@@ -5,6 +5,7 @@ import Image from 'next/image';
 import formatDateToYYYYMMDD, { formatDate } from '@/utils/dateFormatter';
 import { KeyActivitiesData } from '@/app/activities/register/page';
 import useMediaQuery from '@/hooks/useMediaQuery';
+import { toast } from 'react-toastify';
 
 export type DateType = Date | null;
 type StringNullType = string | null;
@@ -64,7 +65,7 @@ export default function TimeInput({
 
   const handleAddRange = () => {
     if (startTime === null || endTime === null) {
-      alert('시작 시간 또는 종료 시간이 잘못되었습니다.');
+      toast.error('시작 시간 또는 종료 시간이 잘못되었습니다.');
       return;
     }
     // 새로운 스케줄이 겹치지 않는지 확인
@@ -94,7 +95,7 @@ export default function TimeInput({
       setDateTimeRanges([...addTimeRageConvert]);
       handlevalue('schedules', addTimeRageConvert);
     } else {
-      alert('이 시간대에는 이미 스케줄이 있습니다.');
+      toast.error('이 시간대에는 이미 스케줄이 있습니다.');
     }
   };
   const handleRemoveRange = (id: number) => {

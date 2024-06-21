@@ -33,7 +33,6 @@ const Selectbox: React.FC<SelectBoxProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const isTablet = useMediaQuery('(min-width: 768px) and (max-width: 1023px)');
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {

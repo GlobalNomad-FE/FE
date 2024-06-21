@@ -5,6 +5,7 @@ import getUserInfo from '@/apis/user/getUserInfo';
 import uploadProfileImage from '@/apis/user/uploadProfileImage';
 import editMyInfo, { EditMyInformationType } from '@/apis/user/editMyInfo';
 import { AxiosError } from 'axios';
+import { toast } from 'react-toastify';
 
 interface UserInformation {
   id: number;
@@ -29,7 +30,7 @@ const useUserProfile = () => {
       const imageData = await uploadProfileImage(file);
       setUploadedImage(imageData.profileImageUrl);
     } catch (error) {
-      console.error('Failed to upload image:', error);
+      toast.error('Failed to upload image:');
     }
   };
 
@@ -43,7 +44,7 @@ const useUserProfile = () => {
       queryClient.invalidateQueries({ queryKey: ['user'] });
     },
     onError: (error: AxiosError) => {
-      console.error('Failed to edit user info:', error);
+      toast.error('Failed to edit user info:');
     },
   });
 

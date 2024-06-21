@@ -76,7 +76,6 @@ const SignUp = () => {
         handleOpenPopup('이미 사용 중인 회원입니다.');
         return;
       }
-      console.error('AxiosError', error);
       handleOpenPopup('회원가입 중 오류가 발생했습니다. 다시 시도해 주세요.');
     },
   });
