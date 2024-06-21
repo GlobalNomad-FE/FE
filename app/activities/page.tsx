@@ -23,7 +23,7 @@ const SuspenseList = () => {
   if (isError) {
     return <div>Error: 로그인 후 이용해주세요</div>;
   }
-  console.log('데이터!!', data);
+
   return (
     <>
       <div className="flex flex-col gap-6 mt-[16px]">
