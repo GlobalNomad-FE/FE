@@ -76,7 +76,7 @@ export default function SideNavigationMenu({ url }: Props) {
                   src={
                     data.profileImageUrl
                       ? data.profileImageUrl
-                      : '/images/mangom.jpeg'
+                      : '/images/Image_default_profile_image.png'
                   }
                   object-fit="contain"
                   alt="프로필이미지"
