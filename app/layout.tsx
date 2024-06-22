@@ -5,6 +5,8 @@ import React from 'react';
 import ReactQueryProviders from '@/apis/ReactQueryProviders';
 import { AuthProvider } from '@/context/Authcontext';
 import ClientComponent from '@/components/ClientComponent';
+import { ToastContainer } from 'react-toastify';
+import Script from 'next/script';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -29,9 +31,32 @@ export default function RootLayout({
         <ReactQueryProviders>
           <AuthProvider>
             <div id="portal" />
-            <ClientComponent pretendard={pretendard}>
-              {children}
-            </ClientComponent>
+
+            {/* Global scripts */}
+            <Script
+              strategy="beforeInteractive"
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
+            />
+            <Script
+              src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
+              strategy="beforeInteractive"
+            />
+
+            {/* Toast Container with global styles */}
+            <ToastContainer
+              position="top-center"
+              limit={2}
+              autoClose={4000}
+              closeOnClick
+              pauseOnHover={false}
+              draggable
+              bodyClassName={pretendard.className}
+              toastStyle={{ width: '350px' }}
+              bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
+            />
+
+            {/* Conditional rendering based on path */}
+            <ClientComponent>{children}</ClientComponent>
           </AuthProvider>
         </ReactQueryProviders>
       </body>
