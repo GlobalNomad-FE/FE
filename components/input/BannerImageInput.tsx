@@ -28,14 +28,13 @@ export default function BannerImageInput({ files, setFiles }: FileInputProps) {
               />
             </div>
             <div
-              className="absolute right-[-10px] top-[-15px] z-1"
+              className="absolute right-[-10px] top-[-15px] z-1 w-10 h-10 tablet:w-8 tablet:h-8 tablet:top-[-10px] mobile:w-6 mobile:h-6 mobile:right-[-5px] mobile:top-[-5px]"
               onClick={() => handleDeleteFile(file)}
             >
               <Image
                 src="/icons/file-close-btn.svg"
                 alt="파일삭제버튼"
-                width={40}
-                height={40}
+                fill
                 style={{ opacity: '0.8' }}
               />
             </div>
