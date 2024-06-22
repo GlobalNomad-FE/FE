@@ -23,9 +23,9 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
     setSelectSchedule(null);
     setSelectDate(date);
   };
-  const onChangeSchedule = (schdule: Schedule | null) => {
-    if (schdule) {
-      setSelectSchedule(schdule);
+  const onChangeSchedule = (schedule: Schedule | null) => {
+    if (schedule) {
+      setSelectSchedule(schedule);
     }
   };
   const onChangeMembers = (members: number) => {
@@ -39,7 +39,7 @@ export const CalendarProvider = ({ children, data }: CalendarProviderProps) => {
     <CalendarContext.Provider
       value={{
         selectDate,
-        formatedDate: formatDateToYYYYMMDD(selectDate),
+        formatDate: formatDateToYYYYMMDD(selectDate),
         selectMonth,
         selectSchedule,
         members,

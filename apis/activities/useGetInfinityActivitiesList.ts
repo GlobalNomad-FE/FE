@@ -1,5 +1,5 @@
 'use client';
-import { getMyActivites } from '../my-activities/@common/myActivites';
+import { getMyActivities } from '../my-activities/@common/myActivity';
 import { useInfiniteQuery, infiniteQueryOptions } from '@tanstack/react-query';
 import { GetActivitiesResponse } from './useGetActivities';
 
@@ -8,7 +8,7 @@ export const useGetInfinityActivitiesList = () => {
     infiniteQueryOptions<GetActivitiesResponse>({
       queryKey: ['activities', 'list'],
       queryFn: ({ pageParam }) => {
-        return getMyActivites(pageParam as number | undefined, 5);
+        return getMyActivities(pageParam as number | undefined, 5);
       },
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {

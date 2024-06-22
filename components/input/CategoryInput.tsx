@@ -1,12 +1,12 @@
-import Selectbox from '../commons/Selectbox';
+import SelectBox from '../commons/SelectBox';
 import { KeyActivitiesData } from '@/app/activities/register/page';
 interface CategoryInputProps {
   value: string;
-  handlevalue: (id: KeyActivitiesData, value: any) => void;
+  handleValue: (id: KeyActivitiesData, value: any) => void;
 }
 
 export default function CategoryInput({
-  handlevalue,
+  handleValue,
   value,
 }: CategoryInputProps) {
   const selectList = [
@@ -18,12 +18,12 @@ export default function CategoryInput({
     { value: '웰빙', label: '웰빙' },
   ];
   const handleOnSelect = (value: any) => {
-    handlevalue('category', value);
+    handleValue('category', value);
   };
 
   return (
     <div>
-      <Selectbox
+      <SelectBox
         defaultValue={value ? { value: value, label: value } : undefined}
         onSelect={(value) => {
           handleOnSelect(value);

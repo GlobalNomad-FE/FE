@@ -1,5 +1,5 @@
 import React from 'react';
-import ReservationWidgetWraaper from '@common/ReservationWidgetWraaper';
+import ReservationWidgetWrapper from '@common/ReservationWidgetWrapper';
 import Price from '@common/Price';
 import DatePicker from '@common/DatePicker';
 import ParticipantCount from '@common/ParticipantCount';
@@ -8,7 +8,7 @@ import { useState } from 'react';
 import ReservationButton from '@common/ReservationButton';
 import { useCalendar } from '../lib/Calendar.provider';
 import BasePopup from '@/components/commons/Popups/BasePopup';
-import { usePostActivityReservation } from '@/apis/activities/mutaion/usePostActivityReservation';
+import { usePostActivityReservation } from '@/apis/activities/mutation/usePostActivityReservation';
 import { AxiosError } from 'axios';
 
 const TabletReservationWidgetContainer = () => {
@@ -52,7 +52,7 @@ const TabletReservationWidgetContainer = () => {
     );
   };
   return (
-    <ReservationWidgetWraaper>
+    <ReservationWidgetWrapper>
       <Price price={price} />
       <DatePicker />
       <ParticipantCount
@@ -76,7 +76,7 @@ const TabletReservationWidgetContainer = () => {
           {errorMessage ? errorMessage : '예약이 완료되었습니다.'}
         </BasePopup>
       )}
-    </ReservationWidgetWraaper>
+    </ReservationWidgetWrapper>
   );
 };
 

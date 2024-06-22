@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import BasePopupTwoBtns from '../commons/Popups/BasePopupTwoBtns';
-import { useDeleteActivites } from '@/apis/activities/mutaion/useDeleteActivites';
+import { useDeleteActivity } from '@/apis/activities/mutation/useDeleteActivity';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 
@@ -15,7 +15,7 @@ export default function Menu({ id: activityId }: { id: number }) {
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
 
-  const { mutate: deleteMutation } = useDeleteActivites(activityId);
+  const { mutate: deleteMutation } = useDeleteActivity(activityId);
 
   // 메뉴 열고 닫기
   const handleKebabToggle = () => {

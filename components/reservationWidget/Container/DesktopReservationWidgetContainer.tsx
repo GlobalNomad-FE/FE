@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import ReservationWidgetWraaper from '@common/ReservationWidgetWraaper';
+import ReservationWidgetWrapper from '@common/ReservationWidgetWrapper';
 import Price from '@common/Price';
 import DatePicker from '@common/DatePicker';
 import TimeSelector from '@common/TimeSelector';
@@ -10,7 +10,7 @@ import ReservationButton from '@common/ReservationButton';
 import { useCalendar } from '../lib/Calendar.provider';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 import { useState } from 'react';
-import { usePostActivityReservation } from '@/apis/activities/mutaion/usePostActivityReservation';
+import { usePostActivityReservation } from '@/apis/activities/mutation/usePostActivityReservation';
 import { AxiosError } from 'axios';
 
 const DesktopReservationWidgetContainer = () => {
@@ -55,7 +55,7 @@ const DesktopReservationWidgetContainer = () => {
   };
 
   return (
-    <ReservationWidgetWraaper>
+    <ReservationWidgetWrapper>
       <Price price={price} />
       <DatePicker />
       <TimeSelector schedules={schedules} />
@@ -80,7 +80,7 @@ const DesktopReservationWidgetContainer = () => {
           {errorMessage ? errorMessage : '예약이 완료되었습니다.'}
         </BasePopup>
       )}
-    </ReservationWidgetWraaper>
+    </ReservationWidgetWrapper>
   );
 };
 

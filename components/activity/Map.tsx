@@ -83,7 +83,7 @@ export default function Map({ location }: { location: string }) {
           width={18}
           height={18}
         />
-        <p>{location}</p>
+        <p className="text-nomad-black text-body2-regular">{location}</p>
       </div>
     </div>
   );

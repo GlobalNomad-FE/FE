@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Chips from '@/components/reservationHistory/Chips';
 import ReservationInfoModal from '@/components/commons/Popups/ReservationHistory/ReservationInfoModal';
 import useGetReservationDashboard from '@/apis/my-activity-reservation-status/useGetReservationDashboard';
@@ -13,8 +13,8 @@ interface Props {
 const Calendar = ({ selectedActivityId }: Props) => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState('');
-  const [isReservationModalOpen, setIsReeservationModalOpen] = useState(false);
-  const [isSeletedDay, setIsSeletedDay] = useState(0);
+  const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const [isSelectedDay, setIsSelectedDay] = useState(0);
 
   const year = currentMonth.getFullYear().toString();
   const month = (currentMonth.getMonth() + 1).toString().padStart(2, '0');
@@ -27,12 +27,12 @@ const Calendar = ({ selectedActivityId }: Props) => {
       year: year,
       month: month,
     },
-    shouldFetchData,
+    shouldFetchData, //요기가 false일 때는 데이터 조회 실행이 안되도록
   );
 
   const handleCloseModal = () => {
-    setIsReeservationModalOpen(false);
-    setIsSeletedDay(0);
+    setIsReservationModalOpen(false);
+    setIsSelectedDay(0);
   };
 
   const getDaysInMonth = (year: number, month: number) => {
@@ -94,11 +94,11 @@ const Calendar = ({ selectedActivityId }: Props) => {
     return (
       <div
         style={{ minWidth: '326px' }}
-        className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[429px] mobile:w-[326px] h-[45px] divide-x border-b"
+        className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[429px] mobile:w-[326px] h-[42px] mobile:h-[33px] divide-x border-b"
       >
         {daysOfWeek.map((day, index) => (
           <div
-            className="w-[61px] tablet:w-[61px] mobile:w-[37px] text-center font-medium text-[16px] p-3 pb-1 text-[#969696]"
+            className="w-[61px] tablet:w-[61px] mobile:w-[37px] text-center font-medium text-[16px] p-3 mobile:p-1 pb-1 text-[#969696]"
             key={index}
           >
             {day}
@@ -181,8 +181,8 @@ const Calendar = ({ selectedActivityId }: Props) => {
           key={day}
           onClick={() => {
             setSelectedDate(currentDateStr);
-            setIsReeservationModalOpen(true);
-            setIsSeletedDay(day);
+            setIsReservationModalOpen(true);
+            setIsSelectedDay(day);
           }}
         >
           <div
@@ -190,7 +190,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
               day < 10 ? 'pl-[18px]' : 'pl-3'
             } mobile:pl-1 pt-3 mobile:pt-1 text-[21px] mobile:text-[16px] flex flex-row justify-between relative`}
           >
-            {isSeletedDay === day ? (
+            {isSelectedDay === day ? (
               <div className="">
                 <div className="top-[7px] left-[3px] w-11 h-11 rounded-full bg-gray-100 text-black absolute" />
                 <p className="top-[12px] absolute">{day}</p>
@@ -240,7 +240,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
       cells.push(
         <div
           className={`h-[154px] tablet:h-[125px] p-3 text-gray-200 text-[21px] bg-gray-100 border-l ${
-            cells.length === 6 && 'border-r rounded-br-lg'
+            cells.length === 6 && ' rounded-br-lg'
           }`}
           key={`next-${day}`}
         >
@@ -272,7 +272,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
 
   return (
     <>
-      <div className="mx-auto mt-10 w-[792px] tablet:w-[429px] mobile:w-[326px] flex flex-col items-center relative">
+      <div className="mx-auto mt-10 w-[792.5px] tablet:w-[429.5px] mobile:w-[327px] flex flex-col items-center relative">
         {renderHeader()}
         <div
           style={{ minWidth: '326px' }}
@@ -283,7 +283,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
         </div>
       </div>
       <div
-        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 mobile:scrollbar-hide ${
+        className={`absolute top-1/4 ml-[370px] tablet:ml-0 mobile:top-16 mobile:ml-0 mobile:left-0 ${
           !isReservationModalOpen && 'hidden'
         }`}
       >
