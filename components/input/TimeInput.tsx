@@ -1,6 +1,6 @@
 import DatePickerInput from '../commons/DatePickerInput';
 import { useEffect, useState } from 'react';
-import Selectbox from '../commons/Selectbox';
+import SelectBox from '@/components/commons/SelectBox';
 import Image from 'next/image';
 import formatDateToYYYYMMDD, { formatDate } from '@/utils/dateFormatter';
 import { KeyActivitiesData } from '@/app/activities/register/page';
@@ -16,7 +16,7 @@ interface InputProps {
   control: any;
   placeholder: string;
   labelName: string;
-  handlevalue: (id: KeyActivitiesData, value: any) => void;
+  handleValue: (id: KeyActivitiesData, value: any) => void;
   value?: DateTimeRange[];
 }
 
@@ -29,7 +29,7 @@ interface DateTimeRange {
 
 export default function TimeInput({
   labelName,
-  handlevalue,
+  handleValue,
   value,
 }: InputProps) {
   const [date, setDate] = useState<DateType>(new Date());
@@ -38,7 +38,7 @@ export default function TimeInput({
 
   const [dateTimeRanges, setDateTimeRanges] = useState<DateTimeRange[]>([]);
 
-  const [removeRanges, setRemvoeRanges] = useState<number[]>([]);
+  const [removeRanges, setRemoveRanges] = useState<number[]>([]);
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   useEffect(() => {
@@ -93,7 +93,7 @@ export default function TimeInput({
       ];
 
       setDateTimeRanges([...addTimeRageConvert]);
-      handlevalue('schedules', addTimeRageConvert);
+      handleValue('schedules', addTimeRageConvert);
     } else {
       toast.error('이 시간대에는 이미 스케줄이 있습니다.');
     }
@@ -102,9 +102,9 @@ export default function TimeInput({
     const removeRange = dateTimeRanges.filter((_, i) => _.id !== id);
     setDateTimeRanges([...removeRange]);
     const removeList = [...removeRanges, id];
-    setRemvoeRanges([...removeList]);
-    handlevalue('schedules', removeRange);
-    handlevalue('scheduleIdsToRemove', removeList);
+    setRemoveRanges([...removeList]);
+    handleValue('schedules', removeRange);
+    handleValue('scheduleIdsToRemove', removeList);
   };
 
   return (
@@ -124,7 +124,7 @@ export default function TimeInput({
                 <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                   시작 시간
                 </div>
-                <Selectbox
+                <SelectBox
                   placeholder="0:00"
                   onSelect={handleStartTime}
                   options={selectList}
@@ -143,7 +143,7 @@ export default function TimeInput({
                 <div className="text-h3-regular text-gray600 mobile:text-body1-regular">
                   종료 시간
                 </div>
-                <Selectbox
+                <SelectBox
                   placeholder="0:00"
                   onSelect={handleEndTime}
                   options={selectList}

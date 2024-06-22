@@ -1,8 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { MouseEvent, useState } from 'react';
-import Menu from '@/components/activitie/Menu';
-import useMediaQuery from '@/hooks/useMediaQuery';
+import Menu from '@/components/activity/Menu';
 import { useRouter } from 'next/navigation';
 import { ActivitiesExperienceType } from './ExperienceType';
 

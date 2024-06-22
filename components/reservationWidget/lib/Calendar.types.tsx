@@ -9,10 +9,10 @@ export interface Schedule {
 
 export interface CalendarContextProps {
   selectDate: Date;
-  formatedDate: string;
+  formatDate: string;
   onChangeSelectDate: (date: Date) => void;
   selectSchedule: Schedule | null;
-  onChangeSchedule: (schdule: Schedule | null) => void;
+  onChangeSchedule: (schedule: Schedule | null) => void;
   members: number;
   onChangeMembers: (members: number) => void;
   selectMonth: number | null;

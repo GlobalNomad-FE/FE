@@ -9,7 +9,6 @@ import TextInput from '@/components/input/TextInput';
 import PriceInput from '@/components/input/PriceInput';
 import AddressInput from '@/components/input/AddressInput';
 import TimeInput from '@/components/input/TimeInput';
-import Footer from '@/components/commons/Footer';
 import BannerImageInput from '@/components/input/BannerImageInput';
 import BioImageInput from '@/components/input/BioImageInput';
 import CategoryInput from '@/components/input/CategoryInput';
@@ -21,17 +20,17 @@ import {
 import { ActivitiesData } from '@/app/activities/register/page';
 import { useMutation, useQuery, queryOptions } from '@tanstack/react-query';
 import { ActivitiesDataType } from '@/types/activitiesType';
-import { patchActivities } from '@/apis/my-activities/@common/myActivites';
+import { patchActivities } from '@/apis/my-activities/@common/myActivity';
 import { useQueryClient } from '@tanstack/react-query';
 import BasePopup from '../commons/Popups/BasePopup';
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 
-interface RegisterpageProps {
+interface RegisterPageProps {
   id?: number;
 }
 
-export default function Registerpage({ id }: RegisterpageProps) {
+export default function RegisterPage({ id }: RegisterPageProps) {
   const [modifyState, setModifyState] = useState(false);
   const [bannerImageUrl, setBannerImageUrl] = useState<string[]>([]);
   const [subImageUrls, setSubImageUrls] = useState<string[]>([]);
@@ -78,7 +77,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
     mutationFn: (data: ActivitiesData) => postActivities(data),
   });
 
-  const { mutate: modifyActiviteMutation } = useMutation({
+  const { mutate: modifyActivityMutation } = useMutation({
     mutationKey: ['register', 'detail', id],
     mutationFn: ({ id, data }: { id: number; data: ActivitiesData }) =>
       patchActivities(id, data),
@@ -97,7 +96,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
     },
   });
 
-  const handlevalue = (id: keyof ActivitiesData, value: any) => {
+  const handleValue = (id: keyof ActivitiesData, value: any) => {
     setValue(id, value);
   };
 
@@ -189,7 +188,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
       schedulesToAdd: data.schedules,
     };
 
-    modifyActiviteMutation({ id: id as number, data: apiData });
+    modifyActivityMutation({ id: id as number, data: apiData });
   };
 
   return (
@@ -221,7 +220,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
                 </div>
                 <BaseInput name="title" placeholder="제목" control={control} />
                 <CategoryInput
-                  handlevalue={handlevalue}
+                  handleValue={handleValue}
                   value={getValues('category')}
                 />
                 <TextInput
@@ -236,7 +235,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
                   labelName="가격"
                 />
                 <AddressInput
-                  handlevalue={handlevalue}
+                  handleValue={handleValue}
                   value={getValues('address')}
                 />
                 <TimeInput
@@ -244,7 +243,7 @@ export default function Registerpage({ id }: RegisterpageProps) {
                   placeholder="YY/MM/DD"
                   control={control}
                   labelName="예약 가능 시간대"
-                  handlevalue={handlevalue}
+                  handleValue={handleValue}
                   value={getValues('schedules')}
                 />
                 <BannerImageInput

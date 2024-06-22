@@ -4,7 +4,7 @@ import { formatDate2 } from '@/utils/dateFormatter';
 import { ReviewsType } from '@/types/reviewsType';
 import Pagination from './commons/Pagination';
 import { useState } from 'react';
-import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitesReviews';
+import { useGetActivitiesReviews } from '@/apis/activities/useGetActivitiesReviews';
 
 export default function ReviewTable({ id }: { id: number }) {
   const [currentPage, setCurrentPage] = useState(1);

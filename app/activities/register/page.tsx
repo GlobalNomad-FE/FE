@@ -1,4 +1,4 @@
-import Registerpage from '@/components/activitie/registerPage';
+import RegisterPage from '@/components/activity/RegisterPage';
 
 export interface ActivitiesData {
   title: string;
@@ -14,5 +14,5 @@ export interface ActivitiesData {
 export type KeyActivitiesData = keyof ActivitiesData;
 
 export default function Register() {
-  return <Registerpage />;
+  return <RegisterPage />;
 }
