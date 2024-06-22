@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { useToggleButton } from '@/hooks/useToggleButton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 import Avatar from '@/components/commons/avatar/avatar';
 import DropdownMenu from '../dropdownMenu/DropdownMenu';
 import Cookies from 'js-cookie';
 import MyNotifications from '../myNotifications/MyNotifications';
 import { useGetProfile } from '@/apis/user/useGetProfile';
-import { useToggleButton } from '@/hooks/useToggleButton';
-import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 export default function GNB() {
   const router = useRouter();
