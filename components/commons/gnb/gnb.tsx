@@ -98,7 +98,7 @@ export default function GNB() {
               <Link href="/signup">회원가입</Link>
             </div>
           ) : (
-            <div className=" flex items-center gap-[25px] static">
+            <div className=" flex items-center gap-[25px] static mobile:gap-[12px]">
               <MyNotifications />
               <div className="w-[1px] h-[22px] bg-gray200" />
               <div className=" flex relative gap-10">
