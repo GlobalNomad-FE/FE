@@ -1,14 +1,12 @@
-import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import localFont from 'next/font/local';
-import Script from 'next/script';
-import ReactQueryProviders from '@/apis/ReactQueryProviders';
 import React from 'react';
+import ReactQueryProviders from '@/apis/ReactQueryProviders';
 import { AuthProvider } from '@/context/Authcontext';
+import ClientComponent from '@/components/ClientComponent';
 import { ToastContainer } from 'react-toastify';
-import GNB from '@/components/commons/gnb/gnb';
-import Footer from '@/components/commons/Footer';
+import Script from 'next/script';
 
 const pretendard = localFont({
   src: '../styles/font/PretendardVariable.woff2',
@@ -17,22 +15,24 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-export const metadata: Metadata = {
-  title: 'GlobalNomad ',
+export const metadata = {
+  title: 'GlobalNomad',
   description: '바쁜 현대인을 위한 여행 플랫폼 GlobalNomad',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="ko">
       <body className={pretendard.className}>
         <ReactQueryProviders>
           <AuthProvider>
             <div id="portal" />
+
+            {/* Global scripts */}
             <Script
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
@@ -41,6 +41,8 @@ export default function RootLayout({
               src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
               strategy="beforeInteractive"
             />
+
+            {/* Toast Container with global styles */}
             <ToastContainer
               position="top-center"
               limit={2}
@@ -52,9 +54,9 @@ export default function RootLayout({
               toastStyle={{ width: '350px' }}
               bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
             />
-            <GNB />
-            {children}
-            <Footer />
+
+            {/* Conditional rendering based on path */}
+            <ClientComponent>{children}</ClientComponent>
           </AuthProvider>
         </ReactQueryProviders>
       </body>
