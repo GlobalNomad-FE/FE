@@ -13,7 +13,7 @@ export interface BioImageType {
   imageUrl: string;
 }
 
-export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
+export default function ActivityTitle({ data }: { data: ActivityDetail }) {
   const { subImages: bioImage, bannerImageUrl, id, userId } = data;
   const cookiesUserId = Cookies.get('userID');
 
@@ -140,7 +140,9 @@ export default function ActivitieTitle({ data }: { data: ActivityDetail }) {
     <div>
       <div className="mt-[150px] flex justify-between max-w-[1200px] items-center">
         <div className="flex flex-col">
-          <div>{data.category}</div>
+          <div className="text-nomad-black text-body2-regular">
+            {data.category}
+          </div>
           <p className="text-title text-nomad-black mt-2.5 mb-4">
             {data.title}
           </p>

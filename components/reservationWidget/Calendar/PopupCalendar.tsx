@@ -28,7 +28,7 @@ export default function PopupCalendar({ handleClose }: Props) {
 
   return (
     <div
-      className="flex h-fit flex-col justify-between w-30 top-0 right-0 z-[5] bg-white rounded-2xl p-6 border border-gray200 mobile:w-full mobile:border-none mobile:h-full mobile:fixed tablet:absolute"
+      className="mobile:overflow-y-scroll flex h-fit flex-col justify-between w-30 top-0 right-0 z-[5] bg-white rounded-2xl p-6 border border-gray200 mobile:w-full mobile:border-none mobile:h-full mobile:fixed tablet:absolute"
       style={{ boxShadow: '0px 4px 16px rgba(17, 34, 17, 0.05)' }}
     >
       <div className="">
@@ -48,7 +48,7 @@ export default function PopupCalendar({ handleClose }: Props) {
           />
         )}
       </div>
-      <div className="w-full">
+      <div className="w-full mobile:mt-8">
         <ReservationButton
           value={!!id}
           handleButtonClick={handleClose}

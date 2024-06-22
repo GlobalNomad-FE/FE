@@ -14,7 +14,7 @@ interface DropdownMenuProps {
 export default function DropdownMenu({ dropdownMenuList }: DropdownMenuProps) {
   return (
     <div
-      className="bg-white absolute top-[72px] right-[-30px] border rounded-md text-gray600 text-body1-regular cursor-pointer"
+      className="bg-white absolute top-[72px] right-[-45px] w-[160px] border rounded-md text-gray600 text-body1-regular cursor-pointer mobile:w-[150px]"
       style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.08)' }}
     >
       {dropdownMenuList.map((item, index) =>
@@ -22,7 +22,7 @@ export default function DropdownMenu({ dropdownMenuList }: DropdownMenuProps) {
           <Link
             key={index}
             href={item.path}
-            className="flex gap-3 items-center h-[3.625rem] py-4 px-[22px] border-b border-gray200 text-gray600 font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-sm"
+            className="flex gap-3 items-center h-[3.625rem] py-4 px-[22px] border-b border-gray200 text-gray600 font-medium hover:bg-gray100 mobile:h-[3.5rem] mobile:text-sm"
           >
             <Image
               src={item.icon}
@@ -37,7 +37,7 @@ export default function DropdownMenu({ dropdownMenuList }: DropdownMenuProps) {
           <div
             key={index}
             onClick={item.handleClick}
-            className="flex gap-3 items-center h-[3.625rem] py-4 px-[22px] border-gray200 text-gray600 font-medium hover:bg-gray100 mobile:h-[4.1rem] mobile:text-sm"
+            className="flex gap-3 items-center h-[3.625rem] py-4 px-[22px] border-gray200 text-gray600 font-medium hover:bg-gray100 mobile:h-[3.5rem] mobile:text-sm"
           >
             <Image
               src={item.icon}

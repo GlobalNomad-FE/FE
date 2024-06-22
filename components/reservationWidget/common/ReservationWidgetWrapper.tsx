@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReservationWidgetWraaper = ({
+const ReservationWidgetWrapper = ({
   children,
 }: {
   children: React.ReactNode;
@@ -15,4 +15,4 @@ const ReservationWidgetWraaper = ({
   );
 };
 
-export default ReservationWidgetWraaper;
+export default ReservationWidgetWrapper;

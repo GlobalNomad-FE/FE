@@ -3,7 +3,7 @@ import ReservationButton from '@common/ReservationButton';
 import TabletCalender from '../Calendar/TabletCalendar';
 import { useCalendar } from '../lib/Calendar.provider';
 import { formatWage } from '@/utils/wageFormatter';
-import { usePostActivityReservation } from '@/apis/activities/mutaion/usePostActivityReservation';
+import { usePostActivityReservation } from '@/apis/activities/mutation/usePostActivityReservation';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 import { useState } from 'react';
 import { AxiosError } from 'axios';
