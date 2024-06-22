@@ -193,72 +193,67 @@ export default function RegisterPage({ id }: RegisterPageProps) {
 
   return (
     <FormProvider {...methods}>
-      <div className="bg-gray50 min-w-[350px]">
-        <Gnb />
-        <main className="flex justify-center min-h-[100vh] max-h-[100%] px-6 mobile:px-4 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px] mb-[150px] mobile:mb-[100px]">
-          <div className="flex gap-6  ">
-            <SideNavigationMenu />
-            <form onSubmit={handleSubmit(onsubmit)}>
-              <div className="flex flex-col flex-grow gap-6">
-                <div className="flex justify-between">
-                  <p className="text-title text-black">
-                    내 체험 {`${modifyState ? '수정' : '등록'}`}{' '}
-                  </p>
-                  <Button
-                    width={120}
-                    height={45}
-                    fontSize={16}
-                    textBold={true}
-                    btnColor={'nomadBlack'}
-                    textColor={'white'}
-                    rounded={4}
-                    style={{ cursor: 'pointer' }}
-                    type="submit"
-                  >
-                    {`${modifyState ? '수정' : '등록'}`} 하기
-                  </Button>
-                </div>
-                <BaseInput name="title" placeholder="제목" control={control} />
-                <CategoryInput
-                  handleValue={handleValue}
-                  value={getValues('category')}
-                />
-                <TextInput
-                  name="description"
-                  placeholder="설명"
-                  control={control}
-                />
-                <PriceInput
-                  name="price"
-                  placeholder="가격"
-                  control={control}
-                  labelName="가격"
-                />
-                <AddressInput
-                  handleValue={handleValue}
-                  value={getValues('address')}
-                />
-                <TimeInput
-                  name="time"
-                  placeholder="YY/MM/DD"
-                  control={control}
-                  labelName="예약 가능 시간대"
-                  handleValue={handleValue}
-                  value={getValues('schedules')}
-                />
-                <BannerImageInput
-                  files={bannerImageUrl}
-                  setFiles={setBannerImageUrl}
-                />
-                <BioImageInput
-                  files={subImageUrls}
-                  setFiles={setSubImageUrls}
-                />
+      <main className="flex justify-center bg-gray50 min-w-[350px] min-h-[100vh] max-h-[100%] px-6 mobile:px-4 pt-[142px] pb-[72px] tablet:pt-[94px] mobile:pt-[94px]">
+        <div className="flex gap-6  ">
+          <SideNavigationMenu />
+          <form onSubmit={handleSubmit(onsubmit)}>
+            <div className="flex flex-col flex-grow gap-6 mb-[150px] mobile:mb-[100px]">
+              <div className="flex justify-between">
+                <p className="text-title text-black">
+                  내 체험 {`${modifyState ? '수정' : '등록'}`}{' '}
+                </p>
+                <Button
+                  width={120}
+                  height={45}
+                  fontSize={16}
+                  textBold={true}
+                  btnColor={'nomadBlack'}
+                  textColor={'white'}
+                  rounded={4}
+                  style={{ cursor: 'pointer' }}
+                  type="submit"
+                >
+                  {`${modifyState ? '수정' : '등록'}`}하기
+                </Button>
               </div>
-            </form>
-          </div>
-        </main>
-      </div>
+              <BaseInput name="title" placeholder="제목" control={control} />
+              <CategoryInput
+                handleValue={handleValue}
+                value={getValues('category')}
+              />
+              <TextInput
+                name="description"
+                placeholder="설명"
+                control={control}
+              />
+              <PriceInput
+                name="price"
+                placeholder="가격"
+                control={control}
+                labelName="가격"
+              />
+              <AddressInput
+                handleValue={handleValue}
+                value={getValues('address')}
+              />
+              <TimeInput
+                name="time"
+                placeholder="YY/MM/DD"
+                control={control}
+                labelName="예약 가능 시간대"
+                handleValue={handleValue}
+                value={getValues('schedules')}
+              />
+              <BannerImageInput
+                files={bannerImageUrl}
+                setFiles={setBannerImageUrl}
+              />
+              <BioImageInput files={subImageUrls} setFiles={setSubImageUrls} />
+            </div>
+          </form>
+        </div>
+      </main>
+
       {imagePopupOpen && (
         <BasePopup
           isOpen={imagePopupOpen}
