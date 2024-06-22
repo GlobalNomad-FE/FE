@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import MyNotifications from '../myNotifications/MyNotifications';
 import { useGetProfile } from '@/apis/user/useGetProfile';
 import { useToggleButton } from '@/hooks/useToggleButton';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 export default function GNB() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function GNB() {
     useToggleButton();
   const ref = useRef<HTMLButtonElement>(null);
 
+  useOutsideClick(ref, isDropdownOpen, isDropdownOpenToggle);
   useEffect(() => {
     const accessToken = Cookies.get('accessToken');
     const refreshToken = Cookies.get('refreshToken');
