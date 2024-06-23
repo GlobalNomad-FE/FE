@@ -31,8 +31,6 @@ export default function RootLayout({
         <ReactQueryProviders>
           <AuthProvider>
             <div id="portal" />
-
-            {/* Global scripts */}
             <Script
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false&libraries=services`}
@@ -41,8 +39,6 @@ export default function RootLayout({
               src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"
               strategy="beforeInteractive"
             />
-
-            {/* Toast Container with global styles */}
             <ToastContainer
               position="top-center"
               limit={2}
@@ -54,8 +50,6 @@ export default function RootLayout({
               toastStyle={{ width: '350px' }}
               bodyStyle={{ fontSize: '1rem', fontWeight: 500 }}
             />
-
-            {/* Conditional rendering based on path */}
             <ClientComponent>{children}</ClientComponent>
           </AuthProvider>
         </ReactQueryProviders>
