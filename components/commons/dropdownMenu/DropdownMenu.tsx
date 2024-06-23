@@ -14,7 +14,7 @@ interface DropdownMenuProps {
 export default function DropdownMenu({ dropdownMenuList }: DropdownMenuProps) {
   return (
     <div
-      className="bg-white absolute top-[72px] right-[-45px] w-[160px] border rounded-md text-gray600 text-body1-regular cursor-pointer mobile:w-[150px]"
+      className="bg-white absolute top-[72px] right-[-45px] w-[160px] border rounded-md text-gray600 text-body1-regular cursor-pointer mobile:w-[150px] mobile:right-[-15px]"
       style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.08)' }}
     >
       {dropdownMenuList.map((item, index) =>
