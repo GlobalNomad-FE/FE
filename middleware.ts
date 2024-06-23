@@ -1,17 +1,20 @@
 import { NextResponse, NextRequest } from 'next/server';
 
-const AUTH_PAGES = ['/', '/login'];
+// 허용된 페이지 목록
+const AUTH_PAGES = ['/login', '/signup'];
 
 export default function middleware(request: NextRequest) {
   const { nextUrl, cookies } = request;
   const { pathname } = nextUrl;
-  const accessToken = cookies.get('userID');
+  const accessToken = cookies.get('accessToken');
+
+  console.log('Requested Pathname:', pathname);
+  console.log('Access Token:', accessToken);
 
   // 로그인이 필요 없는 페이지
   if (AUTH_PAGES.some((page) => pathname.startsWith(page))) {
-    // 로그인 되어 있는 경우 메인 페이지로 리다이렉트
     if (accessToken) {
-      return NextResponse.redirect(new URL('/', request.url));
+      return NextResponse.next();
     } else {
       return NextResponse.next();
     }
@@ -22,7 +25,6 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  // accessToken이 있는 경우 요청 계속 진행
   return NextResponse.next();
 }
 
