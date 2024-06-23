@@ -94,7 +94,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
     return (
       <div
         style={{ minWidth: '326px' }}
-        className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[429px] mobile:w-[326px] h-[42px] mobile:h-[33px] divide-x border-b"
+        className="grid grid-cols-7 content-center justify-items-start w-[792px] tablet:w-[428px] mobile:w-full h-[42px] mobile:h-[33px] divide-x border-b"
       >
         {daysOfWeek.map((day, index) => (
           <div
@@ -175,7 +175,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
         <div
           className={`h-[154px] tablet:h-[125px] p-[2px] text-[#969696] bg-white flex justify-between flex-col cursor-pointer ${
             cells.length !== 0 && 'border-l'
-          } ${cells.length === 6 && 'border-r'} ${
+          } ${cells.length === 6 && 'pc:border-r mobile:border-r-none'} ${
             cells.length === 0 && 'rounded-bl-lg'
           }`}
           key={day}
@@ -224,7 +224,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
       if ((day + startDate) % 7 === 0) {
         rows.push(
           <div
-            className="grid grid-cols-7 w-[792px] tablet:w-[429px] mobile:w-[326px] border-b"
+            className="grid grid-cols-7 w-[790px] tablet:w-[428px] mobile:w-full border-b"
             key={day}
           >
             {cells}
@@ -252,7 +252,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
     if (cells.length > 0) {
       rows.push(
         <div
-          className="grid grid-cols-7 w-[792px] tablet:w-[429px] mobile:w-[326px] border-b-none"
+          className="grid grid-cols-7 w-[792px] tablet:w-[428px] mobile:w-full border-b-none"
           key="next"
         >
           {cells}
@@ -263,7 +263,7 @@ const Calendar = ({ selectedActivityId }: Props) => {
     return (
       <div
         style={{ minWidth: '326px' }}
-        className="w-[792px] tablet:w-[429px] mobile:w-[326px]"
+        className="w-[792px] tablet:w-[428px] mobile:w-full"
       >
         {rows}
       </div>
@@ -272,11 +272,11 @@ const Calendar = ({ selectedActivityId }: Props) => {
 
   return (
     <>
-      <div className="mx-auto mt-10 w-[792.5px] tablet:w-[429.5px] mobile:w-[327px] flex flex-col items-center relative">
+      <div className="mx-auto mt-10 w-[792.5px] tablet:w-[429.5px] mobile:w-full flex flex-col items-center relative">
         {renderHeader()}
         <div
           style={{ minWidth: '326px' }}
-          className="mt-6 w-full border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
+          className="mt-6 w-[100%] border-y border-l border-r rounded-t-lg rounded-b-lg bg-white"
         >
           {renderDays()}
           {renderCells()}

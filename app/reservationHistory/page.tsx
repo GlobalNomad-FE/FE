@@ -29,7 +29,7 @@ export default function Page() {
       <main className="flex justify-center min-h-[100vh] max-h-[100%] bg-gray50 text-black200 pt-[142px] tablet:pt-[94px] mobile:pt-[94px] pb-[72px] px-6 mobile:px-4">
         <div className="w-[1200px] flex gap-6">
           <SideNavigationMenu />
-          <div className="w-[791px] tablet:w-[429px] mobile:w-[326px] text-[32px] mb-[142px] tablet:mb-[128px]">
+          <div className="w-[791px] tablet:w-[429px] mobile:w-full text-[32px] mb-[142px] tablet:mb-[128px]">
             <p className="w-[791px] mobile:w-full font-bold">예약 현황</p>
             {myActivities ? (
               <>
