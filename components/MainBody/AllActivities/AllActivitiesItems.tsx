@@ -39,7 +39,7 @@ const AllActivitiesItems = ({
         {rating} <span className="gray400">({reviewCount})</span>
       </div>
       <div
-        className="text-2xl font-bold mt-[10px] mobile:text-lg hover:underline cursor-pointer"
+        className="text-2xl font-bold mt-[10px] mobile:text-lg hover:underline cursor-pointer w-[283px] truncate"
         onClick={() => router.push(`/activities/${id}`)}
       >
         {title}
