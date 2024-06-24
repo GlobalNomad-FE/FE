@@ -8,9 +8,6 @@ export default function middleware(request: NextRequest) {
   const { pathname } = nextUrl;
   const accessToken = cookies.get('accessToken');
 
-  console.log('Requested Pathname:', pathname);
-  console.log('Access Token:', accessToken);
-
   // 로그인이 필요 없는 페이지
   if (AUTH_PAGES.some((page) => pathname.startsWith(page))) {
     if (accessToken) {
