@@ -82,7 +82,7 @@ const AllActivities = ({ searchTerm, itemSize }: Props) => {
         </>
       )}
       {isLoading ? (
-        <div className="w-auto mainPcSize:w-[1204px] h-[384px] flex justify-center items-center">
+        <div className="w-full mainPcSize:w-[1204px] h-[384px] flex justify-center items-center">
           <Image
             src="/icons/spinner.svg"
             width={150}
