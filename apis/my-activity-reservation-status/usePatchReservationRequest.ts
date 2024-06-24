@@ -25,7 +25,6 @@ async function updateReservationStatus({
 const usePatchReservationRequest = () => {
   const { mutate } = useMutation({
     mutationFn: (request: Request) => updateReservationStatus(request),
-    onError: (error: AxiosError) => {},
   });
 
   return { mutate };

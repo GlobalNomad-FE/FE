@@ -29,6 +29,7 @@ export const reservedScheduleKey = {
     date,
   ],
 };
+
 export const reservedTimeKey = {
   getReservedTime: (
     activityId: number | undefined,
