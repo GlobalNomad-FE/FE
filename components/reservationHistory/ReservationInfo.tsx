@@ -1,7 +1,8 @@
-import Button from '@/components/commons/Button';
+import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ReservationInfoType } from '@/types/activitiesReservationType';
 import useUpdateReservationRequest from '@/apis/my-activity-reservation-status/usePatchReservationRequest';
-import { useState } from 'react';
+import Button from '@/components/commons/Button';
 import BasePopup from '@/components/commons/Popups/BasePopup';
 
 interface Props {
@@ -20,6 +21,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
     activityId,
     id: reservationId,
   } = reservationInfo;
+  const queryClient = useQueryClient();
   const { mutate } = useUpdateReservationRequest();
   const [openPopup, setOpenPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
@@ -40,6 +42,7 @@ const ReservationInfo = ({ selectTab, reservationInfo }: Props) => {
             : setPopupMessage('거절되었습니다.');
           setOpenPopup(true);
           setIsUpdate(true);
+          queryClient.invalidateQueries();
         },
         onError: (error: any) => {
           setIsUpdate(false);
